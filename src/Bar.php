@@ -75,7 +75,9 @@ class Bar {
 
 			// subscribe email to selected list
 			$api = mc4wp_get_api();
-			return $api->subscribe( $this->options['list'], $email );
+			$merge_vars = apply_filters( 'mctp_merge_vars', array() );
+			$email_type = apply_filters( 'mctp_email_type', 'html' );
+			return $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
 		}
 
 		return false;

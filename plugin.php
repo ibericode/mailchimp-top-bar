@@ -123,6 +123,10 @@ final class Plugin {
 
 		$options = array_merge( $defaults, $options );
 
+		// merge with options from MailChimp for WordPress
+		$parent_options = mc4wp_get_options( 'form' );
+		$options['double_optin'] = $parent_options['double_optin'];
+
 		return $options;
 	}
 
