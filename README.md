@@ -1,7 +1,7 @@
 MailChimp Top Bar
 ==============
 
-A WordPress plugin that synchronizes your WordPress Users with a selected MailChimp list. 
+Adds a beautiful and customisable MailChimp opt-in bar to the top of your WordPress site. 
 
 _This plugin is under active development and may be subject to changes breaking backwards compatibility._
 
