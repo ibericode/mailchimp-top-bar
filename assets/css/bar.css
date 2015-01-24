@@ -8,31 +8,35 @@ body {
   line-height: 40px;
   font-size: 18px;
   margin: 0;
-  z-index: 100;
+  z-index: 200;
+  display: block;
+  min-height: 1px;
 }
 #mailchimp-top-bar .mctp-bar {
-  width: 100%;
-  display: block;
   padding: 6px 12px;
 }
 #mailchimp-top-bar form,
-#mailchimp-top-bar input {
+#mailchimp-top-bar input,
+#mailchimp-top-bar label {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  vertical-align: top;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
 }
 #mailchimp-top-bar form {
   text-align: center;
 }
 #mailchimp-top-bar label {
   margin-right: 6px;
+  display: inline-block;
 }
 #mailchimp-top-bar input {
   display: inline-block;
   height: auto;
   width: 240px;
-  margin: 0;
+  margin: 0 0 0 6px;
   padding: 6px 12px;
   line-height: 28px;
 }
@@ -44,10 +48,12 @@ body {
   top: 6px;
   right: 12px;
   color: #666;
-  opacity: 0.6;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
 #mailchimp-top-bar .mctp-close:hover {
   opacity: 1;
+  filter: alpha(opacity=100);
   cursor: pointer;
 }
 
