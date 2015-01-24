@@ -1,0 +1,66 @@
+body{
+	padding-top: 0 !important;
+}
+
+#mailchimp-top-bar {
+
+	position: relative;
+	width: 100%;
+	line-height: 40px;
+	font-size: 18px;
+	margin: 0;
+	z-index: 100;
+
+	.mctp-bar {
+		width: 100%;
+		display: block;
+		padding: 6px 12px;
+	}
+
+	form,
+	input {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		vertical-align: top;
+	}
+
+	form{
+		text-align: center;
+	}
+
+	label {
+		margin-right: 6px;
+	}
+
+	input{
+		display: inline-block;
+		height: auto;
+		width: 240px;
+		margin: 0;
+		padding: 6px 12px;
+		line-height: 28px;
+	}
+
+	.mctp-button {
+
+	}
+
+	.mctp-url {
+		display: none !important;
+	}
+
+	.mctp-close{
+		position: absolute;
+		top: 6px;
+		right: 12px;
+		color: #666;
+		opacity: 0.6;
+	}
+
+	.mctp-close:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+
+}
