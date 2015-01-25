@@ -15,6 +15,16 @@ class Bar {
 	private $success = false;
 
 	/**
+	 * @var string
+	 */
+	private $error_type = '';
+
+	/**
+	 * @var bool
+	 */
+	private $submitted = false;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct( array $options ) {
@@ -63,27 +73,43 @@ class Bar {
 	}
 
 	/**
-	 *
+	 * Process a form submission
 	 */
-	public function process() {
+	private function process() {
 
-		// make sure `url` field is not changed (honeypot)
-		if( isset( $_POST['url'] ) && 'http://' !== $_POST['url'] ) {
+		$this->submitted = true;
+
+		if( ! $this->validate() ) {
 			return false;
 		}
 
-		// grab & validate email
-		$email = ( isset( $_POST['email'] ) ) ? $_POST['email'] : '';
-		if ( is_string( $email ) && is_email( $email ) ) {
+		$email = sanitize_text_field( $_POST['email'] );
 
-			// subscribe email to selected list
-			$api = mc4wp_get_api();
-			$merge_vars = apply_filters( 'mctp_merge_vars', array() );
-			$email_type = apply_filters( 'mctp_email_type', 'html' );
-			return $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
+		// subscribe email to selected list
+		$api = mc4wp_get_api();
+		$merge_vars = apply_filters( 'mctp_merge_vars', array() );
+		$email_type = apply_filters( 'mctp_email_type', 'html' );
+
+		return $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
+	}
+
+	/**
+	 * Validate the form submission
+	 */
+	private function validate() {
+
+		// make sure `url` field is not changed (honeypot)
+		if( isset( $_POST['url'] ) && 'http://' !== $_POST['url'] ) {
+			$this->error_type = 'honeypot';
+			return false;
 		}
 
-		return false;
+		if( ! isset( $_POST['email'] ) || ! is_string( $_POST['email'] ) || ! is_email( $_POST['email'] ) ) {
+			$this->error_type = 'invalid_email';
+			return false;
+		}
+
+		return apply_filters( 'mctb_validate', true );
 	}
 
 	/**
@@ -130,9 +156,16 @@ class Bar {
 			?></style>
 		<div id="mailchimp-top-bar"><div class="mctp-bar" style="display: none">
 				<form method="post">
-					<?php if( $this->success ) { ?>
-						<label><?php echo $this->options['text_success']; ?></label>
-					<?php } else { ?>
+					<?php
+					if( $this->submitted ) {
+						 if( $this->success ) {
+							 echo '<label>' . $this->options['text_success'] . '</label>';
+						 } else if( $this->error_type === 'invalid_email' ) {
+							 echo '<label>' . $this->options['text_invalid_email'] . '</label>';
+						 } else {
+							 echo '<label>' . $this->options['text_error'] . '</label>';
+						 }
+					 } else { ?>
 						<label><?php echo strip_tags( $this->options['text_bar'], '<strong><em><u>' ); ?></label>
 						<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="mctp-email"  />
 						<input type="text"  name="url" placeholder="Your website.." value="http://" class="mctp-url" />
