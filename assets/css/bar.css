@@ -35,10 +35,20 @@ body {
 #mailchimp-top-bar input {
   display: inline-block;
   height: auto;
-  width: 240px;
   margin: 0 0 0 6px;
-  padding: 6px 12px;
-  line-height: 28px;
+  padding: 6px 8px;
+  line-height: 22px;
+  outline: 0;
+  font-size: 12px;
+  border: 1px solid white;
+  background: white;
+}
+#mailchimp-top-bar .mctp-email {
+  width: 240px;
+}
+#mailchimp-top-bar .mctp-button {
+  padding: 6px 18px;
+  cursor: pointer;
 }
 #mailchimp-top-bar .mctp-url {
   display: none !important;

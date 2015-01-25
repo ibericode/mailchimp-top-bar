@@ -116,7 +116,8 @@ class Bar {
 			}
 
 			if( '' !== $this->options['color_button'] ) {
-				echo "#mailchimp-top-bar .mctp-button { background: {$this->options['color_button']}; }";
+				echo "#mailchimp-top-bar .mctp-button { background: {$this->options['color_button']}; border-color: {$this->options['color_button']}; }";
+				echo "#mailchimp-top-bar .mctp-email:focus { border-color: {$this->options['color_button']}; }";
 			}
 
 			if( '' !== $this->options['color_button_text'] ) {
