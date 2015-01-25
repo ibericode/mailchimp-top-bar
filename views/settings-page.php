@@ -66,6 +66,9 @@ defined( 'ABSPATH' ) or exit;
 				<td>
 					<input type="text" name="<?php $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $this->options['text_bar'] ); ?>" class="widefat" />
 				</td>
+				<td class="desc">
+					<?php _e( 'The text to appear before the email field.', 'mailchimp-top-bar' ); ?>
+				</td>
 			</tr>
 
 			<tr valign="top">
@@ -77,6 +80,9 @@ defined( 'ABSPATH' ) or exit;
 				<td>
 					<input type="text" name="<?php $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="widefat" />
 				</td>
+				<td class="desc">
+					<?php _e( 'The text on the submit button.', 'mailchimp-top-bar' ); ?>
+				</td>
 			</tr>
 
 			<tr valign="top">
@@ -87,6 +93,14 @@ defined( 'ABSPATH' ) or exit;
 				</th>
 				<td>
 					<input type="text" name="<?php $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="widefat" />
+				</td>
+				<td class="desc">
+					<?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<p><?php printf( __( 'Success and error messages can be managed in <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?></p>
 				</td>
 			</tr>
 
