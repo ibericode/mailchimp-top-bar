@@ -57,6 +57,41 @@ defined( 'ABSPATH' ) or exit;
 				<td class="desc"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></td>
 			</tr>
 
+			<tr valign="top">
+				<th scope="row">
+					<label for="<?php echo $this->name_attr( 'text_bar' ); ?>">
+						<?php _e( 'Bar Text', 'mailchimp-top-bar' ); ?>
+					</label>
+				</th>
+				<td>
+					<input type="text" name="<?php $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $this->options['text_bar'] ); ?>" class="widefat" />
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row">
+					<label for="<?php echo $this->name_attr( 'text_button' ); ?>">
+						<?php _e( 'Button Text', 'mailchimp-top-bar' ); ?>
+					</label>
+				</th>
+				<td>
+					<input type="text" name="<?php $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="widefat" />
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row">
+					<label for="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>">
+						<?php _e( 'Email Placeholder Text', 'mailchimp-top-bar' ); ?>
+					</label>
+				</th>
+				<td>
+					<input type="text" name="<?php $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="widefat" />
+				</td>
+			</tr>
+
+
+
 		</table>
 
 		<h2><?php _e( 'Form Styling', 'mailchimp-for-wp'); ?></h2>

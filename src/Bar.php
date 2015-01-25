@@ -130,7 +130,7 @@ class Bar {
 						<label><?php echo $this->options['text_success']; ?></label>
 					<?php } else { ?>
 						<label><?php echo strip_tags( $this->options['text_bar'], '<strong><em><u>' ); ?></label>
-						<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options['text_placeholder'] ); ?>" class="mctp-email"  />
+						<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="mctp-email"  />
 						<input type="text"  name="url" placeholder="Your website.." value="http://" class="mctp-url" />
 						<input type="submit" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="mctp-button" />
 						<input type="hidden" name="_mctb" value="1" />

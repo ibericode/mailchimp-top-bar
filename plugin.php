@@ -115,10 +115,9 @@ final class Plugin {
 			'color_text' => '#000000',
 			'color_button' => '#000000',
 			'color_button_text' => '#ffffff',
-			'text_placeholder' => __( 'Your email address..', 'mailchimp-top-bar' ),
+			'text_email_placeholder' => __( 'Your email address..', 'mailchimp-top-bar' ),
 			'text_bar' => 'Sign-up now - don\'t miss the fun!',
-			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' ),
-			'text_success' => __( 'Thank you! Please check your inbox to confirm your subscription.', 'mailchimp-top-bar' )
+			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' )
 		);
 
 		$options = array_merge( $defaults, $options );
@@ -126,6 +125,9 @@ final class Plugin {
 		// merge with options from MailChimp for WordPress
 		$parent_options = mc4wp_get_options( 'form' );
 		$options['double_optin'] = $parent_options['double_optin'];
+		$options['text_success'] = $parent_options['text_success'];
+		$options['text_error'] = $parent_options['text_error'];
+		$options['text_invalid_email'] = $parent_options['text_invalid_email'];
 
 		return $options;
 	}
