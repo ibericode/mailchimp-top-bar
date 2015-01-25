@@ -9,7 +9,7 @@ body{
 	line-height: 40px;
 	font-size: 18px;
 	margin: 0;
-	z-index: 200;
+	z-index: 1000;
 	display: block;
 	min-height: 1px;
 
@@ -26,6 +26,8 @@ body{
 		vertical-align: middle;
 		margin: 0;
 		padding: 0;
+		box-shadow: none;
+		text-shadow: none;
 	}
 
 	form{
@@ -33,7 +35,7 @@ body{
 	}
 
 	label {
-		margin-right: 6px;
+		margin: 0 6px 0;
 		display: inline-block;
 	}
 
