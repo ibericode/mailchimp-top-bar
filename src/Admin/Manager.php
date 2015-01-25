@@ -103,15 +103,34 @@ class Manager {
 
 	/**
 	 * Outputs the settings page
-	 *
-	 * @todo Add field mapping
 	 */
 	public function show_settings_page() {
 
 		$mailchimp = new \MC4WP_MailChimp();
 		$lists = $mailchimp->get_lists();
 
+		if( $this->options['list'] !== '' ) {
+			$list = $mailchimp->get_list( $this->options['list'] );
+			$list_requires_extra_fields = $this->list_requires_extra_fields( $list );
+		}
+
 		require Plugin::DIR . '/views/settings-page.php';
+	}
+
+	/**
+	 * @param $list
+	 *
+	 * @return bool
+	 */
+	private function list_requires_extra_fields( $list ) {
+
+		foreach( $list->merge_vars as $field ) {
+			if( $field->tag !== 'EMAIL' && $field->req ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

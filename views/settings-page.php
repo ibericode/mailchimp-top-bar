@@ -9,7 +9,16 @@ defined( 'ABSPATH' ) or exit;
 
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
 
+		<h2 style="display: none;"></h2>
 		<?php settings_fields( Plugin::OPTION_NAME ); ?>
+		<?php settings_errors(); ?>
+
+		<?php
+		if( isset( $list_requires_extra_fields ) && $list_requires_extra_fields ) { ?>
+			<div class="error">
+				<p><?php printf( __( 'The selected MailChimp list requires more fields than just a <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
+			</div>
+		<?php } ?>
 
 		<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
 
@@ -44,7 +53,6 @@ defined( 'ABSPATH' ) or exit;
 							<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $this->options['list'], $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
 						<?php } ?>
 					</select>
-
 				</td>
 				<td class="desc"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></td>
 			</tr>
