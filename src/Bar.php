@@ -37,7 +37,10 @@ class Bar {
 			return false;
 		}
 
-		return true;
+		// todo: add logic to hide bar on certain selected pages
+
+		// allow developers to hide bar
+		return apply_filters( 'mctp_show_bar', true );
 	}
 
 	/**
