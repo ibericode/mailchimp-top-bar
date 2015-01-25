@@ -30,9 +30,21 @@ class Bar {
 	public function __construct( array $options ) {
 		$this->options = $options;
 
-		if( $this->should_show_bar() ) {
-			$this->add_hooks();
+		add_action( 'init', array( $this, 'init' ) );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function init() {
+
+		if( ! $this->should_show_bar() ) {
+			return false;
 		}
+
+		$this->add_hooks();
+		$this->listen();
+		return true;
 	}
 
 	/**
@@ -57,7 +69,6 @@ class Bar {
 	 * Add the hooks
 	 */
 	public function add_hooks() {
-		add_action( 'init', array( $this, 'listen' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ) );
 		add_action( 'wp_footer', array( $this, 'output_html' ) );
 	}
