@@ -64,7 +64,7 @@ defined( 'ABSPATH' ) or exit;
 					</label>
 				</th>
 				<td>
-					<input type="text" name="<?php $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $this->options['text_bar'] ); ?>" class="widefat" />
+					<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $this->options['text_bar'] ); ?>" class="widefat" />
 				</td>
 				<td class="desc">
 					<?php _e( 'The text to appear before the email field.', 'mailchimp-top-bar' ); ?>
@@ -78,7 +78,7 @@ defined( 'ABSPATH' ) or exit;
 					</label>
 				</th>
 				<td>
-					<input type="text" name="<?php $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="widefat" />
+					<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="widefat" />
 				</td>
 				<td class="desc">
 					<?php _e( 'The text on the submit button.', 'mailchimp-top-bar' ); ?>
@@ -92,7 +92,7 @@ defined( 'ABSPATH' ) or exit;
 					</label>
 				</th>
 				<td>
-					<input type="text" name="<?php $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="widefat" />
+					<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="widefat" />
 				</td>
 				<td class="desc">
 					<?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?>
