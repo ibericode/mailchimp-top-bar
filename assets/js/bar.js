@@ -7,6 +7,13 @@
 
 	// Bar functions & state
 	var bar = {};
+	bar.config = mctb || {
+		cookieLength: 30,
+		icons: {
+			show: 'show',
+			hide: 'hide'
+		}
+	};
 	bar.visible = false;
 
 	/**
@@ -21,7 +28,7 @@
 
 		// if cookie is set, hide the bar.
 		if( readCookie("mctb_bar_hidden") != 1 ) {
-			$close.html('&#x25B2;');
+			$close.html(bar.config.icons.hide);
 			$bar.show();
 			bar.visible = true;
 		}
@@ -42,12 +49,12 @@
 
 		if( bar.visible ) {
 			// hiding bar
-			createCookie( "mctb_bar_hidden", 1, mctb.cookieLength );
-			$close.html('&#x25BC;');
+			createCookie( "mctb_bar_hidden", 1, bar.config.cookieLength );
+			$close.html(bar.config.icons.show);
 		} else {
 			// showing bar
 			eraseCookie( 'mctb_bar_hidden' );
-			$close.html('&#x25B2;');
+			$close.html(bar.config.icons.hide);
 		}
 
 		bar.visible = !bar.visible;
