@@ -1,68 +1,55 @@
 (function($) {
 
-	// vars
-	var $barWrapper = $(document.getElementById('mailchimp-top-bar'));
-	var $bar = $barWrapper.find('.mctp-bar');
-	var $close = $barWrapper.find('.mctp-close');
+	var Bar = function( $wrapper, config ) {
 
-	// Bar functions & state
-	var bar = {};
-	bar.config = mctb || {
-		cookieLength: 30,
-		icons: {
-			show: 'show',
-			hide: 'hide'
-		}
-	};
-	bar.visible = false;
+		// Vars & State
+		var $bar = $wrapper.find('.mctp-bar');
+		var $icon = $wrapper.find('.mctp-close');
+		var visible = false;
 
-	/**
-	 * Initializes bar
-	 *
-	 * - Moves bar element through DOM
-	 * - Checks if cookie is set
-	 */
-	bar.init = function() {
+		// Functions
+		function toggle() {
 
-		$barWrapper.insertBefore( document.body.firstChild );
+			// do nothing if bar is undergoing animation
+			if( $bar.is(':animated') ) {
+				return;
+			}
 
-		// if cookie is set, hide the bar.
-		if( readCookie("mctb_bar_hidden") != 1 ) {
-			$close.html(bar.config.icons.hide);
-			$bar.show();
-			bar.visible = true;
+			$bar.slideToggle();
+
+			if( visible ) {
+				// hiding bar
+				createCookie( "mctb_bar_hidden", 1, config.cookieLength );
+				$icon.html(config.icons.show);
+			} else {
+				// showing bar
+				eraseCookie( 'mctb_bar_hidden' );
+				$icon.html(config.icons.hide);
+			}
+
+			visible = !visible;
 		}
 
-	};
+		// Code to run upon object instantiation
 
-	/**
-	 * Toggle visibility of the bar
-	 */
-	bar.toggle = function( ) {
+		// Move element to begin of <body>
+		$wrapper.insertBefore( document.body.firstChild );
 
-		// do nothing if bar is undergoing animation
-		if( $bar.is(':animated') ) {
-			return;
+		// Listen to `click` events on the icon
+		$icon.click( toggle );
+
+		// Return values
+		return {
+			$element: $wrapper,
+			toggle: toggle
 		}
 
-		$bar.slideToggle();
-
-		if( bar.visible ) {
-			// hiding bar
-			createCookie( "mctb_bar_hidden", 1, bar.config.cookieLength );
-			$close.html(bar.config.icons.show);
-		} else {
-			// showing bar
-			eraseCookie( 'mctb_bar_hidden' );
-			$close.html(bar.config.icons.hide);
-		}
-
-		bar.visible = !bar.visible;
 	};
 
-	// event listeners
-	$(window).load( bar.init );
-	$close.click( bar.toggle );
+	// Init Bar on window.load
+	$(window).load( function() {
+		window.MailChimpTopBar = new Bar( $(document.getElementById('mailchimp-top-bar') ), mctb );
+	});
 
 	/**
 	 * Creates a cookie
