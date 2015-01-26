@@ -1,5 +1,13 @@
 (function($) {
 
+	/**
+	 * Creates a new Top Bar from an element
+	 *
+	 * @param $wrapper
+	 * @param config
+	 * @returns {{$element: *, toggle: toggle, show: show, hide: hide}}
+	 * @constructor
+	 */
 	var Bar = function( $wrapper, config ) {
 
 		// Vars & State
@@ -8,26 +16,50 @@
 		var visible = false;
 
 		// Functions
+
+		/**
+		 * Show the bar
+		 *
+		 * @returns {boolean}
+		 */
+		function show() {
+			if( $bar.is( ':animated' ) || visible ) {
+				return false;
+			}
+
+			$bar.slideDown();
+			eraseCookie( 'mctb_bar_hidden' );
+			$icon.html(config.icons.hide);
+			visible = true;
+
+			return true;
+		}
+
+		/**
+		 * Hide the bar
+		 *
+		 * @returns {boolean}
+		 */
+		function hide() {
+			if( $bar.is( ':animated' ) || ! visible ) {
+				return false;
+			}
+
+			$bar.slideUp();
+			visible = false;
+			createCookie( "mctb_bar_hidden", 1, config.cookieLength );
+			$icon.html(config.icons.show);
+
+			return true;
+		}
+
+		/**
+		 * Toggle visibility of the bar
+		 *
+		 * @returns {boolean}
+		 */
 		function toggle() {
-
-			// do nothing if bar is undergoing animation
-			if( $bar.is(':animated') ) {
-				return;
-			}
-
-			$bar.slideToggle();
-
-			if( visible ) {
-				// hiding bar
-				createCookie( "mctb_bar_hidden", 1, config.cookieLength );
-				$icon.html(config.icons.show);
-			} else {
-				// showing bar
-				eraseCookie( 'mctb_bar_hidden' );
-				$icon.html(config.icons.hide);
-			}
-
-			visible = !visible;
+			return visible ? hide() : show();
 		}
 
 		// Code to run upon object instantiation
@@ -41,14 +73,16 @@
 		// Return values
 		return {
 			$element: $wrapper,
-			toggle: toggle
+			toggle: toggle,
+			show: show,
+			hide: hide
 		}
 
 	};
 
 	// Init Bar on window.load
 	$(window).load( function() {
-		window.MailChimpTopBar = new Bar( $(document.getElementById('mailchimp-top-bar') ), mctb );
+		window.MailChimpTopBar = new Bar( $(document.getElementById('mailchimp-top-bar') ), window.mctb );
 	});
 
 	/**
