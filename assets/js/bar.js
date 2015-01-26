@@ -70,6 +70,13 @@
 		// Listen to `click` events on the icon
 		$icon.click( toggle );
 
+		// Show the bar straight away?
+		if( readCookie( "mctb_bar_hidden" ) != 1 ) {
+			$bar.show();
+			visible = true;
+			$icon.html( config.icons.hide );
+		}
+
 		// Return values
 		return {
 			$element: $wrapper,
