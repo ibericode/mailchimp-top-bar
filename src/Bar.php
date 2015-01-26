@@ -74,7 +74,7 @@ class Bar {
 	}
 
 	/**
-	 * Listen for a form submission
+	 * Listens for actions to take
 	 */
 	public function listen() {
 
@@ -85,6 +85,7 @@ class Bar {
 
 	/**
 	 * Process a form submission
+	 * @return boolean
 	 */
 	private function process() {
 
@@ -106,15 +107,24 @@ class Bar {
 
 	/**
 	 * Validate the form submission
+	 * @return boolean
 	 */
 	private function validate() {
 
 		// make sure `url` field is not changed (honeypot)
 		if( isset( $_POST['url'] ) && 'http://' !== $_POST['url'] ) {
-			$this->error_type = 'honeypot';
+			$this->error_type = 'spam';
 			return false;
 		}
 
+		// simple user agent check
+		$user_agent = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? substr( $_SERVER['HTTP_USER_AGENT'], 0, 254 ) : '';
+		if( strlen( $user_agent ) < 2 ) {
+			$this->error_type = 'spam';
+			return false;
+		}
+
+		// check if email is given and valid
 		if( ! isset( $_POST['email'] ) || ! is_string( $_POST['email'] ) || ! is_email( $_POST['email'] ) ) {
 			$this->error_type = 'invalid_email';
 			return false;
@@ -132,8 +142,22 @@ class Bar {
 		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array( 'jquery' ), Plugin::VERSION, true );
 
 		$data = array(
-			'cookieLength' => $this->options['cookie_length']
+			'cookieLength' => $this->options['cookie_length'],
+			'icons' => array(
+				'hide' => '&#x25B2;',
+				'show' => '&#x25BC;'
+			)
 		);
+
+		/**
+		 * @filter `mctb_bar_config`
+		 * @expects array
+		 *
+		 * Can be used to filter the following values
+		 *  - cookieLength: The length of the cookie
+		 *  - icons: Array with `hide` and `show` keys. Holds the hide/show icon strings.
+		 */
+		$data = apply_filters( 'mctb_bar_config', $data );
 
 		wp_localize_script( 'mailchimp-top-bar', 'mctb', $data );
 	}
