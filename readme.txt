@@ -1,10 +1,10 @@
 === MailChimp Top Bar ===
 Contributors: DvanKooten
 Donate link: https://dannyvankooten.com/donate/
-Tags: mailchimp,top bar,opt-in bar
+Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 0.2
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,16 +15,20 @@ Adds a MailChimp opt-in form in a top bar to your WordPress site.
 Adds a beautiful, customizable opt-in bar to the top of your WordPress site. This bar is guaranteed to get the attention of your visitor and
 increase your MailChimp subscribers.
 
-**This plugin is still in beta. You can definitely use it but it _could_ be subject to changes breaking backwards compatibility.**
-
 > This plugin is an add-on for the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/).
-> To use it, you need at least MailChimp for WordPress v2.2.3 or MailChimp for WordPress Premium 2.5.5.
+> To use it, you need at least **MailChimp for WordPress v2.2.3** or **MailChimp for WordPress Premium v2.5.5**.
 
 = MailChimp Top Bar, at a glance.. =
 
 MailChimp Top Bar adds a simple yet beautiful and customizable opt-in bar to the top of your WordPress site.
 
-Using this bar, people can subscribe to a MailChimp list of your choice.
+Using this bar, people can subscribe to any MailChimp list of your choice.
+
+- A real conversion booster.
+- Unobtrusive, visitors can dismiss the bar.
+- Easy to install & configure, just select a MailChimp list and you're good to.
+- Customizable, you can edit the top bar text and colors from the plugin settings.
+- Lightweight, this plugin aims to do one thing, and does it well.
 
 = Development of MailChimp Top Bar =
 
@@ -65,11 +69,10 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Screenshots ==
 
-1. The MailChimp Top Bar in action with the TwentyFifteen theme.
+1. The MailChimp Top Bar in action on the [MailChimp for WordPress site](https://mc4wp.com).
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
 
-= 0.1 =
-Initial beta release.
-
+= 1.0 - January 28, 2015 =
+Initial release

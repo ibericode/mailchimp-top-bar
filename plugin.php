@@ -14,7 +14,7 @@ final class Plugin {
 	/**
 	 * @const VERSION
 	 */
-	const VERSION = '0.2';
+	const VERSION = '1.0';
 
 	/**
 	 * @const FILE
@@ -112,8 +112,8 @@ final class Plugin {
 			'show_to_administrators' => 1,
 			'cookie_length' => 60,
 			'color_bar' => '#ffcc00',
-			'color_text' => '#000000',
-			'color_button' => '#000000',
+			'color_text' => '#222222',
+			'color_button' => '#222222',
 			'color_button_text' => '#ffffff',
 			'text_email_placeholder' => __( 'Your email address..', 'mailchimp-top-bar' ),
 			'text_bar' => __( 'Sign-up now - don\'t miss the fun!', 'mailchimp-top-bar' ),
