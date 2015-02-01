@@ -22,7 +22,7 @@ class Manager {
 		$this->options = $options;
 
 		add_action( 'admin_init', array( $this, 'init' ) );
-		add_action( 'admin_menu', array( $this, 'menu' ) );
+		add_action( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
 	}
 
 	/**
@@ -74,9 +74,24 @@ class Manager {
 
 	/**
 	 * Register menu pages
+	 *
+	 * @param array $items
+	 *
+	 * @return array
 	 */
-	public function menu() {
-		add_submenu_page( 'mailchimp-for-wp', __( 'MailChimp Top Bar', 'mailchimp-top-bar' ), __( 'Top Bar', 'mailchimp-top-bar' ), self::SETTINGS_CAP, 'mailchimp-for-wp-top-bar', array( $this, 'show_settings_page' ) );
+	public function add_menu_item( array $items ) {
+
+			$item = array(
+				'title' => __( 'MailChimp Top Bar', 'mailchimp-top-bar' ),
+				'text' => __( 'Top Bar', 'mailchimp-top-bar' ),
+				'slug' => 'top-bar',
+				'callback' => array( $this, 'show_settings_page' )
+			);
+
+			// insert item before the last menu item
+			array_splice( $items, count( $items ) - 1, 0, array( $item ) );
+
+			return $items;
 	}
 
 	/**
