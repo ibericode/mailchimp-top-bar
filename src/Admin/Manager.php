@@ -20,6 +20,7 @@ class Manager {
 	public function __construct( array $options ) {
 
 		$this->options = $options;
+		$this->plugin_slug = basename( Plugin::DIR ) . '/mailchimp-top-bar.php';
 
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
@@ -37,6 +38,10 @@ class Manager {
 
 		// register settings
 		register_setting( Plugin::OPTION_NAME, Plugin::OPTION_NAME, array( $this, 'sanitize_settings' ) );
+
+		// add link to settings page from plugins page
+		add_filter( 'plugin_action_links_' . $this->plugin_slug, array( $this, 'add_plugin_settings_link' ) );
+		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links'), 10, 2 );
 
 		// listen for wphs requests, user is authorized by now
 		$this->listen();
@@ -92,6 +97,33 @@ class Manager {
 			array_splice( $items, count( $items ) - 1, 0, array( $item ) );
 
 			return $items;
+	}
+
+	/**
+	 * Add the settings link to the Plugins overview
+	 *
+	 * @param array $links
+	 * @return array
+	 */
+	public function add_plugin_settings_link( $links ) {
+		$settings_link = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=mailchimp-for-wp-top-bar' ), __( 'Settings', 'mailchimp-for-wp' ) );
+		array_unshift( $links, $settings_link );
+		return $links;
+	}
+
+	/**
+	 * Adds meta links to the plugin in the WP Admin > Plugins screen
+	 *
+	 * @param array $links
+	 * @return array
+	 */
+	public function add_plugin_meta_links( $links, $file ) {
+		if( $file !== $this->plugin_slug ) {
+			return $links;
+		}
+
+		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://mc4wp.com/">MailChimp for WordPress</a>' );
+		return $links;
 	}
 
 	/**
