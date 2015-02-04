@@ -98,3 +98,8 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 = 1.0 - January 28, 2015 =
 Initial release
+
+== Upgrade Notice ==
+
+= 1.0.1 =
+Added an option to make the bar "sticky" & to choose bar size.

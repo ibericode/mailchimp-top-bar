@@ -11,7 +11,8 @@
 		padding: $base_size ($base_size * 3);
 	}
 
-	input {
+	input,
+	label {
 		padding: $base_size ($base_size * 1.5);
 	}
 
@@ -21,7 +22,9 @@
 
 	.mctp-close {
 		font-size: $base_size * 4;
-		line-height: 200%;
+		display: table-cell;
+		vertical-align: middle;
+		top: $base_size;
 	}
 }
 
@@ -35,8 +38,8 @@ body {
 	width: 100%;
 	margin: 0;
 	z-index: 1000;
-	display: block;
 	background: transparent;
+	display: table;
 
 	&.mctp-sticky {
 		position: fixed;
