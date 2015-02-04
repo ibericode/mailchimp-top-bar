@@ -208,6 +208,11 @@ class Manager {
 		// todo: perform some actual sanitization
 		$clean = $dirty;
 
+		// make sure size is either `small`, `medium` or `big`
+		if( ! in_array( $dirty['size'], array( 'small', 'medium', 'big' ) ) ) {
+			$clean['size'] = 'medium';
+		}
+
 		return $clean;
 	}
 

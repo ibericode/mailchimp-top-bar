@@ -162,13 +162,29 @@ class Bar {
 		wp_localize_script( 'mailchimp-top-bar', 'mctb', $data );
 	}
 
+	/**
+	 * @return string
+	 */
+	private function get_css_class() {
+		$classes = array( '' );
+
+		// add class when bar is sticky
+		if( $this->options['sticky'] ) {
+			$classes[] = 'mctp-sticky';
+		}
+
+		// add class describing size of the bar
+		$classes[] = "mctp-{$this->options['size']}";
+
+		return join( ' ', $classes );
+	}
+
 
 	/**
 	 * Output the HTML for the opt-in bar
 	 */
 	public function output_html() {
 
-		echo '<!-- MailChimp Top Bar v'. Plugin::VERSION .' - https://wordpress.org/plugins/mailchimp-top-bar/ -->';
 		?><style type="text/css"><?php
 
 			if( '' !== $this->options['color_bar'] ) {
@@ -189,7 +205,9 @@ class Bar {
 			}
 
 			?></style>
-		<div id="mailchimp-top-bar"><div class="mctp-bar" style="display: none">
+		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
+			<!-- MailChimp Top Bar v<?php echo Plugin::VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
+			<div class="mctp-bar" style="display: none">
 				<form method="post">
 					<?php
 					if( $this->submitted ) {
@@ -208,7 +226,7 @@ class Bar {
 						<input type="hidden" name="_mctb" value="1" />
 					<?php } ?>
 				</form>
-			</div><span class="mctp-close">&#x25BC;</span></div><!-- / MailChimp Top Bar --><?php
+			</div><span class="mctp-close">&#x25BC;</span><!-- / MailChimp Top Bar --></div><?php
 	}
 
 	/**

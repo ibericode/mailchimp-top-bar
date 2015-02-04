@@ -108,55 +108,98 @@ defined( 'ABSPATH' ) or exit;
 
 		</table>
 
-		<h2><?php _e( 'Form Styling', 'mailchimp-for-wp'); ?></h2>
+		<h2><?php _e( 'Appearance', 'mailchimp-for-wp'); ?></h2>
 
-		<table class="form-table">
+		<div class="row">
+			<div class="col-2">
+				<table class="form-table">
 
-			<tr valign="top">
-				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'color_bar' ); ?>">
-						<?php _e( 'Bar Color', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $this->options['color_bar'] ); ?>" class="color">
-				</td>
-			</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $this->name_attr( 'size' ); ?>">
+								<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
+							</label>
+						</th>
+						<td>
+							<select name="<?php echo $this->name_attr( 'size' ); ?>">
+								<option value="small" <?php selected( $this->options['size'], 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
+								<option value="medium" <?php selected( $this->options['size'], 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
+								<option value="big" <?php selected( $this->options['size'], 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
+							</select>
+						</td>
+					</tr>
 
-			<tr valign="top">
-				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'color_text' ); ?>">
-						<?php _e( 'Text Color', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $this->options['color_text'] ); ?>" class="color">
-				</td>
-			</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $this->name_attr( 'color_bar' ); ?>">
+								<?php _e( 'Bar Color', 'mailchimp-top-bar' ); ?>
+							</label>
+						</th>
+						<td>
+							<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $this->options['color_bar'] ); ?>" class="color">
+						</td>
+					</tr>
 
-			<tr valign="top">
-				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'color_button' ); ?>">
-						<?php _e( 'Button Color', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $this->options['color_button'] ); ?>" class="color">
-				</td>
-			</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $this->name_attr( 'color_text' ); ?>">
+								<?php _e( 'Text Color', 'mailchimp-top-bar' ); ?>
+							</label>
+						</th>
+						<td>
+							<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $this->options['color_text'] ); ?>" class="color">
+						</td>
+					</tr>
 
-			<tr valign="top">
-				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'color_button_text' ); ?>">
-						<?php _e( 'Button Text Color', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $this->options['color_button_text'] ); ?>" class="color">
-				</td>
-			</tr>
+				</table>
+			</div>
+			<div class="col-2">
+				<table class="form-table">
 
-		</table>
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $this->name_attr( 'sticky' ); ?>">
+								<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
+							</label>
+						</th>
+						<td>
+							<label>
+								<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $this->options['sticky'], 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							</label>
+							<label>
+								<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $this->options['sticky'], 0 ); ?> /> <?php _e( 'No' ); ?>
+							</label>
+						</td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $this->name_attr( 'color_button' ); ?>">
+								<?php _e( 'Button Color', 'mailchimp-top-bar' ); ?>
+							</label>
+						</th>
+						<td>
+							<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $this->options['color_button'] ); ?>" class="color">
+						</td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row">
+							<label for="<?php echo $this->name_attr( 'color_button_text' ); ?>">
+								<?php _e( 'Button Text Color', 'mailchimp-top-bar' ); ?>
+							</label>
+						</th>
+						<td>
+							<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $this->options['color_button_text'] ); ?>" class="color">
+						</td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+
+		<br style="clear: both;" />
+
 
 		<?php submit_button(); ?>
 	</form>

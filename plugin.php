@@ -115,6 +115,8 @@ final class Plugin {
 			'color_text' => '#222222',
 			'color_button' => '#222222',
 			'color_button_text' => '#ffffff',
+			'size' => 'medium',
+			'sticky' => 1,
 			'text_email_placeholder' => __( 'Your email address..', 'mailchimp-top-bar' ),
 			'text_bar' => __( 'Sign-up now - don\'t miss the fun!', 'mailchimp-top-bar' ),
 			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' )
