@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,19 @@ Since this plugin depends on the [MailChimp for WordPress plugin](https://wordpr
 
 == Frequently Asked Questions ==
 
+= How to disable the bar on certain pages? =
+
+For now, you will have to use a filter to disable the bar on certain pages.
+
+`
+add_filter( 'mctp_show_bar', function() {
+	// this will only show the bar on blog post pages.
+	return is_singular( 'post' );
+} );
+`
+
+Have a look at the [Conditional Tags](https://codex.wordpress.org/Conditional_Tags) page for all accepted functions.
+
 = I think I found a bug. What now? =
 
 Please report it on [GitHub issues](https://github.com/dannyvankooten/wp-mailchimp-top-bar/issues) if it's not in the list of known issues.
@@ -73,6 +86,15 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.0.1 - February 4, 2015 =
+
+**Additions**
+- You can now set the bar as "sticky", meaning it will stick to the op your window, even when scrolling.
+- You can now choose the size of the bar, small/medium/big.
+
+**Improvements**
+- The menu item will now show above the item asking you to upgrade to MailChimp for WordPress Pro.
 
 = 1.0 - January 28, 2015 =
 Initial release
