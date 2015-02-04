@@ -31,9 +31,8 @@
 
 			if( manual ) {
 				// Add bar height to <body> padding
-				$body.animate( {
-					'padding-top': parseFloat( $("body").css('padding-top') ) + $bar.outerHeight()
-				} );
+				var bodyPadding = parseFloat( $("body").css('padding-top') ) + $bar.outerHeight();
+				$body.animate({ 'padding-top': bodyPadding });
 				$bar.slideDown();
 				eraseCookie( 'mctb_bar_hidden' );
 			} else {
