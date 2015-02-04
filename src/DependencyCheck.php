@@ -24,12 +24,12 @@ class DependencyCheck {
 	private function check_dependencies() {
 
 		// check for mailchimp for wordpress pro
-		if( defined( 'MC4WP_VERSION' ) && version_compare( MC4WP_VERSION, '2.5.5', '>=' ) ) {
+		if( defined( 'MC4WP_VERSION' ) && version_compare( MC4WP_VERSION, '2.5.6', '>=' ) ) {
 			return true;
 		}
 
 		// check for mailchimp for wordpress lite
-		if( defined( 'MC4WP_LITE_VERSION' ) && version_compare( MC4WP_LITE_VERSION, '2.2.3', '>=' ) ) {
+		if( defined( 'MC4WP_LITE_VERSION' ) && version_compare( MC4WP_LITE_VERSION, '2.2.4', '>=' ) ) {
 			return true;
 		}
 

@@ -89,13 +89,21 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 = 1.0.1 - February 4, 2015 =
 
+**Fixes**
+
+- The plugin will no longer overlap header menu's or other elements
+
 **Additions**
+
 - You can now set the bar as "sticky", meaning it will stick to the op your window, even when scrolling.
 - You can now choose the size of the bar, small/medium/big.
 - Added Dutch translation files.
 
 **Improvements**
+
 - The menu item will now show above the item asking you to upgrade to MailChimp for WordPress Pro.
+
+Please update the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/) before updating to this version.
 
 = 1.0 - January 28, 2015 =
 Initial release
@@ -103,4 +111,4 @@ Initial release
 == Upgrade Notice ==
 
 = 1.0.1 =
-Added an option to make the bar "sticky" & to choose bar size.
+Added an option to make the bar "sticky" & to choose bar size. Please update MailChimp for WordPress first.
