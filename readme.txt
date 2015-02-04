@@ -1,5 +1,5 @@
 === MailChimp Top Bar ===
-Contributors: DvanKooten
+Contributors: DvanKooten, iMazed
 Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
@@ -92,6 +92,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 **Additions**
 - You can now set the bar as "sticky", meaning it will stick to the op your window, even when scrolling.
 - You can now choose the size of the bar, small/medium/big.
+- Added Dutch translation files.
 
 **Improvements**
 - The menu item will now show above the item asking you to upgrade to MailChimp for WordPress Pro.
