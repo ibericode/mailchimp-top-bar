@@ -22,8 +22,6 @@
 
 	.mctp-close {
 		font-size: $base_size * 4;
-		display: table-cell;
-		vertical-align: middle;
 		top: $base_size;
 	}
 }
@@ -102,6 +100,8 @@ body {
 		opacity: 0.5;
 		filter: alpha(opacity=50);
 		cursor: pointer;
+		display: table-cell;
+		vertical-align: middle;
 	}
 
 	.mctp-close:hover {
