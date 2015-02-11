@@ -102,7 +102,10 @@ class Bar {
 		$merge_vars = apply_filters( 'mctp_merge_vars', array() );
 		$email_type = apply_filters( 'mctp_email_type', 'html' );
 
-		return $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
+		$result = $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
+		do_action( 'mc4wp_subscribe', $email, $this->options['list'], $merge_vars, $result, 'form', 'top-bar' );
+
+		return $result;
 	}
 
 	/**
