@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,17 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
+= 1.0.2 - February 12, 2015 =
+
+**Improvements**
+
+- Better CSS reset for elements inside the bar
+- Other minor CSS improvements
+
+**Additions**
+
+- Top Bar sign-ups are now shown in the log for [MailChimp for WordPress Pro](https://mc4wp.com/).
+
 = 1.0.1 - February 4, 2015 =
 
 **Fixes**
@@ -110,5 +121,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-Added an option to make the bar "sticky" & to choose bar size. Please update MailChimp for WordPress first.
+= 1.0.2 =
+Minor CSS improvements & added integration with log in MailChimp for WordPress Pro.
