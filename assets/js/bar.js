@@ -1,21 +1,24 @@
 (function($) {
 
-	var $body = $("body");
+	var bodyEl = document.body;
+	var $body = $(bodyEl);
 
 	/**
 	 * Creates a new Top Bar from an element
 	 *
-	 * @param $wrapper
+	 * @param wrapperEl
 	 * @param config
 	 * @returns {{$element: *, toggle: toggle, show: show, hide: hide}}
 	 * @constructor
 	 */
-	var Bar = function( $wrapper, config ) {
+	var Bar = function( wrapperEl, config ) {
 
 		// Vars & State
-		var $bar = $wrapper.find('.mctp-bar');
-		var $icon = $wrapper.find('.mctp-close');
+		var barEl = wrapperEl.querySelector('.mctp-bar');
+		var iconEl = wrapperEl.querySelector('.mctp-close');
 		var visible = false;
+		var $bar = $(barEl);
+		var $icon = $(iconEl);
 
 		// Functions
 
@@ -25,23 +28,24 @@
 		 * @returns {boolean}
 		 */
 		function show( manual ) {
-			if( $bar.is( ':animated' ) || visible ) {
+
+			if( visible || $bar.is( ':animated' ) ) {
 				return false;
 			}
 
 			if( manual ) {
 				// Add bar height to <body> padding
-				var bodyPadding = parseFloat( $("body").css('padding-top') ) + $bar.outerHeight();
+				var bodyPadding = ( ( parseInt( bodyEl.style.paddingTop )  || 0 ) + $bar.outerHeight() ) + "px";
 				$body.animate({ 'padding-top': bodyPadding });
 				$bar.slideDown();
 				eraseCookie( 'mctb_bar_hidden' );
 			} else {
 				// Add bar height to <body> padding
-				$body.css( 'padding-top', parseFloat( $("body").css('padding-top') ) + $bar.outerHeight() );
-				$bar.show();
+				barEl.style.display = 'block';
+				bodyEl.style.paddingTop = ( ( parseInt( bodyEl.style.paddingTop )  || 0 ) + $bar.outerHeight() ) + "px";
 			}
 
-			$icon.html(config.icons.hide);
+			iconEl.innerHTML = config.icons.hide;
 			visible = true;
 
 			return true;
@@ -53,7 +57,7 @@
 		 * @returns {boolean}
 		 */
 		function hide(manual) {
-			if( $bar.is( ':animated' ) || ! visible ) {
+			if( ! visible || $bar.is( ':animated' ) ) {
 				return false;
 			}
 
@@ -62,12 +66,12 @@
 				$body.animate({ 'padding-top': 0 });
 				createCookie( "mctb_bar_hidden", 1, config.cookieLength );
 			} else {
-				$bar.hide();
-				$body.css('padding-top', 0);
+				barEl.style.display = 'none';
+				document.body.style.paddingTop = 0;
 			}
 
 			visible = false;
-			$icon.html(config.icons.show);
+			iconEl.innerHTML = config.icons.show;
 
 			return true;
 		}
@@ -77,7 +81,7 @@
 			timestamp.setAttribute('name', '_mctb_timestamp');
 			timestamp.setAttribute('type', 'hidden');
 			timestamp.setAttribute('value', currentTimeInSeconds);
-			$bar.find('form').get(0).appendChild( timestamp );
+			barEl.querySelector('form').appendChild(timestamp);
 		}
 
 		/**
@@ -105,7 +109,7 @@
 
 		// Return values
 		return {
-			$element: $wrapper,
+			element: wrapperEl,
 			toggle: toggle,
 			show: show,
 			hide: hide
@@ -116,7 +120,7 @@
 	// Init Bar on window.load
 	var currentTimeInSeconds = Math.round(new Date().getTime() / 1000);
 	$(window).load( function() {
-		window.MailChimpTopBar = new Bar( $(document.getElementById('mailchimp-top-bar') ), window.mctb );
+		window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
 	});
 
 	/**
