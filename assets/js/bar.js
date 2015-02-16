@@ -72,6 +72,14 @@
 			return true;
 		}
 
+		function addTimestampField() {
+			var timestamp = document.createElement('input');
+			timestamp.setAttribute('name', '_mctb_timestamp');
+			timestamp.setAttribute('type', 'hidden');
+			timestamp.setAttribute('value', Math.round(new Date().getTime() / 1000));
+			$bar.find('form').get(0).appendChild( timestamp );
+		}
+
 		/**
 		 * Toggle visibility of the bar
 		 *
@@ -82,6 +90,9 @@
 		}
 
 		// Code to run upon object instantiation
+
+		// add timestamp field
+		addTimestampField();
 
 		// Show the bar straight away?
 		if( readCookie( "mctb_bar_hidden" ) != 1 ) {

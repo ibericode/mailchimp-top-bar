@@ -121,6 +121,12 @@ class Bar {
 			return false;
 		}
 
+		// make sure `_mctb_timestamp` is given and is before 2 seconds ago
+		if( ! isset( $_POST['_mctb_timestamp' ] ) || (int) $_POST['_mctb_timestamp'] > ( time() - 2 ) ) {
+			$this->error_type = 'spam';
+			return false;
+		}
+
 		// simple user agent check
 		$user_agent = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) ? substr( $_SERVER['HTTP_USER_AGENT'], 0, 254 ) : '';
 		if( strlen( $user_agent ) < 2 ) {
@@ -218,7 +224,7 @@ class Bar {
 		?><div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- MailChimp Top Bar v<?php echo Plugin::VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctp-bar" style="display: none">
-				<form method="post" disabled>
+				<form method="post">
 					<?php
 					if( $this->submitted ) {
 						 if( $this->success ) {
