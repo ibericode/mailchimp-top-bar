@@ -63,19 +63,24 @@ body {
 		float: none;
 	}
 
+	input,
+	label {
+		display: inline-block !important;
+		vertical-align: middle !important;
+	}
+
 	form{
 		text-align: center;
+		margin: 0 !important;
 	}
 
 	// Make label & field appear inline
 	label {
-		margin: 0 6px 0 0;
-		display: inline-block;
+		margin: 0 6px 0 0 !important;
 	}
 
 	input{
-		display: inline-block;
-		margin: 0 0 0 6px;
+		margin: 0 0 0 6px !important;
 		border: 1px solid white;
 		background: white;
 	}
