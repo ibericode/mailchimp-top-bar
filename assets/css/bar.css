@@ -59,7 +59,7 @@ body {
 #mailchimp-top-bar .mctp-button {
   cursor: pointer;
 }
-#mailchimp-top-bar .mctp-url {
+#mailchimp-top-bar .mctp-email-confirm {
   display: none !important;
 }
 #mailchimp-top-bar .mctp-close {

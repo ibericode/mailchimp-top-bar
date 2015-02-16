@@ -70,6 +70,7 @@ class Bar {
 	 */
 	public function add_hooks() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ) );
+		add_action( 'wp_head', array( $this, 'output_css'), 90 );
 		add_action( 'wp_footer', array( $this, 'output_html' ) );
 	}
 
@@ -114,8 +115,8 @@ class Bar {
 	 */
 	private function validate() {
 
-		// make sure `url` field is not changed (honeypot)
-		if( isset( $_POST['url'] ) && 'http://' !== $_POST['url'] ) {
+		// make sure `email_confirm` field is given but not filled (honeypot)
+		if( ! isset( $_POST['email_confirm'] ) || '' !== $_POST['email_confirm'] ) {
 			$this->error_type = 'spam';
 			return false;
 		}
@@ -182,36 +183,42 @@ class Bar {
 		return join( ' ', $classes );
 	}
 
+	/**
+	 * Output the CSS settings for the bar
+	 */
+	public function output_css() {
+		echo '<style type="text/css">';
+
+		if( '' !== $this->options['color_bar'] ) {
+			echo "#mailchimp-top-bar .mctp-bar{ background: {$this->options['color_bar']}; }";
+		}
+
+		if( '' !== $this->options['color_text'] ) {
+			echo "#mailchimp-top-bar label { color: {$this->options['color_text']}; }";
+		}
+
+		if( '' !== $this->options['color_button'] ) {
+			echo "#mailchimp-top-bar .mctp-button { background: {$this->options['color_button']}; border-color: {$this->options['color_button']}; }";
+			echo "#mailchimp-top-bar .mctp-email:focus { border-color: {$this->options['color_button']}; }";
+		}
+
+		if( '' !== $this->options['color_button_text'] ) {
+			echo "#mailchimp-top-bar .mctp-button { color: {$this->options['color_button_text']}; }";
+		}
+
+		echo '</style>';
+	}
+
 
 	/**
 	 * Output the HTML for the opt-in bar
 	 */
 	public function output_html() {
 
-		?><style type="text/css"><?php
-
-			if( '' !== $this->options['color_bar'] ) {
-				echo "#mailchimp-top-bar .mctp-bar{ background: {$this->options['color_bar']}; }";
-			}
-
-			if( '' !== $this->options['color_text'] ) {
-				echo "#mailchimp-top-bar label { color: {$this->options['color_text']}; }";
-			}
-
-			if( '' !== $this->options['color_button'] ) {
-				echo "#mailchimp-top-bar .mctp-button { background: {$this->options['color_button']}; border-color: {$this->options['color_button']}; }";
-				echo "#mailchimp-top-bar .mctp-email:focus { border-color: {$this->options['color_button']}; }";
-			}
-
-			if( '' !== $this->options['color_button_text'] ) {
-				echo "#mailchimp-top-bar .mctp-button { color: {$this->options['color_button_text']}; }";
-			}
-
-			?></style>
-		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
+		?><div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- MailChimp Top Bar v<?php echo Plugin::VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctp-bar" style="display: none">
-				<form method="post">
+				<form method="post" disabled>
 					<?php
 					if( $this->submitted ) {
 						 if( $this->success ) {
@@ -224,7 +231,7 @@ class Bar {
 					 } else { ?>
 						<label><?php echo strip_tags( $this->options['text_bar'], '<strong><em><u>' ); ?></label>
 						<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="mctp-email"  />
-						<input type="text"  name="url" placeholder="Your website.." value="http://" class="mctp-url" />
+						<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" class="mctp-email-confirm" />
 						<input type="submit" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="mctp-button" />
 						<input type="hidden" name="_mctb" value="1" />
 					<?php } ?>
