@@ -1,0 +1,11 @@
+<wpml-config>
+	<admin-texts>
+		<key name="mailchimp_top_bar">
+			<key name="text_email_placeholder" />
+			<key name="text_bar" />
+			<key name="text_button" />
+		</key>
+	</admin-texts>
+</wpml-config>
+
+
