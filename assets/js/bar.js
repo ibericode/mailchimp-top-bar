@@ -76,7 +76,7 @@
 			var timestamp = document.createElement('input');
 			timestamp.setAttribute('name', '_mctb_timestamp');
 			timestamp.setAttribute('type', 'hidden');
-			timestamp.setAttribute('value', Math.round(new Date().getTime() / 1000));
+			timestamp.setAttribute('value', currentTimeInSeconds);
 			$bar.find('form').get(0).appendChild( timestamp );
 		}
 
@@ -114,6 +114,7 @@
 	};
 
 	// Init Bar on window.load
+	var currentTimeInSeconds = Math.round(new Date().getTime() / 1000);
 	$(window).load( function() {
 		window.MailChimpTopBar = new Bar( $(document.getElementById('mailchimp-top-bar') ), window.mctb );
 	});
