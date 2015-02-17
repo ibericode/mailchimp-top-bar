@@ -13,12 +13,16 @@ defined( 'ABSPATH' ) or exit;
 		<?php settings_fields( Plugin::OPTION_NAME ); ?>
 		<?php settings_errors(); ?>
 
-		<?php
-		if( isset( $list_requires_extra_fields ) && $list_requires_extra_fields ) { ?>
-			<div class="error">
-				<p><?php printf( __( 'The selected MailChimp list requires more fields than just a <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
-			</div>
-		<?php } ?>
+
+		<div id="message-list-requires-fields" class="error" style="display: none;">
+			<p><?php printf( __( 'The selected MailChimp list requires more fields than just a <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
+		</div>
+
+		<div id="message-bar-is-disabled" class="error" style="display: none;">
+			<p>
+				<?php _e( 'You have disabled the bar. It will not show up on your site until you enable it again.', 'mailchimp-top-bar' ); ?>
+			</p>
+		</div>
 
 		<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
 
@@ -26,7 +30,7 @@ defined( 'ABSPATH' ) or exit;
 
 			<tr valign="top">
 				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'enabled' ); ?>">
+					<label>
 						<?php _e( 'Enable Bar?', 'mailchimp-top-bar' ); ?>
 					</label>
 				</th>
@@ -38,16 +42,19 @@ defined( 'ABSPATH' ) or exit;
 						<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $this->options['enabled'], 0 ); ?> /> <?php _e( 'No' ); ?>
 					</label>
 				</td>
+				<td class="desc">
+					<?php _e( 'A quick way to completely disable the bar.', 'mailchimp-top-bar' ); ?>
+				</td>
 			</tr>
 
 			<tr valign="top">
-				<th scope="row"><label for="<?php echo $this->name_attr( 'list' ); ?>"><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
+				<th scope="row"><label><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
 				<td>
 					<?php if( empty( $lists ) ) {
 						printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 					<?php } ?>
 
-					<select name="<?php echo $this->name_attr( 'list' ); ?>" class="widefat">
+					<select name="<?php echo $this->name_attr( 'list' ); ?>" id="select-mailchimp-list" class="widefat">
 						<option disabled <?php selected( $this->options['list'], '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
 						<?php foreach( $lists as $list ) { ?>
 							<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $this->options['list'], $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
@@ -59,7 +66,7 @@ defined( 'ABSPATH' ) or exit;
 
 			<tr valign="top">
 				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'text_bar' ); ?>">
+					<label>
 						<?php _e( 'Bar Text', 'mailchimp-top-bar' ); ?>
 					</label>
 				</th>
@@ -73,7 +80,7 @@ defined( 'ABSPATH' ) or exit;
 
 			<tr valign="top">
 				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'text_button' ); ?>">
+					<label>
 						<?php _e( 'Button Text', 'mailchimp-top-bar' ); ?>
 					</label>
 				</th>
@@ -87,7 +94,7 @@ defined( 'ABSPATH' ) or exit;
 
 			<tr valign="top">
 				<th scope="row">
-					<label for="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>">
+					<label>
 						<?php _e( 'Email Placeholder Text', 'mailchimp-top-bar' ); ?>
 					</label>
 				</th>
@@ -116,7 +123,7 @@ defined( 'ABSPATH' ) or exit;
 
 					<tr valign="top">
 						<th scope="row">
-							<label for="<?php echo $this->name_attr( 'size' ); ?>">
+							<label>
 								<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
 							</label>
 						</th>
@@ -131,7 +138,7 @@ defined( 'ABSPATH' ) or exit;
 
 					<tr valign="top">
 						<th scope="row">
-							<label for="<?php echo $this->name_attr( 'color_bar' ); ?>">
+							<label>
 								<?php _e( 'Bar Color', 'mailchimp-top-bar' ); ?>
 							</label>
 						</th>
@@ -142,7 +149,7 @@ defined( 'ABSPATH' ) or exit;
 
 					<tr valign="top">
 						<th scope="row">
-							<label for="<?php echo $this->name_attr( 'color_text' ); ?>">
+							<label>
 								<?php _e( 'Text Color', 'mailchimp-top-bar' ); ?>
 							</label>
 						</th>
@@ -158,7 +165,7 @@ defined( 'ABSPATH' ) or exit;
 
 					<tr valign="top">
 						<th scope="row">
-							<label for="<?php echo $this->name_attr( 'sticky' ); ?>">
+							<label>
 								<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
 							</label>
 						</th>
@@ -174,7 +181,7 @@ defined( 'ABSPATH' ) or exit;
 
 					<tr valign="top">
 						<th scope="row">
-							<label for="<?php echo $this->name_attr( 'color_button' ); ?>">
+							<label>
 								<?php _e( 'Button Color', 'mailchimp-top-bar' ); ?>
 							</label>
 						</th>
@@ -185,7 +192,7 @@ defined( 'ABSPATH' ) or exit;
 
 					<tr valign="top">
 						<th scope="row">
-							<label for="<?php echo $this->name_attr( 'color_button_text' ); ?>">
+							<label>
 								<?php _e( 'Button Text Color', 'mailchimp-top-bar' ); ?>
 							</label>
 						</th>

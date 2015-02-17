@@ -138,12 +138,18 @@ class Manager {
 		}
 
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$mailchimp = new \MC4WP_MailChimp();
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'mailchimp-top-bar-admin', $this->asset_url( "/css/admin{$min}.css" ) );
 
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$min}.js" ), array( 'jquery', 'wp-color-picker' ), Plugin::VERSION, true );
+		wp_localize_script( 'mailchimp-top-bar-admin', 'mctb', array(
+				'lists' => $mailchimp->get_lists()
+			)
+		);
+
 
 		return true;
 	}
@@ -158,26 +164,9 @@ class Manager {
 
 		if( $this->options['list'] !== '' ) {
 			$list = $mailchimp->get_list( $this->options['list'] );
-			$list_requires_extra_fields = $this->list_requires_extra_fields( $list );
 		}
 
 		require Plugin::DIR . '/views/settings-page.php';
-	}
-
-	/**
-	 * @param $list
-	 *
-	 * @return bool
-	 */
-	private function list_requires_extra_fields( $list ) {
-
-		foreach( $list->merge_vars as $field ) {
-			if( $field->tag !== 'EMAIL' && $field->req ) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**
