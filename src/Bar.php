@@ -141,7 +141,7 @@ class Bar {
 		}
 
 		// make sure `_mctb_token` is given and valid
-		if( ! isset( $_POST['_mctb_token' ] ) || intval( $_POST['_mctb_token'] ) !== strlen( $_SERVER['REQUEST_URI'] ) ) {
+		if( ! isset( $_POST['_mctb_token' ] ) || '' === $_POST['_mctb_token'] || ( isset( $_SERVER['REQUEST_URI'] ) && intval( $_POST['_mctb_token'] ) !== strlen( $_SERVER['REQUEST_URI'] ) ) ) {
 			$this->error_type = 'spam';
 			return false;
 		}
