@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,26 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
+= 1.0.3 - February 17, 2015 =
+
+**Fixes**
+
+- Styling issues with Enfold theme.
+
+**Improvements**
+
+- Bar will now show "already subscribed" message from MailChimp for WordPress when a person is already on the selected list.
+- Response message will now show and fadeout after 3 seconds.
+- Various usability improvements for the settings screen.
+- Improved spam detection.
+- Major JS performance improvements.
+
+**Additions**
+
+- Multiple new anti-spam measures
+- WPML compatibility
+
+
 = 1.0.2 - February 12, 2015 =
 
 **Improvements**
@@ -117,9 +137,11 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 Please update the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/) before updating to this version.
 
 = 1.0 - January 28, 2015 =
+
 Initial release
 
 == Upgrade Notice ==
 
-= 1.0.2 =
-Minor CSS improvements & added integration with log in MailChimp for WordPress Pro.
+= 1.0.3 =
+
+Better SPAM detection, fixes styling issues with Enfold theme, various usability & performance improvements.
