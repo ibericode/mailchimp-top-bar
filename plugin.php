@@ -130,6 +130,7 @@ final class Plugin {
 		$options['text_success'] = $parent_options['text_success'];
 		$options['text_error'] = $parent_options['text_error'];
 		$options['text_invalid_email'] = $parent_options['text_invalid_email'];
+		$options['text_already_subscribed'] = $parent_options['text_already_subscribed'];
 
 		return $options;
 	}

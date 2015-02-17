@@ -104,9 +104,16 @@ class Bar {
 		$email_type = apply_filters( 'mctp_email_type', 'html' );
 
 		$result = $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
-		do_action( 'mc4wp_subscribe', $email, $this->options['list'], $merge_vars, $result, 'form', 'top-bar' );
 
-		return $result;
+		do_action( 'mc4wp_subscribe', $email, $this->options['list'], $merge_vars, ( $result === true ), 'form', 'top-bar' );
+
+		// return true if success..
+		if( $result === true ) {
+			return true;
+		}
+
+		$this->error_type = $result;
+		return false;
 	}
 
 	/**
@@ -229,6 +236,8 @@ class Bar {
 					if( $this->submitted ) {
 						 if( $this->success ) {
 							 echo '<label>' . $this->options['text_success'] . '</label>';
+						 } else if( $this->error_type === 'already_subscribed' ) {
+							 echo '<label>' . $this->options['text_already_subscribed'] . '</label>';
 						 } else if( $this->error_type === 'invalid_email' ) {
 							 echo '<label>' . $this->options['text_invalid_email'] . '</label>';
 						 } else {
