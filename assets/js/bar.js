@@ -14,13 +14,30 @@
 	var Bar = function( wrapperEl, config ) {
 
 		// Vars & State
-		var barEl = wrapperEl.querySelector('.mctp-bar');
-		var iconEl = wrapperEl.querySelector('.mctp-close');
+		var barEl = wrapperEl.querySelector('.mctb-bar');
+		var iconEl = wrapperEl.querySelector('.mctb-close');
 		var visible = false;
 		var $bar = $(barEl);
 		var $icon = $(iconEl);
 
 		// Functions
+
+		function init() {
+
+			// add token field 1 second after initializign the bar
+			window.setTimeout(addTokenField, 1000);
+
+			// fade response 3 seconds after showing bar
+			window.setTimeout(fadeResponse, 3000);
+
+			// Show the bar straight away?
+			if( readCookie( "mctb_bar_hidden" ) != 1 ) {
+				show()
+			}
+
+			// Listen to `click` events on the icon
+			$icon.click( toggle );
+		}
 
 		/**
 		 * Show the bar
@@ -76,12 +93,25 @@
 			return true;
 		}
 
-		function addTimestampField() {
-			var timestamp = document.createElement('input');
-			timestamp.setAttribute('name', '_mctb_timestamp');
-			timestamp.setAttribute('type', 'hidden');
-			timestamp.setAttribute('value', currentTimeInSeconds);
-			barEl.querySelector('form').appendChild(timestamp);
+		/**
+		 * Adds a timestamp field to prevent bots from submitting instantly
+		 */
+		function addTokenField() {
+			var tokenEl = document.createElement('input');
+			tokenEl.setAttribute('name', '_mctb_token');
+			tokenEl.setAttribute('type', 'hidden');
+			tokenEl.setAttribute('value', window.location.pathname.length.toString() );
+			barEl.querySelector('form').appendChild(tokenEl);
+		}
+
+		/**
+		 * Fade out the response message
+		 */
+		function fadeResponse() {
+			var responseEl = wrapperEl.querySelector('.mctb-response');
+			if( responseEl ) {
+				 $(responseEl).fadeOut();
+			}
 		}
 
 		/**
@@ -94,18 +124,7 @@
 		}
 
 		// Code to run upon object instantiation
-
-		// add timestamp field
-		addTimestampField();
-
-		// Show the bar straight away?
-		if( readCookie( "mctb_bar_hidden" ) != 1 ) {
-			show()
-		}
-
-
-		// Listen to `click` events on the icon
-		$icon.click( toggle );
+		init();
 
 		// Return values
 		return {
@@ -118,7 +137,6 @@
 	};
 
 	// Init Bar on window.load
-	var currentTimeInSeconds = Math.floor(new Date().getTime() / 1000);
 	$(window).load( function() {
 		window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
 	});

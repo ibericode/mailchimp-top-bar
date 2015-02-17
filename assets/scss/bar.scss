@@ -3,11 +3,11 @@
 
 	font-size: $base_size * 2.5;
 
-	.mctp-bar {
+	.mctb-bar {
 		padding: ($base_size * 1.25) ($base_size * 1.5);
 	}
 
-	.mctp-button {
+	.mctb-button {
 		padding: $base_size ($base_size * 3);
 	}
 
@@ -20,7 +20,7 @@
 		font-size: $base_size * 3;
 	}
 
-	.mctp-close {
+	.mctb-close {
 		font-size: $base_size * 4;
 		top: $base_size;
 	}
@@ -40,8 +40,9 @@ body {
 	z-index: 1000;
 	background: transparent;
 	display: table;
+	text-align: center;
 
-	&.mctp-sticky {
+	&.mctb-sticky {
 		position: fixed;
 	}
 	// Reset Form elements, many themes apply basic styling
@@ -62,10 +63,10 @@ body {
 		line-height: initial;
 		float: none;
 	}
-
+	
 	input,
 	label {
-		display: inline-block !important;
+		display: inline-block;
 		vertical-align: middle !important;
 	}
 
@@ -85,19 +86,25 @@ body {
 		background: white;
 	}
 
-	.mctp-email {
+	.mctb-email {
 		width: 240px;
 	}
 
-	.mctp-button {
+	.mctb-button {
 		cursor: pointer;
 	}
 
-	.mctp-email-confirm {
+	.mctb-email-confirm {
 		display: none !important;
 	}
 
-	.mctp-close{
+	.mctb-response {
+		position: absolute;
+		left: 0;
+		right: 0;
+	}
+
+	.mctb-close{
 		position: absolute;
 		top: 0;
 		right: 12px;
@@ -109,7 +116,7 @@ body {
 		vertical-align: middle;
 	}
 
-	.mctp-close:hover {
+	.mctb-close:hover {
 		opacity: 1;
 		filter: alpha(opacity=100);
 	}
@@ -120,17 +127,17 @@ body {
 	*/
 
 	// Small Bar
-	&.mctp-small {
+	&.mctb-small {
 		@include bar-size(4px);
 	}
 
 	// Medium Bar
-	&.mctp-medium {
+	&.mctb-medium {
 		@include bar-size(5px);
 	}
 
 	// Big Bar
-	&.mctp-big {
+	&.mctb-big {
 		@include bar-size(6px);
 	}
 }
