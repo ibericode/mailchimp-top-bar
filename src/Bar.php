@@ -141,7 +141,7 @@ class Bar {
 		}
 
 		// make sure `_mctb_token` is given and valid
-		if( ! isset( $_POST['_mctb_token' ] ) || '' === $_POST['_mctb_token'] || ( isset( $_SERVER['REQUEST_URI'] ) && intval( $_POST['_mctb_token'] ) !== strlen( $_SERVER['REQUEST_URI'] ) ) ) {
+		if( ! $this->validate_token() ) {
 			$this->error_type = 'spam';
 			return false;
 		}
@@ -160,6 +160,24 @@ class Bar {
 		}
 
 		return apply_filters( 'mctb_validate', true );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function validate_token() {
+
+		if( ! isset( $_POST['_mctb_token' ] ) || '' === $_POST['_mctb_token'] ) {
+			return false;
+		}
+
+		if( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+			return true;
+		}
+
+		$token = ( strlen( $_SERVER['REQUEST_URI'] ) * 11 ) . ( ( substr_count( $_SERVER['REQUEST_URI'], '/' ) + 1 ) * 111 );
+
+		return( $_POST['_mctb_token'] === $token );
 	}
 
 	/**

@@ -97,10 +97,14 @@
 		 * Adds a timestamp field to prevent bots from submitting instantly
 		 */
 		function addTokenField() {
+
+			var pathname = window.location.pathname;
+			var token = (pathname.length * 11).toString() + (pathname.split('/').length * 111).toString();
+
 			var tokenEl = document.createElement('input');
 			tokenEl.setAttribute('name', '_mctb_token');
 			tokenEl.setAttribute('type', 'hidden');
-			tokenEl.setAttribute('value', window.location.pathname.length.toString() );
+			tokenEl.setAttribute('value', token );
 			barEl.querySelector('form').appendChild(tokenEl);
 		}
 
