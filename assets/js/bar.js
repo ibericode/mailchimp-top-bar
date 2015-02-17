@@ -118,7 +118,7 @@
 	};
 
 	// Init Bar on window.load
-	var currentTimeInSeconds = Math.round(new Date().getTime() / 1000);
+	var currentTimeInSeconds = Math.floor(new Date().getTime() / 1000);
 	$(window).load( function() {
 		window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
 	});
