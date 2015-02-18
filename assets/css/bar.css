@@ -39,7 +39,7 @@ body {
 }
 #mailchimp-top-bar input,
 #mailchimp-top-bar label {
-  display: inline-block;
+  display: inline-block !important;
   vertical-align: middle !important;
 }
 #mailchimp-top-bar form {
