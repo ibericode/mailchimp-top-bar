@@ -17,4 +17,13 @@
 		-webkit-box-sizing: border-box;
 	}
 
+	.tab {
+		display: none;
+
+		&.tab-active{
+			display: block;
+		}
+	}
+
+
 }

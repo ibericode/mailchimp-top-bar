@@ -8,8 +8,8 @@ defined( 'ABSPATH' ) or exit;
 	<h1>MailChimp Top Bar</h1>
 
 	<h2 class="nav-tab-wrapper" id="mctb-tabs">
-		<a class="nav-tab nav-tab-active" href="#tab-settings">Settings</a>
-		<a class="nav-tab" href="#tab-appearance">Appearance</a>
+		<a class="nav-tab <?php if( $tab === 'settings' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=settings'); ?>">Settings</a>
+		<a class="nav-tab <?php if( $tab === 'appearance' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=appearance'); ?>">Appearance</a>
 	</h2>
 
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) or exit;
 			</p>
 		</div>
 
-		<div class="tab" id="tab-settings">
+		<div class="tab <?php if( $tab === 'settings' ) echo 'tab-active'; ?>" id="tab-settings">
 
 			<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
 
@@ -126,7 +126,7 @@ defined( 'ABSPATH' ) or exit;
 
 			</table>
 		</div>
-		<div class="tab" id="tab-appearance">
+		<div class="tab <?php if( $tab === 'appearance' ) echo 'tab-active'; ?>" id="tab-appearance">
 
 			<h2><?php _e( 'Appearance', 'mailchimp-for-wp'); ?></h2>
 

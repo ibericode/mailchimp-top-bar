@@ -160,6 +160,7 @@ class Manager {
 	 */
 	public function show_settings_page() {
 
+		$tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
 		$opts = $this->options;
 		$mailchimp = new \MC4WP_MailChimp();
 		$lists = $mailchimp->get_lists();

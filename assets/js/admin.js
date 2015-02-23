@@ -58,42 +58,33 @@
 
 		function switchTab() {
 
-			var link = this;
+			var urlParams = parseQuery( this.href );
+			if( typeof(urlParams.tab) === "undefined" ) {
+				return;
+			}
 
 			// hide all tabs & remove active class
 			$tabs.hide();
 			$tabNav.removeClass('nav-tab-active');
 
 			// add `nav-tab-active` to this tab
-			$(link).addClass('nav-tab-active');
+			$(this).addClass('nav-tab-active');
 
 			// show target tab
-			var targetId = link.getAttribute('href');
-			var $target = $(targetId);
-			$target.show();
+			var targetId = "tab-" + urlParams.tab;
+			document.getElementById(targetId).style.display = 'block'
 
 			// update hash
-			location.hash = "tab=" + targetId.substring(1);
+			if( history.pushState ) {
+				history.pushState( '', '', this.href );
+			}
 
 			// prevent page jump
 			return false;
 		}
 
-		function checkForTabHash() {
-			if(window.location.hash && window.location.hash.substring(0,5) === '#tab=') {
-				$tabNav.filter('a[href="#'+ window.location.hash.substring(5) +'"]').click();
-			}
-		}
-
-		// hide all tabs, except first
-		$tabs.not(':first').hide();
-
 		// add tab listener
 		$tabNav.click(switchTab);
-
-		// listen to changes or check current state
-		$(window).on('hashchange', checkForTabHash );
-		checkForTabHash();
 
 	})();
 
@@ -107,5 +98,16 @@
 	// trigger change event to check for required fields right away
 	$selectList.change();
 	$enableBar.change();
+
+	function parseQuery(qstr) {
+		var query = {};
+		var a = qstr.split('&');
+		for (var i in a) {
+			var b = a[i].split('=');
+			query[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);
+		}
+
+		return query;
+	}
 
 })(window.jQuery);

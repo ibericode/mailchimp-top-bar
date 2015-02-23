@@ -13,5 +13,11 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
+#mc4wp-admin .tab {
+  display: none;
+}
+#mc4wp-admin .tab.tab-active {
+  display: block;
+}
 
 /*# sourceMappingURL=admin.css.map */
