@@ -45,10 +45,10 @@ defined( 'ABSPATH' ) or exit;
 					</th>
 					<td>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $opts->get('enabled'), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $opts->get( 'enabled' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
 						</label>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $opts->get('enabled'), 0 ); ?> /> <?php _e( 'No' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $opts->get( 'enabled' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 						<p class="help"><?php _e( 'A quick way to completely disable the bar.', 'mailchimp-top-bar' ); ?></p>
 
@@ -63,9 +63,9 @@ defined( 'ABSPATH' ) or exit;
 						<?php } ?>
 
 						<select name="<?php echo $this->name_attr( 'list' ); ?>" id="select-mailchimp-list">
-							<option disabled <?php selected( $opts->get('list'), '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
+							<option disabled <?php selected( $opts->get( 'list' ), '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
 							<?php foreach( $lists as $list ) { ?>
-								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $opts->get('list'), $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
+								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $opts->get( 'list' ), $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
 							<?php } ?>
 						</select>
 						<p class="help"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></p>
@@ -79,7 +79,7 @@ defined( 'ABSPATH' ) or exit;
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $opts->get('text_bar') ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $opts->get( 'text_bar' ) ); ?>" class="regular-text" />
 						<p class="help"><?php _e( 'The text to appear before the email field.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
@@ -91,7 +91,7 @@ defined( 'ABSPATH' ) or exit;
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $opts->get('text_button') ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $opts->get( 'text_button' ) ); ?>" class="regular-text" />
 						<p class="help"><?php _e( 'The text on the submit button.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
@@ -103,7 +103,7 @@ defined( 'ABSPATH' ) or exit;
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $opts->get('text_email_placeholder') ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $opts->get( 'text_email_placeholder' ) ); ?>" class="regular-text" />
 						<p class="help"><?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
@@ -127,9 +127,9 @@ defined( 'ABSPATH' ) or exit;
 							</th>
 							<td>
 								<select name="<?php echo $this->name_attr( 'size' ); ?>">
-									<option value="small" <?php selected( $opts->get('size'), 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
-									<option value="medium" <?php selected( $opts->get('size'), 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
-									<option value="big" <?php selected( $opts->get('size'), 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
+									<option value="small" <?php selected( $opts->get( 'size' ), 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
+									<option value="medium" <?php selected( $opts->get( 'size' ), 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
+									<option value="big" <?php selected( $opts->get( 'size' ), 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
 								</select>
 							</td>
 						</tr>
@@ -141,7 +141,7 @@ defined( 'ABSPATH' ) or exit;
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $opts->get('color_bar') ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_bar' ) ); ?>" class="color">
 							</td>
 						</tr>
 
@@ -152,7 +152,7 @@ defined( 'ABSPATH' ) or exit;
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $opts->get('color_text') ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_text' ) ); ?>" class="color">
 							</td>
 						</tr>
 
@@ -169,10 +169,10 @@ defined( 'ABSPATH' ) or exit;
 							</th>
 							<td>
 								<label>
-									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $opts->get('sticky'), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $opts->get( 'sticky' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
 								</label>
 								<label>
-									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $opts->get('sticky'), 0 ); ?> /> <?php _e( 'No' ); ?>
+									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $opts->get( 'sticky' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 								</label>
 							</td>
 						</tr>
@@ -184,7 +184,7 @@ defined( 'ABSPATH' ) or exit;
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $opts->get('color_button') ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button' ) ); ?>" class="color">
 							</td>
 						</tr>
 
@@ -195,7 +195,7 @@ defined( 'ABSPATH' ) or exit;
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $opts->get('color_button_text') ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button_text' ) ); ?>" class="color">
 							</td>
 						</tr>
 
