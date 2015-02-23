@@ -8,8 +8,9 @@ defined( 'ABSPATH' ) or exit;
 	<h1>MailChimp Top Bar</h1>
 
 	<h2 class="nav-tab-wrapper" id="mctb-tabs">
-		<a class="nav-tab <?php if( $tab === 'settings' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=settings'); ?>">Settings</a>
-		<a class="nav-tab <?php if( $tab === 'appearance' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=appearance'); ?>">Appearance</a>
+		<a class="nav-tab <?php if( $tab === 'settings' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=settings'); ?>"><?php _e( 'Bar Settings', 'mailchimp-for-wp' ); ?></a>
+		<a class="nav-tab <?php if( $tab === 'appearance' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=appearance'); ?>"><?php _e( 'Appearance', 'mailchimp-for-wp' ); ?></a>
+		<a class="nav-tab <?php if( $tab === 'messages' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=messages'); ?>"><?php _e( 'Messages', 'mailchimp-for-wp' ); ?></a>
 	</h2>
 
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
@@ -29,6 +30,7 @@ defined( 'ABSPATH' ) or exit;
 			</p>
 		</div>
 
+		<!-- Bar Settings -->
 		<div class="tab <?php if( $tab === 'settings' ) echo 'tab-active'; ?>" id="tab-settings">
 
 			<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
@@ -105,30 +107,13 @@ defined( 'ABSPATH' ) or exit;
 						<p class="help"><?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
-
-				<tr valign="top">
-					<th scope="row">
-						<label>
-							<?php _e( 'Redirect to URL after successful sign-ups', 'mailchimp-for-wp' ); ?>
-						</label>
-					</th>
-					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get('redirect' ) ); ?>" value="<?php echo esc_url( $opts->get('redirect', false ) ); ?>" class="regular-text" />
-						<p class="help"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
-					</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">
-						<p><?php printf( __( 'Success and error messages can be managed in <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?></p>
-					</td>
-				</tr>
-
 			</table>
 		</div>
+
+		<!-- Appearance Tab -->
 		<div class="tab <?php if( $tab === 'appearance' ) echo 'tab-active'; ?>" id="tab-appearance">
 
-			<h2><?php _e( 'Appearance', 'mailchimp-for-wp'); ?></h2>
+			<h2><?php _e( 'Appearance', 'mailchimp-top-bar' ); ?></h2>
 
 			<div class="row">
 				<div class="col-2">
@@ -220,7 +205,49 @@ defined( 'ABSPATH' ) or exit;
 			<br style="clear: both;" />
 		</div>
 
+		<!-- Form Messages -->
+		<div class="tab <?php if( $tab === 'messages' ) echo 'tab-active'; ?>" id="tab-messages">
 
+			<h2><?php _e( 'Messages', 'mailchimp-top-bar' ); ?></h2>
+			<p><?php printf( __( 'All these settings are optional and will by default inherit from <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?>.</p>
+
+			<table class="form-table">
+				<tr valign="top">
+					<th scope="row"><label><?php _e( 'Success', 'mailchimp-for-wp' ); ?></label></th>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_success'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_success' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_success', false ) ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><label><?php _e( 'Invalid email address', 'mailchimp-for-wp' ); ?></label></th>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_invalid_email'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_invalid_email', false ) ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><label><?php _e( 'Already subscribed', 'mailchimp-for-wp' ); ?></label></th>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_already_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_already_subscribed', false ) ); ?>" /></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><label><?php _e( 'Other errors' ,'mailchimp-for-wp' ); ?></label></th>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_error'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_error', false ) ); ?>" /></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<p class="help"><?php printf( __( 'HTML tags like %s are allowed in the message fields.', 'mailchimp-for-wp' ), '<code>' . esc_html( '<strong><em><a>' ) . '</code>' ); ?></p>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Redirect to URL after successful sign-ups', 'mailchimp-for-wp' ); ?>
+						</label>
+					</th>
+					<td>
+						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get('redirect' ) ); ?>" value="<?php echo esc_url( $opts->get('redirect', false ) ); ?>" class="regular-text" />
+						<p class="help"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
+					</td>
+				</tr>
+
+			</table>
+		</div>
 
 
 		<?php submit_button(); ?>

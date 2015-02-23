@@ -55,6 +55,7 @@
 
 		var $tabs = $context.find('.tab');
 		var $tabNav = $context.find('.nav-tab');
+		var $refererField = $context.find('input[name="_wp_http_referer"]');
 
 		function switchTab() {
 
@@ -78,6 +79,9 @@
 			if( history.pushState ) {
 				history.pushState( '', '', this.href );
 			}
+
+			// update referer field
+			$refererField.val(this.href);
 
 			// prevent page jump
 			return false;
