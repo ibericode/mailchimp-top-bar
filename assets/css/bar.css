@@ -11,7 +11,6 @@ body {
   margin: 0;
   z-index: 1000;
   background: transparent;
-  display: table;
   text-align: center;
   /**
   * Bar Sizes
@@ -76,7 +75,6 @@ body {
   opacity: 0.5;
   filter: alpha(opacity=50);
   cursor: pointer;
-  display: table-cell;
   vertical-align: middle;
 }
 #mailchimp-top-bar .mctb-close:hover {
@@ -100,8 +98,8 @@ body {
   font-size: 12px;
 }
 #mailchimp-top-bar.mctb-small .mctb-close {
+  top: 5px;
   font-size: 16px;
-  top: 4px;
 }
 #mailchimp-top-bar.mctb-medium {
   font-size: 12.5px;
@@ -120,8 +118,8 @@ body {
   font-size: 15px;
 }
 #mailchimp-top-bar.mctb-medium .mctb-close {
+  top: 6.25px;
   font-size: 20px;
-  top: 5px;
 }
 #mailchimp-top-bar.mctb-big {
   font-size: 15px;
@@ -140,8 +138,8 @@ body {
   font-size: 18px;
 }
 #mailchimp-top-bar.mctb-big .mctb-close {
+  top: 7.5px;
   font-size: 24px;
-  top: 6px;
 }
 
 /*# sourceMappingURL=bar.css.map */

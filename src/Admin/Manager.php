@@ -2,6 +2,7 @@
 
 namespace MailChimp\TopBar\Admin;
 
+use MailChimp\TopBar\Options;
 use MailChimp\TopBar\Plugin;
 
 class Manager {
@@ -9,15 +10,15 @@ class Manager {
 	const SETTINGS_CAP = 'manage_options';
 
 	/**
-	 * @var array $options
+	 * @var Options $options
 	 */
 	private $options;
 
 	/**
 	 * Constructor
-	 * @param array $options
+	 * @param Options $options
 	 */
-	public function __construct( array $options ) {
+	public function __construct( Options $options ) {
 
 		$this->options = $options;
 		$this->plugin_slug = basename( Plugin::DIR ) . '/mailchimp-top-bar.php';
@@ -159,11 +160,12 @@ class Manager {
 	 */
 	public function show_settings_page() {
 
+		$opts = $this->options;
 		$mailchimp = new \MC4WP_MailChimp();
 		$lists = $mailchimp->get_lists();
 
-		if( $this->options['list'] !== '' ) {
-			$list = $mailchimp->get_list( $this->options['list'] );
+		if( $opts->get('list') !== '' ) {
+			$list = $mailchimp->get_list( $opts->get('list') );
 		}
 
 		require Plugin::DIR . '/views/settings-page.php';

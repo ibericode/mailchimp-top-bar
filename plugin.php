@@ -14,7 +14,7 @@ final class Plugin {
 	/**
 	 * @const VERSION
 	 */
-	const VERSION = '1.0.3';
+	const VERSION = '1.0.4';
 
 	/**
 	 * @const FILE
@@ -100,39 +100,10 @@ final class Plugin {
 	}
 
 	/**
-	 * @return array
+	 * @return Options
 	 */
-	private function load_options() {
-
-		$options = (array) get_option( self::OPTION_NAME, array() );
-
-		$defaults = array(
-			'list' => '',
-			'enabled' => 1,
-			'show_to_administrators' => 1,
-			'cookie_length' => 60,
-			'color_bar' => '#ffcc00',
-			'color_text' => '#222222',
-			'color_button' => '#222222',
-			'color_button_text' => '#ffffff',
-			'size' => 'medium',
-			'sticky' => 1,
-			'text_email_placeholder' => __( 'Your email address..', 'mailchimp-top-bar' ),
-			'text_bar' => __( 'Sign-up now - don\'t miss the fun!', 'mailchimp-top-bar' ),
-			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' )
-		);
-
-		$options = array_merge( $defaults, $options );
-
-		// merge with options from MailChimp for WordPress
-		$parent_options = mc4wp_get_options( 'form' );
-		$options['double_optin'] = $parent_options['double_optin'];
-		$options['text_success'] = $parent_options['text_success'];
-		$options['text_error'] = $parent_options['text_error'];
-		$options['text_invalid_email'] = $parent_options['text_invalid_email'];
-		$options['text_already_subscribed'] = $parent_options['text_already_subscribed'];
-
-		return $options;
+	public function load_options() {
+		return new Options( self::OPTION_NAME );
 	}
 
 	/**

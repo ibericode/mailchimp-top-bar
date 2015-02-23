@@ -50,6 +50,53 @@
 	}
 
 
+	// Tabs
+	(function() {
+
+		var $tabs = $context.find('.tab');
+		var $tabNav = $context.find('.nav-tab');
+
+		function switchTab() {
+
+			var link = this;
+
+			// hide all tabs & remove active class
+			$tabs.hide();
+			$tabNav.removeClass('nav-tab-active');
+
+			// add `nav-tab-active` to this tab
+			$(link).addClass('nav-tab-active');
+
+			// show target tab
+			var targetId = link.getAttribute('href');
+			var $target = $(targetId);
+			$target.show();
+
+			// update hash
+			location.hash = "tab=" + targetId.substring(1);
+
+			// prevent page jump
+			return false;
+		}
+
+		function checkForTabHash() {
+			if(window.location.hash && window.location.hash.substring(0,5) === '#tab=') {
+				$tabNav.filter('a[href="#'+ window.location.hash.substring(5) +'"]').click();
+			}
+		}
+
+		// hide all tabs, except first
+		$tabs.not(':first').hide();
+
+		// add tab listener
+		$tabNav.click(switchTab);
+
+		// listen to changes or check current state
+		$(window).on('hashchange', checkForTabHash );
+		checkForTabHash();
+
+	})();
+
 	// init colorpickers
 	$context.find('.color').wpColorPicker();
 

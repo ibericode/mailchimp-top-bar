@@ -140,10 +140,8 @@
 
 	};
 
-	// Init Bar on window.load
-	$(window).load( function() {
-		window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
-	});
+	// Init bar
+	window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
 
 	/**
 	 * Creates a cookie

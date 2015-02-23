@@ -5,7 +5,12 @@ defined( 'ABSPATH' ) or exit;
 ?>
 <div class="wrap" id="mc4wp-admin">
 
-	<h1 style="line-height: 48px;">MailChimp Top Bar</h1>
+	<h1>MailChimp Top Bar</h1>
+
+	<h2 class="nav-tab-wrapper" id="mctb-tabs">
+		<a class="nav-tab nav-tab-active" href="#tab-settings">Settings</a>
+		<a class="nav-tab" href="#tab-appearance">Appearance</a>
+	</h2>
 
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
 
@@ -24,188 +29,198 @@ defined( 'ABSPATH' ) or exit;
 			</p>
 		</div>
 
-		<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
+		<div class="tab" id="tab-settings">
 
-		<table class="form-table">
+			<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
 
-			<tr valign="top">
-				<th scope="row">
-					<label>
-						<?php _e( 'Enable Bar?', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<label>
-						<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $this->options['enabled'], 1 ); ?> /> <?php _e( 'Yes' ); ?>
-					</label>
-					<label>
-						<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $this->options['enabled'], 0 ); ?> /> <?php _e( 'No' ); ?>
-					</label>
-				</td>
-				<td class="desc">
-					<?php _e( 'A quick way to completely disable the bar.', 'mailchimp-top-bar' ); ?>
-				</td>
-			</tr>
+			<table class="form-table">
 
-			<tr valign="top">
-				<th scope="row"><label><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
-				<td>
-					<?php if( empty( $lists ) ) {
-						printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
-					<?php } ?>
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Enable Bar?', 'mailchimp-top-bar' ); ?>
+						</label>
+					</th>
+					<td>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $opts->get('enabled'), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+						</label>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $opts->get('enabled'), 0 ); ?> /> <?php _e( 'No' ); ?>
+						</label>
+						<p class="help"><?php _e( 'A quick way to completely disable the bar.', 'mailchimp-top-bar' ); ?></p>
 
-					<select name="<?php echo $this->name_attr( 'list' ); ?>" id="select-mailchimp-list" class="widefat">
-						<option disabled <?php selected( $this->options['list'], '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
-						<?php foreach( $lists as $list ) { ?>
-							<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $this->options['list'], $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row"><label><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
+					<td>
+						<?php if( empty( $lists ) ) {
+							printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 						<?php } ?>
-					</select>
-				</td>
-				<td class="desc"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></td>
-			</tr>
 
-			<tr valign="top">
-				<th scope="row">
-					<label>
-						<?php _e( 'Bar Text', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $this->options['text_bar'] ); ?>" class="widefat" />
-				</td>
-				<td class="desc">
-					<?php _e( 'The text to appear before the email field.', 'mailchimp-top-bar' ); ?>
-				</td>
-			</tr>
+						<select name="<?php echo $this->name_attr( 'list' ); ?>" id="select-mailchimp-list">
+							<option disabled <?php selected( $opts->get('list'), '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
+							<?php foreach( $lists as $list ) { ?>
+								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $opts->get('list'), $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
+							<?php } ?>
+						</select>
+						<p class="help"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></p>
+					</td>
+				</tr>
 
-			<tr valign="top">
-				<th scope="row">
-					<label>
-						<?php _e( 'Button Text', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="widefat" />
-				</td>
-				<td class="desc">
-					<?php _e( 'The text on the submit button.', 'mailchimp-top-bar' ); ?>
-				</td>
-			</tr>
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Bar Text', 'mailchimp-top-bar' ); ?>
+						</label>
+					</th>
+					<td>
+						<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $opts->get('text_bar') ); ?>" class="regular-text" />
+						<p class="help"><?php _e( 'The text to appear before the email field.', 'mailchimp-top-bar' ); ?></p>
+					</td>
+				</tr>
 
-			<tr valign="top">
-				<th scope="row">
-					<label>
-						<?php _e( 'Email Placeholder Text', 'mailchimp-top-bar' ); ?>
-					</label>
-				</th>
-				<td>
-					<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="widefat" />
-				</td>
-				<td class="desc">
-					<?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<p><?php printf( __( 'Success and error messages can be managed in <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?></p>
-				</td>
-			</tr>
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Button Text', 'mailchimp-top-bar' ); ?>
+						</label>
+					</th>
+					<td>
+						<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $opts->get('text_button') ); ?>" class="regular-text" />
+						<p class="help"><?php _e( 'The text on the submit button.', 'mailchimp-top-bar' ); ?></p>
+					</td>
+				</tr>
 
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Email Placeholder Text', 'mailchimp-top-bar' ); ?>
+						</label>
+					</th>
+					<td>
+						<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $opts->get('text_email_placeholder') ); ?>" class="regular-text" />
+						<p class="help"><?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?></p>
+					</td>
+				</tr>
 
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Redirect to URL after successful sign-ups', 'mailchimp-for-wp' ); ?>
+						</label>
+					</th>
+					<td>
+						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get('redirect' ) ); ?>" value="<?php echo esc_url( $opts->get('redirect', false ) ); ?>" class="regular-text" />
+						<p class="help"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
+					</td>
+				</tr>
 
-		</table>
+				<tr>
+					<td colspan="2">
+						<p><?php printf( __( 'Success and error messages can be managed in <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?></p>
+					</td>
+				</tr>
 
-		<h2><?php _e( 'Appearance', 'mailchimp-for-wp'); ?></h2>
+			</table>
+		</div>
+		<div class="tab" id="tab-appearance">
 
-		<div class="row">
-			<div class="col-2">
-				<table class="form-table">
+			<h2><?php _e( 'Appearance', 'mailchimp-for-wp'); ?></h2>
 
-					<tr valign="top">
-						<th scope="row">
-							<label>
-								<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
-							</label>
-						</th>
-						<td>
-							<select name="<?php echo $this->name_attr( 'size' ); ?>">
-								<option value="small" <?php selected( $this->options['size'], 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
-								<option value="medium" <?php selected( $this->options['size'], 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
-								<option value="big" <?php selected( $this->options['size'], 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
-							</select>
-						</td>
-					</tr>
+			<div class="row">
+				<div class="col-2">
+					<table class="form-table">
 
-					<tr valign="top">
-						<th scope="row">
-							<label>
-								<?php _e( 'Bar Color', 'mailchimp-top-bar' ); ?>
-							</label>
-						</th>
-						<td>
-							<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $this->options['color_bar'] ); ?>" class="color">
-						</td>
-					</tr>
+						<tr valign="top">
+							<th scope="row">
+								<label>
+									<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<select name="<?php echo $this->name_attr( 'size' ); ?>">
+									<option value="small" <?php selected( $opts->get('size'), 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
+									<option value="medium" <?php selected( $opts->get('size'), 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
+									<option value="big" <?php selected( $opts->get('size'), 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
+								</select>
+							</td>
+						</tr>
 
-					<tr valign="top">
-						<th scope="row">
-							<label>
-								<?php _e( 'Text Color', 'mailchimp-top-bar' ); ?>
-							</label>
-						</th>
-						<td>
-							<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $this->options['color_text'] ); ?>" class="color">
-						</td>
-					</tr>
+						<tr valign="top">
+							<th scope="row">
+								<label>
+									<?php _e( 'Bar Color', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $opts->get('color_bar') ); ?>" class="color">
+							</td>
+						</tr>
 
-				</table>
+						<tr valign="top">
+							<th scope="row">
+								<label>
+									<?php _e( 'Text Color', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $opts->get('color_text') ); ?>" class="color">
+							</td>
+						</tr>
+
+					</table>
+				</div>
+				<div class="col-2">
+					<table class="form-table">
+
+						<tr valign="top">
+							<th scope="row">
+								<label>
+									<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<label>
+									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $opts->get('sticky'), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+								</label>
+								<label>
+									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $opts->get('sticky'), 0 ); ?> /> <?php _e( 'No' ); ?>
+								</label>
+							</td>
+						</tr>
+
+						<tr valign="top">
+							<th scope="row">
+								<label>
+									<?php _e( 'Button Color', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $opts->get('color_button') ); ?>" class="color">
+							</td>
+						</tr>
+
+						<tr valign="top">
+							<th scope="row">
+								<label>
+									<?php _e( 'Button Text Color', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $opts->get('color_button_text') ); ?>" class="color">
+							</td>
+						</tr>
+
+					</table>
+				</div>
 			</div>
-			<div class="col-2">
-				<table class="form-table">
-
-					<tr valign="top">
-						<th scope="row">
-							<label>
-								<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
-							</label>
-						</th>
-						<td>
-							<label>
-								<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $this->options['sticky'], 1 ); ?> /> <?php _e( 'Yes' ); ?>
-							</label>
-							<label>
-								<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $this->options['sticky'], 0 ); ?> /> <?php _e( 'No' ); ?>
-							</label>
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row">
-							<label>
-								<?php _e( 'Button Color', 'mailchimp-top-bar' ); ?>
-							</label>
-						</th>
-						<td>
-							<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $this->options['color_button'] ); ?>" class="color">
-						</td>
-					</tr>
-
-					<tr valign="top">
-						<th scope="row">
-							<label>
-								<?php _e( 'Button Text Color', 'mailchimp-top-bar' ); ?>
-							</label>
-						</th>
-						<td>
-							<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $this->options['color_button_text'] ); ?>" class="color">
-						</td>
-					</tr>
-
-				</table>
-			</div>
+			<br style="clear: both;" />
 		</div>
 
-		<br style="clear: both;" />
+
 
 
 		<?php submit_button(); ?>

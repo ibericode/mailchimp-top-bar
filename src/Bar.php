@@ -26,8 +26,10 @@ class Bar {
 
 	/**
 	 * Constructor
+	 *
+	 * @param Options $options
 	 */
-	public function __construct( array $options ) {
+	public function __construct( Options $options ) {
 		$this->options = $options;
 
 		add_action( 'init', array( $this, 'init' ) );
@@ -55,7 +57,7 @@ class Bar {
 	public function should_show_bar() {
 
 		// don't show if bar is disabled
-		if( ! $this->options['enabled'] ) {
+		if( ! $this->options->get('enabled') ) {
 			return false;
 		}
 
@@ -115,12 +117,20 @@ class Bar {
 		$merge_vars = apply_filters( 'mctb_merge_vars', array() );
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
 
-		$result = $api->subscribe( $this->options['list'], $email, $merge_vars, $email_type, $this->options['double_optin'] );
+		$result = $api->subscribe( $this->options->get( 'list' ), $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ) );
 
-		do_action( 'mc4wp_subscribe', $email, $this->options['list'], $merge_vars, ( $result === true ), 'form', 'top-bar' );
+		do_action( 'mc4wp_subscribe', $email, $this->options->get( 'list' ), $merge_vars, ( $result === true ), 'form', 'top-bar' );
 
 		// return true if success..
 		if( $result === true ) {
+
+			// should we redirect
+			if( '' !== $this->options->get( 'redirect' ) ) {
+				wp_redirect( $this->options->get( 'redirect' ) );
+				exit;
+			}
+
+
 			return true;
 		}
 
@@ -189,7 +199,7 @@ class Bar {
 		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array( 'jquery' ), Plugin::VERSION, true );
 
 		$data = array(
-			'cookieLength' => $this->options['cookie_length'],
+			'cookieLength' => $this->options->get('cookie_length'),
 			'icons' => array(
 				'hide' => '&#x25B2;',
 				'show' => '&#x25BC;'
@@ -216,12 +226,12 @@ class Bar {
 		$classes = array( '' );
 
 		// add class when bar is sticky
-		if( $this->options['sticky'] ) {
+		if( $this->options->get('sticky') ) {
 			$classes[] = 'mctb-sticky';
 		}
 
 		// add class describing size of the bar
-		$classes[] = "mctb-{$this->options['size']}";
+		$classes[] = "mctb-{$this->options->get('size')}";
 
 		return join( ' ', $classes );
 	}
@@ -232,21 +242,21 @@ class Bar {
 	public function output_css() {
 		echo '<style type="text/css">';
 
-		if( '' !== $this->options['color_bar'] ) {
-			echo "#mailchimp-top-bar .mctb-bar, .mctb-response { background: {$this->options['color_bar']}; }";
+		if( '' !== $this->options->get('color_bar') ) {
+			echo "#mailchimp-top-bar .mctb-bar, .mctb-response { background: {$this->options->get('color_bar')}; }";
 		}
 
-		if( '' !== $this->options['color_text'] ) {
-			echo "#mailchimp-top-bar label { color: {$this->options['color_text']}; }";
+		if( '' !== $this->options->get('color_text') ) {
+			echo "#mailchimp-top-bar label { color: {$this->options->get('color_text')}; }";
 		}
 
-		if( '' !== $this->options['color_button'] ) {
-			echo "#mailchimp-top-bar .mctb-button { background: {$this->options['color_button']}; border-color: {$this->options['color_button']}; }";
-			echo "#mailchimp-top-bar .mctb-email:focus { border-color: {$this->options['color_button']}; }";
+		if( '' !== $this->options->get('color_button') ) {
+			echo "#mailchimp-top-bar .mctb-button { background: {$this->options->get('color_button')}; border-color: {$this->options->get('color_button')}; }";
+			echo "#mailchimp-top-bar .mctb-email:focus { border-color: {$this->options->get('color_button')}; }";
 		}
 
-		if( '' !== $this->options['color_button_text'] ) {
-			echo "#mailchimp-top-bar .mctb-button { color: {$this->options['color_button_text']}; }";
+		if( '' !== $this->options->get('color_button_text') ) {
+			echo "#mailchimp-top-bar .mctb-button { color: {$this->options->get('color_button_text')}; }";
 		}
 
 		echo '</style>';
@@ -263,10 +273,10 @@ class Bar {
 			<div class="mctb-bar" style="display: none">
 				<?php echo $this->get_response_message(); ?>
 				<form method="post">
-					<label><?php echo strip_tags( $this->options['text_bar'], '<strong><em><u>' ); ?></label>
-					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options['text_email_placeholder'] ); ?>" class="mctb-email"  />
+					<label><?php echo strip_tags( $this->options->get('text_bar'), '<strong><em><u>' ); ?></label>
+					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get('text_email_placeholder') ); ?>" class="mctb-email"  />
 					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" class="mctb-email-confirm" />
-					<input type="submit" value="<?php echo esc_attr( $this->options['text_button'] ); ?>" class="mctb-button" />
+					<input type="submit" value="<?php echo esc_attr( $this->options->get('text_button') ); ?>" class="mctb-button" />
 					<input type="hidden" name="_mctb" value="1" />
 				</form>
 			</div><span class="mctb-close">&#x25BC;</span><!-- / MailChimp Top Bar --></div><?php
@@ -282,13 +292,13 @@ class Bar {
 		}
 
 		if( $this->success ) {
-			$message = $this->options['text_success'];
+			$message = $this->options->get('text_success');
 		} else if( $this->error_type === 'already_subscribed' ) {
-			$message = $this->options['text_already_subscribed'];
+			$message = $this->options->get('text_already_subscribed');
 		} else if( $this->error_type === 'invalid_email' ) {
-			$message = $this->options['text_invalid_email'];
+			$message = $this->options->get('text_invalid_email');
 		} else {
-			$message = $this->options['text_error'];
+			$message = $this->options->get('text_error');
 		}
 
 		return sprintf( '<div class="mctb-response"><label>%s</label></div>', $message );

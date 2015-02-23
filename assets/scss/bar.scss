@@ -21,8 +21,8 @@
 	}
 
 	.mctb-close {
+		top: ($base_size * 1.25);
 		font-size: $base_size * 4;
-		top: $base_size;
 	}
 }
 
@@ -39,7 +39,6 @@ body {
 	margin: 0;
 	z-index: 1000;
 	background: transparent;
-	display: table;
 	text-align: center;
 
 	&.mctb-sticky {
@@ -112,7 +111,6 @@ body {
 		opacity: 0.5;
 		filter: alpha(opacity=50);
 		cursor: pointer;
-		display: table-cell;
 		vertical-align: middle;
 	}
 
