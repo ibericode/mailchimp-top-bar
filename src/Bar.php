@@ -226,12 +226,12 @@ class Bar {
 		$classes = array( '' );
 
 		// add class when bar is sticky
-		if( $this->options->get('sticky') ) {
+		if( $this->options->get( 'sticky' ) ) {
 			$classes[] = 'mctb-sticky';
 		}
 
 		// add class describing size of the bar
-		$classes[] = "mctb-{$this->options->get('size')}";
+		$classes[] = "mctb-{$this->options->get( 'size' )}";
 
 		return join( ' ', $classes );
 	}
@@ -242,21 +242,21 @@ class Bar {
 	public function output_css() {
 		echo '<style type="text/css">';
 
-		if( '' !== $this->options->get('color_bar') ) {
-			echo "#mailchimp-top-bar .mctb-bar, .mctb-response { background: {$this->options->get('color_bar')}; }";
+		if( '' !== $this->options->get( 'color_bar' ) ) {
+			echo "#mailchimp-top-bar .mctb-bar, .mctb-response { background: {$this->options->get( 'color_bar' )}; }";
 		}
 
-		if( '' !== $this->options->get('color_text') ) {
-			echo "#mailchimp-top-bar label { color: {$this->options->get('color_text')}; }";
+		if( '' !== $this->options->get( 'color_text' ) ) {
+			echo "#mailchimp-top-bar label { color: {$this->options->get( 'color_text' )}; }";
 		}
 
 		if( '' !== $this->options->get('color_button') ) {
-			echo "#mailchimp-top-bar .mctb-button { background: {$this->options->get('color_button')}; border-color: {$this->options->get('color_button')}; }";
-			echo "#mailchimp-top-bar .mctb-email:focus { border-color: {$this->options->get('color_button')}; }";
+			echo "#mailchimp-top-bar .mctb-button { background: {$this->options->get( 'color_button' )}; border-color: {$this->options->get( 'color_button' )}; }";
+			echo "#mailchimp-top-bar .mctb-email:focus { border-color: {$this->options->get( 'color_button' )}; }";
 		}
 
-		if( '' !== $this->options->get('color_button_text') ) {
-			echo "#mailchimp-top-bar .mctb-button { color: {$this->options->get('color_button_text')}; }";
+		if( '' !== $this->options->get( 'color_button_text' ) ) {
+			echo "#mailchimp-top-bar .mctb-button { color: {$this->options->get( 'color_button_text' )}; }";
 		}
 
 		echo '</style>';
