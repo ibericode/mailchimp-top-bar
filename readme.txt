@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,11 +87,19 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
-= 1.0.3 - February 17, 2015 =
+= 1.0.4 - February 23, 2015 =
 
 **Fixes**
 
 - Styling issues with Enfold theme.
+
+**Additions**
+
+- Settings page now uses a tabbed interface.
+- You can now set a "redirect url" in the bar settings
+- All form response messages can now be customised for the bar form
+
+= 1.0.3 - February 17, 2015 =
 
 **Improvements**
 
