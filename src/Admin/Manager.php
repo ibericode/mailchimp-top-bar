@@ -197,8 +197,18 @@ class Manager {
 	 */
 	public function sanitize_settings( array $dirty ) {
 
-		// todo: perform some actual sanitization
 		$clean = $dirty;
+
+		 // Dynamic sanitization
+		foreach( $clean as $key => $value ) {
+
+			// make sure colors start with `#`
+			if( substr( $key, 0, 6 ) === 'color_' ) {
+				if( '' !== $value && $value[0] !== '#' ) {
+					$clean[$key] = '#' . $value;
+				}
+			}
+		}
 
 		// make sure size is either `small`, `medium` or `big`
 		if( ! in_array( $dirty['size'], array( 'small', 'medium', 'big' ) ) ) {
