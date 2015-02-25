@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,13 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
+= 1.0.5 - February 25, 2015 =
+
+**Fixes**
+
+- Bar not loading in some themes after latest update
+- Colors not working because of missing leading `#` value. Color settings are now validated before saving them.
+
 = 1.0.4 - February 23, 2015 =
 
 **Fixes**
@@ -150,6 +157,6 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.3 =
+= 1.0.5 =
 
-Better SPAM detection, fixes styling issues with Enfold theme, various usability & performance improvements.
+Bugfix release, fixes issue where the bar did not appear in some themes.
