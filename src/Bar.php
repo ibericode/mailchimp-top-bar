@@ -85,7 +85,7 @@ class Bar {
 	public function add_hooks() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ) );
 		add_action( 'wp_head', array( $this, 'output_css'), 90 );
-		add_action( 'wp_footer', array( $this, 'output_html' ) );
+		add_action( 'wp_footer', array( $this, 'output_html' ), 1 );
 	}
 
 	/**

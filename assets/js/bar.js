@@ -141,7 +141,9 @@
 	};
 
 	// Init bar
-	window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
+	$(document).ready( function() {
+		window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
+	});
 
 	/**
 	 * Creates a cookie
