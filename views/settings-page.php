@@ -241,7 +241,7 @@ defined( 'ABSPATH' ) or exit;
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get('redirect' ) ); ?>" value="<?php echo esc_url( $opts->get('redirect', false ) ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get( 'redirect' ) ); ?>" value="<?php echo esc_url( $opts->get( 'redirect', false ) ); ?>" class="widefat" />
 						<p class="help"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
 					</td>
 				</tr>
