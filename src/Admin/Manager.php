@@ -211,7 +211,7 @@ class Manager {
 		}
 
 		// only allow simple HTML in the bar text
-		$clean['text_bar'] = strip_tags( $dirty['text_bar'], '<strong><em><u><a><i><b><span>' );
+		$clean['text_bar'] = strip_tags( $dirty['text_bar'], '<strong><b><em><i><u><a><span>' );
 
 		// make sure size is either `small`, `medium` or `big`
 		if( ! in_array( $dirty['size'], array( 'small', 'medium', 'big' ) ) ) {
