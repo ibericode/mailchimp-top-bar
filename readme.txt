@@ -1,10 +1,10 @@
 === MailChimp Top Bar ===
 Contributors: DvanKooten, iMazed
 Donate link: https://dannyvankooten.com/donate/
-Tags: mailchimp,top bar,opt-in,sign-up,subscribe,conversion,call to action
+Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
-Tested up to: 4.1.1
-Stable tag: 1.0.5
+Tested up to: 4.2
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,18 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.0.6 - March 17, 2015 =
+
+**Fixes**
+
+- Compatibility issues with latest version of Enfold theme
+- Conflict with other plugins shipping _very old_ versions of Composer
+
+**Improvements**
+
+- Allow simple inline tags in the bar text
+
 
 = 1.0.5 - February 25, 2015 =
 
