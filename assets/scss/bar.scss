@@ -67,6 +67,7 @@ body {
 	label {
 		display: inline-block !important;
 		vertical-align: middle !important;
+		width: auto !important;
 	}
 
 	form{
@@ -86,7 +87,7 @@ body {
 	}
 
 	.mctb-email {
-		width: 240px;
+		width: 240px !important;
 	}
 
 	.mctb-button {

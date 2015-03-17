@@ -40,6 +40,7 @@ body {
 #mailchimp-top-bar label {
   display: inline-block !important;
   vertical-align: middle !important;
+  width: auto !important;
 }
 #mailchimp-top-bar form {
   text-align: center;
@@ -54,7 +55,7 @@ body {
   background: white;
 }
 #mailchimp-top-bar .mctb-email {
-  width: 240px;
+  width: 240px !important;
 }
 #mailchimp-top-bar .mctb-button {
   cursor: pointer;
