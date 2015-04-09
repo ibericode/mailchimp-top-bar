@@ -32,7 +32,7 @@ class Bar {
 	public function __construct( Options $options ) {
 		$this->options = $options;
 
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'wp', array( $this, 'init' ) );
 	}
 
 	/**
