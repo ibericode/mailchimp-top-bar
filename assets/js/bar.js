@@ -24,8 +24,11 @@
 
 		function init() {
 
-			// add token field 1 second after initializign the bar
-			window.setTimeout(addTokenField, 1000);
+			// remove "no_js" field
+			var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
+			noJsField.parentElement.removeChild(noJsField);
+
+			iconEl.style.display = 'block';
 
 			// fade response 3 seconds after showing bar
 			window.setTimeout(fadeResponse, 3000);

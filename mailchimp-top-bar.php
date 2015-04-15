@@ -3,7 +3,7 @@
 Plugin Name: MailChimp Top Bar
 Plugin URI: https://mc4wp.com/
 Description: Adds an opt-in bar to the top of your site.
-Version: 1.0.6
+Version: 1.0.7
 Author: Danny van Kooten
 Author URI: https://dannyvankooten.com
 Text Domain: mailchimp-top-bar

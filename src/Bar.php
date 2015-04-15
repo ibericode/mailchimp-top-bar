@@ -150,8 +150,14 @@ class Bar {
 			return false;
 		}
 
-		// make sure `_mctb_token` is given and valid
-		if( ! $this->validate_token() ) {
+		// make sure `_mctb_timestamp` is at least 1.5 seconds ago
+		if( ! isset( $_POST['_mctb_timestamp'] ) || time() < ( intval( $_POST['_mctb_timestamp'] ) + 1.5 ) ) {
+			$this->error_type = 'spam';
+			return false;
+		}
+
+		// don't work for users without JavaScript (since bar is hidden anyway, must be a bot)
+		if( isset( $_POST['_mctb_no_js'] ) ) {
 			$this->error_type = 'spam';
 			return false;
 		}
@@ -170,24 +176,6 @@ class Bar {
 		}
 
 		return apply_filters( 'mctb_validate', true );
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function validate_token() {
-
-		if( ! isset( $_POST['_mctb_token' ] ) || '' === $_POST['_mctb_token'] ) {
-			return false;
-		}
-
-		if( ! isset( $_SERVER['REQUEST_URI'] ) ) {
-			return true;
-		}
-
-		$token = ( strlen( $_SERVER['REQUEST_URI'] ) * 11 ) . ( ( substr_count( $_SERVER['REQUEST_URI'], '/' ) + 1 ) * 111 );
-
-		return( $_POST['_mctb_token'] === $token );
 	}
 
 	/**
@@ -278,6 +266,8 @@ class Bar {
 					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" class="mctb-email-confirm" />
 					<input type="submit" value="<?php echo esc_attr( $this->options->get('text_button') ); ?>" class="mctb-button" />
 					<input type="hidden" name="_mctb" value="1" />
+					<input type="hidden" name="_mctb_no_js" value="1" />
+					<input type="hidden" name="_mctb_timestamp" value="<?php echo time(); ?>" />
 				</form>
 			</div><span class="mctb-close">&#x25BC;</span><!-- / MailChimp Top Bar --></div><?php
 	}

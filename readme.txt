@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,12 +60,19 @@ Since this plugin depends on the [MailChimp for WordPress plugin](https://wordpr
 
 = How to disable the bar on certain pages? =
 
-For now, you will have to use a filter to disable the bar on certain pages.
+For now, you will have to use a filter to disable the bar on certain pages. The following example only loads the Top Bar on your blog posts.
 
 `
-add_filter( 'mctp_show_bar', function() {
-	// this will only show the bar on blog post pages.
-	return is_singular( 'post' );
+add_filter( 'mctb_show_bar', function( $show ) {
+	return is_single();
+} );
+`
+
+Or, another example, this only loads the bar on your "contact" page.
+
+`
+add_filter( 'mctb_show_bar', function( $show ) {
+	return is_page('contact');
 } );
 `
 
@@ -86,6 +93,17 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.0.7 - April 15, 2015 =
+
+**Fixes**
+
+- `mctb_show_bar` filter was not functioning properly with some themes.
+- Form always errored when using WPML with String Translations.
+
+**Improvements**
+
+- Toggle icon is no longer shown for users without JavaScript.
 
 = 1.0.6 - March 17, 2015 =
 
@@ -169,6 +187,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.5 =
-
-Bugfix release, fixes issue where the bar did not appear in some themes.
+= 1.0.7 =
+Better fallback for visitors without JavaScript & fixed issue with `mctb_show_bar` filter & WPML String Translations.
