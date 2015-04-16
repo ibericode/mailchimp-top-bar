@@ -34,9 +34,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// define constant with path to main plugin file
+define( 'MAILCHIMP_TOP_BAR_FILE', __FILE__ );
+
 // Check if PHP is at the minimum required version
 if( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-	define( 'MAILCHIMP_TOP_BAR_FILE', __FILE__ );
 	require_once dirname( __FILE__ ) . '/plugin.php';
 } else {
 	require_once dirname( __FILE__ ) . '/php-backwards-compatibility.php';

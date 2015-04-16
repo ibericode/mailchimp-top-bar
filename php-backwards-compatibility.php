@@ -19,7 +19,7 @@ function mailchimp_top_bar_deactivate_self() {
 	}
 
 	// deactivate self
-	deactivate_plugins( 'mailchimp-top-bar/mailchimp-top-bar.php' );
+	deactivate_plugins( plugin_basename( MAILCHIMP_TOP_BAR_FILE ) );
 
 	// get rid of "Plugin activated" notice
 	if( isset( $_GET['activate'] ) ) {
