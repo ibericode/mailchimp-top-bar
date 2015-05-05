@@ -31,8 +31,22 @@ class Bar {
 	 */
 	public function __construct( Options $options ) {
 		$this->options = $options;
+	}
 
+	/**
+	 * Add the hooks
+	 */
+	public function add_hooks() {
 		add_action( 'wp', array( $this, 'init' ) );
+	}
+
+	/**
+	 * Add template related hooks
+	 */
+	public function add_template_hooks() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ) );
+		add_action( 'wp_head', array( $this, 'output_css'), 90 );
+		add_action( 'wp_footer', array( $this, 'output_html' ), 1 );
 	}
 
 	/**
@@ -44,7 +58,7 @@ class Bar {
 			return false;
 		}
 
-		$this->add_hooks();
+		$this->add_template_hooks();
 		$this->listen();
 		return true;
 	}
@@ -77,15 +91,6 @@ class Bar {
 		 * Set to true if the bar should be loaded for this request, false if not.
 		 */
 		return apply_filters( 'mctb_show_bar', $return );
-	}
-
-	/**
-	 * Add the hooks
-	 */
-	public function add_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ) );
-		add_action( 'wp_head', array( $this, 'output_css'), 90 );
-		add_action( 'wp_footer', array( $this, 'output_html' ), 1 );
 	}
 
 	/**
@@ -122,7 +127,7 @@ class Bar {
 		do_action( 'mc4wp_subscribe', $email, $this->options->get( 'list' ), $merge_vars, ( $result === true ), 'form', 'top-bar' );
 
 		// return true if success..
-		if( $result === true ) {
+		if( $result ) {
 
 			// should we redirect
 			if( '' !== $this->options->get( 'redirect' ) ) {
@@ -130,11 +135,12 @@ class Bar {
 				exit;
 			}
 
-
 			return true;
 		}
 
-		$this->error_type = $result;
+		// failed
+		$this->error_type = ( $api->get_error_code() === 214 ) ? 'already_subscribed' : 'error';
+
 		return false;
 	}
 
@@ -282,7 +288,7 @@ class Bar {
 		}
 
 		if( $this->success ) {
-			$message = $this->options->get('text_success');
+			$message = $this->options->get('text_subscribed');
 		} else if( $this->error_type === 'already_subscribed' ) {
 			$message = $this->options->get('text_already_subscribed');
 		} else if( $this->error_type === 'invalid_email' ) {

@@ -14,7 +14,7 @@ final class Plugin {
 	/**
 	 * @const VERSION
 	 */
-	const VERSION = '1.0.7';
+	const VERSION = '1.0.8';
 
 	/**
 	 * @const FILE
@@ -87,6 +87,7 @@ final class Plugin {
 
 			// show bar, if it's enabled
 			$bar = new Bar( $this->options );
+			$bar->add_hooks();
 
 
 		} elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -95,7 +96,8 @@ final class Plugin {
 		} else {
 
 			// admin code
-			new Admin\Manager( $this->options );
+			$admin = new Admin\Manager( $this->options );
+			$admin->add_hooks();
 		}
 	}
 

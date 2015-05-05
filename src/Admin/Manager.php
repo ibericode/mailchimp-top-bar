@@ -21,8 +21,13 @@ class Manager {
 	public function __construct( Options $options ) {
 
 		$this->options = $options;
-		$this->plugin_slug = basename( Plugin::DIR ) . '/mailchimp-top-bar.php';
+		$this->plugin_slug = plugin_basename( Plugin::FILE );
+	}
 
+	/**
+	 * Add plugin hooks
+	 */
+	public function add_hooks() {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
 	}
@@ -65,9 +70,9 @@ class Manager {
 			return false;
 		}
 
-		// nothing here yet..
+		$upgrader = new Upgrader( $db_version, Plugin::VERSION );
+		$upgrader->run();
 
-		update_option( 'mailchimp_top_bar_version', Plugin::VERSION );
 		return true;
 	}
 

@@ -3,8 +3,8 @@ Contributors: DvanKooten, iMazed
 Donate link: https://dannyvankooten.com/donate/
 Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
-Tested up to: 4.2
-Stable tag: 1.0.7
+Tested up to: 4.2.1
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,12 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.0.8 - May 6, 2015 =
+
+**Fixes**
+
+- Compatibility with [MailChimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [MailChimp for WordPress Pro v2.7](https://mc4wp.com/).
 
 = 1.0.7 - April 15, 2015 =
 
@@ -187,5 +193,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.7 =
-Better fallback for visitors without JavaScript & fixed issue with `mctb_show_bar` filter & WPML String Translations.
+= 1.0.8 =
+Compatibility update for the latest MailChimp for WordPress release.

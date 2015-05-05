@@ -214,7 +214,7 @@ defined( 'ABSPATH' ) or exit;
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row"><label><?php _e( 'Success', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_success'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_success' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_success', false ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_subscribed', false ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label><?php _e( 'Invalid email address', 'mailchimp-for-wp' ); ?></label></th>

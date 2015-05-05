@@ -65,7 +65,7 @@ class Options {
 			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' ),
 			'redirect' => '',
 			'double_optin' => '',
-			'text_success' => '',
+			'text_subscribed' => '',
 			'text_error' => '',
 			'text_invalid_email' => '',
 			'text_already_subscribed' => '',
@@ -93,7 +93,7 @@ class Options {
 		$inheritance_keys = array(
 			'redirect',
 			'double_optin',
-			'text_success',
+			'text_subscribed',
 			'text_error',
 			'text_invalid_email',
 			'text_already_subscribed',
