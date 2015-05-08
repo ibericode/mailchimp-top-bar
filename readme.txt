@@ -32,12 +32,12 @@ Using this bar, people can subscribe to any MailChimp list of your choice.
 
 = Development of MailChimp Top Bar =
 
-Bug reports (and Pull Requests) for [MailChimp Top Bar are welcomed on GitHub](https://github.com/dannyvankooten/wp-mailchimp-top-bar). Please note that GitHub is _not_ a support forum.
+Bug reports (and Pull Requests) for [MailChimp Top Bar are welcomed on GitHub](https://github.com/ibericode/mailchimp-top-bar). Please note that GitHub is _not_ a support forum.
 
 **More information**
 
 - [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/)
-- Developers; follow or contribute to the [MailChimp Top Bar plugin on GitHub](https://github.com/dannyvankooten/wp-mailchimp-top-bar)
+- Developers; follow or contribute to the [MailChimp Top Bar plugin on GitHub](https://github.com/ibericode/mailchimp-top-bar)
 - Other [WordPress plugins](https://dannyvankooten.com/wordpress-plugins/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](https://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link)
 - [@DannyvanKooten](https://twitter.com/dannyvankooten) on Twitter
 
@@ -80,7 +80,7 @@ Have a look at the [Conditional Tags](https://codex.wordpress.org/Conditional_Ta
 
 = I think I found a bug. What now? =
 
-Please report it on [GitHub issues](https://github.com/dannyvankooten/wp-mailchimp-top-bar/issues) if it's not in the list of known issues.
+Please report it on [GitHub issues](https://github.com/ibericode/mailchimp-top-bar/issues) if it's not in the list of known issues.
 
 = I have another question =
 

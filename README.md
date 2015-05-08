@@ -11,7 +11,7 @@ Installation
 Here's a [guide on how to install the plugin in your WordPress site](https://wordpress.org/plugins/mailchimp-top-bar/installation/).
 If you want to run the latest development version, you have two options:
 
-* You can download the repository .zip file: [mailchimp-top-bar.zip](https://github.com/dannyvankooten/wp-mailchimp-top-bar/archive/master.zip)
+* You can download the repository .zip file: [mailchimp-top-bar.zip](https://github.com/ibericode/mailchimp-top-bar/archive/master.zip)
 * You can clone the GitHub repository using Git
 
 This will download the latest development version of the MailChimp Top Bar plugin. While this version is usually stable,
@@ -22,7 +22,7 @@ Note that this plugin depends on [MailChimp for WordPress](https://mc4wp.com/) t
 
 Bugs
 ----
-If you think you've found a bug, [please raise an issue here](https://github.com/dannyvankooten/wp-mailchimp-top-bar/issues?state=open)!
+If you think you've found a bug, [please raise an issue here](https://github.com/ibericode/mailchimp-top-bar/issues?state=open)!
 
 Support
 -------
@@ -35,6 +35,6 @@ Contributions
 -------------
 Anyone is very welcome to contribute to the plugin. There are various ways you can contribute:
 
-* [Raise an issue](https://github.com/dannyvankooten/wp-mailchimp-top-bar/issues) on GitHub.
+* [Raise an issue](https://github.com/ibericode/mailchimp-top-bar/issues) on GitHub.
 * Send in a Pull Request with your bug fixes and/or new features.
-* Provide feedback and [suggestions on enhancements](https://github.com/dannyvankooten/wp-mailchimp-top-bar/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
+* Provide feedback and [suggestions on enhancements](https://github.com/ibericode/mailchimp-top-bar/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).

@@ -4,7 +4,7 @@
 	"repository" :
 	{
 		"type" : "git",
-		"url" : "https://github.com/dannyvankooten/wp-mailchimp-top-bar"
+		"url" : "https://github.com/ibericode/mailchimp-top-bar"
 	},
 	"devDependencies": {
 		"grunt": "0.4.5",
