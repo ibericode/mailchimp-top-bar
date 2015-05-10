@@ -1,0 +1,222 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MailChimp Top Bar\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Sun May 10 2015 13:42:08 GMT+0300 (EEST)\n"
+"PO-Revision-Date: Sun May 10 2015 13:50:37 GMT+0300 (EEST)\n"
+"Last-Translator: adminas <aleksandr.charkov@posteo.de>\n"
+"Language-Team: \n"
+"Language: Lithuanian\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 "
+"&&(n%100<10||n%100 >= 20)? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: lt_LT\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: ../php-backwards-compatibility.php:45
+msgid ""
+"MailChimp Top Bar did not activate because it requires your server to run "
+"PHP 5.3 or higher."
+msgstr ""
+
+#: ../views/settings-page.php:11 ../views/settings-page.php:36
+msgid "Bar Settings"
+msgstr ""
+
+#: ../views/settings-page.php:12 ../views/settings-page.php:116
+msgid "Appearance"
+msgstr ""
+
+#: ../views/settings-page.php:13 ../views/settings-page.php:211
+msgid "Messages"
+msgstr "Pranešimai"
+
+#: ../views/settings-page.php:24
+#, php-format
+msgid ""
+"The selected MailChimp list requires more fields than just a "
+"<strong>%s</strong> field. Please <a href=\"%s\">log into your MailChimp "
+"account</a> and make sure only the <strong>%s</strong> field is marked as "
+"required."
+msgstr ""
+
+#: ../views/settings-page.php:29
+msgid ""
+"You have disabled the bar. It will not show up on your site until you enable "
+"it again."
+msgstr ""
+
+#: ../views/settings-page.php:43
+msgid "Enable Bar?"
+msgstr ""
+
+#: ../views/settings-page.php:48 ../views/settings-page.php:172
+msgid "Yes"
+msgstr "Taip"
+
+#: ../views/settings-page.php:51 ../views/settings-page.php:175
+msgid "No"
+msgstr "Ne"
+
+#: ../views/settings-page.php:53
+msgid "A quick way to completely disable the bar."
+msgstr ""
+
+#: ../views/settings-page.php:59
+msgid "MailChimp List"
+msgstr ""
+
+#: ../views/settings-page.php:62
+#, php-format
+msgid "No lists found, <a href=\"%s\">are you connected to MailChimp</a>?"
+msgstr ""
+
+#: ../views/settings-page.php:66
+msgid "Select a list.."
+msgstr ""
+
+#: ../views/settings-page.php:71
+msgid "Select the list to which visitors should be subscribed."
+msgstr ""
+
+#: ../views/settings-page.php:78
+msgid "Bar Text"
+msgstr ""
+
+#: ../views/settings-page.php:83
+msgid "The text to appear before the email field."
+msgstr ""
+
+#: ../views/settings-page.php:90
+msgid "Button Text"
+msgstr "Mygtuko tekstas\n"
+
+#: ../views/settings-page.php:95
+msgid "The text on the submit button."
+msgstr ""
+
+#: ../views/settings-page.php:102
+msgid "Email Placeholder Text"
+msgstr ""
+
+#: ../views/settings-page.php:107
+msgid "The initial placeholder text to appear in the email field."
+msgstr ""
+
+#: ../views/settings-page.php:125
+msgid "Bar Size"
+msgstr ""
+
+#: ../views/settings-page.php:130
+msgid "Small"
+msgstr "Mažas"
+
+#: ../views/settings-page.php:131
+msgid "Medium"
+msgstr ""
+
+#: ../views/settings-page.php:132
+msgid "Big"
+msgstr ""
+
+#: ../views/settings-page.php:140
+msgid "Bar Color"
+msgstr ""
+
+#: ../views/settings-page.php:151
+msgid "Text Color"
+msgstr "Teksto spalva"
+
+#: ../views/settings-page.php:167
+msgid "Sticky Bar?"
+msgstr ""
+
+#: ../views/settings-page.php:183
+msgid "Button Color"
+msgstr "Mygtuko spalva"
+
+#: ../views/settings-page.php:194
+msgid "Button Text Color"
+msgstr ""
+
+#: ../views/settings-page.php:212
+#, php-format
+msgid ""
+"All these settings are optional and will by default inherit from <a "
+"href=\"%s\">%s &raquo; %s</a>"
+msgstr ""
+
+#: ../views/settings-page.php:216
+msgid "Success"
+msgstr ""
+
+#: ../views/settings-page.php:220
+msgid "Invalid email address"
+msgstr ""
+
+#: ../views/settings-page.php:224
+msgid "Already subscribed"
+msgstr ""
+
+#: ../views/settings-page.php:228
+msgid "Other errors"
+msgstr "Kitos klaidos"
+
+#: ../views/settings-page.php:234
+#, php-format
+msgid "HTML tags like %s are allowed in the message fields."
+msgstr ""
+
+#: ../views/settings-page.php:240
+msgid "Redirect to URL after successful sign-ups"
+msgstr ""
+
+#: ../views/settings-page.php:245
+msgid ""
+"Leave empty for no redirect. Otherwise, use complete (absolute) URLs, "
+"including <code>http://</code>."
+msgstr ""
+
+#: ../src/DependencyCheck.php:60
+#, php-format
+msgid "Please install <a href=\"%s\">%s</a> in order to use %s."
+msgstr ""
+
+#: ../src/Options.php:63
+msgid "Your email address.."
+msgstr "El. pašto adresas..."
+
+#: ../src/Options.php:64
+msgid "Sign-up now - don't miss the fun!"
+msgstr "Nori užsiprenumeruoti naujienlaiškį?\n"
+
+#: ../src/Options.php:65
+msgid "Subscribe"
+msgstr "Premumeruoti"
+
+#: ../src/Admin/Manager.php:96
+msgid "MailChimp Top Bar"
+msgstr ""
+
+#: ../src/Admin/Manager.php:97
+msgid "Top Bar"
+msgstr ""
+
+#: ../src/Admin/Manager.php:115
+msgid "Settings"
+msgstr "Nustatymai"
+
+#: ../src/Admin/Manager.php:131
+#, php-format
+msgid "An add-on for %s"
+msgstr ""
