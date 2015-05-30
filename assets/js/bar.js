@@ -1,7 +1,6 @@
-(function($) {
+(function() {
 
 	var bodyEl = document.body;
-	var $body = $(bodyEl);
 
 	/**
 	 * Creates a new Top Bar from an element
@@ -17,8 +16,6 @@
 		var barEl = wrapperEl.querySelector('.mctb-bar');
 		var iconEl = wrapperEl.querySelector('.mctb-close');
 		var visible = false;
-		var $bar = $(barEl);
-		var $icon = $(iconEl);
 
 		// Functions
 
@@ -39,7 +36,7 @@
 			}
 
 			// Listen to `click` events on the icon
-			$icon.click( toggle );
+			addEvent(iconEl, 'click', toggle);
 		}
 
 		/**
@@ -49,22 +46,17 @@
 		 */
 		function show( manual ) {
 
-			if( visible || $bar.is( ':animated' ) ) {
+			if( visible ) {
 				return false;
 			}
 
 			if( manual ) {
-				// Add bar height to <body> padding
-				var bodyPadding = ( ( parseInt( bodyEl.style.paddingTop )  || 0 ) + $bar.outerHeight() ) + "px";
-				$body.animate({ 'padding-top': bodyPadding });
-				$bar.slideDown();
 				eraseCookie( 'mctb_bar_hidden' );
-			} else {
-				// Add bar height to <body> padding
-				barEl.style.display = 'block';
-				bodyEl.style.paddingTop = ( ( parseInt( bodyEl.style.paddingTop )  || 0 ) + $bar.outerHeight() ) + "px";
 			}
 
+			// Add bar height to <body> padding
+			barEl.style.display = 'block';
+			bodyEl.style.paddingTop = ( ( parseInt( bodyEl.style.paddingTop )  || 0 ) + barEl.clientHeight ) + "px";
 			iconEl.innerHTML = config.icons.hide;
 			visible = true;
 
@@ -77,19 +69,16 @@
 		 * @returns {boolean}
 		 */
 		function hide(manual) {
-			if( ! visible || $bar.is( ':animated' ) ) {
+			if( ! visible ) {
 				return false;
 			}
 
 			if( manual ) {
-				$bar.slideUp();
-				$body.animate({ 'padding-top': 0 });
 				createCookie( "mctb_bar_hidden", 1, config.cookieLength );
-			} else {
-				barEl.style.display = 'none';
-				document.body.style.paddingTop = 0;
 			}
 
+			barEl.style.display = 'none';
+			document.body.style.paddingTop = 0;
 			visible = false;
 			iconEl.innerHTML = config.icons.show;
 
@@ -97,28 +86,11 @@
 		}
 
 		/**
-		 * Adds a timestamp field to prevent bots from submitting instantly
-		 */
-		function addTokenField() {
-
-			var pathname = window.location.pathname;
-			var token = (pathname.length * 11).toString() + (pathname.split('/').length * 111).toString();
-
-			var tokenEl = document.createElement('input');
-			tokenEl.setAttribute('name', '_mctb_token');
-			tokenEl.setAttribute('type', 'hidden');
-			tokenEl.setAttribute('value', token );
-			barEl.querySelector('form').appendChild(tokenEl);
-		}
-
-		/**
 		 * Fade out the response message
 		 */
 		function fadeResponse() {
 			var responseEl = wrapperEl.querySelector('.mctb-response');
-			if( responseEl ) {
-				 $(responseEl).fadeOut();
-			}
+			fadeOut(responseEl);
 		}
 
 		/**
@@ -144,9 +116,72 @@
 	};
 
 	// Init bar
-	$(document).ready( function() {
+	ready( function() {
 		window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
 	});
+
+	/**
+	 * DOMContentLoaded (IE8 compatible)
+	 *
+	 * @param fn
+	 */
+	function ready(fn) {
+		if (document.readyState != 'loading'){
+			fn();
+		} else if (document.addEventListener) {
+			document.addEventListener('DOMContentLoaded', fn);
+		} else {
+			document.attachEvent('onreadystatechange', function() {
+				if (document.readyState != 'loading')
+					fn();
+			});
+		}
+	}
+
+	/**
+	 * Add event (IE8 compatible)
+	 *
+	 * @param element
+	 * @param eventName
+	 * @param callback
+	 */
+	function addEvent(element, eventName, callback) {
+		if (element.addEventListener) {
+			return element.addEventListener(eventName, callback, false);
+		} else if (element.attachEvent)  {
+			return element.attachEvent('on' + eventName, callback);
+		}
+	}
+
+	/**
+	 * Fades out the given element
+	 *
+	 * @param element
+	 */
+	function fadeOut(element) {
+		var opacity = 1;
+
+		function fadeStep() {
+
+			if (opacity <= 0.1){
+				element.style.display = 'none';
+				return false;
+			}
+
+			element.style.opacity = opacity;
+			opacity -= opacity * 0.1;
+
+			if( typeof( window.requestAnimationFrame ) === "function" ) {
+				window.requestAnimationFrame(fadeStep);
+			} else {
+				window.setTimeout(fadeStep, 25);
+			}
+
+			return true;
+		}
+
+		fadeStep();
+	}
 
 	/**
 	 * Creates a cookie
@@ -194,4 +229,4 @@
 		createCookie(name, "", -1);
 	}
 
-})(window.jQuery);
+})();

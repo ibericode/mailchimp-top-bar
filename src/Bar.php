@@ -191,7 +191,7 @@ class Bar {
 	public function load_assets() {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), Plugin::VERSION );
-		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array( 'jquery' ), Plugin::VERSION, true );
+		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array(), Plugin::VERSION, true );
 
 		$data = array(
 			'cookieLength' => $this->options->get('cookie_length'),
