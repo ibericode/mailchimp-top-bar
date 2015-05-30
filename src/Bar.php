@@ -121,10 +121,11 @@ class Bar {
 		$api = mc4wp_get_api();
 		$merge_vars = apply_filters( 'mctb_merge_vars', array() );
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
+		$mailchimp_list = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
 
-		$result = $api->subscribe( $this->options->get( 'list' ), $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ) );
+		$result = $api->subscribe( $mailchimp_list, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ) );
 
-		do_action( 'mc4wp_subscribe', $email, $this->options->get( 'list' ), $merge_vars, ( $result === true ), 'form', 'top-bar' );
+		do_action( 'mc4wp_subscribe', $email, $mailchimp_list, $merge_vars, ( $result === true ), 'form', 'top-bar' );
 
 		// return true if success..
 		if( $result ) {
