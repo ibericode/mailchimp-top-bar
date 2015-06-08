@@ -122,6 +122,20 @@ defined( 'ABSPATH' ) or exit;
 						<tr valign="top">
 							<th scope="row">
 								<label>
+									<?php _e( 'Bar Position', 'mailchimp-top-bar' ); ?>
+								</label>
+							</th>
+							<td>
+								<select name="<?php echo $this->name_attr( 'position' ); ?>">
+									<option value="top" <?php selected( $opts->get( 'position' ), 'top' ); ?>><?php _e( 'Top', 'mailchimp-top-bar' ); ?></option>
+									<option value="bottom" <?php selected( $opts->get( 'position' ), 'bottom' ); ?>><?php _e( 'Bottom', 'mailchimp-top-bar' ); ?></option>
+								</select>
+							</td>
+						</tr>
+
+						<tr valign="top">
+							<th scope="row">
+								<label>
 									<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
 								</label>
 							</th>

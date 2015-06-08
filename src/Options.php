@@ -64,6 +64,7 @@ class Options {
 			'text_bar' => __( 'Sign-up now - don\'t miss the fun!', 'mailchimp-top-bar' ),
 			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' ),
 			'redirect' => '',
+			'position' => 'top',
 			'double_optin' => '',
 			'text_subscribed' => '',
 			'text_error' => '',

@@ -1,6 +1,7 @@
 (function() {
 
 	var bodyEl = document.body;
+	var $ = window.jQuery;
 
 	/**
 	 * Creates a new Top Bar from an element
@@ -16,6 +17,9 @@
 		var barEl = wrapperEl.querySelector('.mctb-bar');
 		var iconEl = wrapperEl.querySelector('.mctb-close');
 		var visible = false;
+		var originalBodyPadding = 0,
+			barHeight = 0,
+			bodyCSS = {};
 
 		// Functions
 
@@ -25,18 +29,37 @@
 			var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
 			noJsField.parentElement.removeChild(noJsField);
 
-			iconEl.style.display = 'block';
+			// calculate real bar height
+			var origBarPosition = barEl.style.position;
+			barEl.style.display = 'block';
+			barEl.style.position = 'relative';
+			barHeight = barEl.clientHeight;
+			wrapperEl.style.height = barHeight + "px";
+			barEl.style.display = 'none';
+			barEl.style.position = origBarPosition;
+
+			// save original bodyPadding
+			if( config.position === 'bottom' ) {
+				originalBodyPadding = ( parseInt( bodyEl.style.paddingBottom )  || 0 );
+			} else {
+				originalBodyPadding = ( parseInt( bodyEl.style.paddingTop )  || 0 );
+			}
+
+			// get real bar hegiht (if it were shown)
+			bodyPadding = ( originalBodyPadding + barHeight ) + "px";
 
 			// fade response 3 seconds after showing bar
 			window.setTimeout(fadeResponse, 3000);
+
+			// Configure icon
+			iconEl.innerHTML = config.icons.show;
+			iconEl.style.display = 'block';
+			addEvent(iconEl, 'click', toggle);
 
 			// Show the bar straight away?
 			if( readCookie( "mctb_bar_hidden" ) != 1 ) {
 				show()
 			}
-
-			// Listen to `click` events on the icon
-			addEvent(iconEl, 'click', toggle);
 		}
 
 		/**
@@ -54,9 +77,26 @@
 				eraseCookie( 'mctb_bar_hidden' );
 			}
 
-			// Add bar height to <body> padding
-			barEl.style.display = 'block';
-			bodyEl.style.paddingTop = ( ( parseInt( bodyEl.style.paddingTop )  || 0 ) + barEl.clientHeight ) + "px";
+			// use animation if jQuery is loaded
+			if( manual && typeof($) === "function" ){
+				$(barEl).slideDown(300);
+
+				// animate body padding
+				if( config.position === 'bottom' ) {
+					$(bodyEl).animate({
+						'padding-bottom': bodyPadding
+					});
+				} else {
+					$(bodyEl).animate({
+						'padding-top': bodyPadding
+					});
+				}
+			} else {
+				// Add bar height to <body> padding
+				barEl.style.display = 'block';
+				bodyEl.style.marginTop = bodyPadding;
+			}
+
 			iconEl.innerHTML = config.icons.hide;
 			visible = true;
 
@@ -77,8 +117,20 @@
 				createCookie( "mctb_bar_hidden", 1, config.cookieLength );
 			}
 
-			barEl.style.display = 'none';
-			document.body.style.paddingTop = 0;
+			if( manual && typeof($) === "function" ){
+				$(barEl).slideUp(300);
+
+				// animate body padding
+				if( config.position === 'bottom' ) {
+					$(bodyEl).animate({ 'padding-bottom': originalBodyPadding + "px" });
+				} else {
+					$(bodyEl).animate({ 'padding-top': originalBodyPadding +"px" });
+				}
+			} else {
+				barEl.style.display = 'none';
+				document.body.style.paddingTop = originalBodyPadding + "px";
+			}
+
 			visible = false;
 			iconEl.innerHTML = config.icons.show;
 
@@ -90,7 +142,7 @@
 		 */
 		function fadeResponse() {
 			var responseEl = wrapperEl.querySelector('.mctb-response');
-			fadeOut(responseEl);
+			responseEl && fadeOut(responseEl);
 		}
 
 		/**

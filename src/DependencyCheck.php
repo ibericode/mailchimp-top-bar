@@ -33,6 +33,11 @@ class DependencyCheck {
 			return true;
 		}
 
+		// check for MailChimp for WordPress core
+		if( defined( 'MC4WP_VERSION' ) && version_compare( MC4WP_VERSION, '3.0', '>=' ) ) {
+			return true;
+		}
+
 		return false;
 	}
 

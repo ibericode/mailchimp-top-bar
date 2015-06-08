@@ -44,6 +44,19 @@ body {
 	&.mctb-sticky {
 		position: fixed;
 	}
+
+	&.mctb-position-bottom {
+		position: fixed;
+		bottom: 0;
+		top: auto;
+
+		.mctb-bar {
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+		}
+	}
+
 	// Reset Form elements, many themes apply basic styling
 	form,
 	input,

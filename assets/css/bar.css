@@ -19,6 +19,16 @@ body {
 #mailchimp-top-bar.mctb-sticky {
   position: fixed;
 }
+#mailchimp-top-bar.mctb-position-bottom {
+  position: fixed;
+  bottom: 0;
+  top: auto;
+}
+#mailchimp-top-bar.mctb-position-bottom .mctb-bar {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 #mailchimp-top-bar form,
 #mailchimp-top-bar input,
 #mailchimp-top-bar label {

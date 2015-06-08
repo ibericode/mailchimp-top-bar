@@ -223,6 +223,10 @@ class Manager {
 			$clean['size'] = 'medium';
 		}
 
+		if( ! in_array( $dirty['position'], array( 'top', 'bottom' ) ) ) {
+			$clean['position'] = 'top';
+		}
+
 		return $clean;
 	}
 

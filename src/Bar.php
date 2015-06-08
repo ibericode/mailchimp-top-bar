@@ -193,12 +193,15 @@ class Bar {
 		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), Plugin::VERSION );
 		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array(), Plugin::VERSION, true );
 
+		$bottom = ( $this->options->get( 'position' ) === 'bottom' );
+
 		$data = array(
 			'cookieLength' => $this->options->get('cookie_length'),
 			'icons' => array(
-				'hide' => '&#x25B2;',
-				'show' => '&#x25BC;'
-			)
+				'hide' => ( $bottom ) ? '&#x25BC;' : '&#x25B2;',
+				'show' =>  ( $bottom ) ? '&#x25B2;' : '&#x25BC;'
+			),
+			'position' => $this->options->get( 'position' )
 		);
 
 		/**
@@ -223,6 +226,10 @@ class Bar {
 		// add class when bar is sticky
 		if( $this->options->get( 'sticky' ) ) {
 			$classes[] = 'mctb-sticky';
+		}
+
+		if( $this->options->get( 'position' ) ) {
+			$classes[] = sprintf( 'mctb-position-%s', $this->options->get( 'position' ) );
 		}
 
 		// add class describing size of the bar
@@ -276,7 +283,7 @@ class Bar {
 					<input type="hidden" name="_mctb_no_js" value="1" />
 					<input type="hidden" name="_mctb_timestamp" value="<?php echo time(); ?>" />
 				</form>
-			</div><span class="mctb-close">&#x25BC;</span><!-- / MailChimp Top Bar --></div><?php
+			</div><span class="mctb-close"></span><!-- / MailChimp Top Bar --></div><?php
 	}
 
 	/**
