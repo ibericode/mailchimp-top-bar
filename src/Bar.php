@@ -221,13 +221,14 @@ class Bar {
 	 * @return string
 	 */
 	private function get_css_class() {
-		$classes = array( '' );
+		$classes = array();
 
 		// add class when bar is sticky
 		if( $this->options->get( 'sticky' ) ) {
 			$classes[] = 'mctb-sticky';
 		}
 
+		// add unique css class for position (bottom|top)
 		if( $this->options->get( 'position' ) ) {
 			$classes[] = sprintf( 'mctb-position-%s', $this->options->get( 'position' ) );
 		}
