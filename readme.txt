@@ -1,9 +1,9 @@
 === MailChimp Top Bar ===
-Contributors: DvanKooten, iMazed
-Donate link: https://dannyvankooten.com/donate/
+Contributors: ibericode, DvanKooten, iMazed, hchouhan
+Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
 Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
-Tested up to: 4.2.1
+Tested up to: 4.2.2
 Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Adds a beautiful, customizable opt-in bar to the top of your WordPress site. Thi
 increase your MailChimp subscribers.
 
 > This plugin is an add-on for the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/).
-> To use it, you need at least **MailChimp for WordPress v2.2.3** or **MailChimp for WordPress Premium v2.5.5**.
+> To use it, you need at least **MailChimp for WordPress v2.2.3** or **MailChimp for WordPress Pro v2.5.5**.
 
 = MailChimp Top Bar, at a glance.. =
 
@@ -89,7 +89,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Screenshots ==
 
-1. The MailChimp Top Bar in action on the [MailChimp for WordPress site](https://mc4wp.com).
+1. The MailChimp Top Bar in action on the [MailChimp for WordPress site](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=screenshots).
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==

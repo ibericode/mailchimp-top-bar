@@ -128,7 +128,7 @@ class Manager {
 			return $links;
 		}
 
-		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://mc4wp.com/">MailChimp for WordPress</a>' );
+		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page">MailChimp for WordPress</a>' );
 		return $links;
 	}
 
@@ -144,7 +144,6 @@ class Manager {
 		}
 
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		$mailchimp = new \MC4WP_MailChimp();
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'mailchimp-top-bar-admin', $this->asset_url( "/css/admin{$min}.css" ) );
@@ -152,7 +151,7 @@ class Manager {
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$min}.js" ), array( 'jquery', 'wp-color-picker' ), Plugin::VERSION, true );
 		wp_localize_script( 'mailchimp-top-bar-admin', 'mctb', array(
-				'lists' => $mailchimp->get_lists()
+				'lists' => $this->get_mailchimp_lists()
 			)
 		);
 
@@ -167,12 +166,11 @@ class Manager {
 
 		$tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
 		$opts = $this->options;
-		$mailchimp = new \MC4WP_MailChimp();
-		$lists = $mailchimp->get_lists();
+		$lists = $this->get_mailchimp_lists();
 
-		if( $opts->get('list') !== '' ) {
-			$list = $mailchimp->get_list( $opts->get('list') );
-		}
+//		if( $opts->get('list') !== '' ) {
+//			$list = $mailchimp->get_list( $opts->get('list') );
+//		}
 
 		require Plugin::DIR . '/views/settings-page.php';
 	}
@@ -228,6 +226,22 @@ class Manager {
 		}
 
 		return $clean;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function get_mailchimp_lists() {
+		if( class_exists( 'MC4WP_MailChimp' ) ) {
+			$mailchimp = new \MC4WP_MailChimp();
+			return $mailchimp->get_lists();
+		}
+
+		if( class_exists( 'MC4WP_MailChimp_Tools' ) ) {
+			return \MC4WP_MailChimp_Tools::get_lists();
+		}
+
+		return array();
 	}
 
 

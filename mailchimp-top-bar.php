@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: MailChimp Top Bar
-Plugin URI: https://mc4wp.com/
+Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page
 Description: Adds an opt-in bar to the top of your site.
 Version: 1.0.8
 Author: Ibericode
