@@ -9,6 +9,9 @@
 	var $enableBar = $( document.querySelectorAll( 'input[name="mailchimp_top_bar[enabled]"]' ) );
 	var msgRequiresFields = document.getElementById('message-list-requires-fields');
 	var msgBarIsDisabled = document.getElementById('message-bar-is-disabled');
+	$( document.getElementById('select-bar-position' )).change(function() {
+		$('.sticky-bar-options').toggle($(this).prop('checked'));
+	});
 
 	/*
 	 * Functions

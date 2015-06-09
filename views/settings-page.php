@@ -126,14 +126,14 @@ defined( 'ABSPATH' ) or exit;
 								</label>
 							</th>
 							<td>
-								<select name="<?php echo $this->name_attr( 'position' ); ?>">
+								<select name="<?php echo $this->name_attr( 'position' ); ?>" id="select-bar-position">
 									<option value="top" <?php selected( $opts->get( 'position' ), 'top' ); ?>><?php _e( 'Top', 'mailchimp-top-bar' ); ?></option>
 									<option value="bottom" <?php selected( $opts->get( 'position' ), 'bottom' ); ?>><?php _e( 'Bottom', 'mailchimp-top-bar' ); ?></option>
 								</select>
 							</td>
 						</tr>
 
-						<tr valign="top">
+						<tr valign="top" class="bar-size-options" style="">
 							<th scope="row">
 								<label>
 									<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
@@ -175,7 +175,7 @@ defined( 'ABSPATH' ) or exit;
 				<div class="col-2">
 					<table class="form-table">
 
-						<tr valign="top">
+						<tr valign="top" class="sticky-bar-options" style="<?php if( $opts->get('position') === 'bottom' ) { echo 'display: none;'; } ?>">
 							<th scope="row">
 								<label>
 									<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
