@@ -21,7 +21,8 @@ defined( 'ABSPATH' ) or exit;
 
 
 		<div id="message-list-requires-fields" class="error" style="display: none;">
-			<p><?php printf( __( 'The selected MailChimp list requires more fields than just a <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
+			<p><?php printf( __( 'The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
+			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( 'mc4wp-renew-cache' => 1 ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) ); ?></p>
 		</div>
 
 		<div id="message-bar-is-disabled" class="error" style="display: none;">
