@@ -94,7 +94,11 @@
 			} else {
 				// Add bar height to <body> padding
 				barEl.style.display = 'block';
-				bodyEl.style.marginTop = bodyPadding;
+				if( config.position === 'bottom' ) {
+					bodyEl.style.paddingBottom = bodyPadding;
+				} else {
+					bodyEl.style.paddingTop = bodyPadding;
+				}
 			}
 
 			iconEl.innerHTML = config.icons.hide;
@@ -128,7 +132,11 @@
 				}
 			} else {
 				barEl.style.display = 'none';
-				document.body.style.paddingTop = originalBodyPadding + "px";
+				if( config.position === 'bottom' ) {
+					document.body.style.paddingBottom = originalBodyPadding + "px";
+				} else {
+					document.body.style.paddingTop = originalBodyPadding + "px";
+				}
 			}
 
 			visible = false;
