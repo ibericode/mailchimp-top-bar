@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,7 +114,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 **Improvements**
 
 - Various improvements to bar CSS so it can be easily overridden.
-
+- Fix vertical alignment of toggle icon.
 
 = 1.1 - June 10, 2015 =
 
