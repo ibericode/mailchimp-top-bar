@@ -30,7 +30,7 @@ body {
 	position: relative;
 }
 
-#mailchimp-top-bar {
+.mctb {
 
 	position: absolute;
 	top: 0;
@@ -40,22 +40,6 @@ body {
 	z-index: 999999;
 	background: transparent;
 	text-align: center;
-
-	&.mctb-sticky {
-		position: fixed;
-	}
-
-	&.mctb-position-bottom {
-		position: fixed;
-		bottom: 0;
-		top: auto;
-
-		.mctb-bar {
-			width: 100%;
-			position: absolute;
-			bottom: 0;
-		}
-	}
 
 	// Reset Form elements, many themes apply basic styling
 	form,
@@ -99,41 +83,6 @@ body {
 		background: white;
 	}
 
-	.mctb-email {
-		width: 240px !important;
-	}
-
-	.mctb-button {
-		cursor: pointer;
-	}
-
-	.mctb-email-confirm {
-		display: none !important;
-	}
-
-	.mctb-response {
-		position: absolute;
-		left: 0;
-		right: 0;
-	}
-
-	.mctb-close{
-		position: absolute;
-		top: 0;
-		right: 12px;
-		color: #666;
-		opacity: 0.5;
-		filter: alpha(opacity=50);
-		cursor: pointer;
-		vertical-align: middle;
-	}
-
-	.mctb-close:hover {
-		opacity: 1;
-		filter: alpha(opacity=100);
-	}
-
-
 	/**
 	* Bar Sizes
 	*/
@@ -152,4 +101,56 @@ body {
 	&.mctb-big {
 		@include bar-size(6px);
 	}
+}
+
+.mctb-sticky {
+	position: fixed;
+}
+
+.mctb-position-bottom {
+	position: fixed;
+	bottom: 0;
+	top: auto;
+
+	/* bar element should be position absolute when in bottom position */
+	.mctb-bar {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+	}
+}
+
+.mctb-email {
+	max-width: 240px !important;
+}
+
+.mctb-button {
+	cursor: pointer;
+}
+
+input.mctb-email-confirm {
+	display: none !important;
+}
+
+.mctb-response {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.mctb-close{
+	position: absolute;
+	top: 0;
+	right: 12px;
+	color: #444444;
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+	cursor: pointer;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.mctb-close:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
 }

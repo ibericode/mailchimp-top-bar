@@ -79,6 +79,16 @@ add_filter( 'mctb_show_bar', function( $show ) {
 
 Have a look at the [Conditional Tags](https://codex.wordpress.org/Conditional_Tags) page for all accepted functions.
 
+= How to change the color of the toggle icon? =
+
+You can use the following CSS to change the appearance of the toggle icon.
+
+`
+#mailchimp-top-bar .mctb-close {
+	color: red;
+}
+`
+
 = I think I found a bug. What now? =
 
 Please report it on [GitHub issues](https://github.com/ibericode/mailchimp-top-bar/issues) if it's not in the list of known issues.
@@ -94,6 +104,17 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.1.1 - June 12, 2015 =
+
+**Fixes**
+
+- Fixes unclickable admin bar (or fixed navigation menu's).
+
+**Improvements**
+
+- Various improvements to bar CSS so it can be easily overridden.
+
 
 = 1.1 - June 10, 2015 =
 

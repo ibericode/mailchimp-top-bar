@@ -1,4 +1,5 @@
 (function() {
+	'use strict';
 
 	var bodyEl = document.body;
 	var $ = window.jQuery;
@@ -19,7 +20,10 @@
 		var visible = false;
 		var originalBodyPadding = 0,
 			barHeight = 0,
-			bodyCSS = {};
+			bodyPadding = 0;
+
+		var isBottomBar = ( config.position === 'bottom' );
+		var hasjQuery = ( typeof($) === "function" );
 
 		// Functions
 
@@ -34,12 +38,12 @@
 			barEl.style.display = 'block';
 			barEl.style.position = 'relative';
 			barHeight = barEl.clientHeight;
-			wrapperEl.style.height = barHeight + "px";
 			barEl.style.display = 'none';
 			barEl.style.position = origBarPosition;
 
 			// save original bodyPadding
-			if( config.position === 'bottom' ) {
+			if( isBottomBar ) {
+				wrapperEl.style.height = barHeight + "px";
 				originalBodyPadding = ( parseInt( bodyEl.style.paddingBottom )  || 0 );
 			} else {
 				originalBodyPadding = ( parseInt( bodyEl.style.paddingTop )  || 0 );
@@ -78,23 +82,19 @@
 			}
 
 			// use animation if jQuery is loaded
-			if( manual && typeof($) === "function" ){
+			if( manual && hasjQuery ){
 				$(barEl).slideDown(300);
 
 				// animate body padding
-				if( config.position === 'bottom' ) {
-					$(bodyEl).animate({
-						'padding-bottom': bodyPadding
-					});
+				if( isBottomBar ) {
+					$(bodyEl).animate({'padding-bottom': bodyPadding});
 				} else {
-					$(bodyEl).animate({
-						'padding-top': bodyPadding
-					});
+					$(bodyEl).animate({'padding-top': bodyPadding});
 				}
 			} else {
 				// Add bar height to <body> padding
 				barEl.style.display = 'block';
-				if( config.position === 'bottom' ) {
+				if( isBottomBar ) {
 					bodyEl.style.paddingBottom = bodyPadding;
 				} else {
 					bodyEl.style.paddingTop = bodyPadding;
@@ -121,18 +121,18 @@
 				createCookie( "mctb_bar_hidden", 1, config.cookieLength );
 			}
 
-			if( manual && typeof($) === "function" ){
+			if( manual && hasjQuery ){
 				$(barEl).slideUp(300);
 
 				// animate body padding
-				if( config.position === 'bottom' ) {
+				if(isBottomBar ) {
 					$(bodyEl).animate({ 'padding-bottom': originalBodyPadding + "px" });
 				} else {
 					$(bodyEl).animate({ 'padding-top': originalBodyPadding +"px" });
 				}
 			} else {
 				barEl.style.display = 'none';
-				if( config.position === 'bottom' ) {
+				if( isBottomBar ) {
 					document.body.style.paddingBottom = originalBodyPadding + "px";
 				} else {
 					document.body.style.paddingTop = originalBodyPadding + "px";

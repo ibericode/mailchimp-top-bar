@@ -53,7 +53,7 @@ class Options {
 			'list' => '',
 			'enabled' => 1,
 			'show_to_administrators' => 1,
-			'cookie_length' => 60,
+			'cookie_length' => 90,
 			'color_bar' => '#ffcc00',
 			'color_text' => '#222222',
 			'color_button' => '#222222',

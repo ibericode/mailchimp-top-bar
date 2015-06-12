@@ -221,7 +221,7 @@ class Bar {
 	 * @return string
 	 */
 	private function get_css_class() {
-		$classes = array();
+		$classes = array( 'mctb' );
 
 		// add class when bar is sticky
 		if( $this->options->get( 'sticky' ) ) {
