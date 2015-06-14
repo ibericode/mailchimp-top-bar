@@ -37,11 +37,12 @@ body {
 .mctb label {
   display: inline-block !important;
   vertical-align: middle !important;
-  width: auto !important;
+  width: auto;
 }
 .mctb form {
   text-align: center;
   margin: 0 !important;
+  padding: 0 !important;
 }
 .mctb label {
   margin: 0 6px 0 0 !important;
@@ -57,6 +58,16 @@ body {
   background: white;
   height: auto;
 }
+.mctb .mctb-email {
+  width: 100%;
+  max-width: 240px !important;
+}
+.mctb .mctb-button {
+  cursor: pointer;
+}
+.mctb .mctb-email-confirm {
+  display: none !important;
+}
 .mctb.mctb-small {
   font-size: 10px;
 }
@@ -68,7 +79,7 @@ body {
 }
 .mctb.mctb-small input,
 .mctb.mctb-small label {
-  padding: 4px 6px;
+  padding: 4px 6px !important;
 }
 .mctb.mctb-small label {
   font-size: 12px;
@@ -87,7 +98,7 @@ body {
 }
 .mctb.mctb-medium input,
 .mctb.mctb-medium label {
-  padding: 5px 7.5px;
+  padding: 5px 7.5px !important;
 }
 .mctb.mctb-medium label {
   font-size: 15px;
@@ -106,7 +117,7 @@ body {
 }
 .mctb.mctb-big input,
 .mctb.mctb-big label {
-  padding: 6px 9px;
+  padding: 6px 9px !important;
 }
 .mctb.mctb-big label {
   font-size: 18px;
@@ -129,19 +140,6 @@ body {
   width: 100%;
   position: absolute;
   bottom: 0;
-}
-
-.mctb-email {
-  width: 100%;
-  max-width: 240px !important;
-}
-
-.mctb-button {
-  cursor: pointer;
-}
-
-input.mctb-email-confirm {
-  display: none !important;
 }
 
 .mctb-response {
