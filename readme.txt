@@ -84,9 +84,7 @@ Have a look at the [Conditional Tags](https://codex.wordpress.org/Conditional_Ta
 You can use the following CSS to change the appearance of the toggle icon.
 
 `
-#mailchimp-top-bar .mctb-close {
-	color: red;
-}
+#mailchimp-top-bar .mctb-close { color: red; }
 `
 
 = I think I found a bug. What now? =

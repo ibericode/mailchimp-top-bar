@@ -21,7 +21,6 @@
 	}
 
 	.mctb-close {
-		top: ($base_size * 1.25);
 		font-size: $base_size * 4;
 	}
 }
@@ -77,10 +76,16 @@ body {
 		margin: 0 6px 0 0 !important;
 	}
 
-	input{
+	input,
+	input[type="text"],
+	input[type="email"],
+	input[type="submit"],
+	.mctb-email,
+	.mctb-button{
 		margin: 0 0 0 6px !important;
 		border: 1px solid white;
 		background: white;
+		height: auto;
 	}
 
 	/**
@@ -121,6 +126,7 @@ body {
 }
 
 .mctb-email {
+	width: 100%;
 	max-width: 240px !important;
 }
 

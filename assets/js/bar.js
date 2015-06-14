@@ -58,6 +58,7 @@
 			// Configure icon
 			iconEl.innerHTML = config.icons.show;
 			iconEl.style.display = 'block';
+			iconEl.style.lineHeight = barHeight + "px";
 			addEvent(iconEl, 'click', toggle);
 
 			// Show the bar straight away?
