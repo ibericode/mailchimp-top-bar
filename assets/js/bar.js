@@ -17,6 +17,7 @@
 		// Vars & State
 		var barEl = wrapperEl.querySelector('.mctb-bar');
 		var iconEl = wrapperEl.querySelector('.mctb-close');
+		var responseEl = wrapperEl.querySelector('.mctb-response');
 		var visible = false;
 		var originalBodyPadding = 0,
 			barHeight = 0,
@@ -41,6 +42,7 @@
 			barEl.style.display = 'none';
 			barEl.style.position = origBarPosition;
 
+
 			// save original bodyPadding
 			if( isBottomBar ) {
 				wrapperEl.style.height = barHeight + "px";
@@ -54,6 +56,11 @@
 
 			// fade response 3 seconds after showing bar
 			window.setTimeout(fadeResponse, 3000);
+
+			// fix response height
+			if( responseEl ) {
+				responseEl.style.lineHeight = barHeight + "px";
+			}
 
 			// Configure icon
 			iconEl.innerHTML = config.icons.show;
@@ -150,7 +157,6 @@
 		 * Fade out the response message
 		 */
 		function fadeResponse() {
-			var responseEl = wrapperEl.querySelector('.mctb-response');
 			responseEl && fadeOut(responseEl);
 		}
 
