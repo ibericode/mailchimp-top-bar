@@ -229,16 +229,22 @@ class Manager {
 	}
 
 	/**
+	 * Helper function to retrieve MailChimp lists through MailChimp for WordPress
+	 *
+	 * Will try v3.0+ first, then fallback to older versions.
+	 *
 	 * @return array
 	 */
 	protected function get_mailchimp_lists() {
+
+		if( method_exists( 'MC4WP_MailChimp_Tools', 'get_lists' ) ) {
+			return \MC4WP_MailChimp_Tools::get_lists();
+		}
+
+		/** @deprecated MailChimp for WordPress v3.0  */
 		if( class_exists( 'MC4WP_MailChimp' ) ) {
 			$mailchimp = new \MC4WP_MailChimp();
 			return $mailchimp->get_lists();
-		}
-
-		if( class_exists( 'MC4WP_MailChimp_Tools' ) ) {
-			return \MC4WP_MailChimp_Tools::get_lists();
 		}
 
 		return array();
