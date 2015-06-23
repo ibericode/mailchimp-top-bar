@@ -1,10 +1,10 @@
 === MailChimp Top Bar ===
-Contributors: ibericode, DvanKooten, iMazed, hchouhan
+Contributors: Ibericode, DvanKooten, iMazed, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
 Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,12 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.1.3 - June 23, 2015 =
+
+**Fixes**
+
+- Fixes fatal error when visiting settings page on some servers
 
 = 1.1.2 - June 18, 2015 =
 
