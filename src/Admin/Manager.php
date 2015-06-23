@@ -237,7 +237,7 @@ class Manager {
 	 */
 	protected function get_mailchimp_lists() {
 
-		if( method_exists( 'MC4WP_MailChimp_Tools', 'get_lists' ) ) {
+		if( class_exists( 'MC4WP_MailChimp_Tools' ) && method_exists( 'MC4WP_MailChimp_Tools', 'get_lists' ) ) {
 			return \MC4WP_MailChimp_Tools::get_lists();
 		}
 
