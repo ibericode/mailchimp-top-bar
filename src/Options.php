@@ -12,12 +12,12 @@ class Options {
 	/**
 	 * @var array Array of options, without inherited values
 	 */
-	private $options = array();
+	public $options = array();
 
 	/**
 	 * @var array Array of options with inherited values
 	 */
-	private $inherited_options = array();
+	public $inherited_options = array();
 
 	/**
 	 * Constructor

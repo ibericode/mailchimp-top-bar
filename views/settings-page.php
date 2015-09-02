@@ -8,9 +8,10 @@ defined( 'ABSPATH' ) or exit;
 	<h1>MailChimp Top Bar</h1>
 
 	<h2 class="nav-tab-wrapper" id="mctb-tabs">
-		<a class="nav-tab <?php if( $tab === 'settings' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=settings'); ?>"><?php _e( 'Bar Settings', 'mailchimp-for-wp' ); ?></a>
-		<a class="nav-tab <?php if( $tab === 'appearance' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=appearance'); ?>"><?php _e( 'Appearance', 'mailchimp-for-wp' ); ?></a>
-		<a class="nav-tab <?php if( $tab === 'messages' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=messages'); ?>"><?php _e( 'Messages', 'mailchimp-for-wp' ); ?></a>
+		<a class="nav-tab <?php if( $tab === 'settings' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=settings' ); ?>"><?php _e( 'Bar Settings', 'mailchimp-for-wp' ); ?></a>
+		<a class="nav-tab <?php if( $tab === 'appearance' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=appearance' ); ?>"><?php _e( 'Appearance', 'mailchimp-for-wp' ); ?></a>
+		<a class="nav-tab <?php if( $tab === 'messages' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=messages' ); ?>"><?php _e( 'Messages', 'mailchimp-for-wp' ); ?></a>
+		<a class="nav-tab <?php if( $tab === 'advanced' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=advanced' ); ?>"><?php _e( 'Advanced', 'mailchimp-for-wp' ); ?></a>
 	</h2>
 
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
@@ -261,6 +262,51 @@ defined( 'ABSPATH' ) or exit;
 					</td>
 				</tr>
 
+			</table>
+		</div>
+
+		<div class="tab <?php if( $tab === 'advanced' ) echo 'tab-active'; ?>" id="tab-advanced">
+			<h2><?php _e( 'Advanced', 'mailchimp-top-bar' ); ?></h2>
+			<p><?php printf( __( 'All these settings are optional and will by default inherit from <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?>.</p>
+
+			<table class="form-table">
+				<tr valign="top" class="double-optin-options">
+					<th scope="row">
+						<label>
+							<?php _e( 'Double opt-in?', 'mailchimp-for-wp' ); ?>
+						</label>
+					</th>
+					<td>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $opts->get( 'double_optin', false  ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+						</label>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin', false ), 0 ); ?> /> <?php _e( 'No' ); ?>
+						</label>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="" <?php checked( $opts->get( 'double_optin', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
+						</label>
+					</td>
+				</tr>
+
+				<tr valign="top" class="send-welcome-options" style="<?php if( $opts->get('double_optin') == 1 ) { echo 'display: none;'; } ?>">
+					<th scope="row">
+						<label>
+							<?php _e( 'Send Welcome Email?', 'mailchimp-for-wp' ); ?>
+						</label>
+					</th>
+					<td>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome', false  ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+						</label>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome', false  ), 0 ); ?> /> <?php _e( 'No' ); ?>
+						</label>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="" <?php checked( $opts->get( 'send_welcome', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
+						</label>
+					</td>
+				</tr>
 			</table>
 		</div>
 
