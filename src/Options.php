@@ -65,7 +65,10 @@ class Options {
 			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' ),
 			'redirect' => '',
 			'position' => 'top',
+
+			// options which should inherit if empty
 			'double_optin' => '',
+			'send_welcome' => '',
 			'text_subscribed' => '',
 			'text_error' => '',
 			'text_invalid_email' => '',
@@ -94,6 +97,7 @@ class Options {
 		$inheritance_keys = array(
 			'redirect',
 			'double_optin',
+			'send_welcome',
 			'text_subscribed',
 			'text_error',
 			'text_invalid_email',

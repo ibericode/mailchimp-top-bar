@@ -123,7 +123,7 @@ class Bar {
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
 		$mailchimp_list = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
 
-		$result = $api->subscribe( $mailchimp_list, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ) );
+		$result = $api->subscribe( $mailchimp_list, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), false, true, $this->options->get( 'send_welcome' ) );
 
 		do_action( 'mc4wp_subscribe', $email, $mailchimp_list, $merge_vars, ( $result === true ), 'form', 'top-bar' );
 
