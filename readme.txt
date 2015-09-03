@@ -122,7 +122,8 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 **Improvements**
 
-- The bar will now auto-dismiss after every successful sign-up
+- The bar will now auto-dismiss after every successful sign-up.
+- Placeholders will now work in Internet Explorer 7, 8 & 9 as well.
 
 **Additions**
 
