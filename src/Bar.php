@@ -276,9 +276,12 @@ class Bar {
 			<div class="mctb-bar" style="display: none">
 				<?php echo $this->get_response_message(); ?>
 				<form method="post">
+					<?php do_action( 'mctb_before_label' ); ?>
 					<label><?php echo $this->options->get( 'text_bar' ); ?></label>
+					<?php do_action( 'mctb_before_email_field' ); ?>
 					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get( 'text_email_placeholder' ) ); ?>" class="mctb-email"  />
 					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" class="mctb-email-confirm" />
+					<?php do_action( 'mctb_before_submit_button' ); ?>
 					<input type="submit" value="<?php echo esc_attr( $this->options->get('text_button') ); ?>" class="mctb-button" />
 					<input type="hidden" name="_mctb" value="1" />
 					<input type="hidden" name="_mctb_no_js" value="1" />
