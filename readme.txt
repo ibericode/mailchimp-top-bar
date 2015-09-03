@@ -1,10 +1,10 @@
 === MailChimp Top Bar ===
 Contributors: Ibericode, DvanKooten, iMazed, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
-Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,top bar,opt-in,sign-up,subscribe,conversion,call to action
+Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,sign-up bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 1.1.3
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,13 +12,13 @@ Adds a MailChimp opt-in form in a top bar to your WordPress site.
 
 == Description ==
 
-Adds a beautiful, customizable opt-in bar to the top of your WordPress site. This bar is guaranteed to get the attention of your visitor and
+Adds a beautiful, customizable sign-up bar to the top of your WordPress site. This bar is guaranteed to get the attention of your visitor and
 increase your MailChimp subscribers.
 
 > This plugin is an add-on for the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/).
 > To use it, you need at least **MailChimp for WordPress v2.2.3** or **MailChimp for WordPress Pro v2.5.5**.
 
-= MailChimp Top Bar, at a glance.. =
+= MailChimp Sign-Up Bar, at a glance.. =
 
 MailChimp Top Bar adds a simple yet beautiful and customizable opt-in bar to the top or bottom of your WordPress site.
 
@@ -87,6 +87,21 @@ You can use the following CSS to change the appearance of the toggle icon.
 #mailchimp-top-bar .mctb-close { color: red; }
 `
 
+= How to show a Name field in the bar? =
+
+You can use the following code snippet to show a "NAME" field in your bar.
+
+`
+add_action( 'mctb_before_submit_button', function() {
+    echo '<input type="text" name="NAME" placeholder="Your name" />';
+});
+
+add_filter( 'mctb_merge_vars', function( $vars ) {
+    $vars['NAME'] = ( isset( $_POST['NAME'] ) ) ? $_POST['NAME'] : '';
+    return $vars;
+});
+`
+
 = I think I found a bug. What now? =
 
 Please report it on [GitHub issues](https://github.com/ibericode/mailchimp-top-bar/issues) if it's not in the list of known issues.
@@ -102,6 +117,20 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.2 - September 3, 2015 =
+
+**Improvements**
+
+- The bar will now auto-dismiss after every successful sign-up
+
+**Additions**
+
+- Added options for double opt-in and sending MailChimp's "welcome email".
+- Added `mctb_before_label` action allowing you to add HTML before the label-element.
+- Added `mctb_before_email_field` action allowing you to add HTML before the email field.
+- Added `mctb_before_submit_button` action allowing you to add HTML before the submit button.
+- Added `mctb_form_action` filter allowing you to set a custom form action.
 
 = 1.1.3 - June 23, 2015 =
 
