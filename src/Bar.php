@@ -125,10 +125,14 @@ class Bar {
 
 		$result = $api->subscribe( $mailchimp_list, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), false, true, $this->options->get( 'send_welcome' ) );
 
+		// todo: set MailChimp for WP core cookie
 		do_action( 'mc4wp_subscribe', $email, $mailchimp_list, $merge_vars, ( $result === true ), 'form', 'top-bar' );
 
 		// return true if success..
 		if( $result ) {
+
+			// set cookie tracking list_id and time
+			setcookie( '_mctb', serialize( array( $mailchimp_list => time() ) ), time() + ( 365 * WEEK_IN_SECONDS ), '/' );
 
 			// should we redirect
 			if( '' !== $this->options->get( 'redirect' ) ) {
