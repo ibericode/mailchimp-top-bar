@@ -217,6 +217,11 @@ class Bar {
 		$data = apply_filters( 'mctb_bar_config', $data );
 
 		wp_localize_script( 'mailchimp-top-bar', 'mctb', $data );
+
+		// enqueue placeholders.js from MailChimp for WordPress core plugin
+		if( isset( $GLOBALS['is_IE'] ) && $GLOBALS['is_IE'] ) {
+			wp_enqueue_script( 'mc4wp-placeholders' );
+		}
 	}
 
 	/**
