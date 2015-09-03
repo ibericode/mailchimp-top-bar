@@ -9,8 +9,20 @@
 	var $enableBar = $( document.querySelectorAll( 'input[name="mailchimp_top_bar[enabled]"]' ) );
 	var msgRequiresFields = document.getElementById('message-list-requires-fields');
 	var msgBarIsDisabled = document.getElementById('message-bar-is-disabled');
+	var $doubleOptinRow = $('.double-optin-options');
+	var $sendWelcomeRow = $('.send-welcome-options');
+
+	/**
+	 * Only show sticky bar option if position = top (bottom is always sticky)
+	 */
 	$( document.getElementById('select-bar-position' )).change(function() {
 		$('.sticky-bar-options').toggle($(this).prop('checked'));
+	});
+
+	// toggle "Send Welcome Email" row based on double opt-in value
+	$doubleOptinRow.find(':input').change(function() {
+		var doubleOptinEnabled = $(this).val() == 1 || $(this).data('inherited-value') == 1;
+		$sendWelcomeRow.toggle(!doubleOptinEnabled);
 	});
 
 	/*

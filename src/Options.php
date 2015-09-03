@@ -20,6 +20,11 @@ class Options {
 	public $inherited_options = array();
 
 	/**
+	 * @var array
+	 */
+	public $parent_options = array();
+
+	/**
 	 * Constructor
 	 * @param string $options_key
 	 */
@@ -90,7 +95,7 @@ class Options {
 	 */
 	private function load_inherited_options() {
 
-		$parent_options = mc4wp_get_options( 'form' );
+		$this->parent_options = mc4wp_get_options( 'form' );
 		$inherited_options = $this->options;
 
 		// specify keys which should inherit if empty
@@ -107,7 +112,7 @@ class Options {
 		// Use parent value if option value is empty
 		foreach( $inheritance_keys as $key ) {
 			if( $inherited_options[ $key ] === '' ) {
-				$inherited_options[ $key ] = $parent_options[ $key ];
+				$inherited_options[ $key ] = $this->parent_options[ $key ];
 			}
 		}
 

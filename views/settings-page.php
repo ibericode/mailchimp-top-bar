@@ -284,7 +284,7 @@ defined( 'ABSPATH' ) or exit;
 							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin', false ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="" <?php checked( $opts->get( 'double_optin', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="" data-inherited-value="<?php echo esc_attr( $opts->parent_options['double_optin'] ); ?>"  <?php checked( $opts->get( 'double_optin', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
 						</label>
 					</td>
 				</tr>
@@ -303,7 +303,7 @@ defined( 'ABSPATH' ) or exit;
 							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome', false  ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="" <?php checked( $opts->get( 'send_welcome', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="" data-inherited-value="<?php echo esc_attr( $opts->get( 'send_welcome' ) ); ?>" <?php checked( $opts->get( 'send_welcome', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
 						</label>
 					</td>
 				</tr>
