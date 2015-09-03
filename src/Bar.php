@@ -201,7 +201,9 @@ class Bar {
 				'hide' => ( $bottom ) ? '&#x25BC;' : '&#x25B2;',
 				'show' =>  ( $bottom ) ? '&#x25B2;' : '&#x25BC;'
 			),
-			'position' => $this->options->get( 'position' )
+			'position' => $this->options->get( 'position' ),
+			'is_submitted' => $this->submitted,
+			'is_success' => $this->success
 		);
 
 		/**

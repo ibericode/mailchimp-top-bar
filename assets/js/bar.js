@@ -54,8 +54,8 @@
 			// get real bar hegiht (if it were shown)
 			bodyPadding = ( originalBodyPadding + barHeight ) + "px";
 
-			// fade response 3 seconds after showing bar
-			window.setTimeout(fadeResponse, 3000);
+			// fade response 4 seconds after showing bar
+			window.setTimeout(fadeResponse, 4000);
 
 			// fix response height
 			if( responseEl ) {
@@ -157,7 +157,15 @@
 		 * Fade out the response message
 		 */
 		function fadeResponse() {
-			responseEl && fadeOut(responseEl);
+			if( responseEl ) {
+				// fade out element
+				fadeOut(responseEl);
+
+				// auto-dismiss bar if we're good!
+				if( config.is_submitted && config.is_success ) {
+					window.setTimeout( function() { hide( true );}, 1000 );
+				}
+			}
 		}
 
 		/**
