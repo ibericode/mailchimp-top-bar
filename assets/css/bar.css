@@ -1,13 +1,4 @@
 #mailchimp-top-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  margin: 0;
-  z-index: 999999;
-  background: transparent;
-  text-align: center;
   /**
   * Bar Sizes
   */
@@ -140,6 +131,18 @@
   #mailchimp-top-bar .mctb-email {
     margin: 6px 0 !important;
   }
+}
+
+.mctb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  z-index: 999999;
+  background: transparent;
+  text-align: center;
 }
 
 .mctb-sticky {
