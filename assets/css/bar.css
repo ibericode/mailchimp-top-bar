@@ -125,8 +125,8 @@
   }
   #mailchimp-top-bar .mctb-close {
     line-height: initial !important;
-    top: 6px;
     right: 6px;
+    top: 6px;
   }
   #mailchimp-top-bar .mctb-email {
     margin: 6px 0 !important;
@@ -159,6 +159,13 @@
   width: 100%;
   position: absolute;
   bottom: 0;
+}
+@media (max-width: 580px) {
+  .mctb-position-bottom .mctb-close {
+    top: auto !important;
+    bottom: 6px;
+    height: auto !important;
+  }
 }
 
 .mctb-response {

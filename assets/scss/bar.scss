@@ -122,8 +122,8 @@ $mobile_max: 580px;
 
 		.mctb-close{
 			line-height: initial !important;
-			top: 6px;
 			right: 6px;
+			top: 6px;
 		}
 
 		.mctb-email {
@@ -157,6 +157,14 @@ $mobile_max: 580px;
 		width: 100%;
 		position: absolute;
 		bottom: 0;
+	}
+
+	@media( max-width: $mobile_max ) {
+		.mctb-close {
+			top: auto !important;
+			bottom: 6px;
+			height: auto !important;
+		}
 	}
 }
 
