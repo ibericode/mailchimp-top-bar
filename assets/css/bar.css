@@ -1,4 +1,4 @@
-.mctb {
+#mailchimp-top-bar {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,12 +12,12 @@
   * Bar Sizes
   */
 }
-.mctb form,
-.mctb input,
-.mctb label {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
+#mailchimp-top-bar form,
+#mailchimp-top-bar input,
+#mailchimp-top-bar label {
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   vertical-align: middle;
   margin: 0;
   padding: 0;
@@ -29,100 +29,117 @@
   line-height: initial;
   float: none;
 }
-.mctb input,
-.mctb label {
+#mailchimp-top-bar input,
+#mailchimp-top-bar label {
   display: inline-block !important;
   vertical-align: middle !important;
   width: auto;
 }
-.mctb form {
+#mailchimp-top-bar form {
   text-align: center;
   margin: 0 !important;
   padding: 0 !important;
 }
-.mctb label {
-  margin: 0 6px 0 0 !important;
+#mailchimp-top-bar label {
+  margin: 0 6px 0 0;
 }
-.mctb input,
-.mctb input[type="text"],
-.mctb input[type="email"],
-.mctb input[type="submit"],
-.mctb .mctb-email,
-.mctb .mctb-button {
-  margin: 0 0 0 6px !important;
+#mailchimp-top-bar input,
+#mailchimp-top-bar input[type="text"],
+#mailchimp-top-bar input[type="email"],
+#mailchimp-top-bar .mctb-email,
+#mailchimp-top-bar .mctb-button {
+  margin: 0 0 0 6px;
   border: 1px solid white;
   background: white;
   height: auto;
 }
-.mctb .mctb-email {
+#mailchimp-top-bar .mctb-email {
   width: 100%;
-  max-width: 240px !important;
+  max-width: 240px;
 }
-.mctb .mctb-button {
+#mailchimp-top-bar .mctb-button {
+  margin-left: 0;
   cursor: pointer;
 }
-.mctb .mctb-email-confirm {
+#mailchimp-top-bar .mctb-email-confirm {
   display: none !important;
 }
-.mctb.mctb-small {
+#mailchimp-top-bar.mctb-small {
   font-size: 10px;
 }
-.mctb.mctb-small .mctb-bar {
+#mailchimp-top-bar.mctb-small .mctb-bar {
   padding: 5px 6px;
 }
-.mctb.mctb-small .mctb-button {
+#mailchimp-top-bar.mctb-small .mctb-button {
   padding: 4px 12px;
 }
-.mctb.mctb-small input,
-.mctb.mctb-small .mctb-email,
-.mctb.mctb-small .mctb-label {
+#mailchimp-top-bar.mctb-small input,
+#mailchimp-top-bar.mctb-small .mctb-email,
+#mailchimp-top-bar.mctb-small .mctb-label {
   padding: 4px 6px !important;
 }
-.mctb.mctb-small label {
+#mailchimp-top-bar.mctb-small label,
+#mailchimp-top-bar.mctb-small input {
   font-size: 12px;
 }
-.mctb.mctb-small .mctb-close {
+#mailchimp-top-bar.mctb-small .mctb-close {
   font-size: 16px;
 }
-.mctb.mctb-medium {
+#mailchimp-top-bar.mctb-medium {
   font-size: 12.5px;
 }
-.mctb.mctb-medium .mctb-bar {
+#mailchimp-top-bar.mctb-medium .mctb-bar {
   padding: 6.25px 7.5px;
 }
-.mctb.mctb-medium .mctb-button {
+#mailchimp-top-bar.mctb-medium .mctb-button {
   padding: 5px 15px;
 }
-.mctb.mctb-medium input,
-.mctb.mctb-medium .mctb-email,
-.mctb.mctb-medium .mctb-label {
+#mailchimp-top-bar.mctb-medium input,
+#mailchimp-top-bar.mctb-medium .mctb-email,
+#mailchimp-top-bar.mctb-medium .mctb-label {
   padding: 5px 7.5px !important;
 }
-.mctb.mctb-medium label {
+#mailchimp-top-bar.mctb-medium label,
+#mailchimp-top-bar.mctb-medium input {
   font-size: 15px;
 }
-.mctb.mctb-medium .mctb-close {
+#mailchimp-top-bar.mctb-medium .mctb-close {
   font-size: 20px;
 }
-.mctb.mctb-big {
+#mailchimp-top-bar.mctb-big {
   font-size: 15px;
 }
-.mctb.mctb-big .mctb-bar {
+#mailchimp-top-bar.mctb-big .mctb-bar {
   padding: 7.5px 9px;
 }
-.mctb.mctb-big .mctb-button {
+#mailchimp-top-bar.mctb-big .mctb-button {
   padding: 6px 18px;
 }
-.mctb.mctb-big input,
-.mctb.mctb-big .mctb-email,
-.mctb.mctb-big .mctb-label {
+#mailchimp-top-bar.mctb-big input,
+#mailchimp-top-bar.mctb-big .mctb-email,
+#mailchimp-top-bar.mctb-big .mctb-label {
   padding: 6px 9px !important;
 }
-.mctb.mctb-big label {
+#mailchimp-top-bar.mctb-big label,
+#mailchimp-top-bar.mctb-big input {
   font-size: 18px;
 }
-.mctb.mctb-big .mctb-close {
+#mailchimp-top-bar.mctb-big .mctb-close {
   font-size: 24px;
+}
+@media (max-width: 580px) {
+  #mailchimp-top-bar input, #mailchimp-top-bar label {
+    width: 100%;
+    max-width: 100% !important;
+  }
+  #mailchimp-top-bar .mctb-close {
+    line-height: initial !important;
+    top: 6px;
+    right: 6px;
+  }
+  #mailchimp-top-bar .mctb-email {
+    margin: 6px 0 !important;
+  }
 }
 
 .mctb-sticky {

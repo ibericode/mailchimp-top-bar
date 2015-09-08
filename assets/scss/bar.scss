@@ -1,8 +1,11 @@
+$mobile_max: 580px;
+
 // Calculates paddings * heights for the various bar sizes
 @mixin bar-size( $base_size ) {
 
 	font-size: $base_size * 2.5;
 
+	// right side padding of 30px for close icon
 	.mctb-bar {
 		padding: ($base_size * 1.25) ($base_size * 1.5);
 	}
@@ -17,7 +20,8 @@
 		padding: $base_size ($base_size * 1.5) !important;
 	}
 
-	label {
+	label,
+	input {
 		font-size: $base_size * 3;
 	}
 
@@ -26,7 +30,7 @@
 	}
 }
 
-.mctb {
+#mailchimp-top-bar {
 
 	position: absolute;
 	top: 0;
@@ -37,13 +41,14 @@
 	background: transparent;
 	text-align: center;
 
+
 	// Reset Form elements, many themes apply basic styling
 	form,
 	input,
 	label {
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
 		vertical-align: middle;
 		margin: 0;
 		padding: 0;
@@ -55,7 +60,8 @@
 		line-height: initial;
 		float: none;
 	}
-	
+
+	// Make label & field appear inline
 	input,
 	label {
 		display: inline-block !important;
@@ -69,18 +75,16 @@
 		padding: 0 !important;
 	}
 
-	// Make label & field appear inline
 	label {
-		margin: 0 6px 0 0 !important;
+		margin: 0 6px 0 0;
 	}
 
 	input,
 	input[type="text"],
 	input[type="email"],
-	input[type="submit"],
 	.mctb-email,
 	.mctb-button{
-		margin: 0 0 0 6px !important;
+		margin: 0 0 0 6px;
 		border: 1px solid white;
 		background: white;
 		height: auto;
@@ -88,10 +92,11 @@
 
 	.mctb-email {
 		width: 100%;
-		max-width: 240px !important;
+		max-width: 240px;
 	}
 
 	.mctb-button {
+		margin-left: 0;
 		cursor: pointer;
 	}
 
@@ -116,6 +121,23 @@
 	// Big Bar
 	&.mctb-big {
 		@include bar-size(6px);
+	}
+
+	@media( max-width: $mobile_max ) {
+		input, label {
+			width: 100%;
+			max-width: 100% !important;
+		}
+
+		.mctb-close{
+			line-height: initial !important;
+			top: 6px;
+			right: 6px;
+		}
+
+		.mctb-email {
+			margin: 6px 0 !important;
+		}
 	}
 }
 
