@@ -30,6 +30,7 @@ class Manager {
 	public function add_hooks() {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_action( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
+		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
 	}
 
 	/**
@@ -248,6 +249,22 @@ class Manager {
 		}
 
 		return array();
+	}
+
+	/**
+	 * Ask for a plugin review in the WP Admin footer, if this is one of the plugin pages.
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	public function footer_text( $text ) {
+
+		if( ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'mailchimp-for-wp-top-bar' ) === 0 ) ) {
+			$text = sprintf( 'If you enjoy using <strong>MailChimp Top Bar</strong>, please leave us a <a href="%s" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!', 'https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform' );
+		}
+
+		return $text;
 	}
 
 
