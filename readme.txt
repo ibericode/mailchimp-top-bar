@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp,form,newsletter,mailchimp form,mailchimp sign-up,email,sign-up bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,17 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.2.1 - September 8, 2015 =
+
+**Fixes**
+
+- Response message was not showing for some themes.
+
+**Improvements**
+
+- Better mobile responsiveness
+
 
 = 1.2 - September 3, 2015 =
 
@@ -269,4 +280,4 @@ Initial release
 == Upgrade Notice ==
 
 = 1.0.8 =
-Compatibility update for the latest MailChimp for WordPress release.
+Better mobile responsiveness & fixes issue where response was not showing for some themes.
