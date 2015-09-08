@@ -25,6 +25,11 @@ class Bar {
 	private $submitted = false;
 
 	/**
+	 * @var Tracker
+	 */
+	protected $tracker;
+
+	/**
 	 * Constructor
 	 *
 	 * @param Options $options
@@ -53,6 +58,8 @@ class Bar {
 	 * @return bool
 	 */
 	public function init() {
+
+		$this->tracker = new Tracker( 365 * DAY_IN_SECONDS );
 
 		if( ! $this->should_show_bar() ) {
 			return false;
@@ -131,8 +138,9 @@ class Bar {
 		// return true if success..
 		if( $result ) {
 
-			// set cookie tracking list_id and time
-			setcookie( '_mctb', serialize( array( $mailchimp_list => time() ) ), time() + ( 365 * WEEK_IN_SECONDS ), '/' );
+			// track sign-up attempt
+			$this->tracker->track( $mailchimp_list );
+			$this->tracker->save();
 
 			// should we redirect
 			if( '' !== $this->options->get( 'redirect' ) ) {
