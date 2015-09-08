@@ -11,4 +11,5 @@ return array(
     'MailChimp\\TopBar\\Bar' => $baseDir . '/src/Bar.php',
     'MailChimp\\TopBar\\DependencyCheck' => $baseDir . '/src/DependencyCheck.php',
     'MailChimp\\TopBar\\Options' => $baseDir . '/src/Options.php',
+    'MailChimp\\TopBar\\Tracker' => $baseDir . '/src/Tracker.php',
 );
