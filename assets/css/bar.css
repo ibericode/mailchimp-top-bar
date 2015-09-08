@@ -74,7 +74,8 @@
   padding: 4px 12px;
 }
 .mctb.mctb-small input,
-.mctb.mctb-small label {
+.mctb.mctb-small .mctb-email,
+.mctb.mctb-small .mctb-label {
   padding: 4px 6px !important;
 }
 .mctb.mctb-small label {
@@ -93,7 +94,8 @@
   padding: 5px 15px;
 }
 .mctb.mctb-medium input,
-.mctb.mctb-medium label {
+.mctb.mctb-medium .mctb-email,
+.mctb.mctb-medium .mctb-label {
   padding: 5px 7.5px !important;
 }
 .mctb.mctb-medium label {
@@ -112,7 +114,8 @@
   padding: 6px 18px;
 }
 .mctb.mctb-big input,
-.mctb.mctb-big label {
+.mctb.mctb-big .mctb-email,
+.mctb.mctb-big .mctb-label {
   padding: 6px 9px !important;
 }
 .mctb.mctb-big label {
@@ -145,6 +148,11 @@
   top: 0;
   bottom: 0;
   z-index: 100;
+}
+.mctb-response label {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: inherit;
 }
 
 .mctb-close {

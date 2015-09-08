@@ -12,7 +12,8 @@
 	}
 
 	input,
-	label {
+	.mctb-email,
+	.mctb-label {
 		padding: $base_size ($base_size * 1.5) !important;
 	}
 
@@ -142,6 +143,12 @@
 	top: 0;
 	bottom: 0;
 	z-index: 100;
+
+	label {
+		padding: 0 !important;
+		margin: 0 !important;
+		line-height: inherit;
+	}
 }
 
 .mctb-close{

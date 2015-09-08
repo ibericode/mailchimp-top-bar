@@ -290,7 +290,7 @@ class Bar {
 				<?php echo $this->get_response_message(); ?>
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', $form_action ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
-					<label><?php echo $this->options->get( 'text_bar' ); ?></label>
+					<label class="mctb-label"><?php echo $this->options->get( 'text_bar' ); ?></label>
 					<?php do_action( 'mctb_before_email_field' ); ?>
 					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get( 'text_email_placeholder' ) ); ?>" class="mctb-email"  />
 					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" class="mctb-email-confirm" />
@@ -322,7 +322,7 @@ class Bar {
 			$message = $this->options->get('text_error');
 		}
 
-		return sprintf( '<div class="mctb-response"><label>%s</label></div>', $message );
+		return sprintf( '<div class="mctb-response"><label class="mctb-response-label">%s</label></div>', $message );
 	}
 
 	/**
