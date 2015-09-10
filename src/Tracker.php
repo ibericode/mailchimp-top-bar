@@ -36,18 +36,29 @@ class Tracker {
 	 */
 	public function __construct( $expires = 7889231 ) {
 		$this->expires = $expires;
+		$this->data = $this->parse_data();
+	}
 
-		if( isset( $_COOKIE[ self::COOKIE_ID ] ) ) {
-			$this->data = unserialize( $_COOKIE[ self::COOKIE_ID ] );
+	/**
+	 * @return array
+	 */
+	public function parse_data() {
+
+		if( ! isset( $_COOKIE[ self::COOKIE_ID ] ) ) {
+			return array();
 		}
+
+		$cookie_data = stripslashes( $_COOKIE[ self::COOKIE_ID ] );
+
+		return json_decode( $cookie_data, true );
 	}
 
 	/**
 	 * @param int $expiration_time Time of expiration.
 	 * @return bool True if expired, false otherwise or on failure.
 	 */
-	public function has_expired( $expiration_time ) {
-		return ! is_time( $expiration_time ) || ( $expiration_time + $this->expires ) <= time();
+	public function has_expired( $time ) {
+		return ( $time + $this->expires ) <= time();
 	}
 
 	/**
@@ -70,8 +81,8 @@ class Tracker {
 	 * Clean tracking data (removes expired items)
 	 */
 	public function clean() {
-		foreach( $this->data as $list_id => $expires ) {
-			if( $this->has_expired( $expires ) ) {
+		foreach( $this->data as $list_id => $time ) {
+			if( $this->has_expired( $time ) ) {
 				unset( $this->data[ $list_id ] );
 				$this->dirty = true;
 			}
@@ -85,7 +96,7 @@ class Tracker {
 		$this->clean();
 
 		if( $this->dirty ) {
-			setcookie( self::COOKIE_ID, serialize( $this->data ), time() + $this->expires, '/' );
+			setcookie( self::COOKIE_ID, json_encode( $this->data ), time() + $this->expires, '/' );
 		}
 	}
 }
