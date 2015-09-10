@@ -301,7 +301,7 @@ class Bar {
 					<label class="mctb-label"><?php echo $this->options->get( 'text_bar' ); ?></label>
 					<?php do_action( 'mctb_before_email_field' ); ?>
 					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get( 'text_email_placeholder' ) ); ?>" class="mctb-email"  />
-					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" class="mctb-email-confirm" />
+					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off" tabindex="-1" class="mctb-email-confirm" />
 					<?php do_action( 'mctb_before_submit_button' ); ?>
 					<input type="submit" value="<?php echo esc_attr( $this->options->get('text_button') ); ?>" class="mctb-button" />
 					<input type="hidden" name="_mctb" value="1" />
