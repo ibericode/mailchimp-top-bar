@@ -67,8 +67,24 @@ class Options {
 	 * @return array
 	 */
 	private function load_options() {
+		$defaults = $this->get_defaults();
 		$options = (array) get_option( $this->options_key, array() );
-		$options = array_merge( $this->get_defaults(), $options );
+		$options = array_merge( $defaults, $options );
+
+		// for BC with MailChimp Top Bar v1.2.3, always fill text option keys
+		$text_keys = array(
+			'text_subscribed',
+			'text_error',
+			'text_invalid_email',
+			'text_already_subscribed'
+		);
+
+		foreach( $text_keys as $text_key ) {
+			if( empty( $options[ $text_key ] ) && ! empty( $defaults[ $text_key ] ) ) {
+				$options[ $text_key ] = $defaults[ $text_key ];
+			}
+		}
+
 		return $options;
 	}
 
