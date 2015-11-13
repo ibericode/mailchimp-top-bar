@@ -2,19 +2,12 @@
 
 namespace MailChimp\TopBar;
 
-// Prevent direct file access
-if ( ! defined( 'ABSPATH' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit;
-}
-
-final class Plugin {
+class Plugin {
 
 	/**
 	 * @const VERSION
 	 */
-	const VERSION = '1.2.2';
+	const VERSION = MAILCHIMP_TOP_BAR_VERSION;
 
 	/**
 	 * @const FILE
@@ -24,7 +17,7 @@ final class Plugin {
 	/**
 	 * @const DIR
 	 */
-	const DIR = __DIR__;
+	const DIR = MAILCHIMP_TOP_BAR_DIR;
 
 	/**
 	 * @const OPTION_NAME Option name
@@ -54,28 +47,11 @@ final class Plugin {
 	}
 
 	/**
-	 * Constructor
-	 */
-	private function __construct() {
-
-		require __DIR__ . '/vendor/autoload.php';
-
-		// Load plugin files on a later hook
-		add_action( 'plugins_loaded', array( $this, 'load' ), 30 );
-	}
-
-	/**
 	 * Let's go...
 	 *
 	 * Runs at `plugins_loaded` priority 30.
 	 */
-	public function load() {
-
-		// check dependencies and only continue if installed
-		$dependencyCheck = new DependencyCheck();
-		if( ! $dependencyCheck->dependencies_installed ) {
-			return false;
-		}
+	public function init() {
 
 		// load plugin options
 		$this->options = $this->load_options();
@@ -116,5 +92,3 @@ final class Plugin {
 	}
 
 }
-
-$GLOBALS['MailChimp_Top_Bar'] = Plugin::instance();

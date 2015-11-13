@@ -9,7 +9,7 @@ return array(
     'MailChimp\\TopBar\\Admin\\Manager' => $baseDir . '/src/Admin/Manager.php',
     'MailChimp\\TopBar\\Admin\\Upgrader' => $baseDir . '/src/Admin/Upgrader.php',
     'MailChimp\\TopBar\\Bar' => $baseDir . '/src/Bar.php',
-    'MailChimp\\TopBar\\DependencyCheck' => $baseDir . '/src/DependencyCheck.php',
     'MailChimp\\TopBar\\Options' => $baseDir . '/src/Options.php',
+    'MailChimp\\TopBar\\Plugin' => $baseDir . '/src/Plugin.php',
     'MailChimp\\TopBar\\Tracker' => $baseDir . '/src/Tracker.php',
 );

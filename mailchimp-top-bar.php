@@ -3,7 +3,7 @@
 Plugin Name: MailChimp for WordPress - Top Bar
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page
 Description: Adds an opt-in bar to the top of your site.
-Version: 1.2.2
+Version: 1.2.3
 Author: ibericode
 Author URI: https://ibericode.com/
 Text Domain: mailchimp-top-bar
@@ -34,12 +34,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// define constant with path to main plugin file
-define( 'MAILCHIMP_TOP_BAR_FILE', __FILE__ );
 
-// Check if PHP is at the minimum required version
-if( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
-	require_once dirname( __FILE__ ) . '/plugin.php';
-} else {
-	require_once dirname( __FILE__ ) . '/php-backwards-compatibility.php';
+/**
+ * Loads the MailChimp Top Bar plugin
+ *
+ * @return bool
+ */
+function load_mailchimp_top_bar() {
+	global $mailchimp_top_bar;
+
+	// load autoloader
+	require __DIR__ . '/vendor/autoload.php';
+
+	// check deps
+	$ready = include __DIR__ . '/dependencies.php';
+	if( ! $ready ) {
+		return false;
+	}
+
+	define( 'MAILCHIMP_TOP_BAR_FILE', __FILE__ );
+	define( 'MAILCHIMP_TOP_BAR_DIR', __DIR__ );
+	define( 'MAILCHIMP_TOP_BAR_VERSION', '1.2.3' );
+
+	// create instance
+	$classname = 'MailChimp\\TopBar\\Plugin';
+	$mailchimp_top_bar = $classname::instance();
+	$mailchimp_top_bar->init();
+	return true;
 }
+
+if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
+	require_once dirname( __FILE__ ) . '/php-backwards-compatibility.php';
+} else {
+	add_action( 'plugins_loaded', 'load_mailchimp_top_bar', 30 );
+}
+
