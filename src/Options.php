@@ -7,22 +7,12 @@ class Options {
 	/**
 	 * @var string
 	 */
-	private $options_key = '';
+	protected $options_key = '';
 
 	/**
 	 * @var array Array of options, without inherited values
 	 */
-	public $options = array();
-
-	/**
-	 * @var array Array of options with inherited values
-	 */
-	public $inherited_options = array();
-
-	/**
-	 * @var array
-	 */
-	public $parent_options = array();
+	protected $options = array();
 
 	/**
 	 * Constructor
@@ -31,23 +21,17 @@ class Options {
 	public function __construct( $options_key ) {
 		$this->options_key = $options_key;
 		$this->options = $this->load_options();
-		$this->inherited_options = $this->load_inherited_options();
 	}
 
 	/**
 	 * Get an option value
 	 *
 	 * @param      $key
-	 * @param bool $inherit
 	 *
 	 * @return mixed
 	 */
-	public function get( $key, $inherit = true ) {
-		if( $inherit ) {
-			return $this->inherited_options[ $key ];
-		} else {
-			return $this->options[ $key ];
-		}
+	public function get( $key ) {
+		return $this->options[ $key ];
 	}
 
 	/**
@@ -70,14 +54,12 @@ class Options {
 			'text_button' => __( 'Subscribe', 'mailchimp-top-bar' ),
 			'redirect' => '',
 			'position' => 'top',
-
-			// options which should inherit if empty
-			'double_optin' => '',
-			'send_welcome' => '',
-			'text_subscribed' => '',
-			'text_error' => '',
-			'text_invalid_email' => '',
-			'text_already_subscribed' => '',
+			'double_optin' => 1,
+			'send_welcome' => 0,
+			'text_subscribed' => __( "Thanks, you're in! Please check your email inbox for a confirmation.", 'mailchimp-top-bar' ),
+			'text_error' => __( "Oops. Something went wrong.", 'mailchimp-top-bar' ),
+			'text_invalid_email' => __( 'That email seems to be invalid.', 'mailchimp-top-bar' ),
+			'text_already_subscribed' => __( "You are already subscribed. Thank you!", 'mailchimp-top-bar' ),
 		);
 	}
 
@@ -89,36 +71,5 @@ class Options {
 		$options = array_merge( $this->get_defaults(), $options );
 		return $options;
 	}
-
-	/**
-	 * @return array
-	 */
-	private function load_inherited_options() {
-
-		$this->parent_options = mc4wp_get_options( 'form' );
-		$inherited_options = $this->options;
-
-		// specify keys which should inherit if empty
-		$inheritance_keys = array(
-			'redirect',
-			'double_optin',
-			'send_welcome',
-			'text_subscribed',
-			'text_error',
-			'text_invalid_email',
-			'text_already_subscribed',
-		);
-
-		// Use parent value if option value is empty
-		foreach( $inheritance_keys as $key ) {
-			if( $inherited_options[ $key ] === '' ) {
-				$inherited_options[ $key ] = $this->parent_options[ $key ];
-			}
-		}
-
-		return $inherited_options;
-	}
-
-
 
 }

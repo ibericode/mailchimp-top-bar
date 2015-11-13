@@ -66,6 +66,7 @@
 
 
 	// Tabs
+	// todo inherit from core
 	(function() {
 
 		var $tabs = $context.find('.tab');

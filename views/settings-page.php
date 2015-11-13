@@ -225,24 +225,23 @@ defined( 'ABSPATH' ) or exit;
 		<div class="tab <?php if( $tab === 'messages' ) echo 'tab-active'; ?>" id="tab-messages">
 
 			<h2><?php _e( 'Messages', 'mailchimp-top-bar' ); ?></h2>
-			<p><?php printf( __( 'All these settings are optional and will by default inherit from <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?>.</p>
 
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row"><label><?php _e( 'Success', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_subscribed', false ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label><?php _e( 'Invalid email address', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_invalid_email'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_invalid_email', false ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_invalid_email'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label><?php _e( 'Already subscribed', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_already_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_already_subscribed', false ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_already_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><label><?php _e( 'Other errors' ,'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_error'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_error', false ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_error'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>" /></td>
 				</tr>
 				<tr>
 					<th></th>
@@ -257,7 +256,7 @@ defined( 'ABSPATH' ) or exit;
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get( 'redirect' ) ); ?>" value="<?php echo esc_url( $opts->get( 'redirect', false ) ); ?>" class="widefat" />
+						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get( 'redirect' ) ); ?>" value="<?php echo esc_url( $opts->get( 'redirect' ) ); ?>" class="widefat" />
 						<p class="help"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
 					</td>
 				</tr>
@@ -278,13 +277,10 @@ defined( 'ABSPATH' ) or exit;
 					</th>
 					<td>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $opts->get( 'double_optin', false  ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $opts->get( 'double_optin' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
 						</label>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin', false ), 0 ); ?> /> <?php _e( 'No' ); ?>
-						</label>
-						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="" data-inherited-value="<?php echo esc_attr( $opts->parent_options['double_optin'] ); ?>"  <?php checked( $opts->get( 'double_optin', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 					</td>
 				</tr>
@@ -297,13 +293,10 @@ defined( 'ABSPATH' ) or exit;
 					</th>
 					<td>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome', false  ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
 						</label>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome', false  ), 0 ); ?> /> <?php _e( 'No' ); ?>
-						</label>
-						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="" data-inherited-value="<?php echo esc_attr( $opts->get( 'send_welcome' ) ); ?>" <?php checked( $opts->get( 'send_welcome', false  ), '' ); ?> /> <?php _e( 'Inherit' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 					</td>
 				</tr>
