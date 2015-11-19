@@ -20,6 +20,7 @@
 	});
 
 	// toggle "Send Welcome Email" row based on double opt-in value
+	// todo: use data-showif from core plugin
 	$doubleOptinRow.find(':input').change(function() {
 		var doubleOptinEnabled = $(this).val() == 1 || $(this).data('inherited-value') == 1;
 		$sendWelcomeRow.toggle(!doubleOptinEnabled);
@@ -66,8 +67,9 @@
 
 
 	// Tabs
-	// todo inherit from core
 	(function() {
+		// use core tab functionality
+		if(window.mc4wp && window.mc4wp.tabs) { return; }
 
 		var $tabs = $context.find('.tab');
 		var $tabNav = $context.find('.nav-tab');
@@ -89,7 +91,7 @@
 
 			// show target tab
 			var targetId = "tab-" + urlParams.tab;
-			document.getElementById(targetId).style.display = 'block'
+			document.getElementById(targetId).style.display = 'block';
 
 			// update hash
 			if( history.pushState ) {
