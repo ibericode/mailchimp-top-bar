@@ -31,9 +31,12 @@ class Manager {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_filter( 'mc4wp_admin_menu_items', array( $this, 'add_menu_item' ) );
 		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 
 		// for BC with MailChimp for WP < 3.0
 		add_filter( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
+
+
 	}
 
 	/**
@@ -59,7 +62,6 @@ class Manager {
 		// run upgrade routine
 		$this->upgrade_routine();
 
-		add_filter( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
 	}
 
 	/**
@@ -139,28 +141,29 @@ class Manager {
 	/**
 	 * Load assets if we're on the settings page of this plugin
 	 *
-	 * @return bool
+	 * TODO: Use 3.x `mc4wp_admin_enqueue_assets` hook here.
+	 *
+	 * @return void
 	 */
 	public function load_assets() {
 
 		if( ! isset( $_GET['page'] ) || $_GET['page'] !== 'mailchimp-for-wp-top-bar' ) {
-			return false;
+			return;
 		}
 
-		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : 'min';
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'mailchimp-top-bar-admin', $this->asset_url( "/css/admin{$min}.css" ) );
+		wp_enqueue_style( 'mailchimp-top-bar-admin', $this->asset_url( "/css/admin{$suffix}.css" ) );
 
 		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$min}.js" ), array( 'jquery', 'wp-color-picker' ), Plugin::VERSION, true );
+		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$suffix}.js" ), array( 'jquery', 'wp-color-picker' ), Plugin::VERSION, true );
 		wp_localize_script( 'mailchimp-top-bar-admin', 'mctb', array(
 				'lists' => $this->get_mailchimp_lists()
 			)
 		);
 
-
-		return true;
+		return;
 	}
 
 	/**
@@ -171,10 +174,6 @@ class Manager {
 		$current_tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
 		$opts = $this->options;
 		$lists = $this->get_mailchimp_lists();
-
-//		if( $opts->get('list') !== '' ) {
-//			$list = $mailchimp->get_list( $opts->get('list') );
-//		}
 
 		require Plugin::DIR . '/views/settings-page.php';
 	}
@@ -235,17 +234,10 @@ class Manager {
 	/**
 	 * Helper function to retrieve MailChimp lists through MailChimp for WordPress
 	 *
-	 * Will try v3.0+ first, then fallback to older versions.
-	 *
 	 * @return array
 	 */
 	protected function get_mailchimp_lists() {
 
-		if( class_exists( 'MC4WP_MailChimp_Tools' ) && method_exists( 'MC4WP_MailChimp_Tools', 'get_lists' ) ) {
-			return \MC4WP_MailChimp_Tools::get_lists();
-		}
-
-		/** @deprecated MailChimp for WordPress v3.0  */
 		if( class_exists( 'MC4WP_MailChimp' ) ) {
 			$mailchimp = new \MC4WP_MailChimp();
 			return $mailchimp->get_lists();
