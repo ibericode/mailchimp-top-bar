@@ -27,8 +27,6 @@ $tabs = array(
 		<?php settings_fields( Plugin::OPTION_NAME ); ?>
 		<?php settings_errors(); ?>
 
-
-		<?php // TODO: Fix renew cache button with 3.0 ?>
 		<div id="message-list-requires-fields" class="error" style="display: none;">
 			<p><?php printf( __( 'The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
 			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache', 'mc4wp-renew-cache' => 1 /* for bc with < 3.0 */ ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) ); ?></p>
