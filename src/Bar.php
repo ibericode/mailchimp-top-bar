@@ -126,20 +126,48 @@ class Bar {
 
 		// subscribe email to selected list
 		$api = mc4wp_get_api();
+
+		/**
+		 * Filters fields which are sent to MailChimp from Top Bar requests.
+		 *
+		 * @param array $merge_vars
+		 */
 		$merge_vars = apply_filters( 'mctb_merge_vars', array() );
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
-		$mailchimp_list = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
 
-		$result = $api->subscribe( $mailchimp_list, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), false, true, $this->options->get( 'send_welcome' ) );
+		/**
+		 * Filters the list to which Top Bar subscribed
+		 *
+		 * @param string $list_id
+		 */
+		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
 
-		// todo: set MailChimp for WP core cookie
-		do_action( 'mc4wp_subscribe', $email, $mailchimp_list, $merge_vars, ( $result === true ), 'form', 'top-bar' );
+		// TODO: add `mc4wp_merge_vars` and `mc4wp_lists` filter here?
+
+		$result = $api->subscribe( $mailchimp_list_id, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), false, true, $this->options->get( 'send_welcome' ) );
+
+		/*
+		 * @deprecated
+		 *
+		 * This is only still here for backwards compatibility with MailChimp for WP 2.x
+		 */
+		do_action( 'mc4wp_subscribe', $email, $mailchimp_list_id, $merge_vars, ( $result === true ), 'form', 'top-bar' );
 
 		// return true if success..
 		if( $result ) {
 
+
+			/**
+			 * Fires for every successful sign-up using Top Bar.
+			 *
+			 * @param string $mailchimp_list_id
+			 * @param string $email
+			 * @param array $merge_vars
+			 */
+			do_action( 'mctb_subscribed', $mailchimp_list_id, $email, $merge_vars );
+
 			// track sign-up attempt
-			$this->tracker->track( $mailchimp_list );
+			$this->tracker->track( $mailchimp_list_id );
 			$this->tracker->save();
 
 			// should we redirect

@@ -1,16 +1,16 @@
 <?php
 
-// check for mailchimp for wordpress pro
+// check for mailchimp for wordpress pro 2.x
 if( defined( 'MC4WP_VERSION' ) && version_compare( MC4WP_VERSION, '2.5.6', '>=' ) ) {
 	return true;
 }
 
-// check for mailchimp for wordpress lite
+// check for mailchimp for wordpress lite 2.x
 if( defined( 'MC4WP_LITE_VERSION' ) && version_compare( MC4WP_LITE_VERSION, '2.2.4', '>=' ) ) {
 	return true;
 }
 
-// check for MailChimp for WordPress core
+// check for MailChimp for WordPress core 3.x
 if( defined( 'MC4WP_VERSION' ) && version_compare( MC4WP_VERSION, '3.0', '>=' ) ) {
 	return true;
 }
