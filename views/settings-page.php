@@ -2,16 +2,23 @@
 use MailChimp\TopBar\Plugin;
 
 defined( 'ABSPATH' ) or exit;
+
+$tabs = array(
+	'settings' => __( "Bar Setting", "mailchimp-for-wp" ),
+	'appearance' => __( "Appearance", "mailchimp-for-wp" ),
+	'messages' => __( "Messages", "mailchimp-for-wp" ),
+	'advanced' => __( "Advanced", "mailchimp-for-wp" ),
+)
 ?>
 <div class="wrap" id="mc4wp-admin">
 
-	<h1>MailChimp Top Bar</h1>
+	<h1 class="page-title">MailChimp Top Bar</h1>
 
 	<h2 class="nav-tab-wrapper" id="mctb-tabs">
-		<a class="nav-tab <?php if( $tab === 'settings' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=settings' ); ?>"><?php _e( 'Bar Settings', 'mailchimp-for-wp' ); ?></a>
-		<a class="nav-tab <?php if( $tab === 'appearance' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=appearance' ); ?>"><?php _e( 'Appearance', 'mailchimp-for-wp' ); ?></a>
-		<a class="nav-tab <?php if( $tab === 'messages' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=messages' ); ?>"><?php _e( 'Messages', 'mailchimp-for-wp' ); ?></a>
-		<a class="nav-tab <?php if( $tab === 'advanced' ) echo 'nav-tab-active'; ?>" href="<?php echo admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=advanced' ); ?>"><?php _e( 'Advanced', 'mailchimp-for-wp' ); ?></a>
+		<?php foreach( $tabs as $tab => $title ) {
+			$class = ( $current_tab === $tab ) ? 'nav-tab-active' : '';
+			echo sprintf( '<a class="nav-tab nav-tab-%s %s" href="%s">%s</a>', $tab, $class, admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=' . $tab ), $title );
+		} ?>
 	</h2>
 
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
@@ -21,9 +28,10 @@ defined( 'ABSPATH' ) or exit;
 		<?php settings_errors(); ?>
 
 
+		<?php // TODO: Fix renew cache button with 3.0 ?>
 		<div id="message-list-requires-fields" class="error" style="display: none;">
 			<p><?php printf( __( 'The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
-			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( 'mc4wp-renew-cache' => 1 ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) ); ?></p>
+			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache', 'mc4wp-renew-cache' => 1 /* for bc with < 3.0 */ ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) ); ?></p>
 		</div>
 
 		<div id="message-bar-is-disabled" class="error" style="display: none;">
@@ -33,7 +41,7 @@ defined( 'ABSPATH' ) or exit;
 		</div>
 
 		<!-- Bar Settings -->
-		<div class="tab <?php if( $tab === 'settings' ) echo 'tab-active'; ?>" id="tab-settings">
+		<div class="tab <?php if( $current_tab === 'settings' ) echo 'tab-active'; ?>" id="tab-settings">
 
 			<h2><?php _e( 'Bar Settings', 'mailchimp-for-wp'); ?></h2>
 
@@ -113,7 +121,7 @@ defined( 'ABSPATH' ) or exit;
 		</div>
 
 		<!-- Appearance Tab -->
-		<div class="tab <?php if( $tab === 'appearance' ) echo 'tab-active'; ?>" id="tab-appearance">
+		<div class="tab <?php if( $current_tab === 'appearance' ) echo 'tab-active'; ?>" id="tab-appearance">
 
 			<h2><?php _e( 'Appearance', 'mailchimp-top-bar' ); ?></h2>
 
@@ -222,7 +230,7 @@ defined( 'ABSPATH' ) or exit;
 		</div>
 
 		<!-- Form Messages -->
-		<div class="tab <?php if( $tab === 'messages' ) echo 'tab-active'; ?>" id="tab-messages">
+		<div class="tab <?php if( $current_tab === 'messages' ) echo 'tab-active'; ?>" id="tab-messages">
 
 			<h2><?php _e( 'Messages', 'mailchimp-top-bar' ); ?></h2>
 
@@ -264,9 +272,8 @@ defined( 'ABSPATH' ) or exit;
 			</table>
 		</div>
 
-		<div class="tab <?php if( $tab === 'advanced' ) echo 'tab-active'; ?>" id="tab-advanced">
+		<div class="tab <?php if( $current_tab === 'advanced' ) echo 'tab-active'; ?>" id="tab-advanced">
 			<h2><?php _e( 'Advanced', 'mailchimp-top-bar' ); ?></h2>
-			<p><?php printf( __( 'All these settings are optional and will by default inherit from <a href="%s">%s &raquo; %s</a>', 'mailchimp-top-bar' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ), 'MailChimp for WordPress', 'Form Settings' ); ?>.</p>
 
 			<table class="form-table">
 				<tr valign="top" class="double-optin-options">
