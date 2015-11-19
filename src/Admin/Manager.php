@@ -168,7 +168,7 @@ class Manager {
 	 */
 	public function show_settings_page() {
 
-		$tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
+		$current_tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
 		$opts = $this->options;
 		$lists = $this->get_mailchimp_lists();
 
