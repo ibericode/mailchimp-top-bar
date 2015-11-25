@@ -124,7 +124,7 @@ $tabs = array(
 			<h2><?php _e( 'Appearance', 'mailchimp-top-bar' ); ?></h2>
 
 			<div class="row">
-				<div class="col-2">
+				<div class="col col-2">
 					<table class="form-table">
 
 						<tr valign="top">
@@ -180,7 +180,7 @@ $tabs = array(
 
 					</table>
 				</div>
-				<div class="col-2">
+				<div class="col col-2">
 					<table class="form-table">
 
 						<tr valign="top" class="sticky-bar-options" style="<?php if( $opts->get('position') === 'bottom' ) { echo 'display: none;'; } ?>">

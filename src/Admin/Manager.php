@@ -154,9 +154,8 @@ class Manager {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : 'min';
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'mailchimp-top-bar-admin', $this->asset_url( "/css/admin{$suffix}.css" ) );
-
 		wp_enqueue_script( 'wp-color-picker' );
+
 		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$suffix}.js" ), array( 'jquery', 'wp-color-picker' ), Plugin::VERSION, true );
 		wp_localize_script( 'mailchimp-top-bar-admin', 'mctb', array(
 				'lists' => $this->get_mailchimp_lists()
