@@ -27,12 +27,13 @@ $tabs = array(
 		<?php settings_fields( Plugin::OPTION_NAME ); ?>
 		<?php settings_errors(); ?>
 
-		<div id="message-list-requires-fields" class="error" style="display: none;">
+		<div id="message-list-requires-fields" class="notice notice-warning" style="display: none;">
 			<p><?php printf( __( 'The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
-			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache', 'mc4wp-renew-cache' => 1 /* for bc with < 3.0 */ ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) ); ?></p>
+			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache' ) ) ); ?></p>
 		</div>
 
-		<div id="message-bar-is-disabled" class="error" style="display: none;">
+		<?php $config = array( 'element' => $this->name_attr( 'enabled' ), 'value' => 0 ); ?>
+		<div id="message-bar-is-disabled" class="notice notice-warning" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 			<p>
 				<?php _e( 'You have disabled the bar. It will not show up on your site until you enable it again.', 'mailchimp-top-bar' ); ?>
 			</p>
@@ -70,7 +71,7 @@ $tabs = array(
 							printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 						<?php } ?>
 
-						<select name="<?php echo $this->name_attr( 'list' ); ?>" id="select-mailchimp-list">
+						<select name="<?php echo $this->name_attr( 'list' ); ?>" class="mc4wp-list-input" id="select-mailchimp-list">
 							<option disabled <?php selected( $opts->get( 'list' ), '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
 							<?php foreach( $lists as $list ) { ?>
 								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $opts->get( 'list' ), $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
@@ -127,7 +128,8 @@ $tabs = array(
 				<div class="col col-2">
 					<table class="form-table">
 
-						<tr valign="top">
+						<?php $config = array( 'element' => $this->name_attr( 'sticky' ), 'value' => 0 ); ?>
+						<tr valign="top" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 							<th scope="row">
 								<label>
 									<?php _e( 'Bar Position', 'mailchimp-top-bar' ); ?>
@@ -290,7 +292,8 @@ $tabs = array(
 					</td>
 				</tr>
 
-				<tr valign="top" class="send-welcome-options" style="<?php if( $opts->get('double_optin') == 1 ) { echo 'display: none;'; } ?>">
+				<?php $config = array( 'element' => $this->name_attr( 'double_optin' ), 'value' => 0 ); ?>
+				<tr valign="top" class="send-welcome-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 					<th scope="row">
 						<label>
 							<?php _e( 'Send Welcome Email?', 'mailchimp-for-wp' ); ?>
