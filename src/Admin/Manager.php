@@ -31,7 +31,7 @@ class Manager {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_filter( 'mc4wp_admin_menu_items', array( $this, 'add_menu_item' ) );
 		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'load_assets' ) );
+		add_action( 'mc4wp_admin_enqueue_assets', array( $this, 'load_assets' ), 10, 2 );
 
 		// for BC with MailChimp for WP < 3.0
 		add_filter( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
@@ -141,17 +141,13 @@ class Manager {
 	/**
 	 * Load assets if we're on the settings page of this plugin
 	 *
-	 * TODO: Use 3.x `mc4wp_admin_enqueue_assets` hook here.
-	 *
 	 * @return void
 	 */
-	public function load_assets() {
+	public function load_assets( $suffix, $page = '' ) {
 
-		if( ! isset( $_GET['page'] ) || $_GET['page'] !== 'mailchimp-for-wp-top-bar' ) {
+		if( $page !== 'top-bar' ) {
 			return;
 		}
-
-		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : 'min';
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
