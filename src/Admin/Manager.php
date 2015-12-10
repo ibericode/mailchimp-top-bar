@@ -141,6 +141,8 @@ class Manager {
 	/**
 	 * Load assets if we're on the settings page of this plugin
 	 *
+	 * @param string $suffix
+	 * @param string $page
 	 * @return void
 	 */
 	public function load_assets( $suffix, $page = '' ) {
