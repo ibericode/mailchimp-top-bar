@@ -315,4 +315,11 @@ $tabs = array(
 		<?php submit_button(); ?>
 	</form>
 
+	<?php
+	/**
+	 * @ignore
+	 */
+	do_action( 'mc4wp_admin_footer' );
+	?>
+
 </div>
