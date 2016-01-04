@@ -2,6 +2,12 @@
 
 namespace MailChimp\TopBar\Admin;
 
+/**
+ * Class Upgrader
+ * @package MailChimp\TopBar\Admin
+ *
+ * @todo switch to Migrations class in MailChimp for WP core
+ */
 class Upgrader {
 
 	/**
