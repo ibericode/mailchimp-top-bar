@@ -290,23 +290,28 @@ class Bar {
 	 * Output the CSS settings for the bar
 	 */
 	public function output_css() {
-		echo '<style type="text/css">';
+		$bar_color = $this->options->get( 'color_bar' );
+		$button_color = $this->options->get('color_button');
+		$text_color = $this->options->get( 'color_text' );
+		$button_text_color = $this->options->get( 'color_button_text' );
 
-		if( '' !== $this->options->get( 'color_bar' ) ) {
-			echo "#mailchimp-top-bar .mctb-bar, .mctb-response { background: {$this->options->get( 'color_bar' )}; }";
+		echo '<style type="text/css">' . PHP_EOL;
+
+		if( ! empty( $bar_color) ) {
+			echo ".mctb-bar, .mctb-response, .mctb-close { background: {$bar_color} !important; }" . PHP_EOL;
 		}
 
-		if( '' !== $this->options->get( 'color_text' ) ) {
-			echo "#mailchimp-top-bar label { color: {$this->options->get( 'color_text' )}; }";
+		if( ! empty( $text_color ) ) {
+			echo ".mctb-bar, .mctb-close { color: {$text_color} !important; }" . PHP_EOL;
 		}
 
-		if( '' !== $this->options->get('color_button') ) {
-			echo "#mailchimp-top-bar .mctb-button { background: {$this->options->get( 'color_button' )}; border-color: {$this->options->get( 'color_button' )}; }";
-			echo "#mailchimp-top-bar .mctb-email:focus { border-color: {$this->options->get( 'color_button' )}; }";
+		if( ! empty( $button_color ) ) {
+			echo ".mctb-button { background: {$button_color} !important; border-color: {$button_color} !important; }" . PHP_EOL;
+			echo ".mctb-email:focus { outline-color: {$button_color} !important; }" . PHP_EOL;
 		}
 
-		if( '' !== $this->options->get( 'color_button_text' ) ) {
-			echo "#mailchimp-top-bar .mctb-button { color: {$this->options->get( 'color_button_text' )}; }";
+		if( ! empty( $button_text_color ) ) {
+			echo ".mctb-button { color: {$button_text_color} !important; }" . PHP_EOL;
 		}
 
 		echo '</style>';

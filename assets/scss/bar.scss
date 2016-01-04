@@ -26,6 +26,7 @@ $mobile_max: 580px;
 	}
 
 	.mctb-close {
+		padding: 0 ($base_size * 3);
 		font-size: $base_size * 4;
 	}
 }
@@ -187,15 +188,7 @@ $mobile_max: 580px;
 	position: absolute;
 	top: 0;
 	right: 12px;
-	color: #444444;
-	opacity: 0.6;
-	filter: alpha(opacity=60);
 	cursor: pointer;
 	vertical-align: middle;
 	height: 100%;
-}
-
-.mctb-close:hover {
-	opacity: 1;
-	filter: alpha(opacity=100);
 }
