@@ -144,7 +144,7 @@ class Bar {
 
 		// TODO: add `mc4wp_merge_vars` and `mc4wp_lists` filter here?
 
-		$result = $api->subscribe( $mailchimp_list_id, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), false, true, $this->options->get( 'send_welcome' ) );
+		$result = $api->subscribe( $mailchimp_list_id, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), $this->options->get( 'update_existing' ), true, $this->options->get( 'send_welcome' ) );
 
 		/*
 		 * @deprecated

@@ -292,6 +292,9 @@ $tabs = array(
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
+						<p class="help">
+							<?php _e( 'Select "yes" if you want people to confirm their email address before being subscribed (recommended)', 'mailchimp-for-wp' ); ?>
+						</p>
 					</td>
 				</tr>
 
@@ -309,6 +312,29 @@ $tabs = array(
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
+						<p class="help">
+							<?php _e( 'Select "yes" if you want to send your lists Welcome Email if a subscribe succeeds (only when double opt-in is disabled).', 'mailchimp-for-wp' ); ?>
+						</p>
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">
+						<label>
+							<?php _e( 'Update existing subscribers?', 'mailchimp-for-wp' ); ?>
+						</label>
+					</th>
+					<td>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="1" <?php checked( $opts->get( 'update_existing' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+						</label>
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="0" <?php checked( $opts->get( 'update_existing' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+						</label>
+						<p class="help">
+							<?php _e( 'Select "yes" if you want to update existing subscribers with the data that is sent.', 'mailchimp-for-wp' ); ?>
+							<?php printf( __( 'This is really only useful if you have <a href="%s">added additional fields (besides just email)</a>.', 'mailchimp-top-bar' ), 'https://mc4wp.com/kb/add-name-field-to-mailchimp-top-bar/' ); ?>
+						</p>
 					</td>
 				</tr>
 			</table>
