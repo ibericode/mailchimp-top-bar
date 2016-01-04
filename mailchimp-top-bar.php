@@ -61,7 +61,22 @@ function __load_mailchimp_top_bar() {
 	// create instance
 	$classname = 'MailChimp\\TopBar\\Plugin';
 	$mailchimp_top_bar = $classname::instance();
-	$mailchimp_top_bar->init();
+
+	if( ! is_admin() ) {
+		// frontend code
+		$bar_classname = 'MailChimp\\TopBar\\Bar';
+		$bar = new $bar_classname( $mailchimp_top_bar->options );
+		$bar->add_hooks();
+	} elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		// ajax code
+
+	} else {
+		// admin code
+		$admin_classname = 'MailChimp\\TopBar\\Admin\\Manager';
+		$admin = new $admin_classname( $mailchimp_top_bar->options );
+		$admin->add_hooks();
+	}
+
 	return true;
 }
 

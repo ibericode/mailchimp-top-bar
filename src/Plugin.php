@@ -27,7 +27,7 @@ class Plugin {
 	/**
 	 * @var array
 	 */
-	private $options = array();
+	public $options = array();
 
 	/**
 	 * @var
@@ -46,49 +46,9 @@ class Plugin {
 		return self::$instance;
 	}
 
-	/**
-	 * Let's go...
-	 *
-	 * Runs at `plugins_loaded` priority 30.
-	 */
-	public function init() {
-
+	public function __construct() {
 		// load plugin options
-		$this->options = $this->load_options();
-
-		// Load area-specific code
-		if( ! is_admin() ) {
-
-			// frontend code
-
-			// show bar, if it's enabled
-			$bar = new Bar( $this->options );
-			$bar->add_hooks();
-
-
-		} elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			// ajax code
-
-		} else {
-
-			// admin code
-			$admin = new Admin\Manager( $this->options );
-			$admin->add_hooks();
-		}
-	}
-
-	/**
-	 * @return Options
-	 */
-	public function load_options() {
-		return new Options( self::OPTION_NAME );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_options() {
-		return $this->options;
+		$this->options = new Options( self::OPTION_NAME );
 	}
 
 }
