@@ -137,6 +137,10 @@ $mobile_max: 580px;
 	text-align: center;
 }
 
+.mctb-bar {
+	width: 100%;
+}
+
 .mctb-sticky {
 	position: fixed;
 }
@@ -167,7 +171,24 @@ $mobile_max: 580px;
 }
 
 .mctb-close{
+	display: inline-block;
 	float: right;
 	margin-right: 12px;
 	cursor: pointer;
+	z-index: 200;
+	clear: both;
+}
+
+.mctb-icon-inside-bar {
+
+	&.mctb-position-bottom .mctb-bar {
+		position: absolute;
+		bottom: 0;
+	}
+
+		.mctb-close {
+		float: none;
+		position: absolute;
+		top: 0; right: 0;
+	}
 }

@@ -143,6 +143,10 @@
   text-align: center;
 }
 
+.mctb-bar {
+  width: 100%;
+}
+
 .mctb-sticky {
   position: fixed;
 }
@@ -171,9 +175,23 @@
 }
 
 .mctb-close {
+  display: inline-block;
   float: right;
   margin-right: 12px;
   cursor: pointer;
+  z-index: 200;
+  clear: both;
+}
+
+.mctb-icon-inside-bar.mctb-position-bottom .mctb-bar {
+  position: absolute;
+  bottom: 0;
+}
+.mctb-icon-inside-bar .mctb-close {
+  float: none;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 /*# sourceMappingURL=bar.css.map */

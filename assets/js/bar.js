@@ -39,8 +39,6 @@
 			barEl.style.display = 'block';
 			barEl.style.position = 'relative';
 			barHeight = barEl.clientHeight;
-			barEl.style.display = 'none';
-			barEl.style.position = origBarPosition;
 
 			// save original bodyPadding
 			if( isBottomBar ) {
@@ -65,8 +63,23 @@
 			// Configure icon
 			iconEl.setAttribute('class', 'mctb-close');
 			iconEl.innerHTML = config.icons.show;
-			iconEl.style.display = 'block';
 			addEvent(iconEl, 'click', toggle);
+
+			// would the close icon fit inside the bar?
+			var elementsWidth = 0;
+			for( var i=0; i<barEl.firstElementChild.children.length; i++ ) {
+				elementsWidth+= barEl.firstElementChild.children[i].clientWidth;
+			}
+			if( elementsWidth + iconEl.clientWidth + 200 < barEl.clientWidth ) {
+				wrapperEl.className += ' mctb-icon-inside-bar';
+
+				// since icon is now absolutely positioned, we need to set a min height
+				wrapperEl.style.minHeight = iconEl.clientHeight + "px";
+			}
+
+			// hide bar again, we're done measuring
+			barEl.style.display = 'none';
+			barEl.style.position = origBarPosition;
 
 			// Show the bar straight away?
 			if( readCookie( "mctb_bar_hidden" ) != 1 ) {

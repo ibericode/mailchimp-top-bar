@@ -324,12 +324,13 @@ class Bar {
 	public function output_html() {
 
 		$form_action = apply_filters( 'mctb_form_action', null );
+
 		?>
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- MailChimp Top Bar v<?php echo Plugin::VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctb-bar" style="display: none">
 				<?php echo $this->get_response_message(); ?>
-				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', $form_action ); } ?>>
+				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
 					<label class="mctb-label"><?php echo $this->options->get( 'text_bar' ); ?></label>
 					<?php do_action( 'mctb_before_email_field' ); ?>
