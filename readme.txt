@@ -3,8 +3,8 @@ Contributors: Ibericode, DvanKooten, iMazed, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
 Tags: mailchimp,form,newsletter,mc4wp,mailchimp form,mailchimp sign-up,email,sign-up bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
-Tested up to: 4.4
-Stable tag: 1.2.5
+Tested up to: 4.4.1
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,17 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+= 1.2.6 - January 4, 2015 =
+
+ **Additions**
+
+ - Option to "update existing subscribers" in MailChimp, which is useful if you have added fields.
+
+ **Improvements**
+
+ - Toggle icon now has a background color, for increased visibility.
+ - Toggle icon now stacks above or below bar on small screens.
 
 = 1.2.5 - December 10, 2015 =
 
@@ -311,6 +322,6 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.2.5 =
+= 1.2.6 =
 
-Several UX improvements, this update requires MailChimp for WordPress v3.0 (or higher).
+Improvements to toggle icon for small screens & dark backgrounds.
