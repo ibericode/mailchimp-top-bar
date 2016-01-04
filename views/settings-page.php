@@ -1,14 +1,17 @@
 <?php
+use MailChimp\TopBar\Options;
 use MailChimp\TopBar\Plugin;
 
 defined( 'ABSPATH' ) or exit;
 
 $tabs = array(
-	'settings' => __( "Bar Setting", "mailchimp-for-wp" ),
-	'appearance' => __( "Appearance", "mailchimp-for-wp" ),
-	'messages' => __( "Messages", "mailchimp-for-wp" ),
-	'advanced' => __( "Advanced", "mailchimp-for-wp" ),
-)
+	'settings'      => __( "Bar Setting", "mailchimp-for-wp" ),
+	'appearance'    => __( "Appearance", "mailchimp-for-wp" ),
+	'messages'      => __( "Messages", "mailchimp-for-wp" ),
+	'advanced'      => __( "Advanced", "mailchimp-for-wp" ),
+);
+
+/** @var Options $opts */
 ?>
 <div class="wrap" id="mc4wp-admin">
 
@@ -128,8 +131,7 @@ $tabs = array(
 				<div class="col col-2">
 					<table class="form-table">
 
-						<?php $config = array( 'element' => $this->name_attr( 'sticky' ), 'value' => 0 ); ?>
-						<tr valign="top" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
+						<tr valign="top">
 							<th scope="row">
 								<label>
 									<?php _e( 'Bar Position', 'mailchimp-top-bar' ); ?>
@@ -185,7 +187,8 @@ $tabs = array(
 				<div class="col col-2">
 					<table class="form-table">
 
-						<tr valign="top" class="sticky-bar-options" style="<?php if( $opts->get('position') === 'bottom' ) { echo 'display: none;'; } ?>">
+						<?php $config = array( 'element' =>  $this->name_attr( 'position' ), 'value' => 'top' ); ?>
+						<tr valign="top" class="sticky-bar-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 							<th scope="row">
 								<label>
 									<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
