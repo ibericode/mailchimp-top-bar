@@ -74,7 +74,7 @@
   font-size: 12px;
 }
 #mailchimp-top-bar.mctb-small .mctb-close {
-  padding: 0 12px;
+  padding: 4px 12px;
   font-size: 16px;
 }
 #mailchimp-top-bar.mctb-medium {
@@ -96,7 +96,7 @@
   font-size: 15px;
 }
 #mailchimp-top-bar.mctb-medium .mctb-close {
-  padding: 0 15px;
+  padding: 5px 15px;
   font-size: 20px;
 }
 #mailchimp-top-bar.mctb-big {
@@ -118,18 +118,13 @@
   font-size: 18px;
 }
 #mailchimp-top-bar.mctb-big .mctb-close {
-  padding: 0 18px;
+  padding: 6px 18px;
   font-size: 24px;
 }
 @media (max-width: 580px) {
   #mailchimp-top-bar input, #mailchimp-top-bar label {
     width: 100%;
     max-width: 100% !important;
-  }
-  #mailchimp-top-bar .mctb-close {
-    line-height: initial !important;
-    right: 6px;
-    top: 6px;
   }
   #mailchimp-top-bar .mctb-email {
     margin: 6px 0 !important;
@@ -156,19 +151,9 @@
   position: fixed;
   bottom: 0;
   top: auto;
-  /* bar element should be position absolute when in bottom position */
 }
 .mctb-position-bottom .mctb-bar {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-@media (max-width: 580px) {
-  .mctb-position-bottom .mctb-close {
-    top: auto !important;
-    bottom: 6px;
-    height: auto !important;
-  }
+  clear: both;
 }
 
 .mctb-response {
@@ -186,12 +171,9 @@
 }
 
 .mctb-close {
-  position: absolute;
-  top: 0;
-  right: 12px;
+  float: right;
+  margin-right: 12px;
   cursor: pointer;
-  vertical-align: middle;
-  height: 100%;
 }
 
 /*# sourceMappingURL=bar.css.map */

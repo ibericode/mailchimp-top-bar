@@ -16,7 +16,7 @@
 
 		// Vars & State
 		var barEl = wrapperEl.querySelector('.mctb-bar');
-		var iconEl = wrapperEl.querySelector('.mctb-close');
+		var iconEl = document.createElement('span');
 		var responseEl = wrapperEl.querySelector('.mctb-response');
 		var visible = false;
 		var originalBodyPadding = 0,
@@ -42,12 +42,12 @@
 			barEl.style.display = 'none';
 			barEl.style.position = origBarPosition;
 
-
 			// save original bodyPadding
 			if( isBottomBar ) {
-				wrapperEl.style.height = barHeight + "px";
+				wrapperEl.insertBefore( iconEl, barEl );
 				originalBodyPadding = ( parseInt( bodyEl.style.paddingBottom )  || 0 );
 			} else {
+				wrapperEl.insertBefore( iconEl, barEl.nextElementSibling );
 				originalBodyPadding = ( parseInt( bodyEl.style.paddingTop )  || 0 );
 			}
 
@@ -63,9 +63,9 @@
 			}
 
 			// Configure icon
+			iconEl.setAttribute('class', 'mctb-close');
 			iconEl.innerHTML = config.icons.show;
 			iconEl.style.display = 'block';
-			iconEl.style.lineHeight = barHeight + "px";
 			addEvent(iconEl, 'click', toggle);
 
 			// Show the bar straight away?

@@ -26,13 +26,12 @@ $mobile_max: 580px;
 	}
 
 	.mctb-close {
-		padding: 0 ($base_size * 3);
+		padding: ($base_size) ($base_size * 3);
 		font-size: $base_size * 4;
 	}
 }
 
 #mailchimp-top-bar {
-
 
 	// Reset Form elements, many themes apply basic styling
 	form,
@@ -121,12 +120,6 @@ $mobile_max: 580px;
 			max-width: 100% !important;
 		}
 
-		.mctb-close{
-			line-height: initial !important;
-			right: 6px;
-			top: 6px;
-		}
-
 		.mctb-email {
 			margin: 6px 0 !important;
 		}
@@ -153,19 +146,8 @@ $mobile_max: 580px;
 	bottom: 0;
 	top: auto;
 
-	/* bar element should be position absolute when in bottom position */
 	.mctb-bar {
-		width: 100%;
-		position: absolute;
-		bottom: 0;
-	}
-
-	@media( max-width: $mobile_max ) {
-		.mctb-close {
-			top: auto !important;
-			bottom: 6px;
-			height: auto !important;
-		}
+		clear: both;
 	}
 }
 
@@ -185,10 +167,7 @@ $mobile_max: 580px;
 }
 
 .mctb-close{
-	position: absolute;
-	top: 0;
-	right: 12px;
+	float: right;
+	margin-right: 12px;
 	cursor: pointer;
-	vertical-align: middle;
-	height: 100%;
 }

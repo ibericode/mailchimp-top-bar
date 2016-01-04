@@ -324,8 +324,8 @@ class Bar {
 	public function output_html() {
 
 		$form_action = apply_filters( 'mctb_form_action', null );
-
-		?><div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
+		?>
+		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- MailChimp Top Bar v<?php echo Plugin::VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctb-bar" style="display: none">
 				<?php echo $this->get_response_message(); ?>
@@ -341,7 +341,10 @@ class Bar {
 					<input type="hidden" name="_mctb_no_js" value="1" />
 					<input type="hidden" name="_mctb_timestamp" value="<?php echo time(); ?>" />
 				</form>
-			</div><span class="mctb-close"></span><!-- / MailChimp Top Bar --></div><?php
+			</div>
+			<!-- / MailChimp Top Bar -->
+		</div>
+		<?php
 	}
 
 	/**
