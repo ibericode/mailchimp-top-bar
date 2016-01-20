@@ -94,12 +94,14 @@ add_filter( 'mctb_merge_vars', function( $vars ) {
 });
 `
 
-= How to change the color of the toggle icon? =
+= How to hide the bar on small screens? =
 
-You can use the following CSS to change the appearance of the toggle icon.
+Adding the following CSS to your site should hide the bar on all screens smaller than 600px. The [Simple Custom CSS](https://wordpress.org/plugins/simple-custom-css/) plugin is great for adding custom CSS.
 
 `
-#mailchimp-top-bar .mctb-close { color: red; }
+@media( max-width: 600px ) {
+	#mailchimp-top-bar { display: none !important; }
+}
 `
 
 = I think I found a bug. What now? =
