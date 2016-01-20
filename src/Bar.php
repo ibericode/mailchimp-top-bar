@@ -118,7 +118,7 @@ class Bar {
 		if( ! $this->validate() ) {
 
 			if( $log ) {
-				$log->info( sprintf( 'MailChimp Top Bar > Submitted with errors: %s', $this->error_type ) );
+				$log->info( sprintf( 'Top Bar > Submitted with errors: %s', $this->error_type ) );
 			}
 
 			return false;
@@ -136,7 +136,7 @@ class Bar {
 			$this->error_type = 'error';
 
 			if( $log ) {
-				$log->warning( 'MailChimp Top Bar > No MailChimp lists were selected' );
+				$log->warning( 'Top Bar > No MailChimp lists were selected' );
 			}
 
 			return false;
@@ -184,7 +184,7 @@ class Bar {
 
 			// log sign-up attempt
 			if( $log ) {
-				$log->info( sprintf( 'MailChimp Top Bar > Successfully subscribed %s', $email ) );
+				$log->info( sprintf( 'Top Bar > Successfully subscribed %s', $email ) );
 			}
 
 			// should we redirect
@@ -201,13 +201,13 @@ class Bar {
 			$this->error_type = 'already_subscribed';
 
 			if( $log ) {
-				$log->warning( sprintf( 'MailChimp Top Bar > %s is already subscribed to the selected list(s)', $email ) );
+				$log->warning( sprintf( 'Top Bar > %s is already subscribed to the selected list(s)', $email ) );
 			}
 		} else {
 			$this->error_type = 'error';
 
 			if( $log ) {
-				$log->error( sprintf( 'MailChimp Top Bar > MailChimp API error: %s', $api->get_error_message() ) );
+				$log->error( sprintf( 'Top Bar > MailChimp API error: %s', $api->get_error_message() ) );
 			}
 		}
 
