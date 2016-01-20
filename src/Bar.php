@@ -25,11 +25,6 @@ class Bar {
 	private $submitted = false;
 
 	/**
-	 * @var Tracker
-	 */
-	protected $tracker;
-
-	/**
 	 * Constructor
 	 *
 	 * @param Options $options
@@ -58,8 +53,6 @@ class Bar {
 	 * @return bool
 	 */
 	public function init() {
-
-		$this->tracker = new Tracker( 365 * DAY_IN_SECONDS );
 
 		if( ! $this->should_show_bar() ) {
 			return false;
@@ -167,8 +160,9 @@ class Bar {
 			do_action( 'mctb_subscribed', $mailchimp_list_id, $email, $merge_vars );
 
 			// track sign-up attempt
-			$this->tracker->track( $mailchimp_list_id );
-			$this->tracker->save();
+			$tracker = new Tracker( 365 * DAY_IN_SECONDS );
+			$tracker->track( $mailchimp_list_id );
+			$tracker->save();
 
 			// should we redirect
 			if( '' !== $this->options->get( 'redirect' ) ) {
