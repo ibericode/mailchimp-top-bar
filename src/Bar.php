@@ -2,6 +2,9 @@
 
 namespace MailChimp\TopBar;
 
+use Exception;
+use MC4WP_Debug_Log;
+
 class Bar {
 
 	/**
@@ -110,8 +113,17 @@ class Bar {
 	private function process() {
 
 		$this->submitted = true;
+		$log = $this->get_log();
 
 		if( ! $this->validate() ) {
+
+			if( $log ) {
+				$log->info( sprintf( 'MailChimp Top Bar > Submitted with errors: %s', $this->error_type ) );
+			}
+
+			return false;
+		}
+
 		/**
 		 * Filters the list to which Top Bar subscribed
 		 *
@@ -122,6 +134,11 @@ class Bar {
 		// check if a MailChimp list was given
 		if( empty( $mailchimp_list_id ) ) {
 			$this->error_type = 'error';
+
+			if( $log ) {
+				$log->warning( 'MailChimp Top Bar > No MailChimp lists were selected' );
+			}
+
 			return false;
 		}
 
@@ -138,15 +155,7 @@ class Bar {
 		$merge_vars = apply_filters( 'mctb_merge_vars', array() );
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
 
-		/**
-		 * Filters the list to which Top Bar subscribed
-		 *
-		 * @param string $list_id
-		 */
-		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
-
 		// TODO: add `mc4wp_merge_vars` and `mc4wp_lists` filter here?
-
 		$result = $api->subscribe( $mailchimp_list_id, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), $this->options->get( 'update_existing' ), true, $this->options->get( 'send_welcome' ) );
 
 		/*
@@ -158,7 +167,6 @@ class Bar {
 
 		// return true if success..
 		if( $result ) {
-
 
 			/**
 			 * Fires for every successful sign-up using Top Bar.
@@ -174,6 +182,11 @@ class Bar {
 			$tracker->track( $mailchimp_list_id );
 			$tracker->save();
 
+			// log sign-up attempt
+			if( $log ) {
+				$log->info( sprintf( 'MailChimp Top Bar > Successfully subscribed %s', $email ) );
+			}
+
 			// should we redirect
 			if( '' !== $this->options->get( 'redirect' ) ) {
 				wp_redirect( $this->options->get( 'redirect' ) );
@@ -183,8 +196,20 @@ class Bar {
 			return true;
 		}
 
-		// failed
-		$this->error_type = ( $api->get_error_code() === 214 ) ? 'already_subscribed' : 'error';
+		// An API error occured... Oh noes!
+		if( $api->get_error_code() === 214 ) {
+			$this->error_type = 'already_subscribed';
+
+			if( $log ) {
+				$log->warning( sprintf( 'MailChimp Top Bar > %s is already subscribed to the selected list(s)', $email ) );
+			}
+		} else {
+			$this->error_type = 'error';
+
+			if( $log ) {
+				$log->error( sprintf( 'MailChimp Top Bar > MailChimp API error: %s', $api->get_error_message() ) );
+			}
+		}
 
 		return false;
 	}
@@ -381,6 +406,22 @@ class Bar {
 	 */
 	protected function asset_url( $url ) {
 		return plugins_url( '/assets' . $url, Plugin::FILE );
+	}
+
+	/**
+	 * Returns the debug logger or null, if MailChimp for WordPress 3.1 is not installed.
+	 *
+	 * @return MC4WP_Debug_Log|null
+	 */
+	protected function get_log() {
+
+		try {
+			$log = mc4wp('log');
+		} catch( Exception $e ) {
+			return null;
+		}
+
+		return $log;
 	}
 
 }
