@@ -112,6 +112,16 @@ class Bar {
 		$this->submitted = true;
 
 		if( ! $this->validate() ) {
+		/**
+		 * Filters the list to which Top Bar subscribed
+		 *
+		 * @param string $list_id
+		 */
+		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
+
+		// check if a MailChimp list was given
+		if( empty( $mailchimp_list_id ) ) {
+			$this->error_type = 'error';
 			return false;
 		}
 
