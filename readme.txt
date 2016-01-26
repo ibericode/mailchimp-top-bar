@@ -120,7 +120,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
-#### 1.2.7 - January 5, 2016
+#### 1.2.7 - January 26, 2016
 
 **Improvements**
 
