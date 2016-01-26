@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp,form,newsletter,mc4wp,mailchimp form,mailchimp sign-up,email,sign-up bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.4.1
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,7 +120,18 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
-= 1.2.6 - January 4, 2015 =
+#### 1.2.7 - January 5, 2016
+
+**Improvements**
+
+- Miscellaneous code improvements
+
+**Additions**
+
+- Add support for new [debug log](https://mc4wp.com/kb/how-to-enable-log-debugging/) in MailChimp for WordPress 3.1
+
+
+#### 1.2.6 - January 4, 2016
 
  **Additions**
 
@@ -131,7 +142,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
  - Toggle icon now has a background color, for increased visibility.
  - Toggle icon now stacks above or below bar on small screens.
 
-= 1.2.5 - December 10, 2015 =
+#### 1.2.5 - December 10, 2015
 
 The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 3.0 or higher.
 
@@ -144,18 +155,18 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - Improved admin notice when dependencies are not installed.
 
 
-= 1.2.4 - November 22, 2015 =
+#### 1.2.4 - November 22, 2015
 
 - Compatibility for [the upcoming MailChimp for WordPress 3.0 release](https://mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/) tomorrow.
 - Added `mctb_subscribed` filter.
 
-= 1.2.3 - November 13, 2015 =
+#### 1.2.3 - November 13, 2015
 
 **Improvements**
 
 - Minor refactoring in the way the plugin is bootstrapped.
 
-= 1.2.2 - September 10, 2015 =
+#### 1.2.2 - September 10, 2015
 
 **Fixes**
 
@@ -163,7 +174,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - Honeypot field was accessible by pressing "tab" key.
 - Hardened security for cookie that tracks sign-up attempts.
 
-= 1.2.1 - September 8, 2015 =
+#### 1.2.1 - September 8, 2015
 
 **Fixes**
 
@@ -174,7 +185,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - Better mobile responsiveness
 
 
-= 1.2 - September 3, 2015 =
+#### 1.2 - September 3, 2015
 
 **Improvements**
 
@@ -189,20 +200,20 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - Added `mctb_before_submit_button` action allowing you to add HTML before the submit button.
 - Added `mctb_form_action` filter allowing you to set a custom form action.
 
-= 1.1.3 - June 23, 2015 =
+#### 1.1.3 - June 23, 2015
 
 **Fixes**
 
 - Fixes fatal error when visiting settings page on some servers
 
-= 1.1.2 - June 18, 2015 =
+#### 1.1.2 - June 18, 2015
 
 **Improvements**
 
 - Fixes height of response message
 - CSS improvements for compatibility with various popular themes
 
-= 1.1.1 - June 12, 2015 =
+#### 1.1.1 - June 12, 2015
 
 **Fixes**
 
@@ -213,7 +224,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - Various improvements to bar CSS so it can be easily overridden.
 - Fix vertical alignment of toggle icon.
 
-= 1.1 - June 10, 2015 =
+#### 1.1 - June 10, 2015
 
 **Improvements**
 
@@ -225,13 +236,13 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - New filter: `mctb_mailchimp_list` (set lists to subscribe to)
 - Lithuanian translation, thanks to [Aleksandr Charkov](https://github.com/dec0n)
 
-= 1.0.8 - May 6, 2015 =
+#### 1.0.8 - May 6, 2015
 
 **Fixes**
 
 - Compatibility with [MailChimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [MailChimp for WordPress Pro v2.7](https://mc4wp.com/).
 
-= 1.0.7 - April 15, 2015 =
+#### 1.0.7 - April 15, 2015
 
 **Fixes**
 
@@ -242,7 +253,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 - Toggle icon is no longer shown for users without JavaScript.
 
-= 1.0.6 - March 17, 2015 =
+#### 1.0.6 - March 17, 2015
 
 **Fixes**
 
@@ -254,14 +265,14 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - Allow simple inline tags in the bar text
 
 
-= 1.0.5 - February 25, 2015 =
+#### 1.0.5 - February 25, 2015
 
 **Fixes**
 
 - Bar not loading in some themes after latest update
 - Colors not working because of missing leading `#` value. Color settings are now validated before saving them.
 
-= 1.0.4 - February 23, 2015 =
+#### 1.0.4 - February 23, 2015
 
 **Fixes**
 
@@ -273,7 +284,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - You can now set a "redirect url" in the bar settings
 - All form response messages can now be customised for the bar form
 
-= 1.0.3 - February 17, 2015 =
+#### 1.0.3 - February 17, 2015
 
 **Improvements**
 
@@ -289,7 +300,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 - WPML compatibility
 
 
-= 1.0.2 - February 12, 2015 =
+#### 1.0.2 - February 12, 2015
 
 **Improvements**
 
@@ -300,7 +311,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 - Top Bar sign-ups are now shown in the log for [MailChimp for WordPress Pro](https://mc4wp.com/).
 
-= 1.0.1 - February 4, 2015 =
+#### 1.0.1 - February 4, 2015
 
 **Fixes**
 
@@ -318,10 +329,9 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 Please update the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/) before updating to this version.
 
-= 1.0 - January 28, 2015 =
+#### 1.0 - January 28, 2015
 
 Initial release
-
 == Upgrade Notice ==
 
 = 1.2.6 =
