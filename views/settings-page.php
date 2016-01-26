@@ -27,7 +27,7 @@ $tabs = array(
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
 
 		<h2 style="display: none;"></h2>
-		<?php settings_fields( Plugin::OPTION_NAME ); ?>
+		<?php settings_fields( $opts->key ); ?>
 		<?php settings_errors(); ?>
 
 		<div id="message-list-requires-fields" class="notice notice-warning" style="display: none;">

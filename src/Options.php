@@ -2,36 +2,49 @@
 
 namespace MailChimp\TopBar;
 
+use InvalidArgumentException;
+
 class Options {
 
 	/**
-	 * @var string
+	 * @var
 	 */
-	protected $options_key = '';
+	public $key;
 
 	/**
 	 * @var array Array of options, without inherited values
 	 */
-	protected $options = array();
+	private $options = array();
 
 	/**
 	 * Constructor
 	 * @param string $options_key
 	 */
 	public function __construct( $options_key ) {
-		$this->options_key = $options_key;
-		$this->options = $this->load_options();
+		$this->key = $options_key;
+		$this->options = $this->load();
 	}
 
 	/**
 	 * Get an option value
 	 *
-	 * @param      $key
+	 * @param string $key
+	 * @param string $default
 	 *
 	 * @return mixed
+	 * @throw InvalidArgumentException
 	 */
-	public function get( $key ) {
-		return $this->options[ $key ];
+	public function get( $key, $default = null ) {
+
+		if( isset( $this->options[ $key ] ) ) {
+			return $this->options[ $key ];
+		}
+
+		if( isset( $default ) ) {
+			return $default;
+		}
+
+		throw new InvalidArgumentException( "{$key} is not a valid option key." );
 	}
 
 	/**
@@ -67,9 +80,9 @@ class Options {
 	/**
 	 * @return array
 	 */
-	private function load_options() {
+	private function load() {
 		$defaults = $this->get_defaults();
-		$options = (array) get_option( $this->options_key, array() );
+		$options = (array) get_option( $this->key, array() );
 		$options = array_merge( $defaults, $options );
 
 		// for BC with MailChimp Top Bar v1.2.3, always fill text option keys

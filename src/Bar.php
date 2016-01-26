@@ -259,8 +259,8 @@ class Bar {
 	 */
 	public function load_assets() {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), Plugin::VERSION );
-		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array(), Plugin::VERSION, true );
+		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
+		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
 
 		$bottom = ( $this->options->get( 'position' ) === 'bottom' );
 
@@ -356,7 +356,7 @@ class Bar {
 
 		?>
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
-			<!-- MailChimp Top Bar v<?php echo Plugin::VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
+			<!-- MailChimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctb-bar" style="display: none">
 				<?php echo $this->get_response_message(); ?>
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
@@ -405,7 +405,7 @@ class Bar {
 	 * @return string
 	 */
 	protected function asset_url( $url ) {
-		return plugins_url( '/assets' . $url, Plugin::FILE );
+		return plugins_url( '/assets' . $url, MAILCHIMP_TOP_BAR_FILE );
 	}
 
 	/**

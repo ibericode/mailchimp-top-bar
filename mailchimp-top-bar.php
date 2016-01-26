@@ -43,7 +43,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @access private
  */
 function __load_mailchimp_top_bar() {
-	global $mailchimp_top_bar;
 
 	// load autoloader
 	require __DIR__ . '/vendor/autoload.php';
@@ -59,23 +58,7 @@ function __load_mailchimp_top_bar() {
 	define( 'MAILCHIMP_TOP_BAR_VERSION', '1.2.6' );
 
 	// create instance
-	$classname = 'MailChimp\\TopBar\\Plugin';
-	$mailchimp_top_bar = $classname::instance();
-
-	if( ! is_admin() ) {
-		// frontend code
-		$bar_classname = 'MailChimp\\TopBar\\Bar';
-		$bar = new $bar_classname( $mailchimp_top_bar->options );
-		$bar->add_hooks();
-	} elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-		// ajax code
-
-	} else {
-		// admin code
-		$admin_classname = 'MailChimp\\TopBar\\Admin\\Manager';
-		$admin = new $admin_classname( $mailchimp_top_bar->options );
-		$admin->add_hooks();
-	}
+	require_once __DIR__ . '/bootstrap.php';
 
 	return true;
 }

@@ -21,7 +21,7 @@ class Manager {
 	public function __construct( Options $options ) {
 
 		$this->options = $options;
-		$this->plugin_slug = plugin_basename( Plugin::FILE );
+		$this->plugin_slug = plugin_basename( MAILCHIMP_TOP_BAR_FILE );
 	}
 
 	/**
@@ -45,48 +45,17 @@ class Manager {
 	public function init() {
 
 		// only run for administrators
+		// TODO: Use mc4wp capability here
 		if( ! current_user_can( 'manage_options' ) ) {
 			return false;
 		}
 
 		// register settings
-		register_setting( Plugin::OPTION_NAME, Plugin::OPTION_NAME, array( $this, 'sanitize_settings' ) );
+		register_setting( $this->options->key, $this->options->key, array( $this, 'sanitize_settings' ) );
 
 		// add link to settings page from plugins page
 		add_filter( 'plugin_action_links_' . $this->plugin_slug, array( $this, 'add_plugin_settings_link' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links'), 10, 2 );
-
-		// listen for wphs requests, user is authorized by now
-		$this->listen();
-
-		// run upgrade routine
-		$this->upgrade_routine();
-
-	}
-
-	/**
-	 * Upgrade routine, only runs when needed
-	 */
-	private function upgrade_routine() {
-
-		$db_version = get_option( 'mailchimp_top_bar_version', 0 );
-
-		// only run if db version is lower than actual code version
-		if ( ! version_compare( $db_version, Plugin::VERSION, '<' ) ) {
-			return false;
-		}
-
-		$upgrader = new Upgrader( $db_version, Plugin::VERSION );
-		$upgrader->run();
-
-		return true;
-	}
-
-	/**
-	 * Listen for stuff..
-	 */
-	private function listen() {
-
 	}
 
 	/**
@@ -154,7 +123,7 @@ class Manager {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
 
-		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$suffix}.js" ), array( 'jquery', 'wp-color-picker' ), Plugin::VERSION, true );
+		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$suffix}.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
 		wp_localize_script( 'mailchimp-top-bar-admin', 'mctb', array(
 				'lists' => $this->get_mailchimp_lists()
 			)
@@ -172,7 +141,7 @@ class Manager {
 		$opts = $this->options;
 		$lists = $this->get_mailchimp_lists();
 
-		require Plugin::DIR . '/views/settings-page.php';
+		require MAILCHIMP_TOP_BAR_DIR . '/views/settings-page.php';
 	}
 
 	/**
@@ -181,7 +150,7 @@ class Manager {
 	 * @return string
 	 */
 	protected function asset_url( $url ) {
-		return plugins_url( '/assets' . $url, Plugin::FILE );
+		return plugins_url( '/assets' . $url, MAILCHIMP_TOP_BAR_FILE );
 	}
 
 	/**
@@ -190,7 +159,7 @@ class Manager {
 	 * @return string
 	 */
 	protected function name_attr( $option_name ) {
-		return Plugin::OPTION_NAME . '[' . $option_name . ']';
+		return $this->options->key . '[' . $option_name . ']';
 	}
 
 	/**
@@ -234,13 +203,8 @@ class Manager {
 	 * @return array
 	 */
 	protected function get_mailchimp_lists() {
-
-		if( class_exists( 'MC4WP_MailChimp' ) ) {
-			$mailchimp = new \MC4WP_MailChimp();
-			return $mailchimp->get_lists();
-		}
-
-		return array();
+		$mailchimp = new \MC4WP_MailChimp();
+		return $mailchimp->get_lists();
 	}
 
 	/**
