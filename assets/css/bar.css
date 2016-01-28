@@ -46,7 +46,8 @@
 }
 #mailchimp-top-bar .mctb-email {
   width: 100%;
-  max-width: 240px;
+  /* this is important because otherwise the field will stack horizontally */
+  max-width: 240px !important;
 }
 #mailchimp-top-bar .mctb-button {
   margin-left: 0;
@@ -122,7 +123,10 @@
   font-size: 24px;
 }
 @media (max-width: 580px) {
-  #mailchimp-top-bar input, #mailchimp-top-bar label {
+  #mailchimp-top-bar input,
+  #mailchimp-top-bar label,
+  #mailchimp-top-bar .mctb-email,
+  #mailchimp-top-bar .mctb-label {
     width: 100%;
     max-width: 100% !important;
   }

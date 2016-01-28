@@ -83,7 +83,9 @@ $mobile_max: 580px;
 
 	.mctb-email {
 		width: 100%;
-		max-width: 240px;
+
+		/* this is important because otherwise the field will stack horizontally */
+		max-width: 240px !important;
 	}
 
 	.mctb-button {
@@ -115,7 +117,10 @@ $mobile_max: 580px;
 	}
 
 	@media( max-width: $mobile_max ) {
-		input, label {
+		input,
+		label,
+		.mctb-email,
+		.mctb-label {
 			width: 100%;
 			max-width: 100% !important;
 		}
