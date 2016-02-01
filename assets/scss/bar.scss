@@ -33,6 +33,7 @@ $mobile_max: 580px;
 
 #mailchimp-top-bar {
 
+
 	// Reset Form elements, many themes apply basic styling
 	form,
 	input,
@@ -144,6 +145,9 @@ $mobile_max: 580px;
 
 .mctb-bar {
 	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box !important;
 }
 
 .mctb-sticky {
