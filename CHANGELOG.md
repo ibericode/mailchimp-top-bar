@@ -1,4 +1,13 @@
-= Changelog =
+Changelog
+==========
+
+#### 1.2.8 - March 15, 2016
+
+**Improvements**
+
+- Make sure top bar doesn't appear on top of WP admin bar.
+- Hardened CSS styles for improved theme compatability.
+
 
 #### 1.2.7 - January 26, 2016
 
