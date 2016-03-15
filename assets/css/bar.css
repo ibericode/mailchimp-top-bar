@@ -135,6 +135,10 @@
   }
 }
 
+.admin-bar .mctb-position-top {
+  top: 32px;
+}
+
 .mctb {
   position: absolute;
   top: 0;
