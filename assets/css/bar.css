@@ -191,6 +191,7 @@
   margin-right: 12px;
   cursor: pointer;
   clear: both;
+  z-index: 10;
 }
 
 .mctb-icon-inside-bar.mctb-position-bottom .mctb-bar {
