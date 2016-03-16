@@ -144,10 +144,6 @@ $mobile_max: 580px;
 	margin: 0;
 	background: transparent;
 	text-align: center;
-}
-
-.mctb-bar,
-.mctb-close {
 	z-index: 999999;
 }
 
@@ -192,7 +188,6 @@ $mobile_max: 580px;
 	float: right;
 	margin-right: 12px;
 	cursor: pointer;
-	z-index: 200;
 	clear: both;
 }
 
