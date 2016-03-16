@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.2.9 - March 16, 2016
+
+**Fixes**
+
+Top Bar was invisible on some themes because of `z-index` being too low.
+
+
 #### 1.2.8 - March 15, 2016
 
 **Improvements**
