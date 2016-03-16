@@ -331,7 +331,7 @@ class Bar {
 		}
 
 		if( ! empty( $text_color ) ) {
-			echo ".mctb-bar, .mctb-close { color: {$text_color} !important; }" . PHP_EOL;
+			echo ".mctb-bar, .mctb-label, .mctb-close { color: {$text_color} !important; }" . PHP_EOL;
 		}
 
 		if( ! empty( $button_color ) ) {
