@@ -132,8 +132,16 @@ $mobile_max: 580px;
 	}
 }
 
-.admin-bar .mctb-position-top {
-	top: 32px;
+.admin-bar {
+
+	/* make sure z-index is slightly below that of admin bar (for dropdown) */
+	.mctb {
+		z-index: 99998;
+	}
+
+	.mctb-position-top {
+		top: 32px;
+	}
 }
 
 .mctb {

@@ -135,6 +135,9 @@
   }
 }
 
+.admin-bar .mctb {
+  z-index: 99998;
+}
 .admin-bar .mctb-position-top {
   top: 32px;
 }
