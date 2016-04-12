@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.2.10 - April 12, 2016
+
+**Fixes**
+
+- Closed bar would still overlap underlying elements (like fixed top menu's).
+
+
 #### 1.2.9 - March 16, 2016
 
 **Fixes**
