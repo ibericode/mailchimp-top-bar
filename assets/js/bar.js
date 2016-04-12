@@ -49,7 +49,7 @@
 				originalBodyPadding = ( parseInt( bodyEl.style.paddingTop )  || 0 );
 			}
 
-			// get real bar hegiht (if it were shown)
+			// get real bar height (if it were shown)
 			bodyPadding = ( originalBodyPadding + barHeight ) + "px";
 
 			// fade response 4 seconds after showing bar
@@ -74,7 +74,9 @@
 				wrapperEl.className += ' mctb-icon-inside-bar';
 
 				// since icon is now absolutely positioned, we need to set a min height
-				wrapperEl.style.minHeight = iconEl.clientHeight + "px";
+				if( isBottomBar ) {
+					wrapperEl.style.minHeight = iconEl.clientHeight + "px";
+				}
 			}
 
 			// hide bar again, we're done measuring

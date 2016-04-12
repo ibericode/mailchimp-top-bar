@@ -135,6 +135,9 @@
   }
 }
 
+.admin-bar {
+  /* make sure z-index is slightly below that of admin bar (for dropdown items) */
+}
 .admin-bar .mctb {
   z-index: 99998;
 }

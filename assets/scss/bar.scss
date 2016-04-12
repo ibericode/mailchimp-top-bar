@@ -134,7 +134,7 @@ $mobile_max: 580px;
 
 .admin-bar {
 
-	/* make sure z-index is slightly below that of admin bar (for dropdown) */
+	/* make sure z-index is slightly below that of admin bar (for dropdown items) */
 	.mctb {
 		z-index: 99998;
 	}
