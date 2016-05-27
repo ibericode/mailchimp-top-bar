@@ -3,6 +3,7 @@
 namespace MailChimp\TopBar;
 
 use Exception;
+use MC4WP_MailChimp;
 use MC4WP_Debug_Log;
 
 class Bar {
@@ -142,10 +143,7 @@ class Bar {
 			return false;
 		}
 
-		$email = sanitize_text_field( $_POST['email'] );
-
-		// subscribe email to selected list
-		$api = mc4wp_get_api();
+		$email_address = sanitize_text_field( $_POST['email'] );
 
 		/**
 		 * Filters fields which are sent to MailChimp from Top Bar requests.
@@ -155,15 +153,23 @@ class Bar {
 		$merge_vars = apply_filters( 'mctb_merge_vars', array() );
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
 
-		// TODO: add `mc4wp_merge_vars` and `mc4wp_lists` filter here?
-		$result = $api->subscribe( $mailchimp_list_id, $email, $merge_vars, $email_type, $this->options->get( 'double_optin' ), $this->options->get( 'update_existing' ), true, $this->options->get( 'send_welcome' ) );
+		$mailchimp = new MC4WP_MailChimp();
 
-		/*
-		 * @deprecated
-		 *
-		 * This is only still here for backwards compatibility with MailChimp for WP 2.x
-		 */
-		do_action( 'mc4wp_subscribe', $email, $mailchimp_list_id, $merge_vars, ( $result === true ), 'form', 'top-bar' );
+		if( method_exists( $mailchimp, 'list_subscribe' ) ) {
+			$args = array(
+				'email_address' => $email_address,
+				'merge_fields' => $merge_vars,
+				'interests' => array(),
+				'email_type' => $email_type,
+				'status' => $this->options->get( 'double_optin' ) ? 'pending' : 'subscribed',
+			);
+			$result = $mailchimp->list_subscribe( $mailchimp_list_id, $email_address, $args, $this->options->get( 'update_existing' ), true );
+			$result = is_object( $result ) && ! empty( $result->id );
+		} else {
+			// for BC with MailChimp for WordPress 3.x
+			$mailchimp = mc4wp_get_api();
+			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $merge_vars, $email_type, $this->options->get( 'double_optin' ), $this->options->get( 'update_existing' ), true, $this->options->get( 'send_welcome' ) );
+		}
 
 		// return true if success..
 		if( $result ) {
@@ -175,7 +181,7 @@ class Bar {
 			 * @param string $email
 			 * @param array $merge_vars
 			 */
-			do_action( 'mctb_subscribed', $mailchimp_list_id, $email, $merge_vars );
+			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $merge_vars );
 
 			// track sign-up attempt
 			$tracker = new Tracker( 365 * DAY_IN_SECONDS );
@@ -184,7 +190,7 @@ class Bar {
 
 			// log sign-up attempt
 			if( $log ) {
-				$log->info( sprintf( 'Top Bar > Successfully subscribed %s', $email ) );
+				$log->info( sprintf( 'Top Bar > Successfully subscribed %s', $email_address ) );
 			}
 
 			// should we redirect
@@ -197,17 +203,17 @@ class Bar {
 		}
 
 		// An API error occured... Oh noes!
-		if( $api->get_error_code() === 214 ) {
+		if( $mailchimp->get_error_code() === 214 ) {
 			$this->error_type = 'already_subscribed';
 
 			if( $log ) {
-				$log->warning( sprintf( 'Top Bar > %s is already subscribed to the selected list(s)', $email ) );
+				$log->warning( sprintf( 'Top Bar > %s is already subscribed to the selected list(s)', $email_address ) );
 			}
 		} else {
 			$this->error_type = 'error';
 
 			if( $log ) {
-				$log->error( sprintf( 'Top Bar > MailChimp API error: %s', $api->get_error_message() ) );
+				$log->error( sprintf( 'Top Bar > MailChimp API error: %s', $mailchimp->get_error_message() ) );
 			}
 		}
 
@@ -227,7 +233,7 @@ class Bar {
 		}
 
 		// make sure `_mctb_timestamp` is at least 1.5 seconds ago
-		if( ! isset( $_POST['_mctb_timestamp'] ) || time() < ( intval( $_POST['_mctb_timestamp'] ) + 1.5 ) ) {
+		if( empty( $_POST['_mctb_timestamp'] ) || time() < ( intval( $_POST['_mctb_timestamp'] ) + 1.5 ) ) {
 			$this->error_type = 'spam';
 			return false;
 		}
@@ -246,7 +252,7 @@ class Bar {
 		}
 
 		// check if email is given and valid
-		if( ! isset( $_POST['email'] ) || ! is_string( $_POST['email'] ) || ! is_email( $_POST['email'] ) ) {
+		if( empty( $_POST['email'] ) || ! is_string( $_POST['email'] ) || ! is_email( $_POST['email'] ) ) {
 			$this->error_type = 'invalid_email';
 			return false;
 		}
