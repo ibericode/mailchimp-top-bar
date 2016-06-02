@@ -5,6 +5,7 @@ namespace MailChimp\TopBar;
 use Exception;
 use MC4WP_MailChimp;
 use MC4WP_Debug_Log;
+use MC4WP_MailChimp_Subscriber_Data;
 
 class Bar {
 
@@ -115,6 +116,7 @@ class Bar {
 
 		$this->submitted = true;
 		$log = $this->get_log();
+		$subscriber_data = null;
 
 		if( ! $this->validate() ) {
 
@@ -154,16 +156,16 @@ class Bar {
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
 
 		$mailchimp = new MC4WP_MailChimp();
+		if( class_exists( 'MC4WP_MailChimp_Subscriber_Data' ) ) {
+			$subscriber_data = new MC4WP_MailChimp_Subscriber_Data();
+			$subscriber_data->email_address = $email_address;
+			$subscriber_data->merge_fields = $merge_vars;
+			$subscriber_data->email_type = $email_type;
+			$subscriber_data->status = $this->options->get( 'double_optin' ) ? 'pending' : 'subscribed';
 
-		if( method_exists( $mailchimp, 'list_subscribe' ) ) {
-			$args = array(
-				'email_address' => $email_address,
-				'merge_fields' => $merge_vars,
-				'interests' => array(),
-				'email_type' => $email_type,
-				'status' => $this->options->get( 'double_optin' ) ? 'pending' : 'subscribed',
-			);
-			$result = $mailchimp->list_subscribe( $mailchimp_list_id, $email_address, $args, $this->options->get( 'update_existing' ), true );
+			// TODO: Filter data here.
+
+			$result = $mailchimp->list_subscribe( $mailchimp_list_id, $email_address, $subscriber_data->to_array(), $this->options->get( 'update_existing' ), true );
 			$result = is_object( $result ) && ! empty( $result->id );
 		} else {
 			// for BC with MailChimp for WordPress 3.x
@@ -180,8 +182,9 @@ class Bar {
 			 * @param string $mailchimp_list_id
 			 * @param string $email
 			 * @param array $merge_vars
+			 * @param MC4WP_MailChimp_Subscriber_Data $subscriber_data
 			 */
-			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $merge_vars );
+			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $merge_vars, $subscriber_data );
 
 			// track sign-up attempt
 			$tracker = new Tracker( 365 * DAY_IN_SECONDS );
