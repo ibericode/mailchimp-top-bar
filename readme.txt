@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp,form,newsletter,mc4wp,mailchimp form,mailchimp sign-up,email,sign-up bar,opt-in,sign-up,subscribe,conversion,call to action
 Requires at least: 3.8
 Tested up to: 4.5.3
-Stable tag: 1.2.10
+Stable tag: 1.2.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,13 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
+
+#### 1.2.11 - July 8, 2016
+
+**Improvements**
+
+- Completely removed optional jQuery dependency. The plugin now uses JavaScript animations, resulting in a much smoother experience.
+- Preparations for upcoming MailChimp for WordPress v4.0 release.
 
 #### 1.2.10 - April 12, 2016
 
