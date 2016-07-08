@@ -182,9 +182,8 @@ class Bar {
 			 * @param string $mailchimp_list_id
 			 * @param string $email
 			 * @param array $merge_vars
-			 * @param MC4WP_MailChimp_Subscriber_Data $subscriber_data
 			 */
-			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $merge_vars, $subscriber_data );
+			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $merge_vars );
 
 			// track sign-up attempt
 			$tracker = new Tracker( 365 * DAY_IN_SECONDS );
