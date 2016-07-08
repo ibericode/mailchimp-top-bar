@@ -10,8 +10,11 @@ const sass = require('gulp-sass');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const wpPot = require('gulp-wp-pot');
+const sort = require('gulp-sort');
+const config = require('./package.json')
 
-gulp.task('default', ['sass', 'uglify' ]);
+gulp.task('default', ['languages', 'sass', 'uglify' ]);
 
 gulp.task('sass', function () {
     var files = './assets/scss/[^_]*.scss';
@@ -46,4 +49,15 @@ gulp.task('uglify', ['browserify'], function() {
         .pipe(rename({extname: '.min.js'}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./assets/js'));
+});
+
+
+gulp.task('languages', function () {
+    return gulp.src(['src/**/*.php', 'views/**/*.php'])
+        .pipe(sort())
+        .pipe(wpPot( {
+            domain: config.name,
+            destFile: config.name + '.pot'
+        } ))
+        .pipe(gulp.dest('languages'));
 });
