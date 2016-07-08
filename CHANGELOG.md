@@ -1,6 +1,17 @@
 Changelog
 ==========
 
+#### Trunk
+
+**Improvements**
+
+- Function scope generated JavaScript file to prevent Browserify clashes with other loaded scripts.
+
+**Additions**
+
+- Added Spanish language files, thanks to [Ángel Guzmán Maeso](http://shakaran.net/)
+
+
 #### 1.2.11 - July 8, 2016
 
 **Improvements**
