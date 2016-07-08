@@ -1,0 +1,238 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-04-08 06:54+0200\n"
+"PO-Revision-Date: 2016-04-08 07:10+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __\n"
+"Last-Translator: Ángel Guzmán Maeso <shakaran@gmail.com>\n"
+"Language: es_ES\n"
+"X-Poedit-SearchPath-0: views\n"
+"X-Poedit-SearchPath-1: src\n"
+"X-Poedit-SearchPath-2: assets\n"
+"X-Poedit-SearchPath-3: views\n"
+"X-Poedit-SearchPath-4: php-backwards-compatibility.php\n"
+"X-Poedit-SearchPath-5: mailchimp-top-bar.php\n"
+"X-Poedit-SearchPath-6: index.php\n"
+"X-Poedit-SearchPath-7: dependencies.php\n"
+"X-Poedit-SearchPath-8: bootstrap.php\n"
+"X-Poedit-SearchPath-9: src/Options.php\n"
+
+#: dependencies.php:20
+#, php-format
+msgid ""
+"Please install or update <a href=\"%s\" class=\"thickbox\">%s</a> in order "
+"to use %s."
+msgstr ""
+"Por favor instala o actualiza <a href=\"%s\" class=\"thickbox\">%s</a> para "
+"poder usar %s."
+
+#: src/Admin/Manager.php:71
+msgid "MailChimp Top Bar"
+msgstr "MailChimp Top Bar"
+
+#: src/Admin/Manager.php:72
+msgid "Top Bar"
+msgstr "Barra superior"
+
+#: src/Admin/Manager.php:90
+msgid "Settings"
+msgstr "Configuraciones"
+
+#: src/Admin/Manager.php:106
+#, php-format
+msgid "An add-on for %s"
+msgstr "Y complemento para %s"
+
+#: src/Options.php:65
+msgid "Your email address.."
+msgstr "Tu dirección de email.."
+
+#: src/Options.php:66
+msgid "Sign-up now - don't miss the fun!"
+msgstr "Registrate ahora - ¡no te pierdas la diversión!"
+
+#: src/Options.php:67
+msgid "Subscribe"
+msgstr "Suscribirse"
+
+#: src/Options.php:73
+msgid "Thanks, you're in! Please check your email inbox for a confirmation."
+msgstr ""
+"Gracias, ¡estas dentro! Por favor comprueba tu buzón de correo para la "
+"confirmación."
+
+#: src/Options.php:74
+msgid "Oops. Something went wrong."
+msgstr "Oops. Algo fue mal."
+
+#: src/Options.php:75
+msgid "That email seems to be invalid."
+msgstr "Ese correo parece ser no válido."
+
+#: src/Options.php:76
+msgid "You are already subscribed. Thank you!"
+msgstr "Acabas de suscribirte. Gracias!"
+
+#: views/settings-page.php:8
+msgid "Bar Setting"
+msgstr "Configuración de la barra"
+
+#: views/settings-page.php:9
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: views/settings-page.php:10
+msgid "Messages"
+msgstr "Mensajes"
+
+#: views/settings-page.php:11
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: views/settings-page.php:34
+#, php-format
+msgid ""
+"The selected MailChimp list requires more fields than just an <strong>%s</"
+"strong> field. Please <a href=\"%s\">log into your MailChimp account</a> and "
+"make sure only the <strong>%s</strong> field is marked as required."
+msgstr ""
+"La lista de MailChimp elegida requiere más campos que sólo el campo <strong>"
+"%s</strong>. Por favor <a href=\"%s\">accede a tu cuenta de MailChimp</a> y "
+"asegúrate que sólo el campo <strong>%s</strong> esta marcado como "
+"obligatorio."
+
+#: views/settings-page.php:74
+#, php-format
+msgid "No lists found, <a href=\"%s\">are you connected to MailChimp</a>?"
+msgstr ""
+"No se encontraron listas, ¿<a href=\"%s\">estas conectado a MailChimp</a>?"
+
+#: views/settings-page.php:260
+#, php-format
+msgid "HTML tags like %s are allowed in the message fields."
+msgstr "Etiquetas HTML como %s están permitidas en los mensajes de campos."
+
+#: views/settings-page.php:336
+#, php-format
+msgid ""
+"This is really only useful if you have <a href=\"%s\">added additional "
+"fields (besides just email)</a>."
+msgstr ""
+"Esto sólo es útil si tienes <a href=\"%s\">añadidos campos adicionales "
+"(además del correo)</a>."
+
+#: php-backwards-compatibility.php:45
+msgid ""
+"MailChimp Top Bar did not activate because it requires your server to run "
+"PHP 5.3 or higher."
+msgstr ""
+"MailChimp Top Bar no se ha activado porque requiere que tu servidor pueda "
+"ejecutar PHP 5.3 o superior."
+
+#: src/DependencyCheck.php:60
+#, php-format
+msgid "Please install <a href=\"%s\">%s</a> in order to use %s."
+msgstr "Por favor instala <a href=\"%s\">%s</a> para poder usar %s."
+
+#: views/settings-page.php:19
+#, php-format
+msgid ""
+"The selected MailChimp list requires more fields than just a <strong>%s</"
+"strong> field. Please <a href=\"%s\">log into your MailChimp account</a> and "
+"make sure only the <strong>%s</strong> field is marked as required."
+msgstr ""
+"La lista de MailChimp elegida requiere más campos que sólo el campo <strong>"
+"%s</strong>. Por favor <a href=\"%s\">accede a tu cuenta de MailChimp</a> y "
+"asegúrate que sólo el campo <strong>%s</strong> esta marcado como "
+"obligatorio."
+
+#: views/settings-page.php:23
+msgid "Bar Settings"
+msgstr "Configuración de la barra"
+
+#: views/settings-page.php:35 views/settings-page.php:167
+msgid "Yes"
+msgstr "Si"
+
+#: views/settings-page.php:38 views/settings-page.php:170
+msgid "No"
+msgstr "No"
+
+#: views/settings-page.php:44
+msgid "MailChimp List"
+msgstr "Lista MailChimp"
+
+#: views/settings-page.php:51
+msgid "Select a list.."
+msgstr "Selecciona una lista.."
+
+#: views/settings-page.php:57
+msgid "Select the list to which visitors should be subscribed."
+msgstr "Selecciona la lista en las que los visitantes deberían suscribirse."
+
+#: views/settings-page.php:63
+msgid "Bar Text"
+msgstr "Texto de la barra"
+
+#: views/settings-page.php:70
+msgid "The text to appear before the email field."
+msgstr "El texto que aparecerá antes del campo de correo."
+
+#: views/settings-page.php:77
+msgid "Button Text"
+msgstr "Texto del botón"
+
+#: views/settings-page.php:84
+msgid "The text on the submit button."
+msgstr "El texto en el botón de envío"
+
+#: views/settings-page.php:91
+msgid "Email Placeholder Text"
+msgstr "Texto previo del correo"
+
+#: views/settings-page.php:98
+msgid "The initial placeholder text to appear in the email field."
+msgstr "El texto de hueco inicial para aparecer en el campo de email."
+
+#: views/settings-page.php:103
+#, php-format
+msgid ""
+"Success and error messages can be managed in <a href=\"%s\">%s &raquo; %s</a>"
+msgstr ""
+"Mensajes de error y éxito pueden administrarse en <a href=\"%s\">%s &raquo; "
+"%s</a>"
+
+#: views/settings-page.php:126
+msgid "Medium"
+msgstr "Medio"
+
+#: views/settings-page.php:127
+msgid "Big"
+msgstr "Grande"
+
+#: views/settings-page.php:135
+msgid "Bar Color"
+msgstr "Color de la barra"
+
+#: views/settings-page.php:146
+msgid "Text Color"
+msgstr "Color de texto"
+
+#: views/settings-page.php:162
+msgid "Sticky Bar?"
+msgstr "¿Barra fijada?"
+
+#: views/settings-page.php:178
+msgid "Button Color"
+msgstr "Color del botón"
+
+#: views/settings-page.php:189
+msgid "Button Text Color"
+msgstr "Color de texto del botón"
