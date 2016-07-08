@@ -1,7 +1,7 @@
 === MailChimp Top Bar ===
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
-Tags: mailchimp,form,newsletter,mc4wp,mailchimp form,mailchimp sign-up,email,sign-up bar,opt-in,sign-up,subscribe,conversion,call to action
+Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 3.8
 Tested up to: 4.5.3
 Stable tag: 1.2.11
@@ -16,20 +16,19 @@ Adds a beautiful, customizable sign-up bar to the top of your WordPress site. Th
 increase your MailChimp subscribers.
 
 > This plugin is an add-on for the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/).
-> To use it, you need at least **MailChimp for WordPress v2.2.3** or **MailChimp for WordPress Pro v2.5.5**.
 
 = MailChimp Sign-Up Bar, at a glance.. =
 
-MailChimp Top Bar adds a simple yet beautiful and customizable opt-in bar to the top or bottom of your WordPress site.
+MailChimp Top Bar adds a simple yet beautiful & customizable opt-in bar to the top or bottom of your WordPress site.
 
-Using this bar, people can subscribe to any MailChimp list of your choice.
+Using this bar, people can subscribe to a MailChimp list of your choice.
 
-- A real conversion booster.
-- Unobtrusive, visitors can dismiss the bar.
+- Guaranteed to boost conversions.
+- Unobtrusive, visitors can easily dismiss the bar.
 - Easy to install & configure, just select a MailChimp list and you're good to.
 - Customizable, you can edit the bar text and colors from the plugin settings.
 - The bar can be at the top or bottom of the visitor's screen
-- Lightweight, this plugin aims to do one thing, and does it well.
+- Lightweight, the plugin consists of a single 4kb JavaScript file.
 
 = Development of MailChimp Top Bar =
 
@@ -54,14 +53,14 @@ Since this plugin depends on the [MailChimp for WordPress plugin](https://wordpr
 1. Alternatively, download the plugin and upload the contents of `mailchimp-top-bar.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
 1. Set [your MailChimp API key](https://admin.mailchimp.com/account/api) in **MailChimp for WP > MailChimp Settings**.
-1. Select a list to subscribe to in **MailChimp for WP > Top Bar**.
-1. Customize the look of your top bar
+1. Select a MailChimp list to subscribe to in **MailChimp for WP > Top Bar**.
+1. _(Optional)_ Customize the look & position of your opt-in bar.
 
 == Frequently Asked Questions ==
 
 = How to disable the bar on certain pages? =
 
-For now, you will have to use a filter to disable the bar on certain pages. The following example only loads the Top Bar on your blog posts.
+For now, you will have to use a filter to disable the bar on certain pages. The following example only loads the Top Bar on your blog post pages.
 
 `
 add_filter( 'mctb_show_bar', function( $show ) {
@@ -69,7 +68,7 @@ add_filter( 'mctb_show_bar', function( $show ) {
 } );
 `
 
-Or, another example, this only loads the bar on your "contact" page.
+Another example, this only loads the bar on your "contact" page.
 
 `
 add_filter( 'mctb_show_bar', function( $show ) {
@@ -93,6 +92,8 @@ add_filter( 'mctb_merge_vars', function( $vars ) {
     return $vars;
 });
 `
+
+**KB:** [Add name field to MailChimp Top Bar](https://mc4wp.com/kb/add-name-field-to-mailchimp-top-bar/)
 
 = How to hide the bar on small screens? =
 
