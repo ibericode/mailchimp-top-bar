@@ -13,6 +13,7 @@ const buffer = require('vinyl-buffer');
 const wpPot = require('gulp-wp-pot');
 const sort = require('gulp-sort');
 const config = require('./package.json')
+const insert = require('gulp-insert');
 
 gulp.task('default', ['languages', 'sass', 'uglify' ]);
 
@@ -38,6 +39,7 @@ gulp.task('browserify', function() {
     }).on('error', console.log)
         .bundle()
         .pipe(source('script.js'))
+        .pipe(insert.wrap('(function () { var require = undefined; var module = undefined; var exports = undefined; var define = undefined;', '; })();'))
         .pipe(buffer())
         .pipe(gulp.dest('./assets/js'));
 });

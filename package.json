@@ -9,6 +9,7 @@
     "browserify": "^13.0.1",
     "gulp": "^3.9.0",
     "gulp-cssmin": "^0.1.7",
+    "gulp-insert": "^0.5.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-sort": "^2.0.0",
