@@ -163,7 +163,7 @@ class Bar {
 			$subscriber_data->email_type = $email_type;
 			$subscriber_data->status = $this->options->get( 'double_optin' ) ? 'pending' : 'subscribed';
 
-			// TODO: Filter data here.
+			// TODO: Filter data here. (and add IP address)
 
 			$result = $mailchimp->list_subscribe( $mailchimp_list_id, $email_address, $subscriber_data->to_array(), $this->options->get( 'update_existing' ), true );
 			$result = is_object( $result ) && ! empty( $result->id );
@@ -269,7 +269,7 @@ class Bar {
 	public function load_assets() {
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
-		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/bar{$min}.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
+		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script{$min}.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
 
 		$bottom = ( $this->options->get( 'position' ) === 'bottom' );
 
