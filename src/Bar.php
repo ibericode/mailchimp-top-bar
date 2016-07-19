@@ -5,7 +5,8 @@ namespace MailChimp\TopBar;
 use Exception;
 use MC4WP_MailChimp;
 use MC4WP_Debug_Log;
-use MC4WP_MailChimp_Subscriber_Data;
+use MC4WP_MailChimp_Subscriber;
+use MC4WP_List_Data_Mapper;
 
 class Bar {
 
@@ -114,9 +115,13 @@ class Bar {
 	 */
 	private function process() {
 
+		$options = $this->options;
 		$this->submitted = true;
 		$log = $this->get_log();
-		$subscriber_data = null;
+
+		/** @var MC4WP_MailChimp_Subscriber $subscriber_data */
+		$subscriber = null;
+		$result = false;
 
 		if( ! $this->validate() ) {
 
@@ -128,11 +133,11 @@ class Bar {
 		}
 
 		/**
-		 * Filters the list to which Top Bar subscribed
+		 * Filters the list to which MailChimp Top Bar subscribes.
 		 *
 		 * @param string $list_id
 		 */
-		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $this->options->get( 'list' ) );
+		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $options->get( 'list' ) );
 
 		// check if a MailChimp list was given
 		if( empty( $mailchimp_list_id ) ) {
@@ -146,31 +151,53 @@ class Bar {
 		}
 
 		$email_address = sanitize_text_field( $_POST['email'] );
+		$data = array(
+			'EMAIL' => $email_address,
+		);
 
 		/**
-		 * Filters fields which are sent to MailChimp from Top Bar requests.
+		 * Filters the data received by MailChimp Top Bar, before it is further processed.
 		 *
-		 * @param array $merge_vars
+		 * @param $data
 		 */
-		$merge_vars = apply_filters( 'mctb_merge_vars', array() );
+		$data = apply_filters( 'mctb_data', $data );
+
+		/** @ignore */
+		$data = apply_filters( 'mctb_merge_vars', $data );
+
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
 
 		$mailchimp = new MC4WP_MailChimp();
-		if( class_exists( 'MC4WP_MailChimp_Subscriber_Data' ) ) {
-			$subscriber_data = new MC4WP_MailChimp_Subscriber_Data();
-			$subscriber_data->email_address = $email_address;
-			$subscriber_data->merge_fields = $merge_vars;
-			$subscriber_data->email_type = $email_type;
-			$subscriber_data->status = $this->options->get( 'double_optin' ) ? 'pending' : 'subscribed';
+		if( class_exists( 'MC4WP_MailChimp_Subscriber' ) ) {
 
-			// TODO: Filter data here. (and add IP address)
+			$mapper = new MC4WP_List_Data_Mapper( $data, array( $mailchimp_list_id ) );
+			$map = $mapper->map();
 
-			$result = $mailchimp->list_subscribe( $mailchimp_list_id, $email_address, $subscriber_data->to_array(), $this->options->get( 'update_existing' ), true );
-			$result = is_object( $result ) && ! empty( $result->id );
+			foreach( $map as $list_id => $subscriber ) {
+				$subscriber->email_type = $email_type;
+				$subscriber->status = $options->get( 'double_optin' ) ? 'pending' : 'subscribed';
+
+				// TODO: Add IP address.
+
+				/** @ignore (documented elsewhere) */
+				$subscriber = apply_filters( 'mc4wp_subscriber_data', $subscriber );
+
+				/**
+				 * Filter subscriber data before it is sent to MailChimp. Runs only for MailChimp Top Bar requests.
+				 *
+				 * @param MC4WP_MailChimp_Subscriber
+				 */
+				$subscriber = apply_filters( 'mctb_subscriber_data', $subscriber );
+
+				$result = $mailchimp->list_subscribe( $mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options->get( 'update_existing' ), true );
+				$result = is_object( $result ) && ! empty( $result->id );
+			}
+
 		} else {
-			// for BC with MailChimp for WordPress 3.x
+			// for BC with MailChimp for WordPress 3.x, override $mailchimp var
 			$mailchimp = mc4wp_get_api();
-			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $merge_vars, $email_type, $this->options->get( 'double_optin' ), $this->options->get( 'update_existing' ), true, $this->options->get( 'send_welcome' ) );
+			unset( $data['EMAIL'] );
+			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $data, $email_type, $options->get( 'double_optin' ), $options->get( 'update_existing' ), true, $options->get( 'send_welcome' ) );
 		}
 
 		// return true if success..
@@ -181,9 +208,9 @@ class Bar {
 			 *
 			 * @param string $mailchimp_list_id
 			 * @param string $email
-			 * @param array $merge_vars
+			 * @param array $data
 			 */
-			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $merge_vars );
+			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $data );
 
 			// track sign-up attempt
 			$tracker = new Tracker( 365 * DAY_IN_SECONDS );
@@ -196,8 +223,8 @@ class Bar {
 			}
 
 			// should we redirect
-			if( '' !== $this->options->get( 'redirect' ) ) {
-				wp_redirect( $this->options->get( 'redirect' ) );
+			if( '' !== $options->get( 'redirect' ) ) {
+				wp_redirect( $options->get( 'redirect' ) );
 				exit;
 			}
 
