@@ -28,7 +28,7 @@ Using this bar, people can subscribe to a MailChimp list of your choice.
 - Easy to install & configure, just select a MailChimp list and you're good to.
 - Customizable, you can edit the bar text and colors from the plugin settings.
 - The bar can be at the top or bottom of the visitor's screen
-- Lightweight, the plugin consists of a single 4kb JavaScript file.
+- Lightweight, the plugin consists of just a single 4kb JavaScript file.
 
 = Development of MailChimp Top Bar =
 
