@@ -161,6 +161,10 @@ function Bar( wrapperEl, config ) {
      * @returns {boolean}
      */
     function toggle() {
+        if(animator.animated(barEl)) {
+            return false;
+        }
+
         return visible ? hide(true) : show(true);
     }
 
