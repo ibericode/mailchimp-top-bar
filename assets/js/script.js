@@ -157,7 +157,6 @@ module.exports = {
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var body = document.body;
 var cookies = require('./cookies.js');
 var animator = require('./animator.js');
 
@@ -191,10 +190,10 @@ function Bar( wrapperEl, config ) {
         // save original bodyPadding
         if( isBottomBar ) {
             wrapperEl.insertBefore( iconEl, barEl );
-            originalBodyPadding = ( parseInt( body.style.paddingBottom )  || 0 );
+            originalBodyPadding = ( parseInt( document.body.style.paddingBottom )  || 0 );
         } else {
             wrapperEl.insertBefore( iconEl, barEl.nextElementSibling );
-            originalBodyPadding = ( parseInt( body.style.paddingTop )  || 0 );
+            originalBodyPadding = ( parseInt( document.body.style.paddingTop )  || 0 );
         }
 
         // get real bar height (if it were shown)
@@ -259,7 +258,7 @@ function Bar( wrapperEl, config ) {
         } else {
             // Add bar height to <body> padding
             barEl.style.display = 'block';
-            body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
+            document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
         }
 
         iconEl.innerHTML = config.icons.hide;
