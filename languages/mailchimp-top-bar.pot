@@ -166,6 +166,6 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: views/settings-page.php:336
+#: views/settings-page.php:338
 msgid "This is really only useful if you have <a href=\"%s\">added additional fields (besides just email)</a>."
 msgstr ""
