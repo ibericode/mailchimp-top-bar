@@ -298,25 +298,27 @@ $tabs = array(
 					</td>
 				</tr>
 
-				<?php $config = array( 'element' => $this->name_attr( 'double_optin' ), 'value' => 0 ); ?>
-				<tr valign="top" class="send-welcome-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
-					<th scope="row">
-						<label>
-							<?php _e( 'Send Welcome Email?', 'mailchimp-for-wp' ); ?>
-						</label>
-					</th>
-					<td>
-						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
-						</label>
-						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome' ), 0 ); ?> /> <?php _e( 'No' ); ?>
-						</label>
-						<p class="help">
-							<?php _e( 'Select "yes" if you want to send your lists Welcome Email if a subscribe succeeds (only when double opt-in is disabled).', 'mailchimp-for-wp' ); ?>
-						</p>
-					</td>
-				</tr>
+				<?php if( ! class_exists( 'MC4WP_API_v3' ) ) { ?>
+					<?php $config = array( 'element' => $this->name_attr( 'double_optin' ), 'value' => 0 ); ?>
+					<tr valign="top" class="send-welcome-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
+						<th scope="row">
+							<label>
+								<?php _e( 'Send Welcome Email?', 'mailchimp-for-wp' ); ?>
+							</label>
+						</th>
+						<td>
+							<label>
+								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							</label>
+							<label>
+								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+							</label>
+							<p class="help">
+								<?php _e( 'Select "yes" if you want to send your lists Welcome Email if a subscribe succeeds (only when double opt-in is disabled).', 'mailchimp-for-wp' ); ?>
+							</p>
+						</td>
+					</tr>
+				<?php } // end if MC4WP_API_v3 exists ?>
 
 				<tr valign="top">
 					<th scope="row">
