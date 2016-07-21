@@ -1,15 +1,26 @@
 Changelog
 ==========
 
-#### Trunk
+#### 1.2.12 - July 21, 2016
+
+**Fixes**
+
+- Bar would crash when clicking toggle icon during bar animation.
 
 **Improvements**
 
 - Function scope generated JavaScript file to prevent Browserify clashes with other loaded scripts.
+- Make sure script works even though it's loaded in the head section.
+- Preparations for upcoming MailChimp for WordPress v4.0 release.
 
 **Additions**
 
 - Added Spanish language files, thanks to [Ángel Guzmán Maeso](http://shakaran.net/)
+- Added `mctb_data` filter, to filter form data before it is processed.
+
+**Deprecated**
+
+- Deprecated `mctb_merge_vars` filter.
 
 
 #### 1.2.11 - July 8, 2016
@@ -17,7 +28,6 @@ Changelog
 **Improvements**
 
 - Completely removed optional jQuery dependency. The plugin now uses JavaScript animations, resulting in a much smoother experience.
-- Preparations for upcoming MailChimp for WordPress v4.0 release.
 
 #### 1.2.10 - April 12, 2016
 
