@@ -254,7 +254,7 @@ function Bar( wrapperEl, config ) {
             // animate body padding
             var styles = {};
             styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
-            animator.animate(body, styles);
+            animator.animate(document.body, styles);
         } else {
             // Add bar height to <body> padding
             barEl.style.display = 'block';
@@ -284,7 +284,7 @@ function Bar( wrapperEl, config ) {
             // animate body padding
             var styles = {};
             styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding;
-            animator.animate(body, styles);
+            animator.animate(document.body, styles);
         } else {
             barEl.style.display = 'none';
             document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + "px";
