@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.2.13 - August 2, 2016
+
+**Fixes**
+
+- Error in animating body padding back to its original value.
+
+
 #### 1.2.12 - July 21, 2016
 
 **Fixes**
