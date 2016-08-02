@@ -248,9 +248,7 @@ function Bar( wrapperEl, config ) {
         if( visible ) {
             return false;
         }
-
-        window.addEventListener('resize', function() { console.log("Scrolling!") });
-
+        
         if( manual ) {
             cookies.erase( 'mctb_bar_hidden' );
             animator.toggle(barEl, "slide");
