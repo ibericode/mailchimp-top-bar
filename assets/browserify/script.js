@@ -4,7 +4,8 @@ var Bar = require('./bar.js');
 
 // Init bar
 ready(function() {
-    window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
+    var element = document.getElementById('mailchimp-top-bar');
+    window.MailChimpTopBar = new Bar( element, window.mctb );
 });
 
 /**

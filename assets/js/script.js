@@ -177,6 +177,8 @@ function Bar( wrapperEl, config ) {
 
     function init() {
 
+
+
         // remove "no_js" field
         var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
         noJsField.parentElement.removeChild(noJsField);
@@ -207,7 +209,7 @@ function Bar( wrapperEl, config ) {
             responseEl.style.lineHeight = barHeight + "px";
         }
 
-        // Configure icon
+        // configure icon
         iconEl.setAttribute('class', 'mctb-close');
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
@@ -246,6 +248,8 @@ function Bar( wrapperEl, config ) {
         if( visible ) {
             return false;
         }
+
+        window.addEventListener('resize', function() { console.log("Scrolling!") });
 
         if( manual ) {
             cookies.erase( 'mctb_bar_hidden' );
@@ -306,7 +310,7 @@ function Bar( wrapperEl, config ) {
 
             // auto-dismiss bar if we're good!
             if( config.is_submitted && config.is_success ) {
-                window.setTimeout( function() { hide( true );}, 1000 );
+                window.setTimeout( function() { hide(true); }, 1000 );
             }
         }
     }
@@ -334,7 +338,6 @@ function Bar( wrapperEl, config ) {
         show: show,
         hide: hide
     }
-
 }
 
 module.exports = Bar;
@@ -399,7 +402,8 @@ var Bar = require('./bar.js');
 
 // Init bar
 ready(function() {
-    window.MailChimpTopBar = new Bar( document.getElementById('mailchimp-top-bar'), window.mctb );
+    var element = document.getElementById('mailchimp-top-bar');
+    window.MailChimpTopBar = new Bar( element, window.mctb );
 });
 
 /**
