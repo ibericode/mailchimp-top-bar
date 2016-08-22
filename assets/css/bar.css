@@ -111,6 +111,9 @@
     z-index: 99998; }
   .admin-bar .mctb-position-top {
     top: 32px; }
+    @media screen and (max-width: 782px) {
+      .admin-bar .mctb-position-top {
+        top: 46px; } }
 
 .mctb {
   position: absolute;
