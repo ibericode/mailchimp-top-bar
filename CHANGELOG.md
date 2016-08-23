@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.2.14 (not yet released)
+
+**Fixes**
+
+- Top padding for small screens with admin bar.
+
+
 #### 1.2.13 - August 2, 2016
 
 **Fixes**
