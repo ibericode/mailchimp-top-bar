@@ -141,6 +141,9 @@ $mobile_max: 580px;
 
 	.mctb-position-top {
 		top: 32px;
+        @media screen and (max-width: 782px) {
+            top: 46px;
+        }
 	}
 }
 
