@@ -114,6 +114,11 @@
     @media screen and (max-width: 782px) {
       .admin-bar .mctb-position-top {
         top: 46px; } }
+    .admin-bar .mctb-position-top.mctb-sticky {
+      /* admin bar is non-sticky on small screens */ }
+      @media screen and (max-width: 600px) {
+        .admin-bar .mctb-position-top.mctb-sticky {
+          top: 0; } }
 
 .mctb {
   position: absolute;

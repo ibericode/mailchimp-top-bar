@@ -141,9 +141,18 @@ $mobile_max: 580px;
 
 	.mctb-position-top {
 		top: 32px;
+
         @media screen and (max-width: 782px) {
             top: 46px;
         }
+
+		&.mctb-sticky {
+			/* admin bar is non-sticky on small screens */
+			@media screen and (max-width: 600px) {
+				top: 0;
+			}
+		}
+
 	}
 }
 
