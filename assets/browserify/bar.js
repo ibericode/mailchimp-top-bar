@@ -94,6 +94,9 @@ function Bar( wrapperEl, config ) {
 
         // get real bar height (if it were shown)
         bodyPadding = ( originalBodyPadding + barHeight ) + "px";
+        if( visible ) {
+            document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
+        }
 
         // would the close icon fit inside the bar?
         var elementsWidth = 0;
