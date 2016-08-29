@@ -1,11 +1,15 @@
 Changelog
 ==========
 
-#### 1.2.14 (not yet released)
+#### 1.2.14 - August 29, 2016
 
 **Fixes**
 
 - Top padding for small screens with admin bar.
+
+**Improvements**
+
+- Better bar responsiveness when window dimensions change on the fly (eg resizing a window or changing device orientation mode). (Thanks [tech4him1](https://github.com/tech4him1)!)
 
 
 #### 1.2.13 - August 2, 2016
