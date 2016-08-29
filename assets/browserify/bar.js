@@ -78,10 +78,14 @@ function Bar( wrapperEl, config ) {
     }
 
     function calculateDimensions() {
-
+        
         // make sure bar is visible
         var origBarPosition = barEl.style.position;
         var origBarDisplay = barEl.style.display;
+
+        if( origBarDisplay !== 'block' ) {
+            barEl.style.visibility = 'hidden';
+        }
         barEl.style.display = 'block';
         barEl.style.position = 'relative';
 
@@ -110,6 +114,7 @@ function Bar( wrapperEl, config ) {
         // reset bar again, we're done measuring
         barEl.style.display = origBarDisplay;
         barEl.style.position = origBarPosition;
+        barEl.style.visibility = 'visible';
     }
 
     /**
