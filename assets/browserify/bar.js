@@ -38,7 +38,6 @@ function Bar( wrapperEl, config ) {
         bodyPadding = 0,
         isBottomBar = ( config.position === 'bottom' );
 
-
     // Functions
     function init() {
 
@@ -74,11 +73,11 @@ function Bar( wrapperEl, config ) {
 
         // fade response 4 seconds after showing bar
         window.setTimeout(fadeResponse, 4000);
-        window.addEventListener('resize', throttle(calculateDimensions));
+        window.addEventListener('resize', throttle(calculateDimensions, 40));
     }
 
     function calculateDimensions() {
-        
+
         // make sure bar is visible
         var origBarPosition = barEl.style.position;
         var origBarDisplay = barEl.style.display;
@@ -92,7 +91,7 @@ function Bar( wrapperEl, config ) {
         // calculate real bar height
         barHeight = barEl.clientHeight;
 
-        // get real bar height (if it were shown)
+        // calculate & set new body padding if bar is currently visible
         bodyPadding = ( originalBodyPadding + barHeight ) + "px";
         if( visible ) {
             document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
@@ -119,6 +118,7 @@ function Bar( wrapperEl, config ) {
         barEl.style.position = origBarPosition;
         barEl.style.visibility = 'visible';
     }
+
 
     /**
      * Show the bar
