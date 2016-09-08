@@ -4,7 +4,6 @@ const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const rename = require("gulp-rename");
 const cssmin = require('gulp-cssmin');
-const streamify = require('gulp-streamify');
 const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
 const browserify = require('browserify');
@@ -47,7 +46,8 @@ gulp.task('browserify', function() {
 gulp.task('uglify', ['browserify'], function() {
     return gulp.src(['./assets/js/**/*.js','!./assets/js/**/*.min.js'])
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(streamify(uglify().on('error', console.log)))
+        .pipe(buffer())
+        .pipe(uglify().on('error', console.log))
         .pipe(rename({extname: '.min.js'}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./assets/js'));
