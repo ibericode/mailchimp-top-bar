@@ -58,8 +58,8 @@ function Bar( wrapperEl, config ) {
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
 
-        // count input fields
-        if( barEl.querySelectorAll('input').length > 2 ) {
+        // count input fields (3 because of hidden input honeypot)
+        if( barEl.querySelectorAll('input:not([type="hidden"])').length > 3 ) {
             wrapperEl.className += " multiple-input-fields";
         }
 
