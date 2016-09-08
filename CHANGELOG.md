@@ -6,6 +6,7 @@ Changelog
 **Improvements**
 
 - Improved responsiveness when bar has additional input fields.
+- Add `required` attribute to email input.
 
 
 #### 1.2.14 - August 29, 2016
