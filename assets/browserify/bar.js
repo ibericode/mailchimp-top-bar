@@ -64,6 +64,11 @@ function Bar( wrapperEl, config ) {
         iconEl.innerHTML = config.icons.show;
         iconEl.addEventListener('click', toggle);
 
+        // count input fields
+        if( barEl.querySelectorAll('input').length > 2 ) {
+            wrapperEl.className += " multiple-input-fields";
+        }
+
         calculateDimensions();
 
         // Show the bar straight away?

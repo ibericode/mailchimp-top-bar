@@ -1,4 +1,5 @@
 $mobile_max: 580px;
+$tablet_max: 860px;
 
 // Calculates paddings * heights for the various bar sizes
 @mixin bar-size( $base_size ) {
@@ -117,6 +118,7 @@ $mobile_max: 580px;
 		@include bar-size(6px);
 	}
 
+	// bump everything to its own line on mobile screens
 	@media( max-width: $mobile_max ) {
 		input,
 		label,
@@ -126,8 +128,19 @@ $mobile_max: 580px;
 			max-width: 100% !important;
 		}
 
+		input,
 		.mctb-email {
-			margin: 6px 0 !important;
+			margin: 6px 0 0 !important;
+		}
+	}
+
+	// bump label to its own line on tablet when bar has 2+ input fields
+	@media( max-width: $tablet_max ) {
+		&.multiple-input-fields {
+			.mctb-label {
+				display: block !important;
+				margin: 0 0 6px;
+			}
 		}
 	}
 }

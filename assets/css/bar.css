@@ -102,8 +102,13 @@
     #mailchimp-top-bar .mctb-label {
       width: 100%;
       max-width: 100% !important; }
+    #mailchimp-top-bar input,
     #mailchimp-top-bar .mctb-email {
-      margin: 6px 0 !important; } }
+      margin: 6px 0 0 !important; } }
+  @media (max-width: 860px) {
+    #mailchimp-top-bar.multiple-input-fields .mctb-label {
+      display: block !important;
+      margin: 0 0 6px; } }
 
 .admin-bar {
   /* make sure z-index is slightly below that of admin bar (for dropdown items) */ }
