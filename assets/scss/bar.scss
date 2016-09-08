@@ -6,7 +6,6 @@ $tablet_max: 860px;
 
 	font-size: $base_size * 2.5;
 
-	// right side padding of 30px for close icon
 	.mctb-bar {
 		padding: ($base_size * 1.25) ($base_size * 1.5);
 	}
@@ -34,14 +33,17 @@ $tablet_max: 860px;
 
 #mailchimp-top-bar {
 
+	* {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
 
 	// Reset Form elements, many themes apply basic styling
 	form,
 	input,
 	label {
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
 		vertical-align: middle;
 		margin: 0;
 		padding: 0;
@@ -181,10 +183,8 @@ $tablet_max: 860px;
 }
 
 .mctb-bar {
+	position: relative;
 	width: 100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box !important;
 }
 
 .mctb-sticky {
@@ -203,17 +203,9 @@ $tablet_max: 860px;
 
 .mctb-response {
 	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
 	z-index: 100;
-
-	label {
-		padding: 0 !important;
-		margin: 0 !important;
-		line-height: inherit;
-	}
+	top: 0; left: 0;
+	width: 100%;
 }
 
 .mctb-close{
@@ -232,7 +224,7 @@ $tablet_max: 860px;
 		bottom: 0;
 	}
 
-		.mctb-close {
+	.mctb-close {
 		float: none;
 		position: absolute;
 		top: 0; right: 0;

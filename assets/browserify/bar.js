@@ -34,7 +34,6 @@ function Bar( wrapperEl, config ) {
     var responseEl = wrapperEl.querySelector('.mctb-response');
     var visible = false,
         originalBodyPadding = 0,
-        barHeight = 0,
         bodyPadding = 0,
         isBottomBar = ( config.position === 'bottom' );
 
@@ -54,11 +53,6 @@ function Bar( wrapperEl, config ) {
             originalBodyPadding = ( parseInt( document.body.style.paddingTop )  || 0 );
         }
 
-        // fix response height
-        if( responseEl ) {
-            responseEl.style.lineHeight = barHeight + "px";
-        }
-
         // configure icon
         iconEl.setAttribute('class', 'mctb-close');
         iconEl.innerHTML = config.icons.show;
@@ -69,7 +63,11 @@ function Bar( wrapperEl, config ) {
             wrapperEl.className += " multiple-input-fields";
         }
 
+        // calculate initial dimensions
         calculateDimensions();
+
+        // on dom repaint, bar height changes. re-calculate in next repaint.
+        window.requestAnimationFrame(calculateDimensions);
 
         // Show the bar straight away?
         if( cookies.read( "mctb_bar_hidden" ) != 1 ) {
@@ -84,20 +82,15 @@ function Bar( wrapperEl, config ) {
     function calculateDimensions() {
 
         // make sure bar is visible
-        var origBarPosition = barEl.style.position;
         var origBarDisplay = barEl.style.display;
 
         if( origBarDisplay !== 'block' ) {
             barEl.style.visibility = 'hidden';
         }
         barEl.style.display = 'block';
-        barEl.style.position = 'relative';
-
-        // calculate real bar height
-        barHeight = barEl.clientHeight;
 
         // calculate & set new body padding if bar is currently visible
-        bodyPadding = ( originalBodyPadding + barHeight ) + "px";
+        bodyPadding = ( originalBodyPadding + barEl.clientHeight ) + "px";
         if( visible ) {
             document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
         }
@@ -118,10 +111,15 @@ function Bar( wrapperEl, config ) {
             }
         }
 
+        // fix response height
+        if( responseEl ) {
+            responseEl.style.height = barEl.clientHeight + "px";
+            responseEl.style.lineHeight = barEl.clientHeight + "px";
+        }
+
         // reset bar again, we're done measuring
         barEl.style.display = origBarDisplay;
-        barEl.style.position = origBarPosition;
-        barEl.style.visibility = 'visible';
+        barEl.style.visibility = '';
     }
 
 

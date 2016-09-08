@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.2.15 - September 8, 2016
+
+**Improvements**
+
+- Improved responsiveness when bar has additional input fields.
+
+
 #### 1.2.14 - August 29, 2016
 
 **Fixes**
