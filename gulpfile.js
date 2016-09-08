@@ -14,7 +14,7 @@ const sort = require('gulp-sort');
 const config = require('./package.json')
 const insert = require('gulp-insert');
 
-gulp.task('default', ['languages', 'sass', 'uglify' ]);
+gulp.task('default', ['browserify', 'sass', 'minify-js', 'minify-css', 'languages' ]);
 
 gulp.task('sass', function () {
     var files = './assets/scss/[^_]*.scss';
@@ -24,11 +24,6 @@ gulp.task('sass', function () {
         .pipe(sass())
         .pipe(rename({ extname: '.css' }))
         .pipe(gulp.dest('./assets/css'))
-
-        // create .min.css
-        .pipe(cssmin())
-        .pipe(rename({extname: '.min.css'}))
-        .pipe(gulp.dest("./assets/css"));
 });
 
 
@@ -43,7 +38,7 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./assets/js'));
 });
 
-gulp.task('uglify', ['browserify'], function() {
+gulp.task('minify-js', ['browserify'], function() {
     return gulp.src(['./assets/js/**/*.js','!./assets/js/**/*.min.js'])
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(buffer())
@@ -53,6 +48,14 @@ gulp.task('uglify', ['browserify'], function() {
         .pipe(gulp.dest('./assets/js'));
 });
 
+gulp.task('minify-css', ['sass'], function() {
+    return gulp.src(["./assets/css/**/*[^.min].css"])
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(cssmin({ sourceMap: true }))
+        .pipe(rename({extname: '.min.css'}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest("./assets/css"));
+});
 
 gulp.task('languages', function () {
     return gulp.src(['src/**/*.php', 'views/**/*.php'])
@@ -62,4 +65,10 @@ gulp.task('languages', function () {
             destFile: config.name + '.pot'
         } ))
         .pipe(gulp.dest('languages'));
+});
+
+// Rerun the task when a file changes
+gulp.task('watch', function() {
+    gulp.watch('./assets/browserify/**/*.js', ['browserify']);
+    gulp.watch('./assets/scss/**/*.scss', ['sass']);
 });
