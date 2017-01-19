@@ -1,6 +1,11 @@
 Changelog
 ==========
 
+#### 1.2.16 - January 19, 2017
+
+Various minor code improvements.
+
+
 #### 1.2.15 - September 8, 2016
 
 **Improvements**

@@ -2,8 +2,8 @@
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
-Requires at least: 3.8
-Tested up to: 4.6.1
+Requires at least: 4.1
+Tested up to: 4.7.1
 Stable tag: 1.2.15
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -87,9 +87,12 @@ add_action( 'mctb_before_submit_button', function() {
     echo '<input type="text" name="NAME" placeholder="Your name" />';
 });
 
-add_filter( 'mctb_merge_vars', function( $vars ) {
-    $vars['NAME'] = ( isset( $_POST['NAME'] ) ) ? sanitize_text_field( $_POST['NAME'] ) : '';
-    return $vars;
+add_filter( 'mctb_subscriber_data', function( $subscriber ) {
+    if( ! empty( $_POST['NAME'] ) ) {
+        $subscriber->merge_fields['NAME'] = sanitize_text_field( $_POST['NAME'] );
+    }
+
+    return $subscriber;
 });
 `
 
