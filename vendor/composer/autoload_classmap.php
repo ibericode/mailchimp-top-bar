@@ -6,8 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'MailChimp\\TopBar\\Admin\\Manager' => $baseDir . '/src/Admin/Manager.php',
-    'MailChimp\\TopBar\\Bar' => $baseDir . '/src/Bar.php',
-    'MailChimp\\TopBar\\Options' => $baseDir . '/src/Options.php',
-    'MailChimp\\TopBar\\Tracker' => $baseDir . '/src/Tracker.php',
 );

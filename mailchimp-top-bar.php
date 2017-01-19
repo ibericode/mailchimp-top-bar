@@ -44,9 +44,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function _load_mailchimp_top_bar() {
 
-	// load autoloader
-	require __DIR__ . '/vendor/autoload.php';
-
 	// check deps
 	$ready = include __DIR__ . '/dependencies.php';
 	if( ! $ready ) {

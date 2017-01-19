@@ -4,10 +4,13 @@ namespace MailChimp\TopBar;
 
 defined( 'ABSPATH' ) or exit;
 
+require_once __DIR__ . '/src/Options.php';
 $options = new Options( 'mailchimp_top_bar' );
 
 if( ! is_admin() ) {
 	// frontend code
+    require_once __DIR__ . '/src/Tracker.php';
+    require_once __DIR__ . '/src/Bar.php';
 	$bar = new Bar( $options );
 	$bar->add_hooks();
 } elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -15,6 +18,7 @@ if( ! is_admin() ) {
 
 } else {
 	// admin code
-	$admin = new Admin\Manager( $options );
+    require_once __DIR__ . '/src/Admin/Manager.php';
+    $admin = new Admin\Manager( $options );
 	$admin->add_hooks();
 }
