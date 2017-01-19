@@ -6,7 +6,7 @@ Requires at least: 3.8
 Tested up to: 4.6.1
 Stable tag: 1.2.15
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Adds a MailChimp opt-in form in a top bar to your WordPress site.
 
