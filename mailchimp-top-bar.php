@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @ignore
  * @access private
  */
-function __load_mailchimp_top_bar() {
+function _load_mailchimp_top_bar() {
 
 	// load autoloader
 	require __DIR__ . '/vendor/autoload.php';
@@ -66,6 +66,6 @@ function __load_mailchimp_top_bar() {
 if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
 	require_once dirname( __FILE__ ) . '/php-backwards-compatibility.php';
 } else {
-	add_action( 'plugins_loaded', '__load_mailchimp_top_bar', 30 );
+	add_action( 'plugins_loaded', '_load_mailchimp_top_bar', 30 );
 }
 
