@@ -164,8 +164,16 @@ class Bar {
 
 		/** @ignore */
 		$data = apply_filters( 'mctb_merge_vars', $data );
-
 		$email_type = apply_filters( 'mctb_email_type', 'html' );
+
+        $replace_interests = true;
+
+        /**
+         * Filters whether interests should be replaced or appended to.
+         *
+         * @param bool $replace_interests
+         */
+		$replace_interests = apply_filters( 'mctb_replace_interests', $replace_interests );
 
 		$mailchimp = new MC4WP_MailChimp();
 		if( class_exists( 'MC4WP_MailChimp_Subscriber' ) ) {
@@ -189,7 +197,7 @@ class Bar {
 				 */
 				$subscriber = apply_filters( 'mctb_subscriber_data', $subscriber );
 
-				$result = $mailchimp->list_subscribe( $mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options->get( 'update_existing' ), true );
+				$result = $mailchimp->list_subscribe( $mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options->get( 'update_existing' ), $replace_interests );
 				$result = is_object( $result ) && ! empty( $result->id );
 			}
 
@@ -197,7 +205,7 @@ class Bar {
 			// for BC with MailChimp for WordPress 3.x, override $mailchimp var
 			$mailchimp = mc4wp_get_api();
 			unset( $data['EMAIL'] );
-			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $data, $email_type, $options->get( 'double_optin' ), $options->get( 'update_existing' ), true, $options->get( 'send_welcome' ) );
+			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $data, $email_type, $options->get( 'double_optin' ), $options->get( 'update_existing' ), $replace_interests, $options->get( 'send_welcome' ) );
 		}
 
 		// return true if success..
