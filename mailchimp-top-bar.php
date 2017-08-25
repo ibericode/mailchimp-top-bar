@@ -9,6 +9,7 @@ Author URI: https://ibericode.com/
 Text Domain: mailchimp-top-bar
 Domain Path: /languages
 License: GPL v3
+Requires PHP: 5.3
 
 MailChimp Top Bar
 Copyright (C) 2015-2017, Danny van Kooten, hi@dannyvankooten.com
