@@ -104,7 +104,7 @@ Adding the following CSS to your site should hide the bar on all screens smaller
 
 `
 @media( max-width: 600px ) {
-	#mailchimp-top-bar { display: none !important; }
+	&#35;mailchimp-top-bar { display: none !important; }
 }
 `
 
