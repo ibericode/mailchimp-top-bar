@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
 Tested up to: 4.8.3
-Stable tag: 1.2.16
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,14 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
+
+#### 1.3 - November 1, 2017
+
+**Improvements**
+
+- Form now submits over AJAX, no longer reloading the entire page.
+- Added `for` attribute to label elements, thanks [gabriel-kaam](https://github.com/gabriel-kaam).
+- Added `mctb_replace_interests` filter hook.
 
 #### 1.2.16 - January 19, 2017
 
