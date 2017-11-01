@@ -251,54 +251,43 @@ function Bar( wrapperEl, config ) {
         var data = serialize(formEl, { "hash": false, "empty": true });
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() {
+            var response;
+
             // are we done?
-            if (this.readyState === 4) {
-                var response;
-                loader.stop();
-
-                if (this.status >= 200 && this.status < 400) {
-
-                    try {
-                        response = JSON.parse(this.responseText);
-                    } catch (error) {
-                        console.log('MailChimp Top Bar: failed to parse AJAX response.\n\nError: "' + error + '"');
-                        return;
-                    }
-
-                    state.success = !!response.success;
-                    state.submitted = true;
-
-                    if( response.success && response.redirect_url ) {
-                        window.location.href = response.redirect_url;
-                        return;
-                    }
-
-                    if(responseEl) {
-                        responseEl.parentNode.removeChild(responseEl);
-                    }
-
-                    responseEl = document.createElement('div');
-                    responseEl.className = "mctb-response";
-
-                    var labelEl = document.createElement('label');
-                    labelEl.className = "mctb-response-label";
-                    labelEl.innerText = response.message;
-                    responseEl.appendChild(labelEl);
-                    formEl.parentNode.insertBefore(responseEl, formEl.nextElementSibling);
-
-                    calculateDimensions();
-                    window.setTimeout(fadeResponse, 4000);
-
-                    // clear form
-                    if( state.success ) {
-                        formEl.reset();
-                    }
-
-                } else {
-                    // Server error :(
-                    console.log(this.responseText);
-                }
+            if (this.readyState !== 4) {
+                return;
             }
+
+            loader.stop();
+
+            if (this.status >= 200 && this.status < 400) {
+                try {
+                    response = JSON.parse(this.responseText);
+                } catch (error) {
+                    console.log('MailChimp Top Bar: failed to parse AJAX response.\n\nError: "' + error + '"');
+                    return;
+                }
+
+                state.success = !!response.success;
+                state.submitted = true;
+
+                if( response.success && response.redirect_url ) {
+                    window.location.href = response.redirect_url;
+                    return;
+                }
+
+                showResponseMessage(response.message);
+
+                // clear form
+                if( state.success ) {
+                    formEl.reset();
+                }
+
+            } else {
+                // Server error :(
+                console.log(this.responseText);
+            }
+
         };
         request.open('POST', window.location.href, true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -308,6 +297,24 @@ function Bar( wrapperEl, config ) {
 
         loader.start();
         evt.preventDefault();
+    }
+
+    function showResponseMessage(msg) {
+        if(responseEl) {
+            responseEl.parentNode.removeChild(responseEl);
+        }
+
+        responseEl = document.createElement('div');
+        responseEl.className = "mctb-response";
+
+        var labelEl = document.createElement('label');
+        labelEl.className = "mctb-response-label";
+        labelEl.innerText = msg;
+        responseEl.appendChild(labelEl);
+        formEl.parentNode.insertBefore(responseEl, formEl.nextElementSibling);
+
+        calculateDimensions();
+        window.setTimeout(fadeResponse, 4000);
     }
 
     function calculateDimensions() {
