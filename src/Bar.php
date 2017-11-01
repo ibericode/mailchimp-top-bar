@@ -418,9 +418,9 @@ class Bar {
 			<div class="mctb-bar" style="display: none">
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
-					<label class="mctb-label"><?php echo $this->options->get( 'text_bar' ); ?></label>
+					<label class="mctb-label" for="mailchimp-top-bar__email"><?php echo $this->options->get( 'text_bar' ); ?></label>
 					<?php do_action( 'mctb_before_email_field' ); ?>
-					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get( 'text_email_placeholder' ) ); ?>" class="mctb-email"  required />
+					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get( 'text_email_placeholder' ) ); ?>" class="mctb-email" required id="mailchimp-top-bar__email" />
 					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off" tabindex="-1" class="mctb-email-confirm" />
 					<?php do_action( 'mctb_before_submit_button' ); ?>
 					<input type="submit" value="<?php echo esc_attr( $this->options->get('text_button') ); ?>" class="mctb-button" />
