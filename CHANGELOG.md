@@ -1,6 +1,14 @@
 Changelog
 ==========
 
+#### 1.3 - November 1, 2017
+
+**Improvements**
+
+- Form now submits over AJAX, no longer reloading the entire page.
+- Added `for` attribute to label elements, thanks [gabriel-kaam](https://github.com/gabriel-kaam).
+- Added `mctb_replace_interests` filter hook.
+
 #### 1.2.16 - January 19, 2017
 
 Various minor code improvements.
