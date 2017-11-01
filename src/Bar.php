@@ -106,6 +106,26 @@ class Bar {
 
 		if( isset( $_POST['_mctb'] ) && $_POST['_mctb'] == 1 ) {
 			$this->success = $this->process();
+
+			if( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest' ) {
+			    $data = array(
+                    'message' => $this->get_response_message(),
+                    'success' => $this->success,
+                    'redirect_url' => $this->success ? $this->options->get( 'redirect' ) : '',
+                );
+
+			    wp_send_json( $data );
+			    exit;
+            }
+
+            if( $this->success ) {
+                // should we redirect
+                $redirect_url = $this->options->get( 'redirect' );
+                if( ! empty( $redirect_url ) ) {
+                    wp_redirect( $redirect_url );
+                    exit;
+                }
+            }
 		}
 	}
 
@@ -114,7 +134,6 @@ class Bar {
 	 * @return boolean
 	 */
 	private function process() {
-
 		$options = $this->options;
 		$this->submitted = true;
 		$log = $this->get_log();
@@ -230,12 +249,6 @@ class Bar {
 				$log->info( sprintf( 'Top Bar > Successfully subscribed %s', $email_address ) );
 			}
 
-			// should we redirect
-			if( '' !== $options->get( 'redirect' ) ) {
-				wp_redirect( $options->get( 'redirect' ) );
-				exit;
-			}
-
 			return true;
 		}
 
@@ -314,8 +327,10 @@ class Bar {
 				'show' =>  ( $bottom ) ? '&#x25B2;' : '&#x25BC;'
 			),
 			'position' => $this->options->get( 'position' ),
-			'is_submitted' => $this->submitted,
-			'is_success' => $this->success
+			'state' => array(
+                'submitted' => $this->submitted,
+                'success' => $this->success,
+            ),
 		);
 
 		/**
@@ -413,7 +428,7 @@ class Bar {
 					<input type="hidden" name="_mctb_no_js" value="1" />
 					<input type="hidden" name="_mctb_timestamp" value="<?php echo time(); ?>" />
 				</form>
-				<?php echo $this->get_response_message(); ?>
+				<?php echo $this->get_response_message_html(); ?>
 			</div>
 
 			<!-- / MailChimp Top Bar -->
@@ -440,8 +455,19 @@ class Bar {
 			$message = $this->options->get('text_error');
 		}
 
-		return sprintf( '<div class="mctb-response"><label class="mctb-response-label">%s</label></div>', $message );
+		return $message;
 	}
+
+	protected function get_response_message_html() {
+        $message = $this->get_response_message();
+        if( empty( $message ) ) {
+            return '';
+        }
+
+        return sprintf( '<div class="mctb-response"><label class="mctb-response-label">%s</label></div>', $message );
+    }
+
+
 
 	/**
 	 * @param $url

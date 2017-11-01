@@ -2,6 +2,8 @@
 
 var cookies = require('./cookies.js');
 var animator = require('./animator.js');
+var serialize = require('form-serialize');
+var Loader = require('./loader.js');
 
 function throttle(fn, threshhold, scope) {
     threshhold || (threshhold = 250);
@@ -32,17 +34,20 @@ function Bar( wrapperEl, config ) {
     var barEl = wrapperEl.querySelector('.mctb-bar');
     var iconEl = document.createElement('span');
     var responseEl = wrapperEl.querySelector('.mctb-response');
+    var formEl = barEl.querySelector('form');
     var visible = false,
         originalBodyPadding = 0,
         bodyPadding = 0,
         isBottomBar = ( config.position === 'bottom' );
+    var state = config.state;
 
     // Functions
     function init() {
-
         // remove "no_js" field
         var noJsField = barEl.querySelector('input[name="_mctb_no_js"]');
         noJsField.parentElement.removeChild(noJsField);
+
+        formEl.addEventListener('submit', submitForm);
 
         // save original bodyPadding
         if( isBottomBar ) {
@@ -75,8 +80,82 @@ function Bar( wrapperEl, config ) {
         }
 
         // fade response 4 seconds after showing bar
-        window.setTimeout(fadeResponse, 4000);
+        if(responseEl) {
+            window.setTimeout(fadeResponse, 4000);
+        }
+
         window.addEventListener('resize', throttle(calculateDimensions, 40));
+    }
+
+    function submitForm(evt) {
+        var loader = new Loader(formEl);
+        var data = serialize(formEl, { "hash": false, "empty": true });
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            var response;
+
+            // are we done?
+            if (this.readyState !== 4) {
+                return;
+            }
+
+            loader.stop();
+
+            if (this.status >= 200 && this.status < 400) {
+                try {
+                    response = JSON.parse(this.responseText);
+                } catch (error) {
+                    console.log('MailChimp Top Bar: failed to parse AJAX response.\n\nError: "' + error + '"');
+                    return;
+                }
+
+                state.success = !!response.success;
+                state.submitted = true;
+
+                if( response.success && response.redirect_url ) {
+                    window.location.href = response.redirect_url;
+                    return;
+                }
+
+                showResponseMessage(response.message);
+
+                // clear form
+                if( state.success ) {
+                    formEl.reset();
+                }
+
+            } else {
+                // Server error :(
+                console.log(this.responseText);
+            }
+
+        };
+        request.open('POST', window.location.href, true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        request.send(data);
+        request = null;
+
+        loader.start();
+        evt.preventDefault();
+    }
+
+    function showResponseMessage(msg) {
+        if(responseEl) {
+            responseEl.parentNode.removeChild(responseEl);
+        }
+
+        responseEl = document.createElement('div');
+        responseEl.className = "mctb-response";
+
+        var labelEl = document.createElement('label');
+        labelEl.className = "mctb-response-label";
+        labelEl.innerText = msg;
+        responseEl.appendChild(labelEl);
+        formEl.parentNode.insertBefore(responseEl, formEl.nextElementSibling);
+
+        calculateDimensions();
+        window.setTimeout(fadeResponse, 4000);
     }
 
     function calculateDimensions() {
@@ -187,14 +266,15 @@ function Bar( wrapperEl, config ) {
      * Fade out the response message
      */
     function fadeResponse() {
-        if( responseEl ) {
+        if( ! responseEl ) {
+            return;
+        }
 
-            animator.toggle(responseEl, "fade");
+        animator.toggle(responseEl, "fade");
 
-            // auto-dismiss bar if we're good!
-            if( config.is_submitted && config.is_success ) {
-                window.setTimeout( function() { hide(true); }, 1000 );
-            }
+        // auto-dismiss bar if we're good!
+        if( state.submitted && state.success ) {
+            window.setTimeout( function() { hide(true); }, 1000 );
         }
     }
 

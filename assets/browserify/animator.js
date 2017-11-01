@@ -1,3 +1,5 @@
+'use strict';
+
 var duration = 320;
 
 function css(element, styles) {
