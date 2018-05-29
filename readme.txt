@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
 Tested up to: 4.9.6
-Stable tag: 1.3
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -124,6 +124,16 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+
+#### 1.3.1 - May 29, 2018
+
+**Improvements**
+
+- 30% reduction in script file size because of removed JS dependency.
+- Stop setting unused cookie when Top Bar form is used to subscribe.
+- Add mctb_after_submit_button action hook.
+- Improve animation performance.
 
 
 #### 1.3 - November 1, 2017
