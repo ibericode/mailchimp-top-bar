@@ -2,7 +2,6 @@
 
 var cookies = require('./cookies.js');
 var animator = require('./animator.js');
-var serialize = require('form-serialize');
 var Loader = require('./loader.js');
 
 function throttle(fn, threshhold, scope) {
@@ -89,7 +88,7 @@ function Bar( wrapperEl, config ) {
 
     function submitForm(evt) {
         var loader = new Loader(formEl);
-        var data = serialize(formEl, { "hash": false, "empty": true });
+        var data = new FormData(formEl);
         var request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             var response;
@@ -131,7 +130,6 @@ function Bar( wrapperEl, config ) {
 
         };
         request.open('POST', window.location.href, true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         request.send(data);
         request = null;
