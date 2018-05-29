@@ -1,7 +1,8 @@
 (function () { var require = undefined; var module = undefined; var exports = undefined; var define = undefined;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var duration = 320;
+var duration = 800;
+var easeOutQuint = function (t) { return 1+(--t)*t*t*t*t };
 
 function css(element, styles) {
     for(var property in styles) {
@@ -88,66 +89,45 @@ function toggle(element, animation) {
 }
 
 function animate(element, targetStyles, fn) {
-    var last = +new Date();
-    var initialStyles = window.getComputedStyle(element);
-    var currentStyles = {};
-    var propSteps = {};
+    var startTime = performance.now();
+    var styles = window.getComputedStyle(element);
+    var diff = {};
+    var startStyles = {};
 
     for(var property in targetStyles) {
-        // make sure we have an object filled with floats
-        targetStyles[property] = parseFloat(targetStyles[property]);
-
         // calculate step size & current value
-        var to = targetStyles[property];
-        var current = parseFloat(initialStyles[property]);
+        var to = parseFloat(targetStyles[property]);
+        var current = parseFloat(styles[property]);
 
         // is there something to do?
         if( current == to ) {
-            delete targetStyles[property];
             continue;
         }
 
-        propSteps[property] = ( to - current ) / duration; // points per second
-        currentStyles[property] = current;
+        startStyles[property] = current;
+        diff[property] = to - current;
     }
 
-    var tick = function() {
-        var now = +new Date();
-        var timeSinceLastTick = now - last;
-        var done = true;
+    var tick = function(t) {
+        var progress = Math.min(( t - startTime ) / duration, 1);
 
-        var step, to, increment, newValue;
-        for(var property in targetStyles ) {
-            step = propSteps[property];
-            to = targetStyles[property];
-            increment =  step * timeSinceLastTick;
-            newValue = currentStyles[property] + increment;
+        for(var property in diff) {
+            var suffix = property !== "opacity" ? "px" : "";
+            element.style[property] = startStyles[property] + ( diff[property] * easeOutQuint(progress) ) + suffix;
+        }
 
-            if( step > 0 && newValue >= to || step < 0 && newValue <= to ) {
-                newValue = to;
-            } else {
-                done = false;
+        if(progress >= 1) {
+            if(fn) {
+                fn();
             }
 
-            // store new value
-            currentStyles[property] = newValue;
-
-            var suffix = property !== "opacity" ? "px" : "";
-            element.style[property] = newValue + suffix;
-        }
-
-        last = +new Date();
-
-        // keep going until we're done for all props
-        if(!done) {
-            (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 32);
-        } else {
-            // call callback
-            fn && fn();
-        }
+            return;
+        } 
+        
+        window.requestAnimationFrame(tick);
     };
 
-    tick();
+    window.requestAnimationFrame(tick);
 }
 
 
@@ -156,6 +136,7 @@ module.exports = {
     'animate': animate,
     'animated': animated
 };
+
 },{}],2:[function(require,module,exports){
 'use strict';
 
