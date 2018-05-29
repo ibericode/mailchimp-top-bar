@@ -1,6 +1,16 @@
 Changelog
 ==========
 
+#### 1.3.1 - May 29, 2018
+
+**Improvements**
+
+- 30% reduction in script file size because of removed JS dependency.
+- Stop setting unused cookie when Top Bar form is used to subscribe.
+- Add mctb_after_submit_button action hook.
+- Improve animation performance.
+
+
 #### 1.3 - November 1, 2017
 
 **Improvements**
