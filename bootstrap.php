@@ -9,8 +9,7 @@ $options = new Options( 'mailchimp_top_bar' );
 
 if( ! is_admin() ) {
 	// frontend code
-    require_once __DIR__ . '/src/Tracker.php';
-    require_once __DIR__ . '/src/Bar.php';
+   require_once __DIR__ . '/src/Bar.php';
 	$bar = new Bar( $options );
 	$bar->add_hooks();
 } elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {

@@ -239,11 +239,6 @@ class Bar {
 			 */
 			do_action( 'mctb_subscribed', $mailchimp_list_id, $email_address, $data );
 
-			// track sign-up attempt
-            $tracker = new Tracker( 365 * DAY_IN_SECONDS );
-			$tracker->track( $mailchimp_list_id );
-			$tracker->save();
-
 			// log sign-up attempt
 			if( $log ) {
 				$log->info( sprintf( 'Top Bar > Successfully subscribed %s', $email_address ) );
