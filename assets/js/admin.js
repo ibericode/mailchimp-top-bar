@@ -19,10 +19,10 @@
 		var lists = mc4wp.settings.getSelectedLists();
 		for( var i=0; i<lists.length; i++) {
 			var list = lists[i];
-
-			for( var j=0; j<list.merge_vars.length; j++ ) {
-				var merge_var = list.merge_vars[j];
-				if( merge_var.tag !== 'EMAIL' && merge_var.required ) {
+			
+			for( var j=0; j<list.merge_fields.length; j++ ) {
+				var field = list.merge_fields[j];
+				if( field.tag !== 'EMAIL' && field.required ) {
 					msgRequiresFields.style.display = '';
 					return;
 				}

@@ -54,118 +54,118 @@ msgstr ""
 msgid "You are already subscribed. Thank you!"
 msgstr ""
 
-#: views/settings-page.php:34
+#: views/settings-page.php:41
 msgid "The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href=\"%s\">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required."
 msgstr ""
 
-#: views/settings-page.php:35
+#: views/settings-page.php:42
 msgid "After making changes to your MailChimp list, <a href=\"%s\">click here</a> to renew your list configuration."
 msgstr ""
 
-#: views/settings-page.php:41
+#: views/settings-page.php:48
 msgid "You have disabled the bar. It will not show up on your site until you enable it again."
 msgstr ""
 
-#: views/settings-page.php:55
+#: views/settings-page.php:62
 msgid "Enable Bar?"
 msgstr ""
 
-#: views/settings-page.php:65
+#: views/settings-page.php:72
 msgid "A quick way to completely disable the bar."
 msgstr ""
 
-#: views/settings-page.php:78
+#: views/settings-page.php:85
 msgid "Select a list.."
 msgstr ""
 
-#: views/settings-page.php:83
+#: views/settings-page.php:90
 msgid "Select the list to which visitors should be subscribed."
 msgstr ""
 
-#: views/settings-page.php:90
+#: views/settings-page.php:97
 msgid "Bar Text"
 msgstr ""
 
-#: views/settings-page.php:95
+#: views/settings-page.php:102
 msgid "The text to appear before the email field."
 msgstr ""
 
-#: views/settings-page.php:102
+#: views/settings-page.php:109
 msgid "Button Text"
 msgstr ""
 
-#: views/settings-page.php:107
+#: views/settings-page.php:114
 msgid "The text on the submit button."
 msgstr ""
 
-#: views/settings-page.php:114
+#: views/settings-page.php:121
 msgid "Email Placeholder Text"
 msgstr ""
 
-#: views/settings-page.php:119
+#: views/settings-page.php:126
 msgid "The initial placeholder text to appear in the email field."
 msgstr ""
 
-#: views/settings-page.php:128
+#: views/settings-page.php:135
 msgid "Appearance"
 msgstr ""
 
-#: views/settings-page.php:137
+#: views/settings-page.php:144
 msgid "Bar Position"
 msgstr ""
 
-#: views/settings-page.php:142
+#: views/settings-page.php:149
 msgid "Top"
 msgstr ""
 
-#: views/settings-page.php:143
+#: views/settings-page.php:150
 msgid "Bottom"
 msgstr ""
 
-#: views/settings-page.php:151
+#: views/settings-page.php:158
 msgid "Bar Size"
 msgstr ""
 
-#: views/settings-page.php:156
+#: views/settings-page.php:163
 msgid "Small"
 msgstr ""
 
-#: views/settings-page.php:157
+#: views/settings-page.php:164
 msgid "Medium"
 msgstr ""
 
-#: views/settings-page.php:158
+#: views/settings-page.php:165
 msgid "Big"
 msgstr ""
 
-#: views/settings-page.php:166
+#: views/settings-page.php:173
 msgid "Bar Color"
 msgstr ""
 
-#: views/settings-page.php:177
+#: views/settings-page.php:184
 msgid "Text Color"
 msgstr ""
 
-#: views/settings-page.php:194
+#: views/settings-page.php:201
 msgid "Sticky Bar?"
 msgstr ""
 
-#: views/settings-page.php:210
+#: views/settings-page.php:217
 msgid "Button Color"
 msgstr ""
 
-#: views/settings-page.php:221
+#: views/settings-page.php:228
 msgid "Button Text Color"
 msgstr ""
 
-#: views/settings-page.php:238
+#: views/settings-page.php:245
 msgid "Messages"
 msgstr ""
 
-#: views/settings-page.php:279
+#: views/settings-page.php:286
 msgid "Advanced"
 msgstr ""
 
-#: views/settings-page.php:338
+#: views/settings-page.php:345
 msgid "This is really only useful if you have <a href=\"%s\">added additional fields (besides just email)</a>."
 msgstr ""
