@@ -99,7 +99,7 @@ msgstr ""
 
 #: ../views/settings-page.php:90
 msgid "Button Text"
-msgstr "Mygtuko tekstas\n"
+msgstr "Mygtuko tekstas"
 
 #: ../views/settings-page.php:95
 msgid "The text on the submit button."
