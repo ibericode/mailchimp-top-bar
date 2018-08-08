@@ -198,7 +198,7 @@ msgstr "El. pašto adresas..."
 
 #: ../src/Options.php:64
 msgid "Sign-up now - don't miss the fun!"
-msgstr "Nori užsiprenumeruoti naujienlaiškį?\n"
+msgstr "Nori užsiprenumeruoti naujienlaiškį?"
 
 #: ../src/Options.php:65
 msgid "Subscribe"
