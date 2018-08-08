@@ -1,6 +1,17 @@
 Changelog
 ==========
 
+#### 1.3.2 - Aug 8, 2018
+
+**Fixes**
+
+- Required fields notice on selected list was not showing because of invalid list property.
+
+**Improvements**
+
+- Prefix internal CSS classes for improved compatibility with other themes or plugins applying global admin styles.
+
+
 #### 1.3.1 - May 29, 2018
 
 **Improvements**

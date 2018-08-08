@@ -14,43 +14,43 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Admin/Manager.php:71
+#: src/Admin/Manager.php:87
 msgid "MailChimp Top Bar"
 msgstr ""
 
-#: src/Admin/Manager.php:72
+#: src/Admin/Manager.php:88
 msgid "Top Bar"
 msgstr ""
 
-#: src/Admin/Manager.php:106
+#: src/Admin/Manager.php:122
 msgid "An add-on for %s"
 msgstr ""
 
-#: src/Options.php:65
+#: src/Options.php:81
 msgid "Your email address.."
 msgstr ""
 
-#: src/Options.php:66
+#: src/Options.php:82
 msgid "Sign-up now - don't miss the fun!"
 msgstr ""
 
-#: src/Options.php:67
+#: src/Options.php:83
 msgid "Subscribe"
 msgstr ""
 
-#: src/Options.php:73
+#: src/Options.php:89
 msgid "Thanks, you're in! Please check your email inbox for a confirmation."
 msgstr ""
 
-#: src/Options.php:74
+#: src/Options.php:90
 msgid "Oops. Something went wrong."
 msgstr ""
 
-#: src/Options.php:75
+#: src/Options.php:91
 msgid "That email seems to be invalid."
 msgstr ""
 
-#: src/Options.php:76
+#: src/Options.php:92
 msgid "You are already subscribed. Thank you!"
 msgstr ""
 
