@@ -12,7 +12,7 @@ License: GPL v3
 Requires PHP: 5.3
 
 MailChimp Top Bar
-Copyright (C) 2015-2017, Danny van Kooten, hi@dannyvankooten.com
+Copyright (C) 2015-2018, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
