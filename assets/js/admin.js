@@ -31,7 +31,7 @@
 	}
 
 	// init colorpickers
-	$context.find('.color').wpColorPicker();
+	$context.find('.mc4wp-color').wpColorPicker();
 
 	// if a list changes, check which fields are required
 	$selectList.change( maybeShowRequiredFieldsNotice );

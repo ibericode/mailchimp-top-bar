@@ -13,6 +13,13 @@ $tabs = array(
 
 /** @var Options $opts */
 ?>
+<?php /* ensure wp-picker does not push other elements around */ ?>
+<style type="text/css">
+.wp-picker-holder,
+.wp-picker-input-wrap {
+	position: absolute;
+}
+</style>
 <div class="wrap" id="mc4wp-admin">
 
 	<h1 class="page-title">MailChimp Top Bar</h1>
@@ -50,7 +57,7 @@ $tabs = array(
 			<table class="form-table">
 
 				<tr valign="top">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Enable Bar?', 'mailchimp-top-bar' ); ?>
 						</label>
@@ -68,7 +75,7 @@ $tabs = array(
 				</tr>
 
 				<tr valign="top">
-					<th scope="row"><label><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
 					<td>
 						<?php if( empty( $lists ) ) {
 							printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
@@ -85,7 +92,7 @@ $tabs = array(
 				</tr>
 
 				<tr valign="top">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Bar Text', 'mailchimp-top-bar' ); ?>
 						</label>
@@ -97,7 +104,7 @@ $tabs = array(
 				</tr>
 
 				<tr valign="top">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Button Text', 'mailchimp-top-bar' ); ?>
 						</label>
@@ -109,7 +116,7 @@ $tabs = array(
 				</tr>
 
 				<tr valign="top">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Email Placeholder Text', 'mailchimp-top-bar' ); ?>
 						</label>
@@ -127,12 +134,12 @@ $tabs = array(
 
 			<h2><?php _e( 'Appearance', 'mailchimp-top-bar' ); ?></h2>
 
-			<div class="row">
-				<div class="col col-2">
+			<div class="mc4wp-row">
+				<div class="mc4wp-col mc4wp-col-2">
 					<table class="form-table">
 
 						<tr valign="top">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Bar Position', 'mailchimp-top-bar' ); ?>
 								</label>
@@ -146,7 +153,7 @@ $tabs = array(
 						</tr>
 
 						<tr valign="top" class="bar-size-options" style="">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
 								</label>
@@ -161,35 +168,35 @@ $tabs = array(
 						</tr>
 
 						<tr valign="top">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Bar Color', 'mailchimp-top-bar' ); ?>
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_bar' ) ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_bar' ) ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
 						<tr valign="top">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Text Color', 'mailchimp-top-bar' ); ?>
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_text' ) ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_text' ) ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
 					</table>
 				</div>
-				<div class="col col-2">
+				<div class="mc4wp-col mc4wp-col-2">
 					<table class="form-table">
 
 						<?php $config = array( 'element' =>  $this->name_attr( 'position' ), 'value' => 'top' ); ?>
 						<tr valign="top" class="sticky-bar-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Sticky Bar?', 'mailchimp-top-bar' ); ?>
 								</label>
@@ -205,24 +212,24 @@ $tabs = array(
 						</tr>
 
 						<tr valign="top">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Button Color', 'mailchimp-top-bar' ); ?>
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button' ) ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button' ) ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
 						<tr valign="top">
-							<th scope="row">
+							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Button Text Color', 'mailchimp-top-bar' ); ?>
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button_text' ) ); ?>" class="color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button_text' ) ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
@@ -239,19 +246,19 @@ $tabs = array(
 
 			<table class="form-table">
 				<tr valign="top">
-					<th scope="row"><label><?php _e( 'Success', 'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'Success', 'mailchimp-for-wp' ); ?></label></th>
 					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label><?php _e( 'Invalid email address', 'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'Invalid email address', 'mailchimp-for-wp' ); ?></label></th>
 					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_invalid_email'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label><?php _e( 'Already subscribed', 'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'Already subscribed', 'mailchimp-for-wp' ); ?></label></th>
 					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_already_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><label><?php _e( 'Other errors' ,'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'Other errors' ,'mailchimp-for-wp' ); ?></label></th>
 					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_error'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>" /></td>
 				</tr>
 				<tr>
@@ -261,7 +268,7 @@ $tabs = array(
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Redirect to URL after successful sign-ups', 'mailchimp-for-wp' ); ?>
 						</label>
@@ -280,7 +287,7 @@ $tabs = array(
 
 			<table class="form-table">
 				<tr valign="top" class="double-optin-options">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Double opt-in?', 'mailchimp-for-wp' ); ?>
 						</label>
@@ -301,7 +308,7 @@ $tabs = array(
 				<?php if( ! class_exists( 'MC4WP_API_v3' ) ) { ?>
 					<?php $config = array( 'element' => $this->name_attr( 'double_optin' ), 'value' => 0 ); ?>
 					<tr valign="top" class="send-welcome-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
-						<th scope="row">
+						<th scope="mc4wp-row">
 							<label>
 								<?php _e( 'Send Welcome Email?', 'mailchimp-for-wp' ); ?>
 							</label>
@@ -321,7 +328,7 @@ $tabs = array(
 				<?php } // end if MC4WP_API_v3 exists ?>
 
 				<tr valign="top">
-					<th scope="row">
+					<th scope="mc4wp-row">
 						<label>
 							<?php _e( 'Update existing subscribers?', 'mailchimp-for-wp' ); ?>
 						</label>
