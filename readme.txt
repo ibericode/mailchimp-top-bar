@@ -39,8 +39,6 @@ Bug reports (and Pull Requests) for [MailChimp Top Bar are welcomed on GitHub](h
 
 - [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/)
 - Developers; follow or contribute to the [MailChimp Top Bar plugin on GitHub](https://github.com/ibericode/mailchimp-top-bar)
-- Other [WordPress plugins](https://dannyvankooten.com/wordpress-plugins/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](https://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link)
-- [@DannyvanKooten](https://twitter.com/dannyvankooten) on Twitter
 
 == Installation ==
 
