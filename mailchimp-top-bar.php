@@ -44,11 +44,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @access private
  */
 function _load_mailchimp_top_bar() {
-
 	// check deps
 	$ready = include __DIR__ . '/dependencies.php';
 	if( ! $ready ) {
-		return false;
+		return;
 	}
 
 	define( 'MAILCHIMP_TOP_BAR_FILE', __FILE__ );
@@ -58,7 +57,7 @@ function _load_mailchimp_top_bar() {
 	// create instance
 	require_once __DIR__ . '/bootstrap.php';
 
-	return true;
+	return;
 }
 
 if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
