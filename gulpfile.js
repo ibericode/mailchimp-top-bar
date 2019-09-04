@@ -17,7 +17,7 @@ const insert = require('gulp-insert');
 gulp.task('default', ['browserify', 'sass', 'minify-js', 'minify-css', 'languages' ]);
 
 gulp.task('sass', function () {
-    var files = './assets/scss/[^_]*.scss';
+    const files = './assets/scss/[^_]*.scss';
 
     return gulp.src(files)
     // create .css file
