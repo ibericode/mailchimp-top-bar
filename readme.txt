@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-t
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
 Tested up to: 5.2
-Stable tag: 1.3.2
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -122,6 +122,13 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the MailChimp Top Bar plugin.
 
 == Changelog ==
+
+
+#### 1.4.0 - Sep 4, 2019
+
+**Improvements**
+
+- Add (advanced) setting to quickly disable the top bar on certain pages.
 
 
 #### 1.3.2 - Aug 8, 2018
@@ -242,7 +249,7 @@ Top Bar was invisible on some themes because of `z-index` being too low.
 
 **Additions**
 
-- Add support for new [debug log](https://kb.mc4wp.com/how-to-enable-log-debugging/) in MailChimp for WordPress 3.1
+- Add support for new [debug log](https://mc4wp.com/kb/how-to-enable-log-debugging/) in MailChimp for WordPress 3.1
 
 
 #### 1.2.6 - January 4, 2016

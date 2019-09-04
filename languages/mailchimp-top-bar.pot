@@ -162,10 +162,18 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: views/settings-page.php:286
+#: views/settings-page.php:287
 msgid "Advanced"
 msgstr ""
 
-#: views/settings-page.php:345
+#: views/settings-page.php:346
 msgid "This is really only useful if you have <a href=\"%s\">added additional fields (besides just email)</a>."
+msgstr ""
+
+#: views/settings-page.php:354
+msgid "Do not show on pages"
+msgstr ""
+
+#: views/settings-page.php:359
+msgid "Enter a comma separated list of pages to hide the bar on. Accepts page ID's or slugs."
 msgstr ""

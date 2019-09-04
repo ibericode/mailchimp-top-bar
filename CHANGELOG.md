@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.4.0 - Sep 4, 2019
+
+**Improvements**
+
+- Add (advanced) setting to quickly disable the top bar on certain pages.
+
+
 #### 1.3.2 - Aug 8, 2018
 
 **Fixes**
