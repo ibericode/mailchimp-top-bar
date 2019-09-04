@@ -90,6 +90,7 @@ class Options {
 			'text_error' => __( "Oops. Something went wrong.", 'mailchimp-top-bar' ),
 			'text_invalid_email' => __( 'That email seems to be invalid.', 'mailchimp-top-bar' ),
 			'text_already_subscribed' => __( "You are already subscribed. Thank you!", 'mailchimp-top-bar' ),
+            'disable_on_pages' => '',
 		);
 	}
 

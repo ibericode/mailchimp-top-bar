@@ -91,19 +91,25 @@ class Bar {
 	 * @return bool
 	 */
 	public function should_show_bar() {
-
 		// don't show if bar is disabled
 		if( ! $this->options->get('enabled') ) {
 			return false;
 		}
 
-		// todo: add logic to hide bar on certain selected pages
+		$show_bar = true;
+        $disable_on_pages = $this->options->get('disable_on_pages');
+
+		if (!empty($disable_on_pages)) {
+            $disable_on_pages = explode(',', $disable_on_pages);
+            $disable_on_pages = array_map('trim', $disable_on_pages);
+            $show_bar = !is_page($disable_on_pages);
+		}
 
 		/**
 		 * @deprecated 1.1
 		 * @use `mctb_show_bar`
 		 */
-		$return = apply_filters( 'mctp_show_bar', true );
+        $show_bar = apply_filters( 'mctp_show_bar', $show_bar );
 
 
 		/**
@@ -112,7 +118,7 @@ class Bar {
 		 *
 		 * Set to true if the bar should be loaded for this request, false if not.
 		 */
-		return apply_filters( 'mctb_show_bar', $return );
+		return apply_filters( 'mctb_show_bar', $show_bar );
 	}
 
 	/**

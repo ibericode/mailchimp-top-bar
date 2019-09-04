@@ -65,7 +65,7 @@ $tabs = array(
 					<td>
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $opts->get( 'enabled' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
-						</label>
+						</label> &nbsp;
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $opts->get( 'enabled' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
@@ -204,7 +204,7 @@ $tabs = array(
 							<td>
 								<label>
 									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $opts->get( 'sticky' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
-								</label>
+								</label> &nbsp;
 								<label>
 									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $opts->get( 'sticky' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 								</label>
@@ -282,6 +282,7 @@ $tabs = array(
 			</table>
 		</div>
 
+        <!-- Advanced -->
 		<div class="tab <?php if( $current_tab === 'advanced' ) echo 'tab-active'; ?>" id="tab-advanced">
 			<h2><?php _e( 'Advanced', 'mailchimp-top-bar' ); ?></h2>
 
@@ -295,7 +296,7 @@ $tabs = array(
 					<td>
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $opts->get( 'double_optin' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
-						</label>
+						</label> &nbsp;
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
@@ -316,7 +317,7 @@ $tabs = array(
 						<td>
 							<label>
 								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
-							</label>
+							</label> &nbsp;
 							<label>
 								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 							</label>
@@ -336,7 +337,7 @@ $tabs = array(
 					<td>
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="1" <?php checked( $opts->get( 'update_existing' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
-						</label>
+						</label> &nbsp;
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="0" <?php checked( $opts->get( 'update_existing' ), 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
@@ -346,6 +347,19 @@ $tabs = array(
 						</p>
 					</td>
 				</tr>
+
+                <tr valign="top">
+                    <th scope="mc4wp-row">
+                        <label>
+                            <?php _e( 'Do not show on pages', 'mailchimp-top-bar' ); ?>
+                        </label>
+                    </th>
+                    <td>
+                        <input type="text" name="<?php echo $this->name_attr( 'disable_on_pages' ); ?>" value="<?php echo esc_attr( $opts->get( 'disable_on_pages' ) ); ?>" class="regular-text" placeholder="<?php _e('Example: checkout, contact'); ?>" />
+                        <p class="help"><?php _e( "Enter a comma separated list of pages to hide the bar on. Accepts page ID's or slugs.", 'mailchimp-top-bar' ); ?></p>
+                    </td>
+                </tr>
+
 			</table>
 		</div>
 
