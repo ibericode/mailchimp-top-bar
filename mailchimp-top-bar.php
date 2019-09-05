@@ -39,7 +39,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Loads the MailChimp Top Bar plugin
  *
- * @return bool
  * @ignore
  * @access private
  */
