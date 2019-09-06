@@ -1,6 +1,6 @@
 <?php
 /*
-MailChimp Top Bar
+Mailchimp Top Bar
 Copyright (C) 2015, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify

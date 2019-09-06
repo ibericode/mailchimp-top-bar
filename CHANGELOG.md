@@ -78,7 +78,7 @@ Various minor code improvements.
 
 - Function scope generated JavaScript file to prevent Browserify clashes with other loaded scripts.
 - Make sure script works even though it's loaded in the head section.
-- Preparations for upcoming MailChimp for WordPress v4.0 release.
+- Preparations for upcoming Mailchimp for WordPress v4.0 release.
 
 **Additions**
 
@@ -126,14 +126,14 @@ Top Bar was invisible on some themes because of `z-index` being too low.
 
 **Additions**
 
-- Add support for new [debug log](https://mc4wp.com/kb/how-to-enable-log-debugging/) in MailChimp for WordPress 3.1
+- Add support for new [debug log](https://mc4wp.com/kb/how-to-enable-log-debugging/) in Mailchimp for WordPress 3.1
 
 
 #### 1.2.6 - January 4, 2016
 
  **Additions**
 
- - Option to "update existing subscribers" in MailChimp, which is useful if you have added fields.
+ - Option to "update existing subscribers" in Mailchimp, which is useful if you have added fields.
 
  **Improvements**
 
@@ -142,7 +142,7 @@ Top Bar was invisible on some themes because of `z-index` being too low.
 
 #### 1.2.5 - December 10, 2015
 
-The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 3.0 or higher.
+The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 3.0 or higher.
 
 **Fixes**
 
@@ -155,7 +155,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 #### 1.2.4 - November 22, 2015
 
-- Compatibility for [the upcoming MailChimp for WordPress 3.0 release](https://mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/) tomorrow.
+- Compatibility for [the upcoming Mailchimp for WordPress 3.0 release](https://mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/) tomorrow.
 - Added `mctb_subscribed` filter.
 
 #### 1.2.3 - November 13, 2015
@@ -192,7 +192,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 **Additions**
 
-- Added options for double opt-in and sending MailChimp's "welcome email".
+- Added options for double opt-in and sending Mailchimp's "welcome email".
 - Added `mctb_before_label` action allowing you to add HTML before the label-element.
 - Added `mctb_before_email_field` action allowing you to add HTML before the email field.
 - Added `mctb_before_submit_button` action allowing you to add HTML before the submit button.
@@ -238,7 +238,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 **Fixes**
 
-- Compatibility with [MailChimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [MailChimp for WordPress Pro v2.7](https://mc4wp.com/).
+- Compatibility with [Mailchimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [Mailchimp for WordPress Pro v2.7](https://mc4wp.com/).
 
 #### 1.0.7 - April 15, 2015
 
@@ -286,7 +286,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 **Improvements**
 
-- Bar will now show "already subscribed" message from MailChimp for WordPress when a person is already on the selected list.
+- Bar will now show "already subscribed" message from Mailchimp for WordPress when a person is already on the selected list.
 - Response message will now show and fadeout after 3 seconds.
 - Various usability improvements for the settings screen.
 - Improved spam detection.
@@ -307,7 +307,7 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 **Additions**
 
-- Top Bar sign-ups are now shown in the log for [MailChimp for WordPress Pro](https://mc4wp.com/).
+- Top Bar sign-ups are now shown in the log for [Mailchimp for WordPress Pro](https://mc4wp.com/).
 
 #### 1.0.1 - February 4, 2015
 
@@ -323,9 +323,9 @@ The plugin now requires [MailChimp for WordPress](https://wordpress.org/plugins/
 
 **Improvements**
 
-- The menu item will now show above the item asking you to upgrade to MailChimp for WordPress Pro.
+- The menu item will now show above the item asking you to upgrade to Mailchimp for WordPress Pro.
 
-Please update the [MailChimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/) before updating to this version.
+Please update the [Mailchimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/) before updating to this version.
 
 #### 1.0 - January 28, 2015
 

@@ -42,7 +42,7 @@ function mailchimp_top_bar_php_requirement_notice() {
 
 	?>
 	<div class="updated">
-		<p><?php _e( 'MailChimp Top Bar did not activate because it requires your server to run PHP 5.3 or higher.', 'mailchimp-top-bar' ); ?></p>
+		<p><?php _e( 'Mailchimp Top Bar did not activate because it requires your server to run PHP 5.3 or higher.', 'mailchimp-top-bar' ); ?></p>
 	</div>
 	<?php
 }

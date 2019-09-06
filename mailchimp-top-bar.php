@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: MailChimp for WordPress - Top Bar
+Plugin Name: Mailchimp for WordPress - Top Bar
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page
 Description: Adds an opt-in bar to the top of your site.
 Version: 1.4.0
@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL v3
 Requires PHP: 5.3
 
-MailChimp Top Bar
+Mailchimp Top Bar
 Copyright (C) 2015-2019, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /**
- * Loads the MailChimp Top Bar plugin
+ * Loads the Mailchimp Top Bar plugin
  *
  * @ignore
  * @access private
@@ -49,8 +49,8 @@ function _load_mailchimp_top_bar() {
 		return;
 	}
 
-	define( 'MAILCHIMP_TOP_BAR_FILE', __FILE__ );
-	define( 'MAILCHIMP_TOP_BAR_DIR', __DIR__ );
+	define('MAILCHIMP_TOP_BAR_FILE', __FILE__);
+	define('MAILCHIMP_TOP_BAR_DIR', __DIR__);
 	define('MAILCHIMP_TOP_BAR_VERSION', '1.4.0');
 
 	// create instance

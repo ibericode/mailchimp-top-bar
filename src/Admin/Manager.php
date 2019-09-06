@@ -1,6 +1,6 @@
 <?php
 /*
-MailChimp Top Bar
+Mailchimp Top Bar
 Copyright (C) 2015, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
@@ -49,7 +49,7 @@ class Manager {
 		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
 		add_action( 'mc4wp_admin_enqueue_assets', array( $this, 'load_assets' ), 10, 2 );
 
-		// for BC with MailChimp for WP < 3.0
+		// for BC with Mailchimp for WP < 3.0
 		add_filter( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
 
 
@@ -84,7 +84,7 @@ class Manager {
 	public function add_menu_item( array $items ) {
 
 			$item = array(
-				'title' => __( 'MailChimp Top Bar', 'mailchimp-top-bar' ),
+				'title' => __( 'Mailchimp Top Bar', 'mailchimp-top-bar' ),
 				'text' => __( 'Top Bar', 'mailchimp-top-bar' ),
 				'slug' => 'top-bar',
 				'callback' => array( $this, 'show_settings_page' )
@@ -119,7 +119,7 @@ class Manager {
 			return $links;
 		}
 
-		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page">MailChimp for WordPress</a>' );
+		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page">Mailchimp for WordPress</a>' );
 		return $links;
 	}
 
@@ -214,7 +214,7 @@ class Manager {
 	}
 
 	/**
-	 * Helper function to retrieve MailChimp lists through MailChimp for WordPress
+	 * Helper function to retrieve Mailchimp lists through Mailchimp for WordPress
 	 *
 	 * @return array
 	 */
@@ -233,7 +233,7 @@ class Manager {
 	public function footer_text( $text ) {
 
 		if( ( isset( $_GET['page'] ) && strpos( $_GET['page'], 'mailchimp-for-wp-top-bar' ) === 0 ) ) {
-			$text = sprintf( 'If you enjoy using <strong>MailChimp Top Bar</strong>, please leave us a <a href="%s" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!', 'https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform' );
+			$text = sprintf( 'If you enjoy using <strong>Mailchimp Top Bar</strong>, please leave us a <a href="%s" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!', 'https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform' );
 		}
 
 		return $text;

@@ -22,7 +22,7 @@ $tabs = array(
 </style>
 <div class="wrap" id="mc4wp-admin">
 
-	<h1 class="page-title">MailChimp Top Bar</h1>
+	<h1 class="page-title">Mailchimp Top Bar</h1>
 
 	<h2 class="nav-tab-wrapper" id="mctb-tabs">
 		<?php foreach( $tabs as $tab => $title ) {
@@ -38,8 +38,8 @@ $tabs = array(
 		<?php settings_errors(); ?>
 
 		<div id="message-list-requires-fields" class="notice notice-warning" style="display: none;">
-			<p><?php printf( __( 'The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
-			<p class="help"><?php printf( __( 'After making changes to your MailChimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache' ) ) ); ?></p>
+			<p><?php printf( __( 'The selected Mailchimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your Mailchimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
+			<p class="help"><?php printf( __( 'After making changes to your Mailchimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache' ) ) ); ?></p>
 		</div>
 
 		<?php $config = array( 'element' => $this->name_attr( 'enabled' ), 'value' => 0 ); ?>
@@ -75,10 +75,10 @@ $tabs = array(
 				</tr>
 
 				<tr valign="top">
-					<th scope="mc4wp-row"><label><?php _e( 'MailChimp List', 'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'Mailchimp List', 'mailchimp-for-wp' ); ?></label></th>
 					<td>
 						<?php if( empty( $lists ) ) {
-							printf( __( 'No lists found, <a href="%s">are you connected to MailChimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
+							printf( __( 'No lists found, <a href="%s">are you connected to Mailchimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 						<?php } ?>
 
 						<select name="<?php echo $this->name_attr( 'list' ); ?>" class="mc4wp-list-input" id="select-mailchimp-list">

@@ -1,6 +1,6 @@
 <?php
 /*
-MailChimp Top Bar
+Mailchimp Top Bar
 Copyright (C) 2015, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
@@ -174,18 +174,18 @@ class Bar {
 		}
 
 		/**
-		 * Filters the list to which MailChimp Top Bar subscribes.
+		 * Filters the list to which Mailchimp Top Bar subscribes.
 		 *
 		 * @param string $list_id
 		 */
 		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $options->get( 'list' ) );
 
-		// check if a MailChimp list was given
+		// check if a Mailchimp list was given
 		if( empty( $mailchimp_list_id ) ) {
 			$this->error_type = 'error';
 
 			if( $log ) {
-				$log->warning( 'Top Bar > No MailChimp lists were selected' );
+				$log->warning( 'Top Bar > No Mailchimp lists were selected' );
 			}
 
 			return false;
@@ -197,7 +197,7 @@ class Bar {
 		);
 
 		/**
-		 * Filters the data received by MailChimp Top Bar, before it is further processed.
+		 * Filters the data received by Mailchimp Top Bar, before it is further processed.
 		 *
 		 * @param $data
 		 */
@@ -232,7 +232,7 @@ class Bar {
 				$subscriber = apply_filters( 'mc4wp_subscriber_data', $subscriber );
 
 				/**
-				 * Filter subscriber data before it is sent to MailChimp. Runs only for MailChimp Top Bar requests.
+				 * Filter subscriber data before it is sent to Mailchimp. Runs only for Mailchimp Top Bar requests.
 				 *
 				 * @param MC4WP_MailChimp_Subscriber
 				 */
@@ -243,7 +243,7 @@ class Bar {
 			}
 
 		} else {
-			// for BC with MailChimp for WordPress 3.x, override $mailchimp var
+			// for BC with Mailchimp for WordPress 3.x, override $mailchimp var
 			$mailchimp = mc4wp_get_api();
 			unset( $data['EMAIL'] );
 			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $data, $email_type, $options->get( 'double_optin' ), $options->get( 'update_existing' ), $replace_interests, $options->get( 'send_welcome' ) );
@@ -280,7 +280,7 @@ class Bar {
 			$this->error_type = 'error';
 
 			if( $log ) {
-				$log->error( sprintf( 'Top Bar > MailChimp API error: %s', $mailchimp->get_error_message() ) );
+				$log->error( sprintf( 'Top Bar > Mailchimp API error: %s', $mailchimp->get_error_message() ) );
 			}
 		}
 
@@ -362,7 +362,7 @@ class Bar {
 
 		wp_localize_script( 'mailchimp-top-bar', 'mctb', $data );
 
-		// enqueue placeholders.js from MailChimp for WordPress core plugin
+		// enqueue placeholders.js from Mailchimp for WordPress core plugin
 		if( isset( $GLOBALS['is_IE'] ) && $GLOBALS['is_IE'] ) {
 			wp_enqueue_script( 'mc4wp-placeholders' );
 		}
@@ -431,7 +431,7 @@ class Bar {
 
 		?>
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
-			<!-- MailChimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
+			<!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctb-bar" style="display: none">
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
@@ -449,7 +449,7 @@ class Bar {
 				<?php echo $this->get_response_message_html(); ?>
 			</div>
 
-			<!-- / MailChimp Top Bar -->
+			<!-- / Mailchimp Top Bar -->
 		</div>
 		<?php
 	}
@@ -497,7 +497,7 @@ class Bar {
 	}
 
 	/**
-	 * Returns the debug logger or null, if MailChimp for WordPress 3.1 is not installed.
+	 * Returns the debug logger or null, if Mailchimp for WordPress 3.1 is not installed.
 	 *
 	 * @return MC4WP_Debug_Log|null
 	 */
