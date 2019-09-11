@@ -1,4 +1,4 @@
-Mailchimp Top Bar
+MC4WP: Mailchimp Top Bar
 ==============
 
 Adds a beautiful and customisable Mailchimp opt-in bar to the top of your WordPress site. 
