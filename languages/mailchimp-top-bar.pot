@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Admin/Manager.php:87
-msgid "MailChimp Top Bar"
+msgid "Mailchimp Top Bar"
 msgstr ""
 
 #: src/Admin/Manager.php:88
@@ -55,11 +55,11 @@ msgid "You are already subscribed. Thank you!"
 msgstr ""
 
 #: views/settings-page.php:41
-msgid "The selected MailChimp list requires more fields than just an <strong>%s</strong> field. Please <a href=\"%s\">log into your MailChimp account</a> and make sure only the <strong>%s</strong> field is marked as required."
+msgid "The selected Mailchimp list requires more fields than just an <strong>%s</strong> field. Please <a href=\"%s\">log into your Mailchimp account</a> and make sure only the <strong>%s</strong> field is marked as required."
 msgstr ""
 
 #: views/settings-page.php:42
-msgid "After making changes to your MailChimp list, <a href=\"%s\">click here</a> to renew your list configuration."
+msgid "After making changes to your Mailchimp list, <a href=\"%s\">click here</a> to renew your list configuration."
 msgstr ""
 
 #: views/settings-page.php:48

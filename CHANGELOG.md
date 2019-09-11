@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+#### 1.4.1 - Sep 11, 2019
+
+**Changes**
+
+- Change name to MC4WP: Mailchimp Top Bar.
+
+
 #### 1.4.0 - Sep 4, 2019
 
 **Improvements**
