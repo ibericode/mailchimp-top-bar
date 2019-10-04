@@ -1,25 +1,29 @@
 'use strict';
 
-var duration = 800;
-var easeOutQuint = function (t) { return 1+(--t)*t*t*t*t };
+const duration = 600;
+const easeOutQuad = t => t*(2-t);
 
 function css(element, styles) {
-    for(var property in styles) {
+    for(let property in styles) {
+        if (!styles.hasOwnProperty(property)) {
+            continue;
+        }
+
         element.style[property] = styles[property];
     }
 }
 
 function initObjectProperties(properties, value) {
-    var newObject = {};
-    for(var i=0; i<properties.length; i++) {
+    let newObject = {};
+    for(let i=0; i<properties.length; i++) {
         newObject[properties[i]] = value;
     }
     return newObject;
 }
 
 function copyObjectProperties(properties, object) {
-    var newObject = {}
-    for(var i=0; i<properties.length; i++) {
+    let newObject = {}
+    for(let i=0; i<properties.length; i++) {
         newObject[properties[i]] = object[properties[i]];
     }
     return newObject;
@@ -42,11 +46,11 @@ function animated(element) {
  * @param animation Either "fade" or "slide"
  */
 function toggle(element, animation) {
-    var nowVisible = element.style.display != 'none' || element.offsetLeft > 0;
+    const nowVisible = element.style.display !== 'none' || element.offsetLeft > 0;
 
     // create clone for reference
-    var clone = element.cloneNode(true);
-    var cleanup = function() {
+    const clone = element.cloneNode(true);
+    const cleanup = function() {
         element.removeAttribute('data-animated');
         element.setAttribute('style', clone.getAttribute('style'));
         element.style.display = nowVisible ? 'none' : '';
@@ -60,7 +64,7 @@ function toggle(element, animation) {
         element.style.display = '';
     }
 
-    var hiddenStyles, visibleStyles;
+    let hiddenStyles, visibleStyles;
 
     // animate properties
     if( animation === 'slide' ) {
@@ -68,7 +72,7 @@ function toggle(element, animation) {
         visibleStyles = {};
 
         if( ! nowVisible ) {
-            var computedStyles = window.getComputedStyle(element);
+            let computedStyles = window.getComputedStyle(element);
             visibleStyles = copyObjectProperties(["height", "borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom"], computedStyles);
             css(element, hiddenStyles);
         }
@@ -88,18 +92,22 @@ function toggle(element, animation) {
 }
 
 function animate(element, targetStyles, fn) {
-    var startTime = performance.now();
-    var styles = window.getComputedStyle(element);
-    var diff = {};
-    var startStyles = {};
+    let startTime = null;
+    const styles = window.getComputedStyle(element);
+    let diff = {};
+    let startStyles = {};
 
-    for(var property in targetStyles) {
+    for(let property in targetStyles) {
+        if (!targetStyles.hasOwnProperty(property)) {
+            continue;
+        }
+
         // calculate step size & current value
-        var to = parseFloat(targetStyles[property]);
-        var current = parseFloat(styles[property]);
+        const to = parseFloat(targetStyles[property]);
+        const current = parseFloat(styles[property]);
 
         // is there something to do?
-        if( current == to ) {
+        if( current === to ) {
             continue;
         }
 
@@ -107,23 +115,27 @@ function animate(element, targetStyles, fn) {
         diff[property] = to - current;
     }
 
-    var tick = function(t) {
-        var progress = Math.min(( t - startTime ) / duration, 1);
+    const tick = function(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min(( timestamp - startTime ) / duration, 1.00);
 
-        for(var property in diff) {
-            var suffix = property !== "opacity" ? "px" : "";
-            element.style[property] = startStyles[property] + ( diff[property] * easeOutQuint(progress) ) + suffix;
-        }
-
-        if(progress >= 1) {
-            if(fn) {
-                fn();
+        for(let property in diff) {
+            if (!diff.hasOwnProperty(property)) {
+                continue;
             }
 
-            return;
-        } 
-        
-        window.requestAnimationFrame(tick);
+            const suffix = property !== "opacity" ? "px" : "";
+            element.style[property] = startStyles[property] + ( diff[property] * easeOutQuad(progress) ) + suffix;
+        }
+
+        if(progress < 1.00) {
+            return window.requestAnimationFrame(tick);
+        }
+
+        // animation finished!
+        if(fn) {
+            fn();
+        }
     };
 
     window.requestAnimationFrame(tick);

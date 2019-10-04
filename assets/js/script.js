@@ -1,14 +1,18 @@
 (function () { var require = undefined; var module = undefined; var exports = undefined; var define = undefined;(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-var duration = 800;
+var duration = 600;
 
-var easeOutQuint = function easeOutQuint(t) {
-  return 1 + --t * t * t * t * t;
+var easeOutQuad = function easeOutQuad(t) {
+  return t * (2 - t);
 };
 
 function css(element, styles) {
   for (var property in styles) {
+    if (!styles.hasOwnProperty(property)) {
+      continue;
+    }
+
     element.style[property] = styles[property];
   }
 }
@@ -52,7 +56,7 @@ function animated(element) {
 
 
 function toggle(element, animation) {
-  var nowVisible = element.style.display != 'none' || element.offsetLeft > 0; // create clone for reference
+  var nowVisible = element.style.display !== 'none' || element.offsetLeft > 0; // create clone for reference
 
   var clone = element.cloneNode(true);
 
@@ -101,17 +105,21 @@ function toggle(element, animation) {
 }
 
 function animate(element, targetStyles, fn) {
-  var startTime = performance.now();
+  var startTime = null;
   var styles = window.getComputedStyle(element);
   var diff = {};
   var startStyles = {};
 
   for (var property in targetStyles) {
-    // calculate step size & current value
+    if (!targetStyles.hasOwnProperty(property)) {
+      continue;
+    } // calculate step size & current value
+
+
     var to = parseFloat(targetStyles[property]);
     var current = parseFloat(styles[property]); // is there something to do?
 
-    if (current == to) {
+    if (current === to) {
       continue;
     }
 
@@ -119,23 +127,27 @@ function animate(element, targetStyles, fn) {
     diff[property] = to - current;
   }
 
-  var tick = function tick(t) {
-    var progress = Math.min((t - startTime) / duration, 1);
+  var tick = function tick(timestamp) {
+    if (!startTime) startTime = timestamp;
+    var progress = Math.min((timestamp - startTime) / duration, 1.00);
 
-    for (var property in diff) {
-      var suffix = property !== "opacity" ? "px" : "";
-      element.style[property] = startStyles[property] + diff[property] * easeOutQuint(progress) + suffix;
-    }
-
-    if (progress >= 1) {
-      if (fn) {
-        fn();
+    for (var _property in diff) {
+      if (!diff.hasOwnProperty(_property)) {
+        continue;
       }
 
-      return;
+      var suffix = _property !== "opacity" ? "px" : "";
+      element.style[_property] = startStyles[_property] + diff[_property] * easeOutQuad(progress) + suffix;
     }
 
-    window.requestAnimationFrame(tick);
+    if (progress < 1.00) {
+      return window.requestAnimationFrame(tick);
+    } // animation finished!
+
+
+    if (fn) {
+      fn();
+    }
   };
 
   window.requestAnimationFrame(tick);
@@ -574,26 +586,12 @@ module.exports = Loader;
 },{}],5:[function(require,module,exports){
 'use strict';
 
-var Bar = require('./bar.js'); // Init bar
+var Bar = require('./bar.js');
 
-
-ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
   var element = document.getElementById('mailchimp-top-bar');
   window.MailChimpTopBar = new Bar(element, window.mctb);
 });
-/**
- * DOMContentLoaded (IE8 compatible)
- *
- * @param fn
- */
-
-function ready(fn) {
-  if (document.readyState != 'loading') {
-    fn();
-  } else if (document.addEventListener) {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
 
 },{"./bar.js":2}]},{},[5]);
 ; })();

@@ -1,8 +1,8 @@
 'use strict';
 
-var cookies = require('./cookies.js');
-var animator = require('./animator.js');
-var Loader = require('./loader.js');
+const cookies = require('./cookies.js');
+const animator = require('./animator.js');
+const Loader = require('./loader.js');
 
 function throttle(fn, threshhold, scope) {
     threshhold || (threshhold = 250);
