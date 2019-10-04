@@ -6,6 +6,9 @@
     "url": "https://github.com/ibericode/mailchimp-top-bar"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babelify": "^10.0.0",
     "browserify": "^13.0.1",
     "gulp": "^3.9.0",
     "gulp-cssmin": "^0.1.7",

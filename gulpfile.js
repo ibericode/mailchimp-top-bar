@@ -26,17 +26,23 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./assets/css'))
 });
 
-
-gulp.task('browserify', function() {
-    return browserify({
-        entries: './assets/browserify/script.js'
-    }).on('error', console.log)
+function bundleScript(entryFile, bundleName) {
+    return () =>
+        browserify({
+            entries: entryFile
+        }).transform("babelify", {
+            presets: ["@babel/preset-env"],
+        })
         .bundle()
-        .pipe(source('script.js'))
+        .pipe(source(entryFile.split('/').pop()))
         .pipe(insert.wrap('(function () { var require = undefined; var module = undefined; var exports = undefined; var define = undefined;', '; })();'))
         .pipe(buffer())
         .pipe(gulp.dest('./assets/js'));
-});
+}
+
+gulp.task('browserify-script', bundleScript('./assets/browserify/script.js', 'script.js'));
+gulp.task('browserify-admin', bundleScript('./assets/browserify/admin.js', 'script.js'));
+gulp.task('browserify', ['browserify-script', 'browserify-admin']);
 
 gulp.task('minify-js', ['browserify'], function() {
     return gulp.src(['./assets/js/**/*.js','!./assets/js/**/*.min.js'])
