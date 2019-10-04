@@ -14,15 +14,15 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Admin/Manager.php:87
+#: src/Admin/Manager.php:88
 msgid "Mailchimp Top Bar"
 msgstr ""
 
-#: src/Admin/Manager.php:88
+#: src/Admin/Manager.php:89
 msgid "Top Bar"
 msgstr ""
 
-#: src/Admin/Manager.php:122
+#: src/Admin/Manager.php:123
 msgid "An add-on for %s"
 msgstr ""
 
