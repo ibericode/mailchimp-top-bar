@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 namespace MailChimp\TopBar\Admin;
 
+use ABTestingForWP\MC4WP;
 use MailChimp\TopBar\Options;
 use MailChimp\TopBar\Plugin;
 
@@ -140,11 +141,6 @@ class Manager {
 		wp_enqueue_script( 'wp-color-picker' );
 
 		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$suffix}.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
-		wp_localize_script( 'mailchimp-top-bar-admin', 'mctb', array(
-				'lists' => $this->get_mailchimp_lists()
-			)
-		);
-
 		return;
 	}
 
@@ -152,10 +148,10 @@ class Manager {
 	 * Outputs the settings page
 	 */
 	public function show_settings_page() {
-
 		$current_tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
 		$opts = $this->options;
-		$lists = $this->get_mailchimp_lists();
+		$mailchimp = new \MC4WP_MailChimp();
+		$lists = $mailchimp->get_lists();
 
 		require MAILCHIMP_TOP_BAR_DIR . '/views/settings-page.php';
 	}
@@ -211,16 +207,6 @@ class Manager {
 		}
 
 		return $clean;
-	}
-
-	/**
-	 * Helper function to retrieve Mailchimp lists through Mailchimp for WordPress
-	 *
-	 * @return array
-	 */
-	protected function get_mailchimp_lists() {
-		$mailchimp = new \MC4WP_MailChimp();
-		return $mailchimp->get_lists();
 	}
 
 	/**
