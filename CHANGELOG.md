@@ -1,6 +1,11 @@
 Changelog
 ==========
 
+#### 1.5.0 - Oct 7, 2019
+
+Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 4.6.
+
+
 #### 1.4.1 - Sep 11, 2019
 
 **Changes**
