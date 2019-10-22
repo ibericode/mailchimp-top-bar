@@ -18,25 +18,26 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 namespace MailChimp\TopBar\Admin;
 
-use ABTestingForWP\MC4WP;
 use MailChimp\TopBar\Options;
-use MailChimp\TopBar\Plugin;
 
 class Manager {
-
-	const SETTINGS_CAP = 'manage_options';
 
 	/**
 	 * @var Options $options
 	 */
 	private $options;
 
+    /**
+     * @var string
+     */
+	private $plugin_slug;
+
 	/**
 	 * Constructor
 	 * @param Options $options
 	 */
-	public function __construct( Options $options ) {
-
+	public function __construct( Options $options )
+    {
 		$this->options = $options;
 		$this->plugin_slug = plugin_basename( MAILCHIMP_TOP_BAR_FILE );
 	}
@@ -44,7 +45,8 @@ class Manager {
 	/**
 	 * Add plugin hooks
 	 */
-	public function add_hooks() {
+	public function add_hooks()
+    {
 		add_action( 'admin_init', array( $this, 'init' ) );
 		add_filter( 'mc4wp_admin_menu_items', array( $this, 'add_menu_item' ) );
 		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
@@ -52,8 +54,6 @@ class Manager {
 
 		// for BC with Mailchimp for WP < 3.0
 		add_filter( 'mc4wp_menu_items', array( $this, 'add_menu_item' ) );
-
-
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Manager {
 	 * @param array $links
 	 * @return array
 	 */
-	public function add_plugin_settings_link( $links ) {
+	public function add_plugin_settings_link( array $links ) {
 		$settings_link = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=mailchimp-for-wp-top-bar' ), __( 'Settings', 'mailchimp-for-wp' ) );
 		array_unshift( $links, $settings_link );
 		return $links;
@@ -113,9 +113,10 @@ class Manager {
 	 * Adds meta links to the plugin in the WP Admin > Plugins screen
 	 *
 	 * @param array $links
+     * @param string $file
 	 * @return array
 	 */
-	public function add_plugin_meta_links( $links, $file ) {
+	public function add_plugin_meta_links( array $links, $file ) {
 		if( $file !== $this->plugin_slug ) {
 			return $links;
 		}
@@ -157,8 +158,7 @@ class Manager {
 	}
 
 	/**
-	 * @param $url
-	 *
+	 * @param string $url
 	 * @return string
 	 */
 	protected function asset_url( $url ) {
@@ -166,8 +166,7 @@ class Manager {
 	}
 
 	/**
-	 * @param $option_name
-	 *
+	 * @param string $option_name
 	 * @return string
 	 */
 	protected function name_attr( $option_name ) {
@@ -176,7 +175,6 @@ class Manager {
 
 	/**
 	 * @param array $dirty
-	 *
 	 * @return array $clean
 	 */
 	public function sanitize_settings( array $dirty ) {
@@ -212,8 +210,7 @@ class Manager {
 	/**
 	 * Ask for a plugin review in the WP Admin footer, if this is one of the plugin pages.
 	 *
-	 * @param $text
-	 *
+	 * @param string $text
 	 * @return string
 	 */
 	public function footer_text( $text ) {
