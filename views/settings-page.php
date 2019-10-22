@@ -10,8 +10,6 @@ $tabs = array(
 	'messages'      => __( "Messages", "mailchimp-for-wp" ),
 	'advanced'      => __( "Advanced", "mailchimp-for-wp" ),
 );
-
-/** @var Options $opts */
 ?>
 <?php /* ensure wp-picker does not push other elements around */ ?>
 <style type="text/css">
@@ -34,7 +32,7 @@ $tabs = array(
 	<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
 
 		<h2 style="display: none;"></h2>
-		<?php settings_fields( $opts->key ); ?>
+		<?php settings_fields('mailchimp_top_bar'); ?>
 		<?php settings_errors(); ?>
 
 		<div id="message-list-requires-fields" class="notice notice-warning" style="display: none;">
@@ -64,10 +62,10 @@ $tabs = array(
 					</th>
 					<td>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $opts->get( 'enabled' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $options[ 'enabled' ], 1 ); ?> /> <?php _e( 'Yes' ); ?>
 						</label> &nbsp;
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $opts->get( 'enabled' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $options[ 'enabled' ], 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 						<p class="help"><?php _e( 'A quick way to completely disable the bar.', 'mailchimp-top-bar' ); ?></p>
 
@@ -82,9 +80,9 @@ $tabs = array(
 						<?php } ?>
 
 						<select name="<?php echo $this->name_attr( 'list' ); ?>" class="mc4wp-list-input" id="select-mailchimp-list">
-							<option disabled <?php selected( $opts->get( 'list' ), '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
+							<option disabled <?php selected( $options[ 'list' ], '' ); ?>><?php _e( 'Select a list..', 'mailchimp-top-bar' ); ?></option>
 							<?php foreach( $lists as $list ) { ?>
-								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $opts->get( 'list' ), $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
+								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $options[ 'list' ], $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
 							<?php } ?>
 						</select>
 						<p class="help"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></p>
@@ -98,7 +96,7 @@ $tabs = array(
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $opts->get( 'text_bar' ) ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'text_bar' ); ?>" value="<?php echo esc_attr( $options[ 'text_bar' ] ); ?>" class="regular-text" />
 						<p class="help"><?php _e( 'The text to appear before the email field.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
@@ -110,7 +108,7 @@ $tabs = array(
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $opts->get( 'text_button' ) ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'text_button' ); ?>" value="<?php echo esc_attr( $options[ 'text_button' ] ); ?>" class="regular-text" />
 						<p class="help"><?php _e( 'The text on the submit button.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
@@ -122,7 +120,7 @@ $tabs = array(
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $opts->get( 'text_email_placeholder' ) ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo $this->name_attr( 'text_email_placeholder' ); ?>" value="<?php echo esc_attr( $options[ 'text_email_placeholder' ] ); ?>" class="regular-text" />
 						<p class="help"><?php _e( 'The initial placeholder text to appear in the email field.', 'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
@@ -146,8 +144,8 @@ $tabs = array(
 							</th>
 							<td>
 								<select name="<?php echo $this->name_attr( 'position' ); ?>" id="select-bar-position">
-									<option value="top" <?php selected( $opts->get( 'position' ), 'top' ); ?>><?php _e( 'Top', 'mailchimp-top-bar' ); ?></option>
-									<option value="bottom" <?php selected( $opts->get( 'position' ), 'bottom' ); ?>><?php _e( 'Bottom', 'mailchimp-top-bar' ); ?></option>
+									<option value="top" <?php selected( $options[ 'position' ], 'top' ); ?>><?php _e( 'Top', 'mailchimp-top-bar' ); ?></option>
+									<option value="bottom" <?php selected( $options[ 'position' ], 'bottom' ); ?>><?php _e( 'Bottom', 'mailchimp-top-bar' ); ?></option>
 								</select>
 							</td>
 						</tr>
@@ -160,9 +158,9 @@ $tabs = array(
 							</th>
 							<td>
 								<select name="<?php echo $this->name_attr( 'size' ); ?>">
-									<option value="small" <?php selected( $opts->get( 'size' ), 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
-									<option value="medium" <?php selected( $opts->get( 'size' ), 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
-									<option value="big" <?php selected( $opts->get( 'size' ), 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
+									<option value="small" <?php selected( $options[ 'size' ], 'small' ); ?>><?php _e( 'Small', 'mailchimp-top-bar' ); ?></option>
+									<option value="medium" <?php selected( $options[ 'size' ], 'medium' ); ?>><?php _e( 'Medium', 'mailchimp-top-bar' ); ?></option>
+									<option value="big" <?php selected( $options[ 'size' ], 'big' ); ?>><?php _e( 'Big', 'mailchimp-top-bar' ); ?></option>
 								</select>
 							</td>
 						</tr>
@@ -174,7 +172,7 @@ $tabs = array(
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_bar' ) ); ?>" class="mc4wp-color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_bar' ); ?>" value="<?php echo esc_attr( $options[ 'color_bar' ] ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
@@ -185,7 +183,7 @@ $tabs = array(
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_text' ) ); ?>" class="mc4wp-color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_text' ); ?>" value="<?php echo esc_attr( $options[ 'color_text' ] ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
@@ -203,10 +201,10 @@ $tabs = array(
 							</th>
 							<td>
 								<label>
-									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $opts->get( 'sticky' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="1" <?php checked( $options[ 'sticky' ], 1 ); ?> /> <?php _e( 'Yes' ); ?>
 								</label> &nbsp;
 								<label>
-									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $opts->get( 'sticky' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+									<input type="radio" name="<?php echo $this->name_attr( 'sticky' ); ?>" value="0" <?php checked( $options[ 'sticky' ], 0 ); ?> /> <?php _e( 'No' ); ?>
 								</label>
 							</td>
 						</tr>
@@ -218,7 +216,7 @@ $tabs = array(
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button' ) ); ?>" class="mc4wp-color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_button' ); ?>" value="<?php echo esc_attr( $options[ 'color_button' ] ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
@@ -229,7 +227,7 @@ $tabs = array(
 								</label>
 							</th>
 							<td>
-								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $opts->get( 'color_button_text' ) ); ?>" class="mc4wp-color">
+								<input type="text" name="<?php echo $this->name_attr( 'color_button_text' ); ?>" value="<?php echo esc_attr( $options[ 'color_button_text' ] ); ?>" class="mc4wp-color">
 							</td>
 						</tr>
 
@@ -247,19 +245,19 @@ $tabs = array(
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="mc4wp-row"><label><?php _e( 'Success', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_subscribed' ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_subscribed'); ?>" placeholder="<?php echo esc_attr( $options[ 'text_subscribed' ] ); ?>"  value="<?php echo esc_attr( $options[ 'text_subscribed' ] ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="mc4wp-row"><label><?php _e( 'Invalid email address', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_invalid_email'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_invalid_email' ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_invalid_email'); ?>" placeholder="<?php echo esc_attr( $options[ 'text_invalid_email' ] ); ?>"  value="<?php echo esc_attr( $options[ 'text_invalid_email' ] ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="mc4wp-row"><label><?php _e( 'Already subscribed', 'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_already_subscribed'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_already_subscribed' ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_already_subscribed'); ?>" placeholder="<?php echo esc_attr( $options[ 'text_already_subscribed' ] ); ?>"  value="<?php echo esc_attr( $options[ 'text_already_subscribed' ] ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="mc4wp-row"><label><?php _e( 'Other errors' ,'mailchimp-for-wp' ); ?></label></th>
-					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_error'); ?>" placeholder="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>"  value="<?php echo esc_attr( $opts->get( 'text_error' ) ); ?>" /></td>
+					<td><input type="text" class="widefat" name="<?php echo $this->name_attr('text_error'); ?>" placeholder="<?php echo esc_attr( $options[ 'text_error' ] ); ?>"  value="<?php echo esc_attr( $options[ 'text_error' ] ); ?>" /></td>
 				</tr>
 				<tr>
 					<th></th>
@@ -274,7 +272,7 @@ $tabs = array(
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $opts->get( 'redirect' ) ); ?>" value="<?php echo esc_url( $opts->get( 'redirect' ) ); ?>" class="widefat" />
+						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $options[ 'redirect' ] ); ?>" value="<?php echo esc_url( $options[ 'redirect' ] ); ?>" class="widefat" />
 						<p class="help"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
 					</td>
 				</tr>
@@ -295,10 +293,10 @@ $tabs = array(
 					</th>
 					<td>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $opts->get( 'double_optin' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $options[ 'double_optin' ], 1 ); ?> /> <?php _e( 'Yes' ); ?>
 						</label> &nbsp;
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $opts->get( 'double_optin' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $options[ 'double_optin' ], 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 						<p class="help">
 							<?php _e( 'Select "yes" if you want people to confirm their email address before being subscribed (recommended)', 'mailchimp-for-wp' ); ?>
@@ -316,10 +314,10 @@ $tabs = array(
 						</th>
 						<td>
 							<label>
-								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $opts->get( 'send_welcome' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="1" <?php checked( $options[ 'send_welcome' ], 1 ); ?> /> <?php _e( 'Yes' ); ?>
 							</label> &nbsp;
 							<label>
-								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $opts->get( 'send_welcome' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+								<input type="radio" name="<?php echo $this->name_attr( 'send_welcome' ); ?>" value="0" <?php checked( $options[ 'send_welcome' ], 0 ); ?> /> <?php _e( 'No' ); ?>
 							</label>
 							<p class="help">
 								<?php _e( 'Select "yes" if you want to send your lists Welcome Email if a subscribe succeeds (only when double opt-in is disabled).', 'mailchimp-for-wp' ); ?>
@@ -336,10 +334,10 @@ $tabs = array(
 					</th>
 					<td>
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="1" <?php checked( $opts->get( 'update_existing' ), 1 ); ?> /> <?php _e( 'Yes' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="1" <?php checked( $options[ 'update_existing' ], 1 ); ?> /> <?php _e( 'Yes' ); ?>
 						</label> &nbsp;
 						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="0" <?php checked( $opts->get( 'update_existing' ), 0 ); ?> /> <?php _e( 'No' ); ?>
+							<input type="radio" name="<?php echo $this->name_attr( 'update_existing' ); ?>" value="0" <?php checked( $options[ 'update_existing' ], 0 ); ?> /> <?php _e( 'No' ); ?>
 						</label>
 						<p class="help">
 							<?php _e( 'Select "yes" if you want to update existing subscribers with the data that is sent.', 'mailchimp-for-wp' ); ?>
@@ -355,7 +353,7 @@ $tabs = array(
                         </label>
                     </th>
                     <td>
-                        <input type="text" name="<?php echo $this->name_attr( 'disable_on_pages' ); ?>" value="<?php echo esc_attr( $opts->get( 'disable_on_pages' ) ); ?>" class="regular-text" placeholder="<?php _e('Example: checkout, contact'); ?>" />
+                        <input type="text" name="<?php echo $this->name_attr( 'disable_on_pages' ); ?>" value="<?php echo esc_attr( $options[ 'disable_on_pages' ] ); ?>" class="regular-text" placeholder="<?php _e('Example: checkout, contact'); ?>" />
                         <p class="help"><?php _e( "Enter a comma separated list of pages to hide the bar on. Accepts page ID's or slugs.", 'mailchimp-top-bar' ); ?></p>
                     </td>
                 </tr>

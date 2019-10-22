@@ -18,14 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 namespace MailChimp\TopBar\Admin;
 
-use MailChimp\TopBar\Options;
-
 class Manager {
-
-	/**
-	 * @var Options $options
-	 */
-	private $options;
 
     /**
      * @var string
@@ -34,11 +27,9 @@ class Manager {
 
 	/**
 	 * Constructor
-	 * @param Options $options
 	 */
-	public function __construct( Options $options )
+	public function __construct()
     {
-		$this->options = $options;
 		$this->plugin_slug = plugin_basename( MAILCHIMP_TOP_BAR_FILE );
 	}
 
@@ -68,7 +59,7 @@ class Manager {
 		}
 
 		// register settings
-		register_setting( $this->options->key, $this->options->key, array( $this, 'sanitize_settings' ) );
+		register_setting( 'mailchimp_top_bar', 'mailchimp_top_bar', array( $this, 'sanitize_settings' ) );
 
 		// add link to settings page from plugins page
 		add_filter( 'plugin_action_links_' . $this->plugin_slug, array( $this, 'add_plugin_settings_link' ) );
@@ -150,7 +141,7 @@ class Manager {
 	 */
 	public function show_settings_page() {
 		$current_tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'settings';
-		$opts = $this->options;
+		$options = mctb_get_options();
 		$mailchimp = new \MC4WP_MailChimp();
 		$lists = $mailchimp->get_lists();
 
@@ -170,7 +161,7 @@ class Manager {
 	 * @return string
 	 */
 	protected function name_attr( $option_name ) {
-		return $this->options->key . '[' . $option_name . ']';
+		return 'mailchimp_top_bar[' . $option_name . ']';
 	}
 
 	/**

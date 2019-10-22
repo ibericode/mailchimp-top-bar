@@ -25,12 +25,6 @@ use MC4WP_MailChimp_Subscriber;
 use MC4WP_List_Data_Mapper;
 
 class Bar {
-
-	/**
-	 * @var array
-	 */
-	private $options;
-
 	/**
 	 * @var bool
 	 */
@@ -45,15 +39,6 @@ class Bar {
 	 * @var bool
 	 */
 	private $submitted = false;
-
-	/**
-	 * Constructor
-	 *
-	 * @param Options $options
-	 */
-	public function __construct( Options $options ) {
-		$this->options = $options;
-	}
 
 	/**
 	 * Add the hooks
@@ -91,16 +76,17 @@ class Bar {
 	 * @return bool
 	 */
 	public function should_show_bar() {
+	    $options = mctb_get_options();
+
 		// don't show if bar is disabled
-		if( ! $this->options->get('enabled') ) {
+		if( ! $options['enabled'] ) {
 			return false;
 		}
 
 		$show_bar = true;
-        $disable_on_pages = $this->options->get('disable_on_pages');
 
-		if (!empty($disable_on_pages)) {
-            $disable_on_pages = explode(',', $disable_on_pages);
+		if (!empty($options['disable_on_pages'])) {
+            $disable_on_pages = explode(',', $options['disable_on_pages']);
             $disable_on_pages = array_map('trim', $disable_on_pages);
             $show_bar = !is_page($disable_on_pages);
 		}
@@ -126,29 +112,33 @@ class Bar {
 	 */
 	public function listen() {
 
-		if( isset( $_POST['_mctb'] ) && $_POST['_mctb'] == 1 ) {
-			$this->success = $this->process();
-
-			if( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest' ) {
-			    $data = array(
-                    'message' => $this->get_response_message(),
-                    'success' => $this->success,
-                    'redirect_url' => $this->success ? $this->options->get( 'redirect' ) : '',
-                );
-
-			    wp_send_json( $data );
-			    exit;
-            }
-
-            if( $this->success ) {
-                // should we redirect
-                $redirect_url = $this->options->get( 'redirect' );
-                if( ! empty( $redirect_url ) ) {
-                    wp_redirect( $redirect_url );
-                    exit;
-                }
-            }
+		if( ! isset( $_POST['_mctb'] ) || $_POST['_mctb'] != 1 ) {
+            return;
 		}
+
+		$options = mctb_get_options();
+        $this->success = $this->process();
+
+        if( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest' ) {
+            $data = array(
+                'message' => $this->get_response_message(),
+                'success' => $this->success,
+                'redirect_url' => $this->success ? $this->options->get( 'redirect' ) : '',
+            );
+
+            wp_send_json( $data );
+            exit;
+        }
+
+        if( $this->success ) {
+            // should we redirect
+            $redirect_url = $this->options->get( 'redirect' );
+            if( ! empty( $redirect_url ) ) {
+                wp_redirect( $redirect_url );
+                exit;
+            }
+        }
+
 	}
 
 	/**
@@ -156,7 +146,7 @@ class Bar {
 	 * @return boolean
 	 */
 	private function process() {
-		$options = $this->options;
+        $options = mctb_get_options();
 		$this->submitted = true;
 		$log = $this->get_log();
 
@@ -178,7 +168,7 @@ class Bar {
 		 *
 		 * @param string $list_id
 		 */
-		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $options->get( 'list' ) );
+		$mailchimp_list_id = apply_filters( 'mctb_mailchimp_list', $options['list'] );
 
 		// check if a Mailchimp list was given
 		if( empty( $mailchimp_list_id ) ) {
@@ -224,7 +214,7 @@ class Bar {
 
 			foreach( $map as $list_id => $subscriber ) {
 				$subscriber->email_type = $email_type;
-				$subscriber->status = $options->get( 'double_optin' ) ? 'pending' : 'subscribed';
+				$subscriber->status = $options['double_optin'] ? 'pending' : 'subscribed';
 
 				// TODO: Add IP address.
 
@@ -238,7 +228,7 @@ class Bar {
 				 */
 				$subscriber = apply_filters( 'mctb_subscriber_data', $subscriber );
 
-				$result = $mailchimp->list_subscribe( $mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options->get( 'update_existing' ), $replace_interests );
+				$result = $mailchimp->list_subscribe( $mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options['update_existing'], $replace_interests );
 				$result = is_object( $result ) && ! empty( $result->id );
 			}
 
@@ -246,7 +236,7 @@ class Bar {
 			// for BC with Mailchimp for WordPress 3.x, override $mailchimp var
 			$mailchimp = mc4wp_get_api();
 			unset( $data['EMAIL'] );
-			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $data, $email_type, $options->get( 'double_optin' ), $options->get( 'update_existing' ), $replace_interests, $options->get( 'send_welcome' ) );
+			$result = $mailchimp->subscribe( $mailchimp_list_id, $email_address, $data, $email_type, $options['double_optin'], $options['update_existing'], $replace_interests, $options['send_welcome']);
 		}
 
 		// return true if success..
@@ -331,19 +321,20 @@ class Bar {
 	 * Loads the required scripts & styles
 	 */
 	public function load_assets() {
+        $options = mctb_get_options();
 		$min = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
 		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script{$min}.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
 
-		$bottom = ( $this->options->get( 'position' ) === 'bottom' );
+		$bottom = $options['position'] === 'bottom';
 
 		$data = array(
-			'cookieLength' => $this->options->get('cookie_length'),
+			'cookieLength' => $options['cookie_length'],
 			'icons' => array(
 				'hide' => ( $bottom ) ? '&#x25BC;' : '&#x25B2;',
 				'show' =>  ( $bottom ) ? '&#x25B2;' : '&#x25BC;'
 			),
-			'position' => $this->options->get( 'position' ),
+			'position' => $options['position'],
 			'state' => array(
                 'submitted' => $this->submitted,
                 'success' => $this->success,
@@ -372,20 +363,21 @@ class Bar {
 	 * @return string
 	 */
 	private function get_css_class() {
+        $options = mctb_get_options();
 		$classes = array( 'mctb' );
 
 		// add class when bar is sticky
-		if( $this->options->get( 'sticky' ) ) {
+		if ($options['sticky']) {
 			$classes[] = 'mctb-sticky';
 		}
 
 		// add unique css class for position (bottom|top)
-		if( $this->options->get( 'position' ) ) {
-			$classes[] = sprintf( 'mctb-position-%s', $this->options->get( 'position' ) );
+		if ( $options['position']) {
+			$classes[] = sprintf( 'mctb-position-%s', $options['position']);
 		}
 
 		// add class describing size of the bar
-		$classes[] = "mctb-{$this->options->get( 'size' )}";
+		$classes[] = "mctb-{$options['size']}";
 
 		return join( ' ', $classes );
 	}
@@ -394,10 +386,11 @@ class Bar {
 	 * Output the CSS settings for the bar
 	 */
 	public function output_css() {
-		$bar_color = $this->options->get( 'color_bar' );
-		$button_color = $this->options->get('color_button');
-		$text_color = $this->options->get( 'color_text' );
-		$button_text_color = $this->options->get( 'color_button_text' );
+        $options = mctb_get_options();
+		$bar_color = $options[ 'color_bar' ];
+		$button_color = $options['color_button'];
+		$text_color = $options[ 'color_text' ];
+		$button_text_color = $options[ 'color_button_text' ];
 
 		echo '<style type="text/css">' . PHP_EOL;
 
@@ -428,19 +421,19 @@ class Bar {
 	public function output_html() {
 
 		$form_action = apply_filters( 'mctb_form_action', null );
-
+        $options = mctb_get_options();
 		?>
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 			<div class="mctb-bar" style="display: none">
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
-					<label class="mctb-label" for="mailchimp-top-bar__email"><?php echo $this->options->get( 'text_bar' ); ?></label>
+					<label class="mctb-label" for="mailchimp-top-bar__email"><?php echo $options[ 'text_bar' ]; ?></label>
 					<?php do_action( 'mctb_before_email_field' ); ?>
-					<input type="email" name="email" placeholder="<?php echo esc_attr( $this->options->get( 'text_email_placeholder' ) ); ?>" class="mctb-email" required id="mailchimp-top-bar__email" />
+					<input type="email" name="email" placeholder="<?php echo esc_attr( $options[ 'text_email_placeholder' ] ); ?>" class="mctb-email" required id="mailchimp-top-bar__email" />
 					<input type="text"  name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off" tabindex="-1" class="mctb-email-confirm" />
 					<?php do_action( 'mctb_before_submit_button' ); ?>
-					<input type="submit" value="<?php echo esc_attr( $this->options->get('text_button') ); ?>" class="mctb-button" />
+					<input type="submit" value="<?php echo esc_attr( $options['text_button'] ); ?>" class="mctb-button" />
 					<?php do_action( 'mctb_after_submit_button' ); ?>
 					<input type="hidden" name="_mctb" value="1" />
 					<input type="hidden" name="_mctb_no_js" value="1" />
@@ -463,14 +456,16 @@ class Bar {
 			return '';
 		}
 
+        $options = mctb_get_options();
+
 		if( $this->success ) {
-			$message = $this->options->get('text_subscribed');
+			$message = $options['text_subscribed'];
 		} else if( $this->error_type === 'already_subscribed' ) {
-			$message = $this->options->get('text_already_subscribed');
+			$message = $options['text_already_subscribed'];
 		} else if( $this->error_type === 'invalid_email' ) {
-			$message = $this->options->get('text_invalid_email');
+			$message = $options['text_invalid_email'];
 		} else {
-			$message = $this->options->get('text_error');
+			$message = $options['text_error'];
 		}
 
 		return $message;
