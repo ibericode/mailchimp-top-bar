@@ -304,7 +304,7 @@ $tabs = array(
 					</td>
 				</tr>
 
-				<?php if( ! class_exists( 'MC4WP_API_v3' ) ) { ?>
+				<?php if( ! class_exists( 'MC4WP_API_V3' ) ) { ?>
 					<?php $config = array( 'element' => $this->name_attr( 'double_optin' ), 'value' => 0 ); ?>
 					<tr valign="top" class="send-welcome-options" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 						<th scope="mc4wp-row">
