@@ -341,7 +341,7 @@ $tabs = array(
 						</label>
 						<p class="help">
 							<?php _e( 'Select "yes" if you want to update existing subscribers with the data that is sent.', 'mailchimp-for-wp' ); ?>
-							<?php printf( __( 'This is really only useful if you have <a href="%s">added additional fields (besides just email)</a>.', 'mailchimp-top-bar' ), 'https://mc4wp.com/kb/add-name-field-to-mailchimp-top-bar/' ); ?>
+							<?php printf( __( 'This is really only useful if you have <a href="%s">added additional fields (besides just email)</a>.', 'mailchimp-top-bar' ), 'https://www.mc4wp.com/kb/add-name-field-to-mailchimp-top-bar/' ); ?>
 						</p>
 					</td>
 				</tr>

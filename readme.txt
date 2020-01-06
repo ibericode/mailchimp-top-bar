@@ -1,6 +1,6 @@
 === MC4WP: Mailchimp Top Bar ===
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
-Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
+Donate link: https://www.mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
 Tested up to: 5.2
@@ -95,7 +95,7 @@ add_filter( 'mctb_subscriber_data', function( $subscriber ) {
 });
 `
 
-**KB:** [Add name field to Mailchimp Top Bar](https://kb.mc4wp.com/add-name-field-to-mailchimp-top-bar/)
+**KB:** [Add name field to Mailchimp Top Bar](https://www.mc4wp.com/kb/add-name-field-to-mailchimp-top-bar/)
 
 = How to hide the bar on small screens? =
 
@@ -118,7 +118,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Screenshots ==
 
-1. The Mailchimp Top Bar in action on the [Mailchimp for WordPress site](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=screenshots).
+1. The Mailchimp Top Bar in action on the [Mailchimp for WordPress site](https://www.mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=screenshots).
 2. The settings page of the Mailchimp Top Bar plugin.
 
 == Changelog ==
@@ -261,7 +261,7 @@ Top Bar was invisible on some themes because of `z-index` being too low.
 
 **Additions**
 
-- Add support for new [debug log](https://mc4wp.com/kb/how-to-enable-log-debugging/) in Mailchimp for WordPress 3.1
+- Add support for new [debug log](https://www.mc4wp.com/kb/how-to-enable-log-debugging/) in Mailchimp for WordPress 3.1
 
 
 #### 1.2.6 - January 4, 2016
@@ -290,7 +290,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 
 #### 1.2.4 - November 22, 2015
 
-- Compatibility for [the upcoming Mailchimp for WordPress 3.0 release](https://mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/) tomorrow.
+- Compatibility for [the upcoming Mailchimp for WordPress 3.0 release](https://www.mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/) tomorrow.
 - Added `mctb_subscribed` filter.
 
 #### 1.2.3 - November 13, 2015
@@ -373,7 +373,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 
 **Fixes**
 
-- Compatibility with [Mailchimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [Mailchimp for WordPress Pro v2.7](https://mc4wp.com/).
+- Compatibility with [Mailchimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [Mailchimp for WordPress Pro v2.7](https://www.mc4wp.com/).
 
 #### 1.0.7 - April 15, 2015
 
@@ -442,7 +442,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 
 **Additions**
 
-- Top Bar sign-ups are now shown in the log for [Mailchimp for WordPress Pro](https://mc4wp.com/).
+- Top Bar sign-ups are now shown in the log for [Mailchimp for WordPress Pro](https://www.mc4wp.com/).
 
 #### 1.0.1 - February 4, 2015
 

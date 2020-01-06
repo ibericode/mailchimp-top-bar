@@ -17,7 +17,7 @@ If you want to run the latest development version, you have two options:
 This will download the latest development version of the Mailchimp Top Bar plugin. While this version is usually stable,
 it is not recommended for use in a production environment.
 
-Note that this plugin depends on [Mailchimp for WordPress](https://mc4wp.com/) to work, so you will need to install that plugin first.
+Note that this plugin depends on [Mailchimp for WordPress](https://www.mc4wp.com/) to work, so you will need to install that plugin first.
 
 
 Bugs
@@ -29,7 +29,7 @@ Support
 This is a developer's portal for the Mailchimp Top Bar plugin and should not be used for support. Please visit the
 [MailChimp Top Bar support forum on WordPress.org](https://wordpress.org/support/plugin/mailchimp-top-bar).
 
-If you need priority support, please upgrade to [MailChimp for WordPress Pro](https://mc4wp.com/).
+If you need priority support, please upgrade to [MailChimp for WordPress Pro](https://www.mc4wp.com/).
 
 Contributions
 -------------

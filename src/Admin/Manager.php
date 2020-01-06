@@ -112,7 +112,7 @@ class Manager {
 			return $links;
 		}
 
-		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page">Mailchimp for WordPress</a>' );
+		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://www.mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page">Mailchimp for WordPress</a>' );
 		return $links;
 	}
 
