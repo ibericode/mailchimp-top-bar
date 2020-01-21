@@ -157,7 +157,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  transition-duration: 1s; }
+  transition-duration: 800ms; }
 
 .mctb-close {
   display: inline-block;
