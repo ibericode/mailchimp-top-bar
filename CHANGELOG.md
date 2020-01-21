@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+#### 1.5.1 - Jan 21, 2020
+
+- Fade response element using CSS animations for better performance.
+- Various minor performance improvements.
+
+
 #### 1.5.0 - Oct 7, 2019
 
 Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 4.6.
