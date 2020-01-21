@@ -123,7 +123,7 @@ class Bar {
             $data = array(
                 'message' => $this->get_response_message(),
                 'success' => $this->success,
-                'redirect_url' => $this->success ? $this->options->get( 'redirect' ) : '',
+                'redirect_url' => $this->success ? $options['redirect']: '',
             );
 
             wp_send_json( $data );
@@ -132,7 +132,7 @@ class Bar {
 
         if( $this->success ) {
             // should we redirect
-            $redirect_url = $this->options->get( 'redirect' );
+            $redirect_url = $options['redirect'];
             if( ! empty( $redirect_url ) ) {
                 wp_redirect( $redirect_url );
                 exit;
@@ -441,7 +441,6 @@ class Bar {
 				</form>
 				<?php echo $this->get_response_message_html(); ?>
 			</div>
-
 			<!-- / Mailchimp Top Bar -->
 		</div>
 		<?php
