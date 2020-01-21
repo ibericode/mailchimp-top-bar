@@ -36,10 +36,6 @@ function mailchimp_top_bar_deactivate_self() {
  * Outputs a notice telling the user that the plugin deactivated itself
  */
 function mailchimp_top_bar_php_requirement_notice() {
-
-	// load translations
-	load_plugin_textdomain( 'mailchimp-top-bar', false, 'mailchimp-top-bar/languages' );
-
 	?>
 	<div class="updated">
 		<p><?php _e( 'Mailchimp Top Bar did not activate because it requires your server to run PHP 5.3 or higher.', 'mailchimp-top-bar' ); ?></p>
