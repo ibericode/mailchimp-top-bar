@@ -32,13 +32,11 @@ $tablet_max: 860px;
 }
 
 #mailchimp-top-bar {
-
 	* {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
-
 
 	// Reset Form elements, many themes apply basic styling
 	form,
@@ -206,6 +204,7 @@ $tablet_max: 860px;
 	z-index: 100;
 	top: 0; left: 0;
 	width: 100%;
+	transition-duration: 800ms;
 }
 
 .mctb-close{

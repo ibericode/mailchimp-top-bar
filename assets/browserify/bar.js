@@ -4,7 +4,7 @@ const Loader = require('./loader.js')
 
 function throttle (fn, threshold, scope) {
   threshold || (threshold = 600)
-  var last
+  let last
   let deferTimer
   return function () {
     const context = scope || this
@@ -25,20 +25,20 @@ function throttle (fn, threshold, scope) {
 }
 
 function Bar (wrapperEl, config) {
-  var barEl = wrapperEl.querySelector('.mctb-bar')
-  var iconEl = document.createElement('span')
-  var responseEl = wrapperEl.querySelector('.mctb-response')
-  var formEl = barEl.querySelector('form')
-  var visible = false
-  var originalBodyPadding = 0
-  var bodyPadding = 0
-  var isBottomBar = (config.position === 'bottom')
-  var state = config.state
+  const barEl = wrapperEl.querySelector('.mctb-bar')
+  const iconEl = document.createElement('span')
+  const formEl = barEl.querySelector('form')
+  let responseEl = wrapperEl.querySelector('.mctb-response')
+  let visible = false
+  let originalBodyPadding = 0
+  let bodyPadding = 0
+  const isBottomBar = (config.position === 'bottom')
+  const state = config.state
 
   // Functions
   function init () {
     // remove "no_js" field
-    var noJsField = barEl.querySelector('input[name="_mctb_no_js"]')
+    const noJsField = barEl.querySelector('input[name="_mctb_no_js"]')
     noJsField.parentElement.removeChild(noJsField)
 
     formEl.addEventListener('submit', submitForm)
@@ -78,15 +78,15 @@ function Bar (wrapperEl, config) {
       window.setTimeout(fadeResponse, 4000)
     }
 
-    window.addEventListener('resize', throttle(calculateDimensions, 40))
+    window.addEventListener('resize', throttle(calculateDimensions))
   }
 
   function submitForm (evt) {
-    var loader = new Loader(formEl)
-    var data = new FormData(formEl)
-    var request = new XMLHttpRequest()
+    const loader = new Loader(formEl)
+    const data = new FormData(formEl)
+    let request = new XMLHttpRequest()
     request.onreadystatechange = function () {
-      var response
+      let response
 
       // are we done?
       if (this.readyState !== 4) {
@@ -139,7 +139,7 @@ function Bar (wrapperEl, config) {
     responseEl = document.createElement('div')
     responseEl.className = 'mctb-response'
 
-    var labelEl = document.createElement('label')
+    const labelEl = document.createElement('label')
     labelEl.className = 'mctb-response-label'
     labelEl.innerText = msg
     responseEl.appendChild(labelEl)
@@ -151,8 +151,7 @@ function Bar (wrapperEl, config) {
 
   function calculateDimensions () {
     // make sure bar is visible
-    var origBarDisplay = barEl.style.display
-
+    const origBarDisplay = barEl.style.display
     if (origBarDisplay !== 'block') {
       barEl.style.visibility = 'hidden'
     }
@@ -165,8 +164,8 @@ function Bar (wrapperEl, config) {
     }
 
     // would the close icon fit inside the bar?
-    var elementsWidth = 0
-    for (var i = 0; i < barEl.firstElementChild.children.length; i++) {
+    let elementsWidth = 0
+    for (let i = 0; i < barEl.firstElementChild.children.length; i++) {
       elementsWidth += barEl.firstElementChild.children[i].clientWidth
     }
 
@@ -206,7 +205,7 @@ function Bar (wrapperEl, config) {
       animator.toggle(barEl, 'slide')
 
       // animate body padding
-      var styles = {}
+      const styles = {}
       styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding
       animator.animate(document.body, styles)
     } else {
@@ -236,7 +235,7 @@ function Bar (wrapperEl, config) {
       animator.toggle(barEl, 'slide')
 
       // animate body padding
-      var styles = {}
+      const styles = {}
       styles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding
       animator.animate(document.body, styles)
     } else {
@@ -258,12 +257,16 @@ function Bar (wrapperEl, config) {
       return
     }
 
-    animator.toggle(responseEl, 'fade')
+    responseEl.style.opacity = '0'
+    window.setTimeout(() => {
+      // remove response element so form is usable again
+      responseEl.parentElement.removeChild(responseEl)
 
-    // auto-dismiss bar if we're good!
-    if (state.submitted && state.success) {
-      window.setTimeout(function () { hide(true) }, 1000)
-    }
+      // hide bar if sign-up was successful
+      if (state.submitted && state.success) {
+        hide(true)
+      }
+    }, 1000)
   }
 
   /**

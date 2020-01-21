@@ -194,8 +194,8 @@ function throttle(fn, threshold, scope) {
 function Bar(wrapperEl, config) {
   var barEl = wrapperEl.querySelector('.mctb-bar');
   var iconEl = document.createElement('span');
-  var responseEl = wrapperEl.querySelector('.mctb-response');
   var formEl = barEl.querySelector('form');
+  var responseEl = wrapperEl.querySelector('.mctb-response');
   var visible = false;
   var originalBodyPadding = 0;
   var bodyPadding = 0;
@@ -239,7 +239,7 @@ function Bar(wrapperEl, config) {
       window.setTimeout(fadeResponse, 4000);
     }
 
-    window.addEventListener('resize', throttle(calculateDimensions, 40));
+    window.addEventListener('resize', throttle(calculateDimensions));
   }
 
   function submitForm(evt) {
@@ -417,13 +417,15 @@ function Bar(wrapperEl, config) {
       return;
     }
 
-    animator.toggle(responseEl, 'fade'); // auto-dismiss bar if we're good!
+    responseEl.style.opacity = '0';
+    window.setTimeout(function () {
+      // remove response element so form is usable again
+      responseEl.parentElement.removeChild(responseEl); // hide bar if sign-up was successful
 
-    if (state.submitted && state.success) {
-      window.setTimeout(function () {
+      if (state.submitted && state.success) {
         hide(true);
-      }, 1000);
-    }
+      }
+    }, 1000);
   }
   /**
      * Toggle visibility of the bar

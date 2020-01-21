@@ -156,7 +156,8 @@
   z-index: 100;
   top: 0;
   left: 0;
-  width: 100%; }
+  width: 100%;
+  transition-duration: 1s; }
 
 .mctb-close {
   display: inline-block;
