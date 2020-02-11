@@ -16,6 +16,7 @@ function mctb_get_options()
         'color_text' => '#222222',
         'color_button' => '#222222',
         'color_button_text' => '#ffffff',
+        'disable_after_use' => 1,
         'size' => 'medium',
         'sticky' => 1,
         'text_email_placeholder' => __( 'Your email address..', 'mailchimp-top-bar' ),

@@ -1,6 +1,7 @@
 const cookies = require('./cookies.js')
 const animator = require('./animator.js')
 const Loader = require('./loader.js')
+const COOKIE_NAME = 'mctb_bar_hidden'
 
 function throttle (fn, threshold, scope) {
   threshold || (threshold = 600)
@@ -69,7 +70,8 @@ function Bar (wrapperEl, config) {
     window.requestAnimationFrame(calculateDimensions)
 
     // Show the bar straight away?
-    if (cookies.read('mctb_bar_hidden') !== '1') {
+    const cookieValue = cookies.read(COOKIE_NAME)
+    if (cookieValue !== 'hidden' && cookieValue !== 'used') {
       show()
     }
 
@@ -201,7 +203,7 @@ function Bar (wrapperEl, config) {
     }
 
     if (manual) {
-      cookies.erase('mctb_bar_hidden')
+      cookies.erase(COOKIE_NAME)
       animator.toggle(barEl, 'slide')
 
       // animate body padding
@@ -231,7 +233,7 @@ function Bar (wrapperEl, config) {
     }
 
     if (manual) {
-      cookies.create('mctb_bar_hidden', 1, config.cookieLength)
+      cookies.create(COOKIE_NAME, state.success ? 'used' : 'hidden', config.cookieLength)
       animator.toggle(barEl, 'slide')
 
       // animate body padding

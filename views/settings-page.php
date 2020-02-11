@@ -349,6 +349,25 @@ $tabs = array(
                 <tr valign="top">
                     <th scope="mc4wp-row">
                         <label>
+                            <?php _e( 'Stop loading bar after it is used?', 'mailchimp-for-wp' ); ?>
+                        </label>
+                    </th>
+                    <td>
+                        <label>
+                            <input type="radio" name="<?php echo $this->name_attr( 'disable_after_use' ); ?>" value="1" <?php checked( $options[ 'disable_after_use' ], 1 ); ?> /> <?php _e( 'Yes' ); ?>
+                        </label> &nbsp;
+                        <label>
+                            <input type="radio" name="<?php echo $this->name_attr( 'disable_after_use' ); ?>" value="0" <?php checked( $options[ 'disable_after_use' ], 0 ); ?> /> <?php _e( 'No' ); ?>
+                        </label>
+                        <p class="help">
+                            <?php _e( 'Select "yes" if you want to stop loading the bar after is successfully used to subscribe.', 'mailchimp-for-wp' ); ?>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr valign="top">
+                    <th scope="mc4wp-row">
+                        <label>
                             <?php _e( 'Do not show on pages', 'mailchimp-top-bar' ); ?>
                         </label>
                     </th>
@@ -357,6 +376,8 @@ $tabs = array(
                         <p class="help"><?php _e( "Enter a comma separated list of pages to hide the bar on. Accepts page ID's or slugs.", 'mailchimp-top-bar' ); ?></p>
                     </td>
                 </tr>
+
+
 
 			</table>
 		</div>

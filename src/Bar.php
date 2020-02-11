@@ -91,6 +91,10 @@ class Bar {
             $show_bar = !is_page($disable_on_pages);
 		}
 
+		if ($options['disable_after_use'] && isset($_COOKIE['mctb_bar_hidden']) && $_COOKIE['mctb_bar_hidden'] === 'used') {
+		    $show_bar = false;
+        }
+
 		/**
 		 * @deprecated 1.1
 		 * @use `mctb_show_bar`
