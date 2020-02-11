@@ -71,7 +71,7 @@ function Bar (wrapperEl, config) {
 
     // Show the bar straight away?
     const cookieValue = cookies.read(COOKIE_NAME)
-    if (cookieValue !== 'hidden' && cookieValue !== 'used') {
+    if (cookieValue === null) {
       show()
     }
 
