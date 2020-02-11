@@ -3,15 +3,12 @@
 const gulp = require('gulp')
 const uglify = require('gulp-uglify')
 const rename = require('gulp-rename')
-const cssmin = require('gulp-cssmin')
+const cssmin = require('gulp-clean-css')
 const sourcemaps = require('gulp-sourcemaps')
 const sass = require('gulp-sass')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
-const wpPot = require('gulp-wp-pot')
-const sort = require('gulp-sort')
-const config = require('./package.json')
 const insert = require('gulp-insert')
 
 gulp.task('sass', function () {

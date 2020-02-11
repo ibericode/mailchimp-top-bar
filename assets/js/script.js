@@ -234,7 +234,7 @@ function Bar(wrapperEl, config) {
 
     var cookieValue = cookies.read(COOKIE_NAME);
 
-    if (cookieValue !== 'hidden' && cookieValue !== 'used') {
+    if (cookieValue === null) {
       show();
     } // fade response 4 seconds after showing bar
 
