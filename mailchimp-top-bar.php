@@ -62,4 +62,3 @@ if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
 } else {
 	add_action( 'plugins_loaded', '_load_mailchimp_top_bar', 30 );
 }
-
