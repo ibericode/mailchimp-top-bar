@@ -1,10 +1,10 @@
 === MC4WP: Mailchimp Top Bar ===
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
-Donate link: https://www.mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=donate-link
+Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
 Tested up to: 5.3
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -122,6 +122,12 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the Mailchimp Top Bar plugin.
 
 == Changelog ==
+
+
+#### 1.5.2 - Mar 9, 2020
+
+- Add setting to disable bar (stop loading it altogether) after it is used.
+- Increase default cookie lifetime to 1 year.
 
 
 #### 1.5.1 - Jan 21, 2020

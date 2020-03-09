@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+#### 1.5.2 - Mar 9, 2020
+
+- Add setting to disable bar (stop loading it altogether) after it is used.
+- Increase default cookie lifetime to 1 year.
+
+
 #### 1.5.1 - Jan 21, 2020
 
 - Fade response element using CSS animations for better performance.
