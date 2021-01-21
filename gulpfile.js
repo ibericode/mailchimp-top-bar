@@ -6,52 +6,47 @@ const sourcemaps = require('gulp-sourcemaps')
 const sass = require('gulp-sass')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
+const buffer = require('vinyl-buffer')
 
-gulp.task('sass', function () {
-  const files = './assets/scss/[^_]*.scss'
+gulp.task('css', function () {
+  const files = './assets/src/scss/[^_]*.scss'
 
   return gulp.src(files)
     .pipe(sass())
     .pipe(rename({ extname: '.css' }))
+    .pipe(gulp.dest('./assets/css'))
+
+    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(cssmin({ sourceMap: true }))
+    .pipe(rename({ extname: '.min.css' }))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./assets/css'))
 })
 
 function bundleScript (entryFile) {
   return () =>
     browserify({
-      entries: 'assets/browserify/' + entryFile
+      entries: 'assets/src/js/' + entryFile
     }).transform('babelify', {
       presets: ['@babel/preset-env']
     })
       .bundle()
       .pipe(source(entryFile))
       .pipe(gulp.dest('./assets/js'))
+
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(uglify())
+      .pipe(rename({ extname: '.min.js' }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./assets/js'))
 }
 
 gulp.task('js', gulp.parallel(bundleScript('script.js'), bundleScript('admin.js')))
 
-gulp.task('minify-js', gulp.series('js', function () {
-  return gulp.src(['./assets/js/**/*.js', '!./assets/js/**/*.min.js'])
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
-    .pipe(rename({ extname: '.min.js' }))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./assets/js'))
-}))
+gulp.task('default', gulp.parallel('js', 'css'))
 
-gulp.task('minify-css', gulp.series('sass', function () {
-  return gulp.src(['./assets/css/**/*[^.min].css'])
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(cssmin({ sourceMap: true }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./assets/css'))
-}))
-
-gulp.task('default', gulp.series('js', 'sass', 'minify-js', 'minify-css'))
-
-// Rerun the task when a file changes
 gulp.task('watch', function () {
-  gulp.watch('./assets/browserify/**/*.js', ['js'])
-  gulp.watch('./assets/scss/**/*.scss', ['sass'])
+  gulp.watch('./assets/src/js/**/*.js', ['js'])
+  gulp.watch('./assets/src/scss/**/*.scss', ['css'])
 })
