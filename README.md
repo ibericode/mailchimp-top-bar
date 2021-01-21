@@ -6,18 +6,35 @@ Adds a beautiful and customisable Mailchimp opt-in bar to the top of your WordPr
 Installation
 ------------
 
-There is a [guide on how to install the plugin in your WordPress site](https://wordpress.org/plugins/mailchimp-top-bar/installation/).
+If you just want to install this plugin on your WordPress site, please download and install the latest version from WordPress.org: [Mailchimp Top Bar plugin on WordPress.org](https://wordpress.org/plugins/mailchimp-top-bar/installation/).
 
-If you want to run the latest development version, you have two options:
+To install the development version, take the following steps:
 
-* You can download the repository .zip file: [mailchimp-top-bar.zip](https://github.com/ibericode/mailchimp-top-bar/archive/master.zip)
-* You can clone the GitHub repository using Git
+1. Clone the GitHub repository:
 
-This will download the latest development version of the Mailchimp Top Bar plugin. While this version is usually stable,
-it is not recommended for use in a production environment.
+```
+git clone https://github.com/ibericode/mailchimp-top-bar.git
+```
 
-Note that this plugin depends on the [Mailchimp for WordPress plugin](https://www.mc4wp.com/) to work, so you will need to install that plugin first.
+2. Install NPM dependencies:
 
+```
+npm install
+```
+
+3. Install Composer dependencies:
+
+```
+composer install
+```
+
+4. Generate plugin asset files:
+
+```
+npx gulp
+```
+
+5. Activate the plugin in your WordPress admin.
 
 Bugs
 ----
