@@ -20,19 +20,6 @@ namespace MailChimp\TopBar\Admin;
 
 class Manager {
 
-    /**
-     * @var string
-     */
-	private $plugin_slug;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-    {
-		$this->plugin_slug = plugin_basename( MAILCHIMP_TOP_BAR_FILE );
-	}
-
 	/**
 	 * Add plugin hooks
 	 */
@@ -62,7 +49,7 @@ class Manager {
 		register_setting( 'mailchimp_top_bar', 'mailchimp_top_bar', array( $this, 'sanitize_settings' ) );
 
 		// add link to settings page from plugins page
-		add_filter( 'plugin_action_links_' . $this->plugin_slug, array( $this, 'add_plugin_settings_link' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( MAILCHIMP_TOP_BAR_FILE ), array( $this, 'add_plugin_settings_link' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_meta_links'), 10, 2 );
 	}
 
@@ -108,7 +95,7 @@ class Manager {
 	 * @return array
 	 */
 	public function add_plugin_meta_links( array $links, $file ) {
-		if( $file !== $this->plugin_slug ) {
+		if( $file !== plugin_basename( MAILCHIMP_TOP_BAR_FILE ) ) {
 			return $links;
 		}
 

@@ -28,13 +28,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// Prevent direct file access
-if ( ! defined( 'ABSPATH' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit;
-}
-
+defined( 'ABSPATH' ) or exit;
 
 /**
  * Loads the Mailchimp Top Bar plugin
