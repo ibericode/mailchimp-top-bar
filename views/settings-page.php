@@ -360,7 +360,7 @@ $tabs = array(
                             <input type="radio" name="<?php echo $this->name_attr( 'disable_after_use' ); ?>" value="0" <?php checked( $options[ 'disable_after_use' ], 0 ); ?> /> <?php _e( 'No' ); ?>
                         </label>
                         <p class="help">
-                            <?php _e( 'Select "yes" if you want to stop loading the bar after is successfully used to subscribe.', 'mailchimp-for-wp' ); ?>
+                            <?php _e( 'Select "yes" if you want to completely stop loading the bar after it is successfully used to subscribe.', 'mailchimp-for-wp' ); ?>
                         </p>
                     </td>
                 </tr>
