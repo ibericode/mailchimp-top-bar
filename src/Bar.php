@@ -418,13 +418,13 @@ class Bar {
 	 * Output the HTML for the opt-in bar
 	 */
 	public function output_html() {
-
+        $hide = isset( $_COOKIE['mctb_bar_hidden'] );
 		$form_action = apply_filters( 'mctb_form_action', null );
         $options = mctb_get_options();
 		?>
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
 			<!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-			<div class="mctb-bar" style="display: none">
+			<div class="mctb-bar" <?php echo $hide ? 'style="display: none"' : ''; ?>>
 				<form method="post" <?php if( is_string( $form_action ) ) { printf( 'action="%s"', esc_attr( $form_action ) ); } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
 					<label class="mctb-label" for="mailchimp-top-bar__email"><?php echo $options[ 'text_bar' ]; ?></label>
