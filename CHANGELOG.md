@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+#### 1.5.3 - Mar 30, 2021
+
+- Fix typo in help text.
+- Show bar server-side to speed-up height calculation.
+
+
 #### 1.5.2 - Mar 9, 2020
 
 - Add setting to disable bar (stop loading it altogether) after it is used.
