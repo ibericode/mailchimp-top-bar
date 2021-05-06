@@ -333,9 +333,8 @@ class Bar {
 	 */
 	public function load_assets() {
 		$options = mctb_get_options();
-		$min     = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar{$min}.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
-		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script{$min}.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
+		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
+		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
 
 		$bottom = $options['position'] === 'bottom';
 
