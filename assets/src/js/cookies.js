@@ -6,10 +6,10 @@
  * @param days
  */
 function create (name, value, days) {
-  var expires
+  let expires
 
   if (days) {
-    var date = new Date()
+    const date = new Date()
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
     expires = '; expires=' + date.toGMTString()
   } else {
@@ -25,10 +25,10 @@ function create (name, value, days) {
  * @returns {*}
  */
 function read (name) {
-  var nameEQ = encodeURIComponent(name) + '='
-  var ca = document.cookie.split(';')
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i]
+  const nameEQ = encodeURIComponent(name) + '='
+  const ca = document.cookie.split(';')
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i]
     while (c.charAt(0) === ' ') c = c.substring(1, c.length)
     if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length))
   }
@@ -44,8 +44,4 @@ function erase (name) {
   create(name, '', -1)
 }
 
-module.exports = {
-  read: read,
-  create: create,
-  erase: erase
-}
+module.exports = { read, create, erase }

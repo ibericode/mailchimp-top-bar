@@ -1,5 +1,3 @@
-'use strict'
-
 const duration = 600
 const easeOutQuad = t => t * (2 - t)
 
