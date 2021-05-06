@@ -1,0 +1,248 @@
+#mailchimp-top-bar form,
+#mailchimp-top-bar input,
+#mailchimp-top-bar label {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    text-shadow: none;
+    font-size: 100%;
+    outline: 0;
+    height: auto;
+    line-height: initial;
+    float: none;
+    box-sizing: border-box;
+}
+
+#mailchimp-top-bar input,
+#mailchimp-top-bar label {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    width: auto;
+}
+
+#mailchimp-top-bar form {
+    text-align: center;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#mailchimp-top-bar label {
+    margin: 0 6px 0 0;
+}
+
+#mailchimp-top-bar input,
+#mailchimp-top-bar input[type="text"],
+#mailchimp-top-bar input[type="email"],
+#mailchimp-top-bar .mctb-email,
+#mailchimp-top-bar .mctb-button {
+    margin: 0 0 0 6px;
+    border: 1px solid white;
+    background: white;
+    height: auto;
+}
+
+#mailchimp-top-bar .mctb-email {
+    width: 100%;
+    /* this is important because otherwise the field will stack horizontally */
+    max-width: 240px !important;
+}
+
+#mailchimp-top-bar .mctb-button {
+    margin-left: 0;
+    cursor: pointer;
+}
+
+#mailchimp-top-bar .mctb-email-confirm {
+    display: none !important;
+}
+
+#mailchimp-top-bar.mctb-small {
+    font-size: 10px;
+}
+
+#mailchimp-top-bar.mctb-small .mctb-bar {
+    padding: 5px 6px;
+}
+
+#mailchimp-top-bar.mctb-small .mctb-button {
+    padding: 4px 12px;
+}
+
+#mailchimp-top-bar.mctb-small input,
+#mailchimp-top-bar.mctb-small .mctb-email,
+#mailchimp-top-bar.mctb-small .mctb-label {
+    padding: 4px 6px !important;
+}
+
+#mailchimp-top-bar.mctb-small label,
+#mailchimp-top-bar.mctb-small input {
+    font-size: 12px;
+}
+
+#mailchimp-top-bar.mctb-small .mctb-close {
+    padding: 4px 12px;
+    font-size: 16px;
+}
+
+#mailchimp-top-bar.mctb-medium {
+    font-size: 12.5px;
+}
+
+#mailchimp-top-bar.mctb-medium .mctb-bar {
+    padding: 6.25px 7.5px;
+}
+
+#mailchimp-top-bar.mctb-medium .mctb-button {
+    padding: 5px 15px;
+}
+
+#mailchimp-top-bar.mctb-medium input,
+#mailchimp-top-bar.mctb-medium .mctb-email,
+#mailchimp-top-bar.mctb-medium .mctb-label {
+    padding: 5px 7.5px !important;
+}
+
+#mailchimp-top-bar.mctb-medium label,
+#mailchimp-top-bar.mctb-medium input {
+    font-size: 15px;
+}
+
+#mailchimp-top-bar.mctb-medium .mctb-close {
+    padding: 5px 15px;
+    font-size: 20px;
+}
+
+#mailchimp-top-bar.mctb-big {
+    font-size: 15px;
+}
+
+#mailchimp-top-bar.mctb-big .mctb-bar {
+    padding: 7.5px 9px;
+}
+
+#mailchimp-top-bar.mctb-big .mctb-button {
+    padding: 6px 18px;
+}
+
+#mailchimp-top-bar.mctb-big input,
+#mailchimp-top-bar.mctb-big .mctb-email,
+#mailchimp-top-bar.mctb-big .mctb-label {
+    padding: 6px 9px !important;
+}
+
+#mailchimp-top-bar.mctb-big label,
+#mailchimp-top-bar.mctb-big input {
+    font-size: 18px;
+}
+
+#mailchimp-top-bar.mctb-big .mctb-close {
+    padding: 6px 18px;
+    font-size: 24px;
+}
+
+@media (max-width: 580px) {
+    #mailchimp-top-bar input,
+    #mailchimp-top-bar label,
+    #mailchimp-top-bar .mctb-email,
+    #mailchimp-top-bar .mctb-label {
+        width: 100%;
+        max-width: 100% !important;
+    }
+
+    #mailchimp-top-bar input,
+    #mailchimp-top-bar .mctb-email {
+        margin: 6px 0 0 !important;
+    }
+}
+
+@media (max-width: 860px) {
+    #mailchimp-top-bar.multiple-input-fields .mctb-label {
+        display: block !important;
+        margin: 0 0 6px;
+    }
+}
+
+/* make sure z-index is slightly below that of admin bar (for dropdown items) */
+.admin-bar .mctb {
+    z-index: 99998;
+}
+
+.admin-bar .mctb-position-top {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    .admin-bar .mctb-position-top {
+        top: 46px;
+    }
+}
+
+/* admin bar is non-sticky on small screens */
+@media screen and (max-width: 600px) {
+    .admin-bar .mctb-position-top.mctb-sticky {
+        top: 0;
+    }
+}
+
+.mctb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    text-align: center;
+    z-index: 100000;
+}
+
+.mctb-bar {
+    position: relative;
+    width: 100%;
+}
+
+.mctb-sticky {
+    position: fixed;
+}
+
+.mctb-position-bottom {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+}
+
+.mctb-position-bottom .mctb-bar {
+    clear: both;
+}
+
+.mctb-response {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition-duration: 800ms;
+}
+
+.mctb-close {
+    display: inline-block;
+    float: right;
+    margin-right: 12px;
+    cursor: pointer;
+    clear: both;
+    z-index: 10;
+    line-height: initial;
+}
+
+.mctb-icon-inside-bar.mctb-position-bottom .mctb-bar {
+    position: absolute;
+    bottom: 0;
+}
+
+.mctb-icon-inside-bar .mctb-close {
+    float: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

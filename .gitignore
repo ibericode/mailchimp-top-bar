@@ -3,5 +3,7 @@ node_modules
 .sass-cache
 assets/
 !assets/src
+!assets/src/js
+!assets/src/css
 
 vendor/
