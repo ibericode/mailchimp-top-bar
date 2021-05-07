@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+#### 1.5.4 - May 7, 2021
+
+- Update classnames to work with MailChimp for WordPress version 4.8.4 (and up).
+- Minor JS optimizations.
+
+
 #### 1.5.3 - Mar 30, 2021
 
 - Fix typo in help text.
