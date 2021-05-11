@@ -37,7 +37,7 @@ $tabs = array(
 
 		<div id="message-list-requires-fields" class="notice notice-warning" style="display: none;">
 			<p><?php printf( __( 'The selected Mailchimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your Mailchimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
-			<p class="description"><?php printf( __( 'After making changes to your Mailchimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache' ) ) ); ?></p>
+			<p class="description"><?php printf( __( 'After making changes to your Mailchimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache', '_wpnonce' => wp_create_nonce( '_mc4wp_action' ) ) ) ); ?></p>
 		</div>
 
 		<?php $config = array( 'element' => $this->name_attr( 'enabled' ), 'value' => 0 ); ?>
