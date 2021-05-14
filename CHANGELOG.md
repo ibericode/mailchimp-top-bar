@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+#### 1.5.5 - May 14, 2021
+
+- Always use minified asset file, regardless of `SCRIPT_DEBUG` setting.
+- Add nonce to all URL's using `_mc4wp_action` parameter.
+
+
 #### 1.5.4 - May 7, 2021
 
 - Update classnames to work with MailChimp for WordPress version 4.8.4 (and up).
