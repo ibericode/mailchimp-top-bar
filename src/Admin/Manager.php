@@ -110,7 +110,7 @@ class Manager {
 	 * @param string $page
 	 * @return void
 	 */
-	public function load_assets( $suffix, $page = '' ) {
+	public function load_assets( $suffix = '', $page = '' ) {
 
 		if( $page !== 'top-bar' ) {
 			return;
@@ -118,9 +118,7 @@ class Manager {
 
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
-
-		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin{$suffix}.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
-		return;
+		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
 	}
 
 	/**

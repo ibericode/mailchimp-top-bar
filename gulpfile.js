@@ -22,10 +22,8 @@ function bundleScript (entryFile) {
     })
       .bundle()
       .pipe(source(entryFile))
-      .pipe(gulp.dest('./assets/js'))
       .pipe(buffer())
       .pipe(uglify())
-      .pipe(rename({ extname: '.min.js' }))
       .pipe(gulp.dest('./assets/js'))
 }
 
