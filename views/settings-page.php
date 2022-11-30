@@ -25,7 +25,7 @@ $tabs = array(
 	<h2 class="nav-tab-wrapper" id="mctb-tabs">
 		<?php foreach( $tabs as $tab => $title ) {
 			$class = ( $current_tab === $tab ) ? 'nav-tab-active' : '';
-			echo sprintf( '<a class="nav-tab nav-tab-%s %s" href="%s">%s</a>', $tab, $class, admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=' . $tab ), $title );
+			echo sprintf( '<a class="nav-tab nav-tab-%s %s" data-tab="%s" href="%s">%s</a>', $tab, $class, $tab, admin_url( 'admin.php?page=mailchimp-for-wp-top-bar&tab=' . $tab ), $title );
 		} ?>
 	</h2>
 
