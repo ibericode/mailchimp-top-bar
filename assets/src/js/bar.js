@@ -290,9 +290,9 @@ function Bar (wrapperEl, config) {
   // Return values
   return {
     element: wrapperEl,
-    toggle: toggle,
-    show: show,
-    hide: hide
+    toggle,
+    show,
+    hide
   }
 }
 

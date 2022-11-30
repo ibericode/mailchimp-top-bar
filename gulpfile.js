@@ -1,6 +1,5 @@
 const gulp = require('gulp')
 const uglify = require('gulp-uglify')
-const rename = require('gulp-rename')
 const cssmin = require('gulp-clean-css')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')

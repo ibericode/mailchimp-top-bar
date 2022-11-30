@@ -9,7 +9,6 @@ function setButtonText (button, text) {
 function Loader (formElement) {
   this.form = formElement
   this.button = formElement.querySelector('input[type="submit"], button[type="submit"]')
-  this.loadingInterval = 0
   this.char = '\u00B7'
 
   if (this.button) {

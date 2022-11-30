@@ -1,6 +1,6 @@
 const $ = window.jQuery
 const $context = $(document.getElementById('mc4wp-admin'))
-const elSelectList = document.getElementById('select-mailchimp-list');
+const elSelectList = document.getElementById('select-mailchimp-list')
 const msgRequiresFields = document.getElementById('message-list-requires-fields')
 const ajaxurl = window.ajaxurl
 
@@ -34,7 +34,7 @@ function maybeShowRequiredFieldsNotice () {
 $context.find('.mc4wp-color').wpColorPicker()
 
 // if a list changes, check which fields are required
-elSelectList.addEventListener('change', maybeShowRequiredFieldsNotice);
+elSelectList.addEventListener('change', maybeShowRequiredFieldsNotice)
 
 // check right away
 maybeShowRequiredFieldsNotice()

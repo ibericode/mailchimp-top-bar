@@ -5,16 +5,21 @@
     "type": "git",
     "url": "https://github.com/ibericode/mailchimp-top-bar"
   },
+  "scripts": {
+    "lint": "eslint assets/src/js gulpfile.js",
+    "watch": "gulp watch",
+    "build": "gulp"
+  },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.2",
-    "eslint": "^6.8.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.1",
+    "browserify": "^17.0.0",
+    "eslint": "^8.28.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-standard": "^4.1.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
