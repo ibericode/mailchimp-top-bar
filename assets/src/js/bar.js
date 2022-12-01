@@ -70,8 +70,7 @@ function Bar (wrapperEl, config) {
     window.requestAnimationFrame(calculateDimensions)
 
     // Show the bar straight away?
-    const cookieValue = cookies.read(COOKIE_NAME)
-    if (cookieValue === null) {
+    if (cookies.exists(COOKIE_NAME)) {
       show()
     }
 

@@ -6,33 +6,18 @@
  * @param days
  */
 function create (name, value, days) {
-  let expires
-
-  if (days) {
-    const date = new Date()
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
-    expires = '; expires=' + date.toGMTString()
-  } else {
-    expires = ''
-  }
-  document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=/'
+  const expires = days ? ';max-age=' + days * 24 * 60 * 60 : ''
+  document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + ';path=/;SameSite=lax'
 }
 
 /**
- * Reads a cookie
+ * Checks for existence of a cookie without checking its value
  *
  * @param name
- * @returns {*}
+ * @returns {boolean}
  */
-function read (name) {
-  const nameEQ = encodeURIComponent(name) + '='
-  const ca = document.cookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') c = c.substring(1, c.length)
-    if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length))
-  }
-  return null
+function exists (name) {
+  return (new RegExp(name + '=')).test(document.cookie)
 }
 
 /**
@@ -44,4 +29,4 @@ function erase (name) {
   create(name, '', -1)
 }
 
-module.exports = { read, create, erase }
+module.exports = { exists, create, erase }
