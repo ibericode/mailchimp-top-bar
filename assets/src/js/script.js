@@ -3,29 +3,16 @@ const animator = require('./animator.js')
 const Loader = require('./loader.js')
 const COOKIE_NAME = 'mctb_bar_hidden'
 
-function throttle (fn, threshold, scope) {
-  threshold || (threshold = 600)
-  let last
-  let deferTimer
-  return function () {
-    const context = scope || this
-    const now = +new Date()
-    const args = arguments
-    if (last && now < last + threshold) {
-      // hold on to it
-      clearTimeout(deferTimer)
-      deferTimer = setTimeout(function () {
-        last = now
-        fn.apply(context, args)
-      }, threshold)
-    } else {
-      last = now
-      fn.apply(context, args)
-    }
-  }
+// holder for debounce timeout
+let timeout
+function debounce (fn, delay) {
+  clearTimeout(timeout)
+  timeout = setTimeout(fn, delay)
 }
 
-function Bar (wrapperEl, config) {
+function Bar () {
+  const wrapperEl = document.getElementById('mailchimp-top-bar')
+  const config = window.mctb
   const barEl = wrapperEl.querySelector('.mctb-bar')
   const iconEl = document.createElement('span')
   const formEl = barEl.querySelector('form')
@@ -36,66 +23,60 @@ function Bar (wrapperEl, config) {
   const isBottomBar = (config.position === 'bottom')
   const state = config.state
 
-  // Functions
-  function init () {
-    // remove "no_js" field
-    const noJsField = barEl.querySelector('input[name="_mctb_no_js"]')
-    noJsField.parentElement.removeChild(noJsField)
+  // remove "no_js" field (which is used to detect bots and prevent spam)
+  const noJsField = barEl.querySelector('input[name="_mctb_no_js"]')
+  noJsField.parentElement.removeChild(noJsField)
 
-    formEl.addEventListener('submit', submitForm)
+  formEl.addEventListener('submit', submitForm)
 
-    // save original bodyPadding
-    if (isBottomBar) {
-      wrapperEl.insertBefore(iconEl, barEl)
-      originalBodyPadding = (parseInt(document.body.style.paddingBottom) || 0)
-    } else {
-      wrapperEl.insertBefore(iconEl, barEl.nextElementSibling)
-      originalBodyPadding = (parseInt(document.body.style.paddingTop) || 0)
-    }
-
-    // configure icon
-    iconEl.className = 'mctb-close'
-    iconEl.innerHTML = config.icons.show
-    iconEl.addEventListener('click', toggle)
-
-    // count input fields (3 because of hidden input honeypot)
-    if (barEl.querySelectorAll('input:not([type="hidden"])').length > 3) {
-      wrapperEl.className += ' multiple-input-fields'
-    }
-
-    // calculate initial dimensions
-    calculateDimensions()
-
-    // on dom repaint, bar height changes. re-calculate in next repaint.
-    window.requestAnimationFrame(calculateDimensions)
-
-    // Show the bar straight away?
-    if (cookies.exists(COOKIE_NAME)) {
-      show()
-    }
-
-    // fade response 4 seconds after showing bar
-    if (responseEl) {
-      window.setTimeout(fadeResponse, 4000)
-    }
-
-    window.addEventListener('resize', throttle(calculateDimensions))
+  // save original bodyPadding
+  if (isBottomBar) {
+    wrapperEl.insertBefore(iconEl, barEl)
+    originalBodyPadding = (parseInt(document.body.style.paddingBottom) || 0)
+  } else {
+    wrapperEl.insertBefore(iconEl, barEl.nextElementSibling)
+    originalBodyPadding = (parseInt(document.body.style.paddingTop) || 0)
   }
+
+  // configure icon
+  iconEl.className = 'mctb-close'
+  iconEl.innerHTML = config.icons.show
+  iconEl.addEventListener('click', toggle)
+
+  // count input fields (3 because of hidden input honeypot)
+  if (barEl.querySelectorAll('input:not([type="hidden"])').length > 3) {
+    wrapperEl.className += ' multiple-input-fields'
+  }
+
+  // on dom repaint, bar height changes. re-calculate in next repaint.
+  window.requestAnimationFrame(calculateDimensions)
+
+  // Show the bar straight away?
+  if (!cookies.exists(COOKIE_NAME)) {
+    show()
+  }
+
+  // fade response 4 seconds after showing bar
+  if (responseEl) {
+    window.setTimeout(fadeResponse, 4000)
+  }
+
+  window.addEventListener('resize', debounce(calculateDimensions, 100))
 
   function submitForm (evt) {
     const loader = new Loader(formEl)
     const data = new FormData(formEl)
     let request = new XMLHttpRequest()
     request.onreadystatechange = function () {
-      let response
-
-      // are we done?
       if (this.readyState !== 4) {
         return
       }
 
+      // remove loading indicator
       loader.stop()
 
+      // parse json response
+      let response
       if (this.status >= 200 && this.status < 400) {
         try {
           response = JSON.parse(this.responseText)
@@ -107,6 +88,7 @@ function Bar (wrapperEl, config) {
         state.success = !!response.success
         state.submitted = true
 
+        // maybe redirect to url from settings
         if (response.success && response.redirect_url) {
           window.location.href = response.redirect_url
           return
@@ -150,13 +132,23 @@ function Bar (wrapperEl, config) {
     window.setTimeout(fadeResponse, 4000)
   }
 
+  function iconFitsInsideBar () {
+    // would the close icon fit inside the bar?
+    let elementsWidth = 0
+    for (let i = 0; i < barEl.firstElementChild.children.length; i++) {
+      elementsWidth += barEl.firstElementChild.children[i].clientWidth
+    }
+
+    return (elementsWidth + iconEl.clientWidth + 200) < barEl.clientWidth
+  }
+
   function calculateDimensions () {
     // make sure bar is visible
     const origBarDisplay = barEl.style.display
     if (origBarDisplay !== 'block') {
       barEl.style.visibility = 'hidden'
+      barEl.style.display = 'block'
     }
-    barEl.style.display = 'block'
 
     // calculate & set new body padding if bar is currently visible
     bodyPadding = (originalBodyPadding + barEl.clientHeight) + 'px'
@@ -164,14 +156,8 @@ function Bar (wrapperEl, config) {
       document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding
     }
 
-    // would the close icon fit inside the bar?
-    let elementsWidth = 0
-    for (let i = 0; i < barEl.firstElementChild.children.length; i++) {
-      elementsWidth += barEl.firstElementChild.children[i].clientWidth
-    }
-
     wrapperEl.className = wrapperEl.className.replace('mctb-icon-inside-bar', '')
-    if (elementsWidth + iconEl.clientWidth + 200 < barEl.clientWidth) {
+    if (iconFitsInsideBar()) {
       wrapperEl.className += ' mctb-icon-inside-bar'
 
       // since icon is now absolutely positioned, we need to set a min height
@@ -283,9 +269,6 @@ function Bar (wrapperEl, config) {
     return visible ? hide(true) : show(true)
   }
 
-  // Code to run upon object instantiation
-  init()
-
   // Return values
   return {
     element: wrapperEl,
@@ -296,6 +279,5 @@ function Bar (wrapperEl, config) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const element = document.getElementById('mailchimp-top-bar')
-  window.MailChimpTopBar = new Bar(element, window.mctb)
+  window.MailChimpTopBar = new Bar()
 })
