@@ -2,11 +2,7 @@ const duration = 600
 const easeOutQuad = t => t * (2 - t)
 
 function css (element, styles) {
-  for (const property in styles) {
-    if (!styles.hasOwnProperty(property)) {
-      continue
-    }
-
+  for (const property of Object.keys(styles)) {
     element.style[property] = styles[property]
   }
 }
@@ -89,17 +85,13 @@ function toggle (element, animation) {
   }
 }
 
-function animate (element, targetStyles, fn) {
+function animate (element, targetStyles, callbackFn) {
   let startTime = null
   const styles = window.getComputedStyle(element)
   const diff = {}
   const startStyles = {}
 
-  for (const property in targetStyles) {
-    if (!targetStyles.hasOwnProperty(property)) {
-      continue
-    }
-
+  for (const property of Object.keys(targetStyles)) {
     // calculate step size & current value
     const to = parseFloat(targetStyles[property])
     const current = parseFloat(styles[property])
@@ -117,22 +109,19 @@ function animate (element, targetStyles, fn) {
     if (!startTime) startTime = timestamp
     const progress = Math.min((timestamp - startTime) / duration, 1.00)
 
-    for (const property in diff) {
-      if (!diff.hasOwnProperty(property)) {
-        continue
-      }
-
+    for (const property of Object.keys(diff)) {
       const suffix = property !== 'opacity' ? 'px' : ''
       element.style[property] = startStyles[property] + (diff[property] * easeOutQuad(progress)) + suffix
     }
 
+    // keep going until animation finished
     if (progress < 1.00) {
       return window.requestAnimationFrame(tick)
     }
 
     // animation finished!
-    if (fn) {
-      fn()
+    if (callbackFn) {
+      callbackFn()
     }
   }
 
