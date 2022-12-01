@@ -1,6 +1,13 @@
 Changelog
 ==========
 
+
+### 1.5.6 - Dec 1, 2022
+
+- Minor JS improvements to shrink ~500 bytes off script file.
+- Prepare admin tab navigation for upcoming [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) release.
+
+
 #### 1.5.5 - May 14, 2021
 
 - Always use minified asset file, regardless of `SCRIPT_DEBUG` setting.
