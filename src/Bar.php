@@ -335,7 +335,7 @@ class Bar {
 		$options = mctb_get_options();
 		wp_enqueue_style( 'mailchimp-top-bar', $this->asset_url( "/css/bar.css" ), array(), MAILCHIMP_TOP_BAR_VERSION );
 		wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
-
+        add_filter( 'script_loader_tag', array( $this, 'add_defer_attribute' ), 10, 2 );
 		$bottom = $options['position'] === 'bottom';
 
 		$data = array(
@@ -362,7 +362,18 @@ class Bar {
 		$data = apply_filters( 'mctb_bar_config', $data );
 
 		wp_localize_script( 'mailchimp-top-bar', 'mctb', $data );
-	}
+    }
+    
+    /**
+     * Adds defer attribute to our <script> element
+     */
+    public function add_defer_attribute( $tag, $handle ) {
+        if ( $handle !== 'mailchimp-top-bar' ) {
+            return $tag;
+        }
+
+        return str_replace( ' src=', ' defer="defer" src=', $tag );
+    }
 
 	/**
 	 * @return string
