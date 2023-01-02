@@ -5,8 +5,8 @@ Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to acti
 Requires at least: 4.1
 Tested up to: 6.1
 Stable tag: 1.5.6
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 5.3
 
 Adds a Mailchimp opt-in form to the top or bottom of your WordPress site.
