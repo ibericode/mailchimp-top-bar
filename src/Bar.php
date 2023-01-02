@@ -372,7 +372,7 @@ class Bar {
             return $tag;
         }
 
-        return str_replace( ' src=', ' defer="defer" src=', $tag );
+        return str_replace( ' src=', ' defer src=', $tag );
     }
 
     /**
