@@ -1,8 +1,8 @@
 {
   "scripts": {
     "lint": "eslint assets/src/js gulpfile.js",
-    "watch": "gulp watch",
-    "build": "gulp"
+    "watch": "NODE_ENV=development gulp watch",
+    "build": "NODE_ENV=production gulp"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

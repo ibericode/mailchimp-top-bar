@@ -1,9 +1,9 @@
 /**
  * Creates a cookie
  *
- * @param name
- * @param value
- * @param days
+ * @param {string} name
+ * @param {mixed} value
+ * @param {int|undefined} days
  */
 function create (name, value, days) {
   const expires = days ? ';max-age=' + days * 24 * 60 * 60 : ''
@@ -13,7 +13,7 @@ function create (name, value, days) {
 /**
  * Checks for existence of a cookie without checking its value
  *
- * @param name
+ * @param {string} name
  * @returns {boolean}
  */
 function exists (name) {
@@ -23,7 +23,7 @@ function exists (name) {
 /**
  * Erases a cookie
  *
- * @param name
+ * @param {string} name
  */
 function erase (name) {
   create(name, '', -1)

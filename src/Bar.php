@@ -441,7 +441,7 @@ class Bar {
 ?>
         <div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
             <!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-            <div class="mctb-bar" <?php echo $hide ? 'style="display: none"' : ''; ?>>
+			<div class="mctb-bar" <?php echo $hide ? 'style="display: none;"' : ''; ?>>
             <form method="post" <?php if ( is_string( $form_action ) ) {
             printf( 'action="%s"', esc_attr( $form_action ) );
         } ?>>

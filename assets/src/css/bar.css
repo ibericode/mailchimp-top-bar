@@ -200,6 +200,16 @@
 .mctb-bar {
     position: relative;
     width: 100%;
+	transform: scaleY(0);
+	transform-origin: top;
+}
+
+.mctb-animated {
+	transition: transform 0.5s ease;
+}
+
+.mctb-bar.visible {
+	transform:	scaleY(1);
 }
 
 .mctb-sticky {

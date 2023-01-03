@@ -1,11 +1,21 @@
+/**
+ * @param {HTMLElement} button
+ */
 function getButtonText (button) {
   return button.innerHTML ? button.innerHTML : button.value
 }
 
+/**
+ * @param {HTMLElement} button
+ * @param {string} text
+ */
 function setButtonText (button, text) {
   button.innerHTML ? button.innerHTML = text : button.value = text
 }
 
+/**
+ * @param {HTMLFormElement} formElement
+ */
 function Loader (formElement) {
   this.form = formElement
   this.button = formElement.querySelector('input[type="submit"], button[type="submit"]')
@@ -16,10 +26,16 @@ function Loader (formElement) {
   }
 }
 
+/**
+ * @param {string} c
+ */
 Loader.prototype.setCharacter = function (c) {
   this.char = c
 }
 
+/**
+ * Start the loading indicator
+ */
 Loader.prototype.start = function () {
   if (this.button) {
     // loading text
@@ -39,6 +55,9 @@ Loader.prototype.start = function () {
   }
 }
 
+/**
+ * Single step in the loading indicator's "animation"
+ */
 Loader.prototype.tick = function () {
   // count chars, start over at 5
   const text = getButtonText(this.button)
@@ -46,6 +65,9 @@ Loader.prototype.tick = function () {
   setButtonText(this.button, text.length >= 5 ? loadingChar : text + ' ' + loadingChar)
 }
 
+/**
+ * Stops the loading indicator
+ */
 Loader.prototype.stop = function () {
   if (this.button) {
     this.button.style.width = this.originalButton.style.width
