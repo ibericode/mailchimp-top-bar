@@ -383,14 +383,12 @@ class Bar {
         $classes = array( 'mctb' );
 
         // add class when bar is sticky
-        if ( $options['sticky'] ) {
+        if ( $options['position'] === 'top' && $options['sticky'] ) {
             $classes[] = 'mctb-sticky';
         }
 
         // add unique css class for position (bottom|top)
-        if ( $options['position'] ) {
-            $classes[] = sprintf( 'mctb-position-%s', $options['position'] );
-        }
+		$classes[] = sprintf( 'mctb-position-%s', $options['position'] );
 
         // add class describing size of the bar
         $classes[] = "mctb-{$options['size']}";
@@ -411,37 +409,37 @@ class Bar {
         echo '<style type="text/css">' . PHP_EOL;
 
         if ( ! empty( $bar_color ) ) {
-            echo ".mctb-bar, .mctb-response, .mctb-close { background: {$bar_color} !important; }" . PHP_EOL;
+            echo ".mctb-bar,.mctb-response,.mctb-close{ background: {$bar_color} !important; }" . PHP_EOL;
         }
 
         if ( ! empty( $text_color ) ) {
-            echo ".mctb-bar, .mctb-label, .mctb-close { color: {$text_color} !important; }" . PHP_EOL;
+            echo ".mctb-bar,.mctb-label,.mctb-close{ color: {$text_color} !important; }" . PHP_EOL;
         }
 
         if ( ! empty( $button_color ) ) {
-            echo ".mctb-button { background: {$button_color} !important; border-color: {$button_color} !important; }" . PHP_EOL;
-            echo ".mctb-email:focus { outline-color: {$button_color} !important; }" . PHP_EOL;
+            echo ".mctb-button{ background: {$button_color} !important; border-color: {$button_color} !important; }" . PHP_EOL;
+            echo ".mctb-email:focus{ outline-color: {$button_color} !important; }" . PHP_EOL;
         }
 
         if ( ! empty( $button_text_color ) ) {
-            echo ".mctb-button { color: {$button_text_color} !important; }" . PHP_EOL;
+            echo ".mctb-button{ color: {$button_text_color} !important; }" . PHP_EOL;
         }
 
-        echo '</style>';
+        echo '</style>' . PHP_EOL;
     }
 
 
     /**
      * Output the HTML for the opt-in bar
      */
-    public function output_html() {
-        $hide        = isset( $_COOKIE['mctb_bar_hidden'] );
+	public function output_html() {
+		$hide = isset( $_COOKIE['mctb_bar_hidden'] );
         $form_action = apply_filters( 'mctb_form_action', null );
         $options     = mctb_get_options();
 ?>
+        <!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
         <div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
-            <!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-			<div class="mctb-bar" <?php echo $hide ? 'style="display: none;"' : ''; ?>>
+		<div class="mctb-bar" <?php if ( $hide ) { echo ' style="display: none;"'; } ?>>
             <form method="post" <?php if ( is_string( $form_action ) ) {
             printf( 'action="%s"', esc_attr( $form_action ) );
         } ?>>
@@ -463,8 +461,8 @@ class Bar {
                 </form>
                 <?php echo $this->get_response_message_html(); ?>
             </div>
-            <!-- / Mailchimp Top Bar -->
-        </div>
+		</div>
+		<!-- / Mailchimp Top Bar -->
 <?php
     }
 

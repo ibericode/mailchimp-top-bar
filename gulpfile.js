@@ -22,7 +22,7 @@ function bundleScript (entryFile) {
       .bundle()
       .pipe(source(entryFile))
       .pipe(buffer())
-     //.pipe(uglify())
+      .pipe(uglify())
       .pipe(gulp.dest('./assets/js'))
 }
 

@@ -2,7 +2,10 @@ const cookies = require('./cookies.js')
 const Loader = require('./loader.js')
 const COOKIE_NAME = 'mctb_bar_hidden'
 
-// holder for debounce timeout
+/**
+ * @param {function} fn callback
+ * @parma {int} delay in ms
+ */
 function debounce(fn, delay) {
   let timeout;
   return function() {
@@ -17,8 +20,10 @@ function Bar () {
   const barEl = wrapperEl.querySelector('.mctb-bar')
   const iconEl = document.createElement('span')
   const formEl = barEl.querySelector('form')
+  let barHeight;
+  let barPadding;
   let responseEl = wrapperEl.querySelector('.mctb-response')
-  let visible = false
+  let visible = !cookies.exists(COOKIE_NAME);
   let originalBodyPadding = 0
   let bodyPadding = 0
   const isBottomBar = (config.position === 'bottom')
@@ -41,20 +46,17 @@ function Bar () {
 
   // configure icon
   iconEl.className = 'mctb-close'
-  iconEl.innerHTML = config.icons.show
+  iconEl.innerHTML = visible ? config.icons.hide : config.icons.show
   iconEl.addEventListener('click', toggle)
+
 
   // count input fields (3 because of hidden input honeypot)
   if (barEl.querySelectorAll('input:not([type="hidden"])').length > 3) {
     wrapperEl.className += ' multiple-input-fields'
   }
 
-  window.requestAnimationFrame(() => {
-    calculateDimensions();
-    if (! cookies.exists(COOKIE_NAME)) {
-      show(false)
-    }
-  });
+  window.requestAnimationFrame(calculateDimensions)
+  window.addEventListener('load', calculateDimensions);
 
   // fade response 4 seconds after showing bar
   if (responseEl) {
@@ -64,14 +66,14 @@ function Bar () {
   window.addEventListener('resize', debounce(calculateDimensions, 100));
 
   function submitForm (evt) {
+    evt.preventDefault();
+
     const loader = new Loader(formEl)
+    loader.start();
+
     const data = new FormData(formEl)
     let request = new XMLHttpRequest()
-    request.onreadystatechange = function () {
-      if (this.readyState !== 4) {
-        return
-      }
-
+    request.onload = function () {
       // remove loading indicator
       loader.stop()
 
@@ -108,10 +110,6 @@ function Bar () {
     request.open('POST', window.location.href, true)
     request.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
     request.send(data)
-    request = null
-
-    loader.start()
-    evt.preventDefault()
   }
 
   function showResponseMessage (msg) {
@@ -135,29 +133,28 @@ function Bar () {
   function iconFitsInsideBar () {
     // would the close icon fit inside the bar?
     let elementsWidth = 0
-    console.log("Bar el", barEl);
     for (let i = 0; i < barEl.firstElementChild.children.length; i++) {
       elementsWidth += barEl.firstElementChild.children[i].clientWidth
     }
-
-    console.log("Element width: ", elementsWidth);
-
-    console.log("Client width: ", barEl.clientWidth);
 
     return (elementsWidth + iconEl.clientWidth + 200) < barEl.clientWidth
   }
 
   function calculateDimensions () {
-  console.log("Calculating dimensions");
-    visible = barEl.className.indexOf('visible') > -1;
-
     // make sure bar is visible
     if (!visible) {
       barEl.style.visibility = 'hidden'
     }
-
     barEl.style.display = '';
-    barEl.classList.toggle('visible', true);
+    barEl.style.height = '';
+    barEl.style.paddingTop = '';
+    barEl.style.paddingBottom = '';
+
+    // measure bar padding and height
+    // we use this as our animation target values
+    const styles = window.getComputedStyle(barEl);
+    barHeight = styles.height;
+    barPadding = styles.paddingTop;
 
     // calculate & set new body padding if bar is currently visible
     bodyPadding = (originalBodyPadding + barEl.clientHeight) + 'px'
@@ -165,7 +162,6 @@ function Bar () {
       document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding
     }
 
-    console.log("Icon fits inside bar: ", iconFitsInsideBar());
     wrapperEl.className = wrapperEl.className.replace('mctb-icon-inside-bar', '')
     if (iconFitsInsideBar()) {
       wrapperEl.className += ' mctb-icon-inside-bar'
@@ -184,15 +180,34 @@ function Bar () {
 
     // reset bar again, we're done measuring
     barEl.style.visibility = ''
-    barEl.classList.toggle('visible', visible);
+    if (!visible) {
+      barEl.style.height = 0;
+      barEl.style.paddingTop = 0;
+      barEl.style.paddingBottom = 0;
+    }
   }
 
-  function animateBody() {
-    let orig = document.body.style;
-    document.body.style.transition = 'padding 0.5s ease';
+  /**
+   * @param {HTMLElement} el
+   * @param {object} styles
+   */
+  function animate(el, styles) {
+    el.style.transition = 'all 0.6s ease';
+    css(el, styles);
     window.setTimeout(() => {
-      document.body.style.transition = orig;
-    }, 550);
+      el.style.transition = '';
+    }, 1000);
+  }
+
+  /**
+   * @param {HTMLElement} el
+   * @param {object} styles
+   */
+  function css(el, styles) {
+    for (const prop in styles) {
+      el.style[prop] = styles[prop];
+    }
+
   }
 
   /**
@@ -205,19 +220,24 @@ function Bar () {
       return false
     }
 
+    let barStyles = {
+      height: barHeight,
+      paddingTop: barPadding,
+      paddingBottom: barPadding
+    };
+    let bodyStyles = {};
+    bodyStyles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
     if (manual) {
-      barEl.classList.toggle('mctb-animated', true);
-      animateBody();
+      animate(barEl, barStyles);
+      animate(document.body, bodyStyles);
       cookies.erase(COOKIE_NAME)
+    } else {
+      css(barEl, barStyles);
+      css(document.body, bodyStyles);
     }
 
-    window.requestAnimationFrame(() => {
-      barEl.classList.toggle('visible', true);
-      // Add bar height to <body> padding
-      document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding
-      iconEl.innerHTML = config.icons.hide
-      visible = true
-    });
+    iconEl.innerHTML = config.icons.hide
+    visible = true
     return true
   }
 
@@ -231,19 +251,24 @@ function Bar () {
       return false
     }
 
+    const barStyles = {
+      height: 0,
+      paddingBottom: 0,
+      paddingTop: 0,
+    };
+    let bodyStyles = {};
+    bodyStyles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + 'px';
     if (manual) {
-      animateBody();
-      barEl.classList.toggle('mctb-animated', true);
+      animate(barEl, barStyles);
+      animate(document.body, bodyStyles);
       cookies.create(COOKIE_NAME, state.success ? 'used' : 'hidden', config.cookieLength)
+    } else {
+      css(barEl, barStyles);
+      css(document.body, bodyStyles);
     }
 
-    window.requestAnimationFrame(() => {
-      barEl.classList.toggle('visible', false);
-      document.body.style[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + 'px'
-
-      visible = false
-      iconEl.innerHTML = config.icons.show
-    });
+    visible = false
+    iconEl.innerHTML = config.icons.show
     return true
   }
 
