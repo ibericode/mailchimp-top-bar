@@ -58,18 +58,15 @@ class Bar {
     }
 
     /**
-     * @return bool
+     *
      */
     public function init() {
-
         if ( ! $this->should_show_bar() ) {
-            return false;
+            return;
         }
 
         $this->add_template_hooks();
         $this->listen();
-
-        return true;
     }
 
     /**

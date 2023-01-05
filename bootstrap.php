@@ -15,7 +15,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ */
 
 namespace MailChimp\TopBar;
 
@@ -25,7 +25,7 @@ require __DIR__ . '/src/functions.php';
 
 if( ! is_admin() ) {
 	// frontend code
-   require_once __DIR__ . '/src/Bar.php';
+	require __DIR__ . '/src/Bar.php';
 	$bar = new Bar();
 	$bar->add_hooks();
 } elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -33,7 +33,7 @@ if( ! is_admin() ) {
 
 } else {
 	// admin code
-    require_once __DIR__ . '/src/Admin/Manager.php';
-    $admin = new Admin\Manager();
+	require __DIR__ . '/src/Admin.php';
+	$admin = new Admin();
 	$admin->add_hooks();
 }

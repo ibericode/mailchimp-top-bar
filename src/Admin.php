@@ -16,9 +16,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-namespace MailChimp\TopBar\Admin;
+namespace MailChimp\TopBar;
 
-class Manager {
+class Admin {
 
 	/**
 	 * Add plugin hooks
@@ -38,11 +38,10 @@ class Manager {
 	 * Runs on `admin_init`
 	 */
 	public function init() {
-
 		// only run for administrators
 		// TODO: Use mc4wp capability here
 		if( ! current_user_can( 'manage_options' ) ) {
-			return false;
+			return;
 		}
 
 		// register settings
@@ -117,7 +116,6 @@ class Manager {
 		}
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
 	}
 
