@@ -1,7 +1,7 @@
 Changelog
 ==========
 
-### Development
+### 1.6.0 - Jan 4, 2022
 
 - JS file now has `defer` attribute so it is not render blocking.
 - Stylesheet is now inserted through JS, so it is not render blocking.

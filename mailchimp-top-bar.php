@@ -51,8 +51,5 @@ function _load_mailchimp_top_bar() {
 	require_once __DIR__ . '/bootstrap.php';
 }
 
-if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
-	require_once dirname( __FILE__ ) . '/php-backwards-compatibility.php';
-} else {
-	add_action( 'plugins_loaded', '_load_mailchimp_top_bar', 30 );
-}
+
+add_action( 'plugins_loaded', '_load_mailchimp_top_bar', 30 );
