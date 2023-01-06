@@ -18,12 +18,14 @@ function setButtonText (button, text) {
  */
 function Loader (formElement) {
   this.form = formElement
-  this.button = formElement.querySelector('input[type="submit"], button[type="submit"]')
+  this.button = formElement.querySelector('input[type="submit"],button[type="submit"]')
   this.char = '\u00B7'
 
   if (this.button) {
     this.originalButton = this.button.cloneNode(true)
   }
+
+  this.start();
 }
 
 /**

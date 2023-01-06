@@ -7,14 +7,14 @@ const msgRequiresFields = document.getElementById('message-list-requires-fields'
 function maybeShowRequiredFieldsNotice () {
   msgRequiresFields.style.display = 'none'
   const listId = elSelectList.value
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', window.ajaxurl + '?action=mc4wp_get_list_details&ids=' + listId, true);
-  xhr.onload = function() {
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', window.ajaxurl + '?action=mc4wp_get_list_details&ids=' + listId, true)
+  xhr.onload = function () {
     if (this.status >= 400) {
-      console.error("Error retrieving list details");
-      return;
+      console.error('Error retrieving list details')
+      return
     }
-    const lists = JSON.parse(this.responseText);
+    const lists = JSON.parse(this.responseText)
     // iterate over selected lists
     for (let i = 0; i < lists.length; i++) {
       const list = lists[i]
@@ -30,8 +30,8 @@ function maybeShowRequiredFieldsNotice () {
         }
       }
     }
-  };
-  xhr.send(null);
+  }
+  xhr.send(null)
 }
 
 // init colorpickers

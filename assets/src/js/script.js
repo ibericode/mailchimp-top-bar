@@ -7,12 +7,12 @@ import css from '../css/bar.css';
  * @param {function} fn callback
  * @parma {int} delay in ms
  */
-function debounce(fn, delay) {
-  let timeout;
-  return function() {
+function debounce (fn, delay) {
+  let timeout
+  return function () {
     clearTimeout(timeout)
     timeout = setTimeout(fn, delay)
-  };
+  }
 }
 
 function Bar () {
@@ -21,10 +21,10 @@ function Bar () {
   const barEl = wrapperEl.querySelector('.mctb-bar')
   const iconEl = document.createElement('span')
   const formEl = barEl.querySelector('form')
-  let barHeight;
-  let barPadding;
+  let barHeight
+  let barPadding
   let responseEl = wrapperEl.querySelector('.mctb-response')
-  let visible = !cookies.exists(COOKIE_NAME);
+  let visible = !cookies.exists(COOKIE_NAME)
   let originalBodyPadding = 0
   let bodyPadding = 0
   const isBottomBar = (config.position === 'bottom')
@@ -50,30 +50,27 @@ function Bar () {
   iconEl.innerHTML = visible ? config.icons.hide : config.icons.show
   iconEl.addEventListener('click', toggle)
 
-
   // count input fields (3 because of hidden input honeypot)
   if (barEl.querySelectorAll('input:not([type="hidden"])').length > 3) {
     wrapperEl.className += ' multiple-input-fields'
   }
 
+  // calculate bar size whenever layout shifts or window is resized
   window.requestAnimationFrame(calculateDimensions)
-  window.addEventListener('load', calculateDimensions);
+  window.addEventListener('load', calculateDimensions)
+  window.addEventListener('resize', debounce(calculateDimensions, 100))
 
   // fade response 4 seconds after showing bar
   if (responseEl) {
     window.setTimeout(fadeResponse, 4000)
   }
 
-  window.addEventListener('resize', debounce(calculateDimensions, 100));
-
   function submitForm (evt) {
-    evt.preventDefault();
+    evt.preventDefault()
 
     const loader = new Loader(formEl)
-    loader.start();
-
     const data = new FormData(formEl)
-    let request = new XMLHttpRequest()
+    const request = new XMLHttpRequest()
     request.onload = function () {
       // remove loading indicator
       loader.stop()
@@ -146,16 +143,16 @@ function Bar () {
     if (!visible) {
       barEl.style.visibility = 'hidden'
     }
-    barEl.style.display = '';
-    barEl.style.height = '';
-    barEl.style.paddingTop = '';
-    barEl.style.paddingBottom = '';
+    barEl.style.display = ''
+    barEl.style.height = ''
+    barEl.style.paddingTop = ''
+    barEl.style.paddingBottom = ''
 
     // measure bar padding and height
     // we use this as our animation target values
-    const styles = window.getComputedStyle(barEl);
-    barHeight = styles.height;
-    barPadding = styles.paddingTop;
+    const styles = window.getComputedStyle(barEl)
+    barHeight = styles.height
+    barPadding = styles.paddingTop
 
     // calculate & set new body padding if bar is currently visible
     bodyPadding = (originalBodyPadding + barEl.clientHeight) + 'px'
@@ -181,34 +178,36 @@ function Bar () {
 
     // reset bar again, we're done measuring
     barEl.style.visibility = ''
-    if (!visible) {
-      barEl.style.height = 0;
-      barEl.style.paddingTop = 0;
-      barEl.style.paddingBottom = 0;
-    }
+    barEl.style.height = visible ? barHeight : 0
+    barEl.style.paddingTop = visible ? barPadding : 0
+    barEl.style.paddingBottom = visible ? barPadding : 0
+  }
+
+  /**
+   * @param {Event} evt
+   */
+  function removeTransition (evt) {
+    evt.target.style.transition = ''
+    evt.target.removeEventListener('transitionend', removeTransition)
+  }
+  /**
+   * @param {HTMLElement} el
+   * @param {object} styles
+   */
+  function animate (el, styles) {
+    el.style.transition = 'all 0.6s ease'
+    el.addEventListener('transitionend', removeTransition)
+    window.requestAnimationFrame(() => css(el, styles))
   }
 
   /**
    * @param {HTMLElement} el
    * @param {object} styles
    */
-  function animate(el, styles) {
-    el.style.transition = 'all 0.6s ease';
-    css(el, styles);
-    window.setTimeout(() => {
-      el.style.transition = '';
-    }, 1000);
-  }
-
-  /**
-   * @param {HTMLElement} el
-   * @param {object} styles
-   */
-  function css(el, styles) {
+  function css (el, styles) {
     for (const prop in styles) {
-      el.style[prop] = styles[prop];
+      el.style[prop] = styles[prop]
     }
-
   }
 
   /**
@@ -221,20 +220,20 @@ function Bar () {
       return false
     }
 
-    let barStyles = {
+    const barStyles = {
       height: barHeight,
       paddingTop: barPadding,
       paddingBottom: barPadding
-    };
-    let bodyStyles = {};
-    bodyStyles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding;
+    }
+    const bodyStyles = {}
+    bodyStyles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = bodyPadding
     if (manual) {
-      animate(barEl, barStyles);
-      animate(document.body, bodyStyles);
+      animate(barEl, barStyles)
+      animate(document.body, bodyStyles)
       cookies.erase(COOKIE_NAME)
     } else {
-      css(barEl, barStyles);
-      css(document.body, bodyStyles);
+      css(barEl, barStyles)
+      css(document.body, bodyStyles)
     }
 
     iconEl.innerHTML = config.icons.hide
@@ -255,17 +254,17 @@ function Bar () {
     const barStyles = {
       height: 0,
       paddingBottom: 0,
-      paddingTop: 0,
-    };
-    let bodyStyles = {};
-    bodyStyles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + 'px';
+      paddingTop: 0
+    }
+    const bodyStyles = {}
+    bodyStyles[isBottomBar ? 'paddingBottom' : 'paddingTop'] = originalBodyPadding + 'px'
     if (manual) {
-      animate(barEl, barStyles);
-      animate(document.body, bodyStyles);
+      animate(barEl, barStyles)
+      animate(document.body, bodyStyles)
       cookies.create(COOKIE_NAME, state.success ? 'used' : 'hidden', config.cookieLength)
     } else {
-      css(barEl, barStyles);
-      css(document.body, bodyStyles);
+      css(barEl, barStyles)
+      css(document.body, bodyStyles)
     }
 
     visible = false
