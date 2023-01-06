@@ -335,7 +335,6 @@ class Bar {
         $bottom = $options['position'] === 'bottom';
 
         $data = array(
-            'stylesheet' => $this->asset_url( '/css/bar.css?v=' . MAILCHIMP_TOP_BAR_VERSION ),
             'cookieLength' => $options['cookie_length'],
             'icons'        => array(
                 'hide' => ( $bottom ) ? '&#x25BC;' : '&#x25B2;',

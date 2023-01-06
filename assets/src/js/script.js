@@ -1,6 +1,7 @@
 const cookies = require('./cookies.js')
 const Loader = require('./loader.js')
 const COOKIE_NAME = 'mctb_bar_hidden'
+import css from '../css/bar.css';
 
 /**
  * @param {function} fn callback
@@ -310,10 +311,6 @@ function Bar () {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const linkEl = document.createElement('link');
-  linkEl.href = window.mctb.stylesheet;
-  linkEl.rel = 'stylesheet';
-  document.head.appendChild(linkEl);
+document.addEventListener('DOMContentLoaded', function() {
   window.MailChimpTopBar = new Bar()
 })
