@@ -1,13 +1,13 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   entry: {
-    'script': './assets/src/js/script.js',
-    'admin': './assets/src/js/admin.js',
+    script: './assets/src/js/script.js',
+    admin: './assets/src/js/admin.js'
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'assets'),
+    path: path.resolve(__dirname, 'assets')
   },
   module: {
     rules: [
@@ -23,8 +23,8 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
+        use: ['style-loader', 'css-loader']
+      }
     ]
   }
-};
+}

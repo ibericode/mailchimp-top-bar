@@ -29,4 +29,4 @@ function erase (name) {
   create(name, '', -1)
 }
 
-module.exports = { exists, create, erase }
+export default { exists, create, erase }

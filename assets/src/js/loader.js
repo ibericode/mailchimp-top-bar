@@ -25,7 +25,7 @@ function Loader (formElement) {
     this.originalButton = this.button.cloneNode(true)
   }
 
-  this.start();
+  this.start()
 }
 
 /**
@@ -81,4 +81,4 @@ Loader.prototype.stop = function () {
   }
 }
 
-module.exports = Loader
+export default Loader

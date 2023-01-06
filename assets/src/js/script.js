@@ -1,11 +1,12 @@
-const cookies = require('./cookies.js')
-const Loader = require('./loader.js')
+import cookies from './cookies.js'
+import Loader from './loader.js'
+import '../css/bar.css'
+
 const COOKIE_NAME = 'mctb_bar_hidden'
-import css from '../css/bar.css';
 
 /**
  * @param {function} fn callback
- * @parma {int} delay in ms
+ * @param {int} delay in ms
  */
 function debounce (fn, delay) {
   let timeout
@@ -310,6 +311,6 @@ function Bar () {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   window.MailChimpTopBar = new Bar()
 })
