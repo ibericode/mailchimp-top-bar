@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'assets/js'),
+    path: path.resolve(__dirname, 'assets'),
   },
   module: {
     rules: [

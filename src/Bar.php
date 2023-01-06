@@ -330,7 +330,7 @@ class Bar {
      */
     public function load_assets() {
         $options = mctb_get_options();
-        wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/js/script.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
+        wp_enqueue_script( 'mailchimp-top-bar', $this->asset_url( "/script.js" ), array(), MAILCHIMP_TOP_BAR_VERSION, true );
         add_filter( 'script_loader_tag', array( $this, 'add_defer_attribute' ), 10, 2 );
         $bottom = $options['position'] === 'bottom';
 

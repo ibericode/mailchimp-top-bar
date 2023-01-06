@@ -116,7 +116,7 @@ class Admin {
 		}
 
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/js/admin.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
+		wp_enqueue_script( 'mailchimp-top-bar-admin', $this->asset_url( "/admin.js" ), array( 'jquery', 'wp-color-picker' ), MAILCHIMP_TOP_BAR_VERSION, true );
 	}
 
 	/**
