@@ -4,7 +4,7 @@ Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
 Tested up to: 6.1
-Stable tag: 1.5.6
+Stable tag: 1.6.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 5.3
@@ -123,6 +123,13 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Changelog ==
 
+
+### 1.6.0 - Jan 4, 2022
+
+- JS file now has `defer` attribute so it is not render blocking.
+- Stylesheet is now inserted through JS, so it is not render blocking.
+- Animations now entirely handled using CSS.
+- JS file is now 20% smaller because of the above (2.6 kB gzipped).
 
 
 ### 1.5.6 - Dec 1, 2022
