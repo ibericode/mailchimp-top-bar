@@ -5,7 +5,7 @@ Changelog
 
 - JS file now has `defer` attribute so it is not render blocking.
 - Stylesheet is now inserted through JS, so it is not render blocking.
-- Animations now use CSS transforms, so they can be offloaded to the GPU. 
+- Animations now entirely handled using CSS.
 - JS file is now 20% smaller because of the above (2.6 kB gzipped).
 
 
