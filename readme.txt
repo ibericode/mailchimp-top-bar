@@ -3,7 +3,7 @@ Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
 Requires at least: 4.1
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 1.6.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
