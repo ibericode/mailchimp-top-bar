@@ -1,7 +1,7 @@
 === MC4WP: Mailchimp Top Bar ===
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://www.mc4wp.com/
-Tags: mailchimp, form, newsletter, mc4wp, email, opt-in, subscribe, call to action
+Tags: mailchimp, form, top bar, call to action, subscribe
 Requires at least: 4.1
 Tested up to: 6.5
 Stable tag: 1.6.0
