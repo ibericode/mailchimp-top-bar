@@ -7,7 +7,7 @@ Tested up to: 6.5
 Stable tag: 1.6.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Requires PHP: 5.3
+Requires PHP: 7.0
 
 Adds a Mailchimp opt-in form to the top or bottom of your WordPress site.
 

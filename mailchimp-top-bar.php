@@ -30,26 +30,48 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 defined( 'ABSPATH' ) or exit;
 
-/**
- * Loads the Mailchimp Top Bar plugin
- *
- * @ignore
- * @access private
- */
-function _load_mailchimp_top_bar() {
-	// check deps
-	$ready = include __DIR__ . '/dependencies.php';
-	if( ! $ready ) {
+add_action( 'plugins_loaded', function() {
+	// check for MailChimp for WordPress (version 3.0 or higher)
+	if ( !defined( 'MC4WP_VERSION' ) || version_compare( MC4WP_VERSION, '3.0', '<' ) ) {
+		// Show notice to user
+		add_action( 'admin_notices',  function() {
+
+			// only show to user with caps
+			if( ! current_user_can( 'install_plugins' ) ) {
+				return;
+			}
+
+			add_thickbox();
+			$url = network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=mailchimp-for-wp&TB_iframe=true&width=600&height=550' );
+			?>
+			<div class="notice notice-warning is-dismissible">
+				<p><?php printf( __( 'Please install or update <a href="%s" class="thickbox">%s</a> in order to use %s.', 'mailchimp-top-bar' ), $url, '<strong>MailChimp for WordPress</strong> (version 3.0 or higher)', 'MailChimp Top Bar' ); ?></p>
+			</div>
+		<?php
+		});
 		return;
 	}
+
 
 	define('MAILCHIMP_TOP_BAR_FILE', __FILE__);
 	define('MAILCHIMP_TOP_BAR_DIR', __DIR__);
 	define('MAILCHIMP_TOP_BAR_VERSION', '1.6.0');
 
-	// create instance
-	require_once __DIR__ . '/bootstrap.php';
-}
+	require __DIR__ . '/src/functions.php';
 
+	if( ! is_admin() ) {
+		// frontend code
+		require __DIR__ . '/src/Bar.php';
+		$bar = new MailChimp\TopBar\Bar();
+		$bar->add_hooks();
+	} elseif( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		// ajax code
 
-add_action( 'plugins_loaded', '_load_mailchimp_top_bar', 30 );
+	} else {
+		// admin code
+		require __DIR__ . '/src/Admin.php';
+		$admin = new Mailchimp\TopBar\Admin();
+		$admin->add_hooks();
+	}
+
+}, 30 );
