@@ -36,8 +36,8 @@ $tabs = array(
 		<?php settings_errors(); ?>
 
 		<div id="message-list-requires-fields" class="notice notice-warning" style="display: none;">
-			<p><?php printf( __( 'The selected Mailchimp list requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your Mailchimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/lists/', 'EMAIL' ); ?></p>
-			<p class="description"><?php printf( __( 'After making changes to your Mailchimp list, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache', '_wpnonce' => wp_create_nonce( '_mc4wp_action' ) ) ) ); ?></p>
+			<p><?php printf( __( 'The selected Mailchimp audience requires more fields than just an <strong>%s</strong> field. Please <a href="%s">log into your Mailchimp account</a> and make sure only the <strong>%s</strong> field is marked as required.', 'mailchimp-top-bar' ), 'EMAIL', 'https://admin.mailchimp.com/audience/', 'EMAIL' ); ?></p>
+			<p class="description"><?php printf( __( 'After making changes to your Mailchimp audience, <a href="%s">click here</a> to renew your list configuration.', 'mailchimp-top-bar' ), esc_attr( add_query_arg( array( '_mc4wp_action' => 'empty_lists_cache', '_wpnonce' => wp_create_nonce( '_mc4wp_action' ) ) ) ) ); ?></p>
 		</div>
 
 		<?php $config = array( 'element' => $this->name_attr( 'enabled' ), 'value' => 0 ); ?>
@@ -73,10 +73,10 @@ $tabs = array(
 				</tr>
 
 				<tr valign="top">
-					<th scope="mc4wp-row"><label><?php _e( 'Mailchimp List', 'mailchimp-for-wp' ); ?></label></th>
+					<th scope="mc4wp-row"><label><?php _e( 'Mailchimp Audience', 'mailchimp-for-wp' ); ?></label></th>
 					<td>
 						<?php if( empty( $lists ) ) {
-							printf( __( 'No lists found, <a href="%s">are you connected to Mailchimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
+							printf( __( 'No audiences found, <a href="%s">are you connected to Mailchimp</a>?', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ); ?>
 						<?php } ?>
 
 						<select name="<?php echo $this->name_attr( 'list' ); ?>" class="mc4wp-list-input" id="select-mailchimp-list">
@@ -85,7 +85,7 @@ $tabs = array(
 								<option value="<?php echo esc_attr( $list->id ); ?>" <?php selected( $options[ 'list' ], $list->id ); ?>><?php echo esc_html( $list->name ); ?></option>
 							<?php } ?>
 						</select>
-						<p class="description"><?php _e( 'Select the list to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></p>
+						<p class="description"><?php _e( 'Select the Mailchimp audience to which visitors should be subscribed.' ,'mailchimp-top-bar' ); ?></p>
 					</td>
 				</tr>
 
@@ -150,7 +150,7 @@ $tabs = array(
 							</td>
 						</tr>
 
-						<tr valign="top" class="bar-size-options" style="">
+						<tr valign="top" class="bar-size-options">
 							<th scope="mc4wp-row">
 								<label>
 									<?php _e( 'Bar Size', 'mailchimp-top-bar' ); ?>
@@ -272,7 +272,7 @@ $tabs = array(
 						</label>
 					</th>
 					<td>
-						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_url( $options[ 'redirect' ] ); ?>" value="<?php echo esc_url( $options[ 'redirect' ] ); ?>" class="widefat" />
+						<input type="text" name="<?php echo $this->name_attr( 'redirect' ); ?>" placeholder="<?php echo esc_attr( $options[ 'redirect' ] ); ?>" value="<?php echo esc_attr( $options[ 'redirect' ] ); ?>" class="widefat" />
 						<p class="description"><?php _e( 'Leave empty for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp' ); ?></p>
 					</td>
 				</tr>
