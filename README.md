@@ -22,16 +22,10 @@ git clone https://github.com/ibericode/mailchimp-top-bar.git
 npm install
 ```
 
-3. Install Composer dependencies:
+3. Generate plugin asset files:
 
 ```
-composer install
-```
-
-4. Generate plugin asset files:
-
-```
-npx gulp
+npm run build
 ```
 
 5. Activate the plugin in your WordPress admin.
