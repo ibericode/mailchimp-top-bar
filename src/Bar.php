@@ -397,26 +397,27 @@ class Bar {
 		$text_color        = $options['color_text'];
 		$button_text_color = $options['color_button_text'];
 
-		echo '<style type="text/css">' . PHP_EOL;
+		echo '<style>';
+		echo file_get_contents( MAILCHIMP_TOP_BAR_DIR . '/assets/bar.css');
 
 		if ( ! empty( $bar_color ) ) {
-			echo ".mctb-bar,.mctb-response,.mctb-close{ background: {$bar_color} !important; }" . PHP_EOL;
+			echo ".mctb-bar,.mctb-response,.mctb-close{background:{$bar_color}!important;}";
 		}
 
 		if ( ! empty( $text_color ) ) {
-			echo ".mctb-bar,.mctb-label,.mctb-close{ color: {$text_color} !important; }" . PHP_EOL;
+			echo ".mctb-bar,.mctb-label,.mctb-close{color:{$text_color}!important;}";
 		}
 
 		if ( ! empty( $button_color ) ) {
-			echo ".mctb-button{ background: {$button_color} !important; border-color: {$button_color} !important; }" . PHP_EOL;
-			echo ".mctb-email:focus{ outline-color: {$button_color} !important; }" . PHP_EOL;
+			echo ".mctb-button{background:{$button_color}!important;border-color:{$button_color}!important;}";
+			echo ".mctb-email:focus{outline-color:{$button_color}!important;}";
 		}
 
 		if ( ! empty( $button_text_color ) ) {
-			echo ".mctb-button{ color: {$button_text_color} !important; }" . PHP_EOL;
+			echo ".mctb-button{color: {$button_text_color}!important;}";
 		}
 
-		echo '</style>' . PHP_EOL;
+		echo '</style>', PHP_EOL;
 	}
 
 

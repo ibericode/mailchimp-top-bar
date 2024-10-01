@@ -1,7 +1,5 @@
 import cookies from './cookies.js'
 import Loader from './loader.js'
-import '../css/bar.css'
-
 const COOKIE_NAME = 'mctb_bar_hidden'
 
 /**
