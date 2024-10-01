@@ -1,7 +1,15 @@
 Changelog
 ==========
 
-### 1.6.0 - Jan 4, 2022
+### 1.6.1 - Oct 1, 2024
+
+- Escape return value of `add_query_arg` before outputting, fixing a potential XSS issue. Thanks to vgo0 for the responsible disclosure.
+- Escape or kses return values of all gettext calls.
+- Improved sanitization of all plugin settings.
+- Minor server side performance improvements by getting rid of some unneccessary string copies or sprintf calls.
+
+
+### 1.6.0 - Jan 4, 2023
 
 - JS file now has `defer` attribute so it is not render blocking.
 - Stylesheet is now inserted through JS, so it is not render blocking.
