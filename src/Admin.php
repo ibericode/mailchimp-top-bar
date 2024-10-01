@@ -62,15 +62,14 @@ class Admin {
 	public function add_menu_item( array $items ) {
 
 			$item = array(
-				'title' => __( 'Mailchimp Top Bar', 'mailchimp-top-bar' ),
-				'text' => __( 'Top Bar', 'mailchimp-top-bar' ),
+				'title' => strip_tags(__( 'Mailchimp Top Bar', 'mailchimp-top-bar' )),
+				'text' => strip_tags(__( 'Top Bar', 'mailchimp-top-bar' )),
 				'slug' => 'top-bar',
-				'callback' => array( $this, 'show_settings_page' )
+				'callback' => array($this, 'show_settings_page')
 			);
 
 			// insert item before the last menu item
 			array_splice( $items, count( $items ) - 1, 0, array( $item ) );
-
 			return $items;
 	}
 
@@ -81,7 +80,9 @@ class Admin {
 	 * @return array
 	 */
 	public function add_plugin_settings_link( array $links ) {
-		$settings_link = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=mailchimp-for-wp-top-bar' ), __( 'Settings', 'mailchimp-for-wp' ) );
+		$link_href = admin_url( 'admin.php?page=mailchimp-for-wp-top-bar' );
+		$link_title = strip_tags(__( 'Settings', 'mailchimp-for-wp' ));
+		$settings_link = "<a href=\"{$link_href}\">{$link_title}</a>";
 		array_unshift( $links, $settings_link );
 		return $links;
 	}
@@ -98,7 +99,7 @@ class Admin {
 			return $links;
 		}
 
-		$links[] = sprintf( __( 'An add-on for %s', 'mailchimp-top-bar' ), '<a href="https://www.mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page">Mailchimp for WordPress</a>' );
+		$links[] = \sprintf(strip_tags(__( 'An add-on for %s', 'mailchimp-top-bar' )), '<a href="https://www.mc4wp.com/">Mailchimp for WordPress</a>');
 		return $links;
 	}
 

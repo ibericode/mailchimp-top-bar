@@ -379,7 +379,7 @@ class Bar {
 		}
 
 		// add unique css class for position (bottom|top)
-		$classes[] = sprintf( 'mctb-position-%s', $options['position'] );
+		$classes[] = \sprintf( 'mctb-position-%s', $options['position'] );
 
 		// add class describing size of the bar
 		$classes[] = "mctb-{$options['size']}";
@@ -430,10 +430,8 @@ class Bar {
 ?>
 		<!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
 		<div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
-		<div class="mctb-bar" <?php if ( $hide ) { echo ' style="display: none;"'; } ?>>
-			<form method="post" <?php if ( is_string( $form_action ) ) {
-			printf( 'action="%s"', esc_attr( $form_action ) );
-		} ?>>
+		<div class="mctb-bar" <?php if ( $hide ) { echo 'style="display: none;"'; } ?>>
+			<form method="post" <?php if (is_string($form_action)) { echo "action=\"", esc_attr($form_action), "\""; } ?>>
 					<?php do_action( 'mctb_before_label' ); ?>
 					<label class="mctb-label" for="mailchimp-top-bar__email"><?php echo $options['text_bar']; ?></label>
 					<?php do_action( 'mctb_before_email_field' ); ?>
@@ -486,7 +484,7 @@ class Bar {
 			return '';
 		}
 
-		return sprintf( '<div class="mctb-response"><label class="mctb-response-label">%s</label></div>', $message );
+		return \sprintf( '<div class="mctb-response"><label class="mctb-response-label">%s</label></div>', $message );
 	}
 
 
