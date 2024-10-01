@@ -153,30 +153,53 @@ class Admin {
 	 */
 	public function sanitize_settings( array $dirty ) {
 
+		$unfiltered_html = current_user_can('unfiltered_html');
 		$clean = $dirty;
+		$safe_attributes = array(
+			'class' => array(),
+			'id' => array(),
+			'title' => array(),
+			'tabindex' => array(),
+		);
+		$unsafe_attributes = array_merge($safe_attributes, array('href' => array()));
+		$allowed_html = array(
+			'strong' => $safe_attributes,
+			'b' => $safe_attributes,
+			'em' => $safe_attributes,
+			'i' => $safe_attributes,
+			'u' => $safe_attributes,
+			// only allow href attribute on <a> elements if user has unfiltered_html capability
+			'a' => $unfiltered_html ? $unsafe_attributes : $safe_attributes,
+			'span' => $safe_attributes,
+		);
 
-		 // Dynamic sanitization
 		foreach( $clean as $key => $value ) {
-
 			// make sure colors start with `#`
-			if( substr( $key, 0, 6 ) === 'color_' ) {
+			if (strpos($key, 'color_') === 0) {
+				$value = strip_tags($value);
 				if( '' !== $value && $value[0] !== '#' ) {
 					$clean[$key] = '#' . $value;
 				}
 			}
+
+			// only allow certain HTML elements inside all text settings
+			if (strpos($key, 'text_') === 0) {
+				$clean[$key] = wp_kses(strip_tags($value, '<strong><b><em><i><u><a><span>'), $allowed_html );
+			}
 		}
 
-		// only allow simple HTML in the bar text
-		$clean['text_bar'] = strip_tags( $dirty['text_bar'], '<strong><b><em><i><u><a><span>' );
-
 		// make sure size is either `small`, `medium` or `big`
-		if( ! in_array( $dirty['size'], array( 'small', 'medium', 'big' ) ) ) {
+		if( ! in_array( $dirty['size'], array('small', 'medium', 'big') ) ) {
 			$clean['size'] = 'medium';
 		}
 
-		if( ! in_array( $dirty['position'], array( 'top', 'bottom' ) ) ) {
+		if( ! in_array( $dirty['position'], array('top', 'bottom') ) ) {
 			$clean['position'] = 'top';
 		}
+
+		// button & email placeholders can have no HTML at all
+		$clean['text_button'] = strip_tags($dirty['button_text']);
+		$clean['text_email_placeholder'] = strip_tags($dirty['text_email_placeholder']);
 
 		return $clean;
 	}
