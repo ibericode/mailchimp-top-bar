@@ -4,7 +4,7 @@ Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, top bar, call to action, subscribe
 Requires at least: 4.1
 Tested up to: 6.6
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.0
@@ -124,7 +124,15 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 == Changelog ==
 
 
-### 1.6.0 - Jan 4, 2022
+### 1.6.1 - Oct 1, 2024
+
+- Escape return value of `add_query_arg` before outputting, fixing a potential XSS issue. Thanks to vgo0 for the responsible disclosure.
+- Escape or kses return values of all gettext calls.
+- Improved sanitization of all plugin settings.
+- Minor server side performance improvements by getting rid of some unneccessary string copies or sprintf calls.
+
+
+### 1.6.0 - Jan 4, 2023
 
 - JS file now has `defer` attribute so it is not render blocking.
 - Stylesheet is now inserted through JS, so it is not render blocking.
