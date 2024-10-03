@@ -1,6 +1,11 @@
 Changelog
 ==========
 
+### 1.6.2 - Oct 3, 2024
+
+- Fix button text setting not updating after saving settings.
+
+
 ### 1.6.1 - Oct 1, 2024
 
 - Escape return value of `add_query_arg` before outputting, fixing a potential XSS issue. Thanks to vgo0 for the responsible disclosure.
