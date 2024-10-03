@@ -199,7 +199,7 @@ class Admin {
 		}
 
 		// button & email placeholders can have no HTML at all
-		$clean['text_button'] = strip_tags($dirty['button_text']);
+		$clean['text_button'] = strip_tags($dirty['text_button']);
 		$clean['text_email_placeholder'] = strip_tags($dirty['text_email_placeholder']);
 
 		return $clean;
