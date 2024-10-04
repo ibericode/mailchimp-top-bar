@@ -1,17 +1,18 @@
 <?php
 /*
 Plugin Name: MC4WP: Mailchimp Top Bar
-Plugin URI: https://www.mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-top-bar&utm_campaign=plugins-page
+Plugin URI: https://www.mc4wp.com/
 Description: Adds a Mailchimp opt-in bar to the top of your site.
 Version: 1.6.2
 Author: ibericode
 Author URI: https://ibericode.com/
 Text Domain: mailchimp-top-bar
 Domain Path: /languages
-License: GPL v3
+License: GPL-3.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Mailchimp Top Bar
-Copyright (C) 2015 - 2024, Danny van Kooten, hi@dannyvankooten.com
+Copyright (C) 2015, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

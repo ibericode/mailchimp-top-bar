@@ -5,8 +5,8 @@ Tags: mailchimp, form, top bar, call to action, subscribe
 Requires at least: 4.1
 Tested up to: 6.6
 Stable tag: 1.6.2
-License: GPLv3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+License: GPL-3.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.2
 
 Adds a Mailchimp opt-in form to the top or bottom of your WordPress site.
@@ -118,7 +118,7 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 
 == Screenshots ==
 
-1. The Mailchimp Top Bar in action on the [Mailchimp for WordPress site](https://www.mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-top-bar&utm_campaign=screenshots).
+1. The Mailchimp Top Bar in action on the [Mailchimp for WordPress site](https://www.mc4wp.com/).
 2. The settings page of the Mailchimp Top Bar plugin.
 
 == Changelog ==
