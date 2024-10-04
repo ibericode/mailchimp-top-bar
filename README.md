@@ -3,6 +3,13 @@ MC4WP: Mailchimp Top Bar
 
 Adds a beautiful and customizable Mailchimp opt-in bar to the top of your WordPress site. 
 
+Requirements
+------------
+
+- WordPress version 4.1 or later
+- PHP version 7.1 or later
+
+
 Installation
 ------------
 

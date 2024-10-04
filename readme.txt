@@ -7,7 +7,7 @@ Tested up to: 6.6
 Stable tag: 1.6.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
-Requires PHP: 7.0
+Requires PHP: 7.1
 
 Adds a Mailchimp opt-in form to the top or bottom of your WordPress site.
 
@@ -83,15 +83,15 @@ You can use the following code snippet to show a "NAME" field in your bar.
 
 `
 add_action( 'mctb_before_submit_button', function() {
-    echo '<input type="text" name="NAME" placeholder="Your name" />';
+	echo '<input type="text" name="NAME" placeholder="Your name" />';
 });
 
 add_filter( 'mctb_subscriber_data', function( $subscriber ) {
-    if( ! empty( $_POST['NAME'] ) ) {
-        $subscriber->merge_fields['NAME'] = sanitize_text_field( $_POST['NAME'] );
-    }
+	if( ! empty( $_POST['NAME'] ) ) {
+		$subscriber->merge_fields['NAME'] = sanitize_text_field( $_POST['NAME'] );
+	}
 
-    return $subscriber;
+	return $subscriber;
 });
 `
 
