@@ -17,5 +17,8 @@
 	},
 	"scripts": {
     	"check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.11"
 	}
 }

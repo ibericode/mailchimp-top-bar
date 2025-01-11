@@ -21,3 +21,8 @@ jobs:
 
       # Lint every PHP source file using PHP interpreter
       - run: composer run check-syntax
+
+      - run: composer install --no-progress
+        if: ${{ matrix.php-versions }} == '8.3'
+      - run: ./vendor/bin/phpcs -ns
+        if: ${{ matrix.php-versions }} == '8.3'
