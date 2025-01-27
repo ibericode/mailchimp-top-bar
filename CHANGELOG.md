@@ -1,6 +1,15 @@
 Changelog
 ==========
 
+### 1.7.0 - Jan 27. 2025
+
+- Bump required PHP version to 7.3 or higher.
+- Bump required WordPress version to 4.9 or higher.
+- Remove compatibility code for Mailchimp for WordPress versions before 3.0.
+- Add visitor IP to sign-ups through Top Bar.
+- Minor performance improvements troughout the code by explicitly specifying the global namespace on core PHP functions.
+
+
 ### 1.6.2 - Oct 3, 2024
 
 - Fix button text setting not updating after saving settings.
