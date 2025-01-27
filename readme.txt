@@ -4,7 +4,7 @@ Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, top bar, call to action, subscribe
 Requires at least: 4.9
 Tested up to: 6.7
-Stable tag: 1.6.2
+Stable tag: 1.7.0
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.3
@@ -122,6 +122,16 @@ Please open a topic on the [WordPress.org plugin support forums](https://wordpre
 2. The settings page of the Mailchimp Top Bar plugin.
 
 == Changelog ==
+
+
+### 1.7.0 - Jan 27. 2025
+
+- Bump required PHP version to 7.3 or higher.
+- Bump required WordPress version to 4.9 or higher.
+- Remove compatibility code for Mailchimp for WordPress versions before 3.0.
+- Add visitor IP to sign-ups through Top Bar.
+- Fix response not showing up after first trying with an invalid email address.
+- Minor performance improvements troughout the code by explicitly specifying the global namespace on core PHP functions.
 
 
 ### 1.6.2 - Oct 3, 2024
