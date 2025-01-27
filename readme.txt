@@ -3,7 +3,7 @@ Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, top bar, call to action, subscribe
 Requires at least: 4.1
-Tested up to: 6.6
+Tested up to: 6.7
 Stable tag: 1.6.2
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -63,7 +63,7 @@ For now, you will have to use a filter to disable the bar on certain pages. The 
 
 `
 add_filter( 'mctb_show_bar', function( $show ) {
-	return is_single();
+    return is_single();
 } );
 `
 
@@ -71,7 +71,7 @@ Another example, this only loads the bar on your "contact" page.
 
 `
 add_filter( 'mctb_show_bar', function( $show ) {
-	return is_page('contact');
+    return is_page('contact');
 } );
 `
 
@@ -83,15 +83,15 @@ You can use the following code snippet to show a "NAME" field in your bar.
 
 `
 add_action( 'mctb_before_submit_button', function() {
-	echo '<input type="text" name="NAME" placeholder="Your name" />';
+    echo '<input type="text" name="NAME" placeholder="Your name" />';
 });
 
 add_filter( 'mctb_subscriber_data', function( $subscriber ) {
-	if( ! empty( $_POST['NAME'] ) ) {
-		$subscriber->merge_fields['NAME'] = sanitize_text_field( $_POST['NAME'] );
-	}
+    if( ! empty( $_POST['NAME'] ) ) {
+        $subscriber->merge_fields['NAME'] = sanitize_text_field( $_POST['NAME'] );
+    }
 
-	return $subscriber;
+    return $subscriber;
 });
 `
 
@@ -103,7 +103,7 @@ Adding the following CSS to your site should hide the bar on all screens smaller
 
 `
 @media( max-width: 600px ) {
-	&#35;mailchimp-top-bar { display: none !important; }
+    &#35;mailchimp-top-bar { display: none !important; }
 }
 `
 

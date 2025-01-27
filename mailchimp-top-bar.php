@@ -45,7 +45,7 @@ add_action('plugins_loaded', function () {
             $url = network_admin_url('plugin-install.php?tab=plugin-information&plugin=mailchimp-for-wp&TB_iframe=true&width=600&height=550');
             ?>
             <div class="notice notice-warning is-dismissible">
-                <p><?php printf(__('Please install or update <a href="%s" class="thickbox">%s</a> in order to use %s.', 'mailchimp-top-bar'), $url, '<strong>MailChimp for WordPress</strong> (version 3.0 or higher)', 'MailChimp Top Bar'); ?></p>
+                <p><?php printf(__('Please install or activate <a href="%s" class="thickbox">%s</a> in order to use %s.', 'mailchimp-top-bar'), $url, '<strong>MailChimp for WordPress</strong>', 'MailChimp Top Bar'); ?></p>
             </div>
             <?php
         });
@@ -59,17 +59,13 @@ add_action('plugins_loaded', function () {
 
     require __DIR__ . '/src/functions.php';
 
-    if (! is_admin()) {
-        // frontend code
-        require __DIR__ . '/src/Bar.php';
-        $bar = new MailChimp\TopBar\Bar();
-        $bar->add_hooks();
-    } elseif (defined('DOING_AJAX') && DOING_AJAX) {
-        // ajax code
-    } else {
-        // admin code
+    if (is_admin()) {
         require __DIR__ . '/src/Admin.php';
         $admin = new Mailchimp\TopBar\Admin();
         $admin->add_hooks();
+    } else {
+        require __DIR__ . '/src/Bar.php';
+        $bar = new MailChimp\TopBar\Bar();
+        $bar->add_hooks();
     }
 }, 30);

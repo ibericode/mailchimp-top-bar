@@ -91,8 +91,8 @@ class Bar
         $show_bar = true;
 
         if (! empty($options['disable_on_pages'])) {
-            $disable_on_pages = explode(',', $options['disable_on_pages']);
-            $disable_on_pages = array_map('trim', $disable_on_pages);
+            $disable_on_pages = \explode(',', $options['disable_on_pages']);
+            $disable_on_pages = \array_map('trim', $disable_on_pages);
             $show_bar         = ! is_page($disable_on_pages);
         }
 
@@ -385,7 +385,7 @@ class Bar
         // add class describing size of the bar
         $classes[] = "mctb-{$options['size']}";
 
-        return join(' ', $classes);
+        return \join(' ', $classes);
     }
 
     /**
@@ -400,7 +400,7 @@ class Bar
         $button_text_color = $options['color_button_text'];
 
         echo '<style>';
-        echo file_get_contents(MAILCHIMP_TOP_BAR_DIR . '/assets/bar.css');
+        echo \file_get_contents(MAILCHIMP_TOP_BAR_DIR . '/assets/bar.css');
 
         if (! empty($bar_color)) {
             echo ".mctb-bar,.mctb-response,.mctb-close{background:{$bar_color}!important;}";
