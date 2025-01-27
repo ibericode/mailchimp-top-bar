@@ -214,37 +214,30 @@ class Bar
          * @param bool $replace_interests
          */
         $replace_interests = apply_filters('mctb_replace_interests', $replace_interests);
-
         $mailchimp = new MC4WP_MailChimp();
-        if (class_exists('MC4WP_MailChimp_Subscriber')) {
-            $mapper = new MC4WP_List_Data_Mapper($data, [ $mailchimp_list_id ]);
-            $map    = $mapper->map();
 
-            foreach ($map as $list_id => $subscriber) {
-                $subscriber->email_type = $email_type;
-                $subscriber->status     = $options['double_optin'] ? 'pending' : 'subscribed';
+        $mapper = new MC4WP_List_Data_Mapper($data, [ $mailchimp_list_id ]);
+        $map    = $mapper->map();
 
-                // TODO: Add IP address.
+        foreach ($map as $list_id => $subscriber) {
+            $subscriber->email_type = $email_type;
+            $subscriber->status     = $options['double_optin'] ? 'pending' : 'subscribed';
+            $subscriber->ip_signup = mc4wp_get_request_ip_address();
 
-                /** @ignore (documented elsewhere) */
-                $subscriber = apply_filters('mc4wp_subscriber_data', $subscriber);
+            /** @ignore (documented elsewhere) */
+            $subscriber = apply_filters('mc4wp_subscriber_data', $subscriber);
 
-                /**
-                 * Filter subscriber data before it is sent to Mailchimp. Runs only for Mailchimp Top Bar requests.
-                 *
-                 * @param MC4WP_MailChimp_Subscriber
-                 */
-                $subscriber = apply_filters('mctb_subscriber_data', $subscriber);
+            /**
+             * Filter subscriber data before it is sent to Mailchimp. Runs only for Mailchimp Top Bar requests.
+             *
+             * @param MC4WP_MailChimp_Subscriber
+             */
+            $subscriber = apply_filters('mctb_subscriber_data', $subscriber);
 
-                $result = $mailchimp->list_subscribe($mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options['update_existing'], $replace_interests);
-                $result = is_object($result) && ! empty($result->id);
-            }
-        } else {
-            // for BC with Mailchimp for WordPress 3.x, override $mailchimp var
-            $mailchimp = mc4wp_get_api();
-            unset($data['EMAIL']);
-            $result = $mailchimp->subscribe($mailchimp_list_id, $email_address, $data, $email_type, $options['double_optin'], $options['update_existing'], $replace_interests, $options['send_welcome']);
+            $result = $mailchimp->list_subscribe($mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options['update_existing'], $replace_interests);
+            $result = is_object($result) && ! empty($result->id);
         }
+
 
         // return true if success..
         if ($result) {
