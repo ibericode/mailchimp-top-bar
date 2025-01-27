@@ -110,8 +110,8 @@ function Bar () {
   }
 
   function showResponseMessage (msg) {
-    if (responseEl) {
-      responseEl.parentNode.removeChild(responseEl)
+    if (responseEl && responseEl.parentElement) {
+      responseEl.parentElement.removeChild(responseEl)
     }
 
     responseEl = document.createElement('div')
@@ -121,7 +121,7 @@ function Bar () {
     labelEl.className = 'mctb-response-label'
     labelEl.innerText = msg
     responseEl.appendChild(labelEl)
-    formEl.parentNode.insertBefore(responseEl, formEl.nextElementSibling)
+    formEl.parentElement.insertBefore(responseEl, formEl.nextElementSibling)
 
     calculateDimensions()
     window.setTimeout(fadeResponse, 4000)

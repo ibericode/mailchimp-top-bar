@@ -7,6 +7,7 @@ Changelog
 - Bump required WordPress version to 4.9 or higher.
 - Remove compatibility code for Mailchimp for WordPress versions before 3.0.
 - Add visitor IP to sign-ups through Top Bar.
+- Fix response not showing up after first trying with an invalid email address.
 - Minor performance improvements troughout the code by explicitly specifying the global namespace on core PHP functions.
 
 
