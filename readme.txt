@@ -2,12 +2,12 @@
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://www.mc4wp.com/
 Tags: mailchimp, form, top bar, call to action, subscribe
-Requires at least: 4.1
+Requires at least: 4.9
 Tested up to: 6.7
 Stable tag: 1.6.2
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Requires PHP: 7.2
+Requires PHP: 7.3
 
 Adds a Mailchimp opt-in form to the top or bottom of your WordPress site.
 

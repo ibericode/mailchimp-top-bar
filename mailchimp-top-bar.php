@@ -31,6 +31,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 defined('ABSPATH') or exit;
 
 add_action('plugins_loaded', function () {
+    // check for PHP 7.3 or higher
+    if (PHP_VERSION_ID < 70300) {
+        return;
+    }
+
     // check for MailChimp for WordPress (version 3.0 or higher)
     if (!defined('MC4WP_VERSION') || version_compare(MC4WP_VERSION, '3.0', '<')) {
         // Show notice to user

@@ -6,8 +6,8 @@ Adds a beautiful and customizable Mailchimp opt-in bar to the top of your WordPr
 Requirements
 ------------
 
-- WordPress version 4.1 or later
-- PHP version 7.2 or later
+- WordPress version 4.9 or later
+- PHP version 7.3 or later
 
 
 Installation
