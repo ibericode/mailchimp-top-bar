@@ -1,7 +1,13 @@
 Changelog
 ==========
 
-### 1.7.0 - Jan 27. 2025
+### 1.7.1 - Jul 2, 2025
+
+- Update dependencies and WordPress compatibility.
+- Decrease timestamp check to one second ago.
+
+
+### 1.7.0 - Jan 27, 2025
 
 - Bump required PHP version to 7.3 or higher.
 - Bump required WordPress version to 4.9 or higher.

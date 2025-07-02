@@ -290,8 +290,8 @@ class Bar
             return false;
         }
 
-        // make sure `_mctb_timestamp` is at least 1.5 seconds ago
-        if (empty($_POST['_mctb_timestamp']) || time() < ( intval($_POST['_mctb_timestamp']) + 1.5 )) {
+        // make sure `_mctb_timestamp` is at least 1 seconds ago
+        if (empty($_POST['_mctb_timestamp']) || time() < ( intval($_POST['_mctb_timestamp']) + 1 )) {
             $this->error_type = 'spam';
             return false;
         }
@@ -363,7 +363,7 @@ class Bar
             return $tag;
         }
 
-        return str_replace(' src=', ' defer src=', $tag);
+        return \str_replace(' src=', ' defer src=', $tag);
     }
 
     /**
