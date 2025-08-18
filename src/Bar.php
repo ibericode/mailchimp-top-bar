@@ -400,7 +400,7 @@ class Bar
         $button_text_color = $options['color_button_text'];
 
         echo '<style>';
-        echo \file_get_contents(MAILCHIMP_TOP_BAR_DIR . '/assets/bar.css');
+        include MAILCHIMP_TOP_BAR_DIR . '/assets/bar.css';
 
         if (! empty($bar_color)) {
             echo ".mctb-bar,.mctb-response,.mctb-close{background:{$bar_color}!important;}";
