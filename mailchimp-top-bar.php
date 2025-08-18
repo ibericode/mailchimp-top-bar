@@ -1,4 +1,5 @@
 <?php
+
 /*
 Plugin Name: MC4WP: Mailchimp Top Bar
 Plugin URI: https://www.mc4wp.com/
@@ -27,6 +28,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
 
 defined('ABSPATH') or exit;
 
