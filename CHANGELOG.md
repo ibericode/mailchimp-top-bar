@@ -1,9 +1,10 @@
 Changelog
 ==========
 
-### 1.7.2 - Aug 18, 2025
+### 1.7.3 - Oct 1, 2025
 
 - Minor performance or memory usage related improvements.
+- Compatibility check with latest WordPress version.
 
 
 ### 1.7.1 - Jul 2, 2025

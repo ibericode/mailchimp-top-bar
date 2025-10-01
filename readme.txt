@@ -38,7 +38,7 @@ Using this bar, people can subscribe to a Mailchimp audience of your choice.
 
 = About the author =
 
-Mailchimp Top Bar is a plugin by [ibericode](https:/www.ibericode.com/), a small Dutch company that you may known from other plugins like [Mailchimp for WordPress](https://www.mc4wp.com/), [Boxzilla Pop-ups](https://www.boxzillaplugin.com) and [Koko Analytics](https://www.kokoanalytics.com/).
+Mailchimp Top Bar is a plugin by [ibericode](https:/www.ibericode.com/), a company from The Netherlands that you may know from other plugins like [Mailchimp for WordPress](https://www.mc4wp.com/), [Boxzilla Pop-ups](https://www.boxzillaplugin.com) and [Koko Analytics](https://www.kokoanalytics.com/).
 
 
 == Installation ==
