@@ -44,24 +44,6 @@ class Bar
     private $submitted = false;
 
     /**
-     * Add the hooks
-     */
-    public function add_hooks()
-    {
-        add_action('wp', [ $this, 'init' ]);
-    }
-
-    /**
-     * Add template related hooks
-     */
-    public function add_template_hooks()
-    {
-        add_action('wp_enqueue_scripts', [ $this, 'load_assets' ]);
-        add_action('wp_head', [ $this, 'output_css' ], 90);
-        add_action('wp_footer', [ $this, 'output_html' ], 1);
-    }
-
-    /**
      *
      */
     public function init()
@@ -70,7 +52,10 @@ class Bar
             return;
         }
 
-        $this->add_template_hooks();
+        add_action('wp_enqueue_scripts', [ $this, 'load_assets' ]);
+        add_action('wp_head', [ $this, 'output_css' ], 90);
+        add_action('wp_footer', [ $this, 'output_html' ], 1);
+
         $this->listen();
     }
 

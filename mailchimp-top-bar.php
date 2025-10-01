@@ -58,6 +58,6 @@ add_action('plugins_loaded', function () {
     } else {
         require __DIR__ . '/src/Bar.php';
         $bar = new MailChimp\TopBar\Bar();
-        $bar->add_hooks();
+        add_action('wp', [$bar, 'init']);
     }
 }, 30);
