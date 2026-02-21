@@ -64,5 +64,5 @@ add_action(
             add_action("wp", [$bar, "init"]);
         }
     },
-    30,
+    30
 );
