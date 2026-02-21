@@ -29,35 +29,40 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+defined("ABSPATH") or exit();
 
-defined('ABSPATH') or exit;
+add_action(
+    "plugins_loaded",
+    function () {
+        // check for PHP 7.3 or higher
+        if (PHP_VERSION_ID < 70300) {
+            return;
+        }
 
-add_action('plugins_loaded', function () {
-    // check for PHP 7.3 or higher
-    if (PHP_VERSION_ID < 70300) {
-        return;
-    }
+        // check for MailChimp for WordPress (version 3.0 or higher)
+        if (
+            !defined("MC4WP_VERSION") ||
+            version_compare(MC4WP_VERSION, "3.0", "<")
+        ) {
+            require __DIR__ . "/src/admin-notice-install-deps.php";
+            return;
+        }
 
-    // check for MailChimp for WordPress (version 3.0 or higher)
-    if (!defined('MC4WP_VERSION') || version_compare(MC4WP_VERSION, '3.0', '<')) {
-        require __DIR__ . '/src/admin-notice-install-deps.php';
-        return;
-    }
+        define("MAILCHIMP_TOP_BAR_FILE", __FILE__);
+        define("MAILCHIMP_TOP_BAR_DIR", __DIR__);
+        define("MAILCHIMP_TOP_BAR_VERSION", "1.7.3");
 
+        require __DIR__ . "/src/functions.php";
 
-    define('MAILCHIMP_TOP_BAR_FILE', __FILE__);
-    define('MAILCHIMP_TOP_BAR_DIR', __DIR__);
-    define('MAILCHIMP_TOP_BAR_VERSION', '1.7.3');
-
-    require __DIR__ . '/src/functions.php';
-
-    if (is_admin()) {
-        require __DIR__ . '/src/Admin.php';
-        $admin = new Mailchimp\TopBar\Admin();
-        $admin->add_hooks();
-    } else {
-        require __DIR__ . '/src/Bar.php';
-        $bar = new MailChimp\TopBar\Bar();
-        add_action('wp', [$bar, 'init']);
-    }
-}, 30);
+        if (is_admin()) {
+            require __DIR__ . "/src/Admin.php";
+            $admin = new MailChimp\TopBar\Admin();
+            $admin->add_hooks();
+        } else {
+            require __DIR__ . "/src/Bar.php";
+            $bar = new MailChimp\TopBar\Bar();
+            add_action("wp", [$bar, "init"]);
+        }
+    },
+    30,
+);

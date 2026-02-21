@@ -36,7 +36,7 @@ class Bar
     /**
      * @var string
      */
-    private $error_type = '';
+    private $error_type = "";
 
     /**
      * @var bool
@@ -48,13 +48,13 @@ class Bar
      */
     public function init()
     {
-        if (! $this->should_show_bar()) {
+        if (!$this->should_show_bar()) {
             return;
         }
 
-        add_action('wp_enqueue_scripts', [ $this, 'load_assets' ]);
-        add_action('wp_head', [ $this, 'output_css' ], 90);
-        add_action('wp_footer', [ $this, 'output_html' ], 1);
+        add_action("wp_enqueue_scripts", [$this, "load_assets"]);
+        add_action("wp_head", [$this, "output_css"], 90);
+        add_action("wp_footer", [$this, "output_html"], 1);
 
         $this->listen();
     }
@@ -69,19 +69,23 @@ class Bar
         $options = mctb_get_options();
 
         // don't show if bar is disabled
-        if (! $options['enabled']) {
+        if (!$options["enabled"]) {
             return false;
         }
 
         $show_bar = true;
 
-        if (! empty($options['disable_on_pages'])) {
-            $disable_on_pages = \explode(',', $options['disable_on_pages']);
-            $disable_on_pages = \array_map('trim', $disable_on_pages);
-            $show_bar         = ! is_page($disable_on_pages);
+        if (!empty($options["disable_on_pages"])) {
+            $disable_on_pages = \explode(",", $options["disable_on_pages"]);
+            $disable_on_pages = \array_map("trim", $disable_on_pages);
+            $show_bar = !is_page($disable_on_pages);
         }
 
-        if ($options['disable_after_use'] && isset($_COOKIE['mctb_bar_hidden']) && $_COOKIE['mctb_bar_hidden'] === 'used') {
+        if (
+            $options["disable_after_use"] &&
+            isset($_COOKIE["mctb_bar_hidden"]) &&
+            $_COOKIE["mctb_bar_hidden"] === "used"
+        ) {
             $show_bar = false;
         }
 
@@ -89,8 +93,7 @@ class Bar
          * @deprecated 1.1
          * @use `mctb_show_bar`
          */
-        $show_bar = apply_filters('mctp_show_bar', $show_bar);
-
+        $show_bar = apply_filters("mctp_show_bar", $show_bar);
 
         /**
          * @filter `mctb_show_bar`
@@ -98,7 +101,7 @@ class Bar
          *
          * Set to true if the bar should be loaded for this request, false if not.
          */
-        return apply_filters('mctb_show_bar', $show_bar);
+        return apply_filters("mctb_show_bar", $show_bar);
     }
 
     /**
@@ -106,31 +109,33 @@ class Bar
      */
     public function listen()
     {
-
-        if (! isset($_POST['_mctb']) || $_POST['_mctb'] != 1) {
+        if (!isset($_POST["_mctb"]) || $_POST["_mctb"] != 1) {
             return;
         }
 
-        $options       = mctb_get_options();
+        $options = mctb_get_options();
         $this->success = $this->process();
 
-        if (! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+        if (
+            !empty($_SERVER["HTTP_X_REQUESTED_WITH"]) &&
+            $_SERVER["HTTP_X_REQUESTED_WITH"] === "XMLHttpRequest"
+        ) {
             $data = [
-                'message'      => $this->get_response_message(),
-                'success'      => $this->success,
-                'redirect_url' => $this->success ? $options['redirect'] : '',
+                "message" => $this->get_response_message(),
+                "success" => $this->success,
+                "redirect_url" => $this->success ? $options["redirect"] : "",
             ];
 
             wp_send_json($data);
-            exit;
+            exit();
         }
 
         if ($this->success) {
             // should we redirect
-            $redirect_url = $options['redirect'];
-            if (! empty($redirect_url)) {
+            $redirect_url = $options["redirect"];
+            if (!empty($redirect_url)) {
                 wp_redirect($redirect_url);
-                exit;
+                exit();
             }
         }
     }
@@ -141,17 +146,22 @@ class Bar
      */
     private function process()
     {
-        $options         = mctb_get_options();
+        $options = mctb_get_options();
         $this->submitted = true;
-        $log             = $this->get_log();
+        $log = $this->get_log();
 
         /** @var MC4WP_MailChimp_Subscriber $subscriber_data */
         $subscriber = null;
-        $result     = false;
+        $result = false;
 
-        if (! $this->validate()) {
+        if (!$this->validate()) {
             if ($log) {
-                $log->info(sprintf('Top Bar > Submitted with errors: %s', $this->error_type));
+                $log->info(
+                    sprintf(
+                        "Top Bar > Submitted with errors: %s",
+                        $this->error_type,
+                    ),
+                );
             }
 
             return false;
@@ -162,22 +172,25 @@ class Bar
          *
          * @param string $list_id
          */
-        $mailchimp_list_id = apply_filters('mctb_mailchimp_list', $options['list']);
+        $mailchimp_list_id = apply_filters(
+            "mctb_mailchimp_list",
+            $options["list"],
+        );
 
         // check if a Mailchimp list was given
         if (empty($mailchimp_list_id)) {
-            $this->error_type = 'error';
+            $this->error_type = "error";
 
             if ($log) {
-                $log->warning('Top Bar > No Mailchimp lists were selected');
+                $log->warning("Top Bar > No Mailchimp lists were selected");
             }
 
             return false;
         }
 
-        $email_address = sanitize_text_field($_POST['email']);
-        $data          = [
-            'EMAIL' => $email_address,
+        $email_address = sanitize_text_field($_POST["email"]);
+        $data = [
+            "EMAIL" => $email_address,
         ];
 
         /**
@@ -185,11 +198,11 @@ class Bar
          *
          * @param $data
          */
-        $data = apply_filters('mctb_data', $data);
+        $data = apply_filters("mctb_data", $data);
 
         /** @ignore */
-        $data       = apply_filters('mctb_merge_vars', $data);
-        $email_type = apply_filters('mctb_email_type', 'html');
+        $data = apply_filters("mctb_merge_vars", $data);
+        $email_type = apply_filters("mctb_email_type", "html");
 
         $replace_interests = true;
 
@@ -198,35 +211,44 @@ class Bar
          *
          * @param bool $replace_interests
          */
-        $replace_interests = apply_filters('mctb_replace_interests', $replace_interests);
+        $replace_interests = apply_filters(
+            "mctb_replace_interests",
+            $replace_interests,
+        );
         $mailchimp = new MC4WP_MailChimp();
 
-        $mapper = new MC4WP_List_Data_Mapper($data, [ $mailchimp_list_id ]);
-        $map    = $mapper->map();
+        $mapper = new MC4WP_List_Data_Mapper($data, [$mailchimp_list_id]);
+        $map = $mapper->map();
 
         foreach ($map as $list_id => $subscriber) {
             $subscriber->email_type = $email_type;
-            $subscriber->status     = $options['double_optin'] ? 'pending' : 'subscribed';
+            $subscriber->status = $options["double_optin"]
+                ? "pending"
+                : "subscribed";
             $subscriber->ip_signup = mc4wp_get_request_ip_address();
 
             /** @ignore (documented elsewhere) */
-            $subscriber = apply_filters('mc4wp_subscriber_data', $subscriber);
+            $subscriber = apply_filters("mc4wp_subscriber_data", $subscriber);
 
             /**
              * Filter subscriber data before it is sent to Mailchimp. Runs only for Mailchimp Top Bar requests.
              *
              * @param MC4WP_MailChimp_Subscriber
              */
-            $subscriber = apply_filters('mctb_subscriber_data', $subscriber);
+            $subscriber = apply_filters("mctb_subscriber_data", $subscriber);
 
-            $result = $mailchimp->list_subscribe($mailchimp_list_id, $subscriber->email_address, $subscriber->to_array(), $options['update_existing'], $replace_interests);
-            $result = is_object($result) && ! empty($result->id);
+            $result = $mailchimp->list_subscribe(
+                $mailchimp_list_id,
+                $subscriber->email_address,
+                $subscriber->to_array(),
+                $options["update_existing"],
+                $replace_interests,
+            );
+            $result = is_object($result) && !empty($result->id);
         }
-
 
         // return true if success..
         if ($result) {
-
             /**
              * Fires for every successful sign-up using Top Bar.
              *
@@ -234,11 +256,21 @@ class Bar
              * @param string $email
              * @param array $data
              */
-            do_action('mctb_subscribed', $mailchimp_list_id, $email_address, $data);
+            do_action(
+                "mctb_subscribed",
+                $mailchimp_list_id,
+                $email_address,
+                $data,
+            );
 
             // log sign-up attempt
             if ($log) {
-                $log->info(sprintf('Top Bar > Successfully subscribed %s', $email_address));
+                $log->info(
+                    sprintf(
+                        "Top Bar > Successfully subscribed %s",
+                        $email_address,
+                    ),
+                );
             }
 
             return true;
@@ -246,16 +278,26 @@ class Bar
 
         // An API error occured... Oh noes!
         if ($mailchimp->get_error_code() === 214) {
-            $this->error_type = 'already_subscribed';
+            $this->error_type = "already_subscribed";
 
             if ($log) {
-                $log->warning(sprintf('Top Bar > %s is already subscribed to the selected list(s)', $email_address));
+                $log->warning(
+                    sprintf(
+                        "Top Bar > %s is already subscribed to the selected list(s)",
+                        $email_address,
+                    ),
+                );
             }
         } else {
-            $this->error_type = 'error';
+            $this->error_type = "error";
 
             if ($log) {
-                $log->error(sprintf('Top Bar > Mailchimp API error: %s', $mailchimp->get_error_message()));
+                $log->error(
+                    sprintf(
+                        "Top Bar > Mailchimp API error: %s",
+                        $mailchimp->get_error_message(),
+                    ),
+                );
             }
         }
 
@@ -268,39 +310,47 @@ class Bar
      */
     private function validate()
     {
-
         // make sure `email_confirm` field is given but not filled (honeypot)
-        if (! isset($_POST['email_confirm']) || '' !== $_POST['email_confirm']) {
-            $this->error_type = 'spam';
+        if (!isset($_POST["email_confirm"]) || "" !== $_POST["email_confirm"]) {
+            $this->error_type = "spam";
             return false;
         }
 
         // make sure `_mctb_timestamp` is at least 1 seconds ago
-        if (empty($_POST['_mctb_timestamp']) || time() < ( intval($_POST['_mctb_timestamp']) + 1 )) {
-            $this->error_type = 'spam';
+        if (
+            empty($_POST["_mctb_timestamp"]) ||
+            time() < intval($_POST["_mctb_timestamp"]) + 1
+        ) {
+            $this->error_type = "spam";
             return false;
         }
 
         // don't work for users without JavaScript (since bar is hidden anyway, must be a bot)
-        if (isset($_POST['_mctb_no_js'])) {
-            $this->error_type = 'spam';
+        if (isset($_POST["_mctb_no_js"])) {
+            $this->error_type = "spam";
             return false;
         }
 
         // simple user agent check
-        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+        $user_agent = isset($_SERVER["HTTP_USER_AGENT"])
+            ? $_SERVER["HTTP_USER_AGENT"]
+            : "";
         if (strlen($user_agent) < 2) {
-            $this->error_type = 'spam';
+            $this->error_type = "spam";
             return false;
         }
 
         // check if email is given and valid
-        if (empty($_POST['email']) || ! is_string($_POST['email']) || ! is_email($_POST['email'])) {
-            $this->error_type = 'invalid_email';
+        if (
+            empty($_POST["email"]) ||
+            !is_string($_POST["email"]) ||
+            !is_email($_POST["email"])
+        ) {
+            $this->error_type = "invalid_email";
             return false;
         }
 
-        return apply_filters('mctb_validate', true);
+        return apply_filters("mctb_validate", true);
     }
 
     /**
@@ -309,20 +359,20 @@ class Bar
     public function load_assets()
     {
         $options = mctb_get_options();
-        wp_enqueue_script('mailchimp-top-bar', $this->asset_url("/script.js"), [], MAILCHIMP_TOP_BAR_VERSION, true);
-        add_filter('script_loader_tag', [ $this, 'add_defer_attribute' ], 10, 2);
-        $bottom = $options['position'] === 'bottom';
+        wp_enqueue_script("mailchimp-top-bar", $this->asset_url("/script.js"), [], MAILCHIMP_TOP_BAR_VERSION, true);
+        wp_script_add_data("mailchimp-top-bar", "strategy", "defer");
+        $bottom = $options["position"] === "bottom";
 
         $data = [
-            'cookieLength' => $options['cookie_length'],
-            'icons'        => [
-                'hide' => ( $bottom ) ? '&#x25BC;' : '&#x25B2;',
-                'show' => ( $bottom ) ? '&#x25B2;' : '&#x25BC;'
+            "cookieLength" => $options["cookie_length"],
+            "icons" => [
+                "hide" => $bottom ? "&#x25BC;" : "&#x25B2;",
+                "show" => $bottom ? "&#x25B2;" : "&#x25BC;",
             ],
-            'position'     => $options['position'],
-            'state'        => [
-                'submitted' => $this->submitted,
-                'success'   => $this->success,
+            "position" => $options["position"],
+            "state" => [
+                "submitted" => $this->submitted,
+                "success" => $this->success,
             ],
         ];
 
@@ -334,21 +384,9 @@ class Bar
          *  - cookieLength: The length of the cookie
          *  - icons: Array with `hide` and `show` keys. Holds the hide/show icon strings.
          */
-        $data = apply_filters('mctb_bar_config', $data);
+        $data = apply_filters("mctb_bar_config", $data);
 
-        wp_localize_script('mailchimp-top-bar', 'mctb', $data);
-    }
-
-    /**
-     * Adds defer attribute to our <script> element
-     */
-    public function add_defer_attribute($tag, $handle)
-    {
-        if ($handle !== 'mailchimp-top-bar') {
-            return $tag;
-        }
-
-        return \str_replace(' src=', ' defer src=', $tag);
+        wp_localize_script("mailchimp-top-bar", "mctb", $data);
     }
 
     /**
@@ -357,20 +395,20 @@ class Bar
     private function get_css_class()
     {
         $options = mctb_get_options();
-        $classes = [ 'mctb' ];
+        $classes = ["mctb"];
 
         // add class when bar is sticky
-        if ($options['position'] === 'top' && $options['sticky']) {
-            $classes[] = 'mctb-sticky';
+        if ($options["position"] === "top" && $options["sticky"]) {
+            $classes[] = "mctb-sticky";
         }
 
         // add unique css class for position (bottom|top)
-        $classes[] = \sprintf('mctb-position-%s', $options['position']);
+        $classes[] = \sprintf("mctb-position-%s", $options["position"]);
 
         // add class describing size of the bar
-        $classes[] = "mctb-{$options['size']}";
+        $classes[] = "mctb-{$options["size"]}";
 
-        return \join(' ', $classes);
+        return \join(" ", $classes);
     }
 
     /**
@@ -378,68 +416,65 @@ class Bar
      */
     public function output_css()
     {
-        $options           = mctb_get_options();
-        $bar_color         = $options['color_bar'];
-        $button_color      = $options['color_button'];
-        $text_color        = $options['color_text'];
-        $button_text_color = $options['color_button_text'];
+        $options = mctb_get_options();
+        $bar_color = sanitize_hex_color($options["color_bar"]);
+        $button_color = sanitize_hex_color($options["color_button"]);
+        $text_color = sanitize_hex_color($options["color_text"]);
+        $button_text_color = sanitize_hex_color($options["color_button_text"]);
 
-        echo '<style>';
-        include MAILCHIMP_TOP_BAR_DIR . '/assets/bar.css';
+        echo "<style>";
+        include MAILCHIMP_TOP_BAR_DIR . "/assets/bar.css";
 
-        if (! empty($bar_color)) {
+        if (!empty($bar_color)) {
             echo ".mctb-bar,.mctb-response,.mctb-close{background:{$bar_color}!important;}";
         }
 
-        if (! empty($text_color)) {
+        if (!empty($text_color)) {
             echo ".mctb-bar,.mctb-label,.mctb-close{color:{$text_color}!important;}";
         }
 
-        if (! empty($button_color)) {
+        if (!empty($button_color)) {
             echo ".mctb-button{background:{$button_color}!important;border-color:{$button_color}!important;}";
             echo ".mctb-email:focus{outline-color:{$button_color}!important;}";
         }
 
-        if (! empty($button_text_color)) {
+        if (!empty($button_text_color)) {
             echo ".mctb-button{color: {$button_text_color}!important;}";
         }
 
-        echo '</style>', PHP_EOL;
+        echo "</style>", PHP_EOL;
     }
-
 
     /**
      * Output the HTML for the opt-in bar
      */
     public function output_html()
     {
-        $hide = isset($_COOKIE['mctb_bar_hidden']);
-        $form_action = apply_filters('mctb_form_action', null);
-        $options     = mctb_get_options();
+        $hide = isset($_COOKIE["mctb_bar_hidden"]);
+        $form_action = apply_filters("mctb_form_action", null);
+        $options = mctb_get_options();
         ?>
         <!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-        <div id="mailchimp-top-bar" class="<?php echo $this->get_css_class(); ?>">
-        <div class="mctb-bar" <?php if ($hide) {
-            echo 'style="display: none;"';
-                              } ?>>
+        <div id="mailchimp-top-bar" class="<?= esc_attr($this->get_css_class()) ?>">
+            <div class="mctb-bar" style="<?= $hide ? 'display: none;' : ''; ?>">
             <form method="post" <?php if (is_string($form_action)) {
                 echo "action=\"", esc_attr($form_action), "\"";
                                 } ?>>
-                    <?php do_action('mctb_before_label'); ?>
-                    <label class="mctb-label" for="mailchimp-top-bar__email"><?php echo $options['text_bar']; ?></label>
-                    <?php do_action('mctb_before_email_field'); ?>
+                    <?php do_action("mctb_before_label"); ?>
+                    <label class="mctb-label" for="mailchimp-top-bar__email"><?= wp_kses_post($options["text_bar"]); ?></label>
+                    <?php do_action("mctb_before_email_field"); ?>
                     <input type="email" name="email"
-                           placeholder="<?php echo esc_attr($options['text_email_placeholder']); ?>"
-                           class="mctb-email" required id="mailchimp-top-bar__email"/>
+                           placeholder="<?= esc_attr($options["text_email_placeholder"]); ?>"
+                           class="mctb-email" required id="mailchimp-top-bar__email">
                     <input type="text" name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off"
-                           tabindex="-1" class="mctb-email-confirm"/>
-                    <?php do_action('mctb_before_submit_button'); ?>
-                    <input type="submit" value="<?php echo esc_attr($options['text_button']); ?>"
-                           class="mctb-button"/>
-                    <?php do_action('mctb_after_submit_button'); ?>
-                    <input type="hidden" name="_mctb" value="1"/>
-                    <input type="hidden" name="_mctb_no_js" value="1"/>
-                    <input type="hidden" name="_mctb_timestamp" value="<?php echo time(); ?>"/>
+                           tabindex="-1" class="mctb-email-confirm">
+                    <?php do_action("mctb_before_submit_button"); ?>
+                    <input type="submit" value="<?= esc_attr($options["text_button"]); ?>"
+                           class="mctb-button">
+                    <?php do_action("mctb_after_submit_button"); ?>
+                    <input type="hidden" name="_mctb" value="1">
+                    <input type="hidden" name="_mctb_no_js" value="1">
+                    <input type="hidden" name="_mctb_timestamp" value="<?= time() ?>">
                 </form>
                 <?php echo $this->get_response_message_html(); ?>
             </div>
@@ -453,20 +488,20 @@ class Bar
      */
     protected function get_response_message()
     {
-        if (! $this->submitted) {
-            return '';
+        if (!$this->submitted) {
+            return "";
         }
 
         $options = mctb_get_options();
 
         if ($this->success) {
-            $message = $options['text_subscribed'];
-        } elseif ($this->error_type === 'already_subscribed') {
-            $message = $options['text_already_subscribed'];
-        } elseif ($this->error_type === 'invalid_email') {
-            $message = $options['text_invalid_email'];
+            $message = $options["text_subscribed"];
+        } elseif ($this->error_type === "already_subscribed") {
+            $message = $options["text_already_subscribed"];
+        } elseif ($this->error_type === "invalid_email") {
+            $message = $options["text_invalid_email"];
         } else {
-            $message = $options['text_error'];
+            $message = $options["text_error"];
         }
 
         return $message;
@@ -476,12 +511,14 @@ class Bar
     {
         $message = $this->get_response_message();
         if (empty($message)) {
-            return '';
+            return "";
         }
 
-        return \sprintf('<div class="mctb-response"><label class="mctb-response-label">%s</label></div>', $message);
+        return \sprintf(
+            '<div class="mctb-response"><label class="mctb-response-label">%s</label></div>',
+            $message,
+        );
     }
-
 
     /**
      * @param $url
@@ -490,7 +527,7 @@ class Bar
      */
     protected function asset_url($url)
     {
-        return plugins_url('/assets' . $url, MAILCHIMP_TOP_BAR_FILE);
+        return plugins_url("/assets" . $url, MAILCHIMP_TOP_BAR_FILE);
     }
 
     /**
@@ -500,9 +537,8 @@ class Bar
      */
     protected function get_log()
     {
-
         try {
-            $log = mc4wp('log');
+            $log = mc4wp("log");
         } catch (Exception $e) {
             return null;
         }

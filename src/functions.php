@@ -25,7 +25,6 @@ function mctb_get_options()
         'redirect' => '',
         'position' => 'top',
         'double_optin' => 1,
-        'send_welcome' => 0,
         'update_existing' => 0,
         'text_subscribed' => __("Thanks, you're in! Please check your email inbox for a confirmation.", 'mailchimp-top-bar'),
         'text_error' => __("Oops. Something went wrong.", 'mailchimp-top-bar'),

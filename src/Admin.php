@@ -26,10 +26,10 @@ class Admin
      */
     public function add_hooks()
     {
-        add_action('admin_init', [ $this, 'init' ], 10, 0);
-        add_action('admin_footer_text', [ $this, 'footer_text' ], 11, 1);
-        add_filter('mc4wp_admin_menu_items', [ $this, 'add_menu_item' ], 10, 1);
-        add_action('mc4wp_admin_enqueue_assets', [ $this, 'load_assets' ], 10, 2);
+        add_action("admin_init", [$this, "init"], 10, 0);
+        add_action("admin_footer_text", [$this, "footer_text"], 11, 1);
+        add_filter("mc4wp_admin_menu_items", [$this, "add_menu_item"], 10, 1);
+        add_action("mc4wp_admin_enqueue_assets", [$this, "load_assets"], 10, 2);
     }
 
     /**
@@ -39,16 +39,22 @@ class Admin
     {
         // only run for administrators
         // TODO: Use mc4wp capability here
-        if (! current_user_can('manage_options')) {
+        if (!current_user_can("manage_options")) {
             return;
         }
 
         // register settings
-        register_setting('mailchimp_top_bar', 'mailchimp_top_bar', [ $this, 'sanitize_settings' ]);
+        register_setting("mailchimp_top_bar", "mailchimp_top_bar", [
+            $this,
+            "sanitize_settings",
+        ]);
 
         // add link to settings page from plugins page
-        add_filter('plugin_action_links_' . plugin_basename(MAILCHIMP_TOP_BAR_FILE), [ $this, 'add_plugin_settings_link' ]);
-        add_filter('plugin_row_meta', [ $this, 'add_plugin_meta_links'], 10, 2);
+        add_filter(
+            "plugin_action_links_" . plugin_basename(MAILCHIMP_TOP_BAR_FILE),
+            [$this, "add_plugin_settings_link"],
+        );
+        add_filter("plugin_row_meta", [$this, "add_plugin_meta_links"], 10, 2);
     }
 
     /**
@@ -60,16 +66,16 @@ class Admin
      */
     public function add_menu_item(array $items)
     {
-            $item = [
-                'title' => esc_html__('Mailchimp Top Bar', 'mailchimp-top-bar'),
-                'text' => esc_html__('Top Bar', 'mailchimp-top-bar'),
-                'slug' => 'top-bar',
-                'callback' => [$this, 'show_settings_page']
-            ];
+        $item = [
+            "title" => esc_html__("Mailchimp Top Bar", "mailchimp-top-bar"),
+            "text" => esc_html__("Top Bar", "mailchimp-top-bar"),
+            "slug" => "top-bar",
+            "callback" => [$this, "show_settings_page"],
+        ];
 
-            // insert item before the last menu item
-            \array_splice($items, \count($items) - 1, 0, [ $item ]);
-            return $items;
+        // insert item before the last menu item
+        \array_splice($items, \count($items) - 1, 0, [$item]);
+        return $items;
     }
 
     /**
@@ -80,8 +86,10 @@ class Admin
      */
     public function add_plugin_settings_link(array $links)
     {
-        $link_href = esc_attr(admin_url('admin.php?page=mailchimp-for-wp-top-bar'));
-        $link_title = esc_html__('Settings', 'mailchimp-for-wp');
+        $link_href = esc_attr(
+            admin_url("admin.php?page=mailchimp-for-wp-top-bar"),
+        );
+        $link_title = esc_html__("Settings", "mailchimp-for-wp");
         $settings_link = "<a href=\"{$link_href}\">{$link_title}</a>";
         \array_unshift($links, $settings_link);
         return $links;
@@ -100,7 +108,10 @@ class Admin
             return $links;
         }
 
-        $links[] = \sprintf(esc_html__('An add-on for %s', 'mailchimp-top-bar'), '<a href="https://www.mc4wp.com/">Mailchimp for WordPress</a>');
+        $links[] = \sprintf(
+            esc_html__("An add-on for %s", "mailchimp-top-bar"),
+            '<a href="https://www.mc4wp.com/">Mailchimp for WordPress</a>',
+        );
         return $links;
     }
 
@@ -113,12 +124,18 @@ class Admin
      */
     public function load_assets($suffix, $page)
     {
-        if ($page !== 'top-bar') {
+        if ($page !== "top-bar") {
             return;
         }
 
-        wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('mailchimp-top-bar-admin', $this->asset_url("/admin.js"), [ 'jquery', 'wp-color-picker' ], MAILCHIMP_TOP_BAR_VERSION, true);
+        wp_enqueue_style("wp-color-picker");
+        wp_enqueue_script(
+            "mailchimp-top-bar-admin",
+            $this->asset_url("/admin.js"),
+            ["jquery", "wp-color-picker"],
+            MAILCHIMP_TOP_BAR_VERSION,
+            true,
+        );
     }
 
     /**
@@ -126,12 +143,12 @@ class Admin
      */
     public function show_settings_page()
     {
-        $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'settings';
+        $current_tab = isset($_GET["tab"]) ? sanitize_text_field($_GET["tab"]) : "settings";
         $options = mctb_get_options();
         $mailchimp = new \MC4WP_MailChimp();
         $lists = $mailchimp->get_lists();
 
-        require MAILCHIMP_TOP_BAR_DIR . '/views/settings-page.php';
+        require MAILCHIMP_TOP_BAR_DIR . "/views/settings-page.php";
     }
 
     /**
@@ -140,7 +157,7 @@ class Admin
      */
     protected function asset_url($url)
     {
-        return plugins_url('/assets' . $url, MAILCHIMP_TOP_BAR_FILE);
+        return plugins_url("/assets" . $url, MAILCHIMP_TOP_BAR_FILE);
     }
 
     /**
@@ -158,54 +175,55 @@ class Admin
      */
     public function sanitize_settings(array $dirty)
     {
-        $unfiltered_html = current_user_can('unfiltered_html');
+        $unfiltered_html = current_user_can("unfiltered_html");
         $clean = $dirty;
         $safe_attributes = [
-            'class' => [],
-            'id' => [],
-            'title' => [],
-            'tabindex' => [],
+            "class" => [],
+            "id" => [],
+            "title" => [],
+            "tabindex" => [],
         ];
-        $unsafe_attributes = \array_merge($safe_attributes, ['href' => []]);
+        $unsafe_attributes = \array_merge($safe_attributes, ["href" => []]);
         $allowed_html = [
-            'strong' => $safe_attributes,
-            'b' => $safe_attributes,
-            'em' => $safe_attributes,
-            'i' => $safe_attributes,
-            'u' => $safe_attributes,
+            "strong" => $safe_attributes,
+            "b" => $safe_attributes,
+            "em" => $safe_attributes,
+            "i" => $safe_attributes,
+            "u" => $safe_attributes,
             // only allow href attribute on <a> elements if user has unfiltered_html capability
-            'a' => $unfiltered_html ? $unsafe_attributes : $safe_attributes,
-            'span' => $safe_attributes,
+            "a" => $unfiltered_html ? $unsafe_attributes : $safe_attributes,
+            "span" => $safe_attributes,
         ];
 
         foreach ($clean as $key => $value) {
             // make sure colors start with `#`
-            if (\strpos($key, 'color_') === 0) {
+            if (\strpos($key, "color_") === 0) {
                 $value = \strip_tags($value);
-                if ('' !== $value && $value[0] !== '#') {
-                    $clean[$key] = '#' . $value;
+                if ("" !== $value && $value[0] !== "#") {
+                    $clean[$key] = "#" . $value;
                 }
             }
 
             // only allow certain HTML elements inside all text settings
-            if (\strpos($key, 'text_') === 0) {
-                $clean[$key] = wp_kses(\strip_tags($value, '<strong><b><em><i><u><a><span>'), $allowed_html);
+            if (\strpos($key, "text_") === 0) {
+                $clean[$key] = wp_kses($value, $allowed_html);
             }
         }
 
-
         // make sure size is either `small`, `medium` or `big`
-        if (! in_array($dirty['size'], ['small', 'medium', 'big'])) {
-            $clean['size'] = 'medium';
+        if (!in_array($dirty["size"], ["small", "medium", "big"])) {
+            $clean["size"] = "medium";
         }
 
-        if (! in_array($dirty['position'], ['top', 'bottom'])) {
-            $clean['position'] = 'top';
+        if (!in_array($dirty["position"], ["top", "bottom"])) {
+            $clean["position"] = "top";
         }
 
         // button & email placeholders can have no HTML at all
-        $clean['text_button'] = \strip_tags($dirty['text_button']);
-        $clean['text_email_placeholder'] = \strip_tags($dirty['text_email_placeholder']);
+        $clean["text_button"] = \strip_tags($dirty["text_button"]);
+        $clean["text_email_placeholder"] = \strip_tags(
+            $dirty["text_email_placeholder"],
+        );
 
         return $clean;
     }
@@ -218,8 +236,12 @@ class Admin
      */
     public function footer_text($text)
     {
-        if (( isset($_GET['page']) && strpos($_GET['page'], 'mailchimp-for-wp-top-bar') === 0 )) {
-            $text = 'If you enjoy using <strong>Mailchimp Top Bar</strong>, please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!';
+        if (
+            isset($_GET["page"]) &&
+            strpos($_GET["page"], "mailchimp-for-wp-top-bar") === 0
+        ) {
+            $text =
+                'If you enjoy using <strong>Mailchimp Top Bar</strong>, please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!';
         }
 
         return $text;

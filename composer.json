@@ -1,24 +1,27 @@
 {
-	"name": "dannyvankooten/wp-mailchimp-top-bar",
-	"type": "wordpress-plugin",
-	"description": "Adds an opt-in bar to the top of your site.",
-	"keywords": ["wordpress", "mailchimp"],
-	"homepage": "https://wordpress.org/plugins/mailchimp-top-bar/",
-	"license": "GPL-3.0+",
-	"authors": [
-		{
-			"name": "Danny van Kooten",
-			"email": "hi@dannyvankooten.com",
-			"homepage": "https://dannyvankooten.com"
-		}
-	],
-	"require": {
-		"php": ">=7.2"
-	},
-	"scripts": {
-    	"check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l"
-	},
-	"require-dev": {
-		"squizlabs/php_codesniffer": "^3.11"
-	}
+    "name": "dannyvankooten/wp-mailchimp-top-bar",
+    "type": "wordpress-plugin",
+    "description": "Adds an opt-in bar to the top of your site.",
+    "keywords": [
+        "wordpress",
+        "mailchimp"
+    ],
+    "homepage": "https://wordpress.org/plugins/mailchimp-top-bar/",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Danny van Kooten",
+            "email": "hi@dannyvankooten.com",
+            "homepage": "https://dannyvankooten.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3"
+    },
+    "scripts": {
+        "check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.11"
+    }
 }
