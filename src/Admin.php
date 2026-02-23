@@ -21,21 +21,15 @@ namespace MailChimp\TopBar;
 
 class Admin
 {
-    /**
-     * Add plugin hooks
-     */
-    public function add_hooks()
+    public function add_hooks(): void
     {
-        add_action("admin_init", [$this, "init"], 10, 0);
-        add_action("admin_footer_text", [$this, "footer_text"], 11, 1);
+        add_action("admin_init", [$this, "action_init"], 10, 0);
+        add_filter("admin_footer_text", [$this, "footer_text"], 11, 1);
         add_filter("mc4wp_admin_menu_items", [$this, "add_menu_item"], 10, 1);
         add_action("mc4wp_admin_enqueue_assets", [$this, "load_assets"], 10, 2);
     }
 
-    /**
-     * Runs on `admin_init`
-     */
-    public function init()
+    public function action_init(): void
     {
         // only run for administrators
         // TODO: Use mc4wp capability here

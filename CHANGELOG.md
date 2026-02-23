@@ -1,6 +1,10 @@
 Changelog
 ==========
 
+### 1.7.4 - Feb 23, 2026
+
+- 
+
 ### 1.7.3 - Oct 1, 2025
 
 - Minor performance or memory usage related improvements.

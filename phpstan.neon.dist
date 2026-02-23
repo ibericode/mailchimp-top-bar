@@ -1,0 +1,7 @@
+parameters:
+    level: 1
+    paths:
+        - mailchimp-top-bar.php
+        - src/
+    scanDirectories:
+      - ../mailchimp-for-wp

@@ -59,12 +59,7 @@ class Bar
         $this->listen();
     }
 
-    /**
-     * Should the bar be shown?
-     *
-     * @return bool
-     */
-    public function should_show_bar()
+    public function should_show_bar(): bool
     {
         $options = mctb_get_options();
 
@@ -107,7 +102,7 @@ class Bar
     /**
      * Listens for actions to take
      */
-    public function listen()
+    public function listen(): void
     {
         if (!isset($_POST["_mctb"]) || $_POST["_mctb"] != 1) {
             return;
@@ -140,11 +135,7 @@ class Bar
         }
     }
 
-    /**
-     * Process a form submission
-     * @return boolean
-     */
-    private function process()
+    private function process(): bool
     {
         $options = mctb_get_options();
         $this->submitted = true;
@@ -196,7 +187,7 @@ class Bar
         /**
          * Filters the data received by Mailchimp Top Bar, before it is further processed.
          *
-         * @param $data
+         * @param array $data
          */
         $data = apply_filters("mctb_data", $data);
 
@@ -211,10 +202,7 @@ class Bar
          *
          * @param bool $replace_interests
          */
-        $replace_interests = apply_filters(
-            "mctb_replace_interests",
-            $replace_interests,
-        );
+        $replace_interests = apply_filters("mctb_replace_interests", $replace_interests);
         $mailchimp = new MC4WP_MailChimp();
 
         $mapper = new MC4WP_List_Data_Mapper($data, [$mailchimp_list_id]);
@@ -233,7 +221,7 @@ class Bar
             /**
              * Filter subscriber data before it is sent to Mailchimp. Runs only for Mailchimp Top Bar requests.
              *
-             * @param MC4WP_MailChimp_Subscriber
+             * @param MC4WP_MailChimp_Subscriber $subscriber
              */
             $subscriber = apply_filters("mctb_subscriber_data", $subscriber);
 

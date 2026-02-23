@@ -1,0 +1,20 @@
+name: Check PHP syntax
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Install PHP interpreter
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          ini-file: development
+
+      - name: checkout repo
+        uses: actions/checkout@v6
+
+      - name: Check PHP syntax
+        run: composer run check-syntax

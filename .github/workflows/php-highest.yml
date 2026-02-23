@@ -1,0 +1,33 @@
+name: Lint and analyse on latest PHP version
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: mailchimp-top-bar
+
+      - uses: actions/checkout@v6
+        with:
+          repository: ibericode/mailchimp-for-wordpress
+          path: mailchimp-for-wp
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: highest
+          tools: composer
+
+      - run: composer run check-syntax
+        working-directory: mailchimp-top-bar
+
+      - run: composer install --no-progress
+        working-directory: mailchimp-top-bar
+
+      - run: composer run check-codestyle
+        working-directory: mailchimp-top-bar
+
+      - run: composer run-script static-analysis
+        working-directory: mailchimp-top-bar
