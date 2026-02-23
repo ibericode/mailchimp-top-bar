@@ -3,7 +3,9 @@ Changelog
 
 ### 1.7.4 - Feb 23, 2026
 
-- 
+- Bump required WordPress version to 7.4 or higher.
+- Modernize code base by using latest PHP features and removing legacy compatibility code.
+
 
 ### 1.7.3 - Oct 1, 2025
 
