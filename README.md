@@ -7,8 +7,8 @@ Requirements
 ------------
 
 - WordPress version 4.9 or later
-- PHP version 7.3 or later
-
+- PHP version 7.4 or later
+- [Mailchimp for WordPress](https://www.mc4wp.com/) version 3.0 or later
 
 Installation
 ------------

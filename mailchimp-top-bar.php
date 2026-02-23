@@ -34,8 +34,8 @@ defined("ABSPATH") or exit();
 add_action(
     "plugins_loaded",
     function () {
-        // check for PHP 7.3 or higher
-        if (PHP_VERSION_ID < 70300) {
+        // check for PHP 7.4 or higher
+        if (PHP_VERSION_ID < 70400) {
             return;
         }
 

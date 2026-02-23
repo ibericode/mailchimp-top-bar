@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3"
+        "php": ">=7.4"
     },
     "scripts": {
         "check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l"
