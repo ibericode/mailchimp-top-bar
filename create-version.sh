@@ -1,4 +1,4 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -26,8 +26,13 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
-# Check if there is an existing file for this release already
-rm -f "$PACKAGE_FILE"
+# First, run some checks
+if [ ! -e "vendor/bin/phpstan"]; then
+    composer install
+fi;
+composer run check-syntax
+composer run check-codestyle
+composer run static-analysis
 
 # Build (optimized) client-side assets
 npm run build
@@ -44,6 +49,9 @@ wp-update-changelog
 # Move up one directory level because we need plugin directory in ZIP file
 cd ..
 
+# Check if there is an existing file for this release already
+rm -f "$PACKAGE_FILE"
+
 # Create archive (excl. development files)
 zip -r "$PACKAGE_FILE" "$PLUGIN_SLUG" \
 	-x "$PLUGIN_SLUG/.*" \
@@ -55,6 +63,7 @@ zip -r "$PACKAGE_FILE" "$PLUGIN_SLUG" \
 	-x "$PLUGIN_SLUG/*.lock" \
 	-x "$PLUGIN_SLUG/phpcs.xml" \
 	-x "$PLUGIN_SLUG/phpunit.xml.dist" \
+	-x "$PLUGIN_SLUG/phpstan.neon.dist" \
 	-x "$PLUGIN_SLUG/*.sh" \
 	-x "$PLUGIN_SLUG/assets/src/*"	\
 	-x "$PLUGIN_SLUG/sample-code-snippets/*"
