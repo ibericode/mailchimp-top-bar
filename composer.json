@@ -21,7 +21,8 @@
     "scripts": {
         "check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l",
         "check-codestyle": "vendor/bin/phpcs",
-        "static-analysis": "vendor/bin/phpstan analyse"
+        "static-analysis": "vendor/bin/phpstan analyse",
+        "wp-plugin-checks": "wp plugin check mailchimp-top-bar --ignore-warnings --ignore-codes=hidden_files,application_detected"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.11",
