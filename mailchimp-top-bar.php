@@ -9,7 +9,7 @@ Author: ibericode
 Author URI: https://www.ibericode.com/
 Text Domain: mailchimp-top-bar
 Requires Plugins: mailchimp-for-wp 
-Requires PHP: 8.4
+Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
