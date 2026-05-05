@@ -8,9 +8,11 @@ Version: 1.7.4
 Author: ibericode
 Author URI: https://www.ibericode.com/
 Text Domain: mailchimp-top-bar
-Domain Path: /languages
+Requires Plugins: mailchimp-for-wp 
+Requires PHP: 8.4
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+
 
 Mailchimp Top Bar
 Copyright (C) 2015, Danny van Kooten, hi@dannyvankooten.com
@@ -36,15 +38,6 @@ add_action(
     function () {
         // check for PHP 7.4 or higher
         if (PHP_VERSION_ID < 70400) {
-            return;
-        }
-
-        // check for MailChimp for WordPress (version 3.0 or higher)
-        if (
-            !defined("MC4WP_VERSION") ||
-            version_compare(MC4WP_VERSION, "3.0", "<")
-        ) {
-            require __DIR__ . "/src/admin-notice-install-deps.php";
             return;
         }
 
