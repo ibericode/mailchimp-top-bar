@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 function mctb_get_options()
 {
     static $options = null;

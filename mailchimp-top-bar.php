@@ -8,7 +8,7 @@ Version: 1.7.4
 Author: ibericode
 Author URI: https://www.ibericode.com/
 Text Domain: mailchimp-top-bar
-Requires Plugins: mailchimp-for-wp 
+Requires Plugins: mailchimp-for-wp
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -31,7 +31,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-defined("ABSPATH") or exit();
+if (! defined('ABSPATH')) {
+    exit;
+}
 
 add_action(
     "plugins_loaded",

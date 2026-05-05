@@ -17,7 +17,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
 namespace MailChimp\TopBar;
+
+if (! defined('ABSPATH')) {
+    exit;
+}
 
 class Admin
 {
@@ -83,7 +88,7 @@ class Admin
         $link_href = esc_attr(
             admin_url("admin.php?page=mailchimp-for-wp-top-bar"),
         );
-        $link_title = esc_html__("Settings", "mailchimp-for-wp");
+        $link_title = esc_html__("Settings", "mailchimp-top-bar");
         $settings_link = "<a href=\"{$link_href}\">{$link_title}</a>";
         \array_unshift($links, $settings_link);
         return $links;
@@ -103,6 +108,7 @@ class Admin
         }
 
         $links[] = \sprintf(
+            /* translators: %s: Plugin name with link to its website. */
             esc_html__("An add-on for %s", "mailchimp-top-bar"),
             '<a href="https://www.mc4wp.com/">Mailchimp for WordPress</a>',
         );
@@ -192,7 +198,7 @@ class Admin
         foreach ($clean as $key => $value) {
             // make sure colors start with `#`
             if (\strpos($key, "color_") === 0) {
-                $value = \strip_tags($value);
+                $value = wp_strip_all_tags($value);
                 if ("" !== $value && $value[0] !== "#") {
                     $clean[$key] = "#" . $value;
                 }
@@ -214,8 +220,8 @@ class Admin
         }
 
         // button & email placeholders can have no HTML at all
-        $clean["text_button"] = \strip_tags($dirty["text_button"]);
-        $clean["text_email_placeholder"] = \strip_tags(
+        $clean["text_button"] = wp_strip_all_tags($dirty["text_button"]);
+        $clean["text_email_placeholder"] = wp_strip_all_tags(
             $dirty["text_email_placeholder"],
         );
 

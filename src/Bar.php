@@ -20,6 +20,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace MailChimp\TopBar;
 
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 use Exception;
 use MC4WP_MailChimp;
 use MC4WP_Debug_Log;
@@ -414,20 +418,20 @@ class Bar
         include MAILCHIMP_TOP_BAR_DIR . "/assets/bar.css";
 
         if (!empty($bar_color)) {
-            echo ".mctb-bar,.mctb-response,.mctb-close{background:{$bar_color}!important;}";
+            echo ".mctb-bar,.mctb-response,.mctb-close{background:", esc_html($bar_color), "!important;}";
         }
 
         if (!empty($text_color)) {
-            echo ".mctb-bar,.mctb-label,.mctb-close{color:{$text_color}!important;}";
+            echo ".mctb-bar,.mctb-label,.mctb-close{color:", esc_html($text_color), "!important;}";
         }
 
         if (!empty($button_color)) {
-            echo ".mctb-button{background:{$button_color}!important;border-color:{$button_color}!important;}";
-            echo ".mctb-email:focus{outline-color:{$button_color}!important;}";
+            echo ".mctb-button{background:", esc_html($button_color), "!important;border-color:", esc_html($button_color), "!important;}";
+            echo ".mctb-email:focus{outline-color:", esc_html($button_color), "!important;}";
         }
 
         if (!empty($button_text_color)) {
-            echo ".mctb-button{color: {$button_text_color}!important;}";
+            echo ".mctb-button{color:", esc_html($button_text_color), "!important;}";
         }
 
         echo "</style>", PHP_EOL;
@@ -442,29 +446,29 @@ class Bar
         $form_action = apply_filters("mctb_form_action", null);
         $options = mctb_get_options();
         ?>
-        <!-- Mailchimp Top Bar v<?php echo MAILCHIMP_TOP_BAR_VERSION; ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-        <div id="mailchimp-top-bar" class="<?= esc_attr($this->get_css_class()) ?>">
-            <div class="mctb-bar" style="<?= $hide ? 'display: none;' : ''; ?>">
+         <!-- Mailchimp Top Bar v<?php echo esc_html(MAILCHIMP_TOP_BAR_VERSION); ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
+         <div id="mailchimp-top-bar" class="<?php echo esc_attr($this->get_css_class()); ?>">
+             <div class="mctb-bar" style="<?php echo esc_attr($hide ? "display: none;" : ""); ?>">
             <form method="post" <?php if (is_string($form_action)) {
                 echo "action=\"", esc_attr($form_action), "\"";
                                 } ?>>
                     <?php do_action("mctb_before_label"); ?>
-                    <label class="mctb-label" for="mailchimp-top-bar__email"><?= wp_kses_post($options["text_bar"]); ?></label>
+                  <label class="mctb-label" for="mailchimp-top-bar__email"><?php echo wp_kses_post($options["text_bar"]); ?></label>
                     <?php do_action("mctb_before_email_field"); ?>
                     <input type="email" name="email"
-                           placeholder="<?= esc_attr($options["text_email_placeholder"]); ?>"
+                      placeholder="<?php echo esc_attr($options["text_email_placeholder"]); ?>"
                            class="mctb-email" required id="mailchimp-top-bar__email">
                     <input type="text" name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off"
                            tabindex="-1" class="mctb-email-confirm">
                     <?php do_action("mctb_before_submit_button"); ?>
-                    <input type="submit" value="<?= esc_attr($options["text_button"]); ?>"
+                  <input type="submit" value="<?php echo esc_attr($options["text_button"]); ?>"
                            class="mctb-button">
                     <?php do_action("mctb_after_submit_button"); ?>
                     <input type="hidden" name="_mctb" value="1">
                     <input type="hidden" name="_mctb_no_js" value="1">
-                    <input type="hidden" name="_mctb_timestamp" value="<?= time() ?>">
+                  <input type="hidden" name="_mctb_timestamp" value="<?php echo esc_attr((string) time()); ?>">
                 </form>
-                <?php echo $this->get_response_message_html(); ?>
+              <?php echo wp_kses_post($this->get_response_message_html()); ?>
             </div>
         </div>
         <!-- / Mailchimp Top Bar -->
