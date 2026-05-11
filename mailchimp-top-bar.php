@@ -45,7 +45,7 @@ add_action(
 
         define("MAILCHIMP_TOP_BAR_FILE", __FILE__);
         define("MAILCHIMP_TOP_BAR_DIR", __DIR__);
-define('MAILCHIMP_TOP_BAR_VERSION', '1.7.5');
+        define('MAILCHIMP_TOP_BAR_VERSION', '1.7.5');
 
         require __DIR__ . "/src/functions.php";
 

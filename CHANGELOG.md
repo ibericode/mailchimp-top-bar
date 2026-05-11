@@ -1,31 +1,31 @@
 Changelog
 ==========
 
-### 1.7.5 - May 11, 2026
+= 1.7.5 =
 
 - Allow WP Core to handle dependency on core Mailchimp for WordPress plugin.
 - Minor defensive coding improvements.
 
 
-### 1.7.4 - Feb 23, 2026
+= 1.7.4 =
 
 - Bump required WordPress version to 7.4 or higher.
 - Modernize code base by using latest PHP features and removing legacy compatibility code.
 
 
-### 1.7.3 - Oct 1, 2025
+= 1.7.3 =
 
 - Minor performance or memory usage related improvements.
 - Compatibility check with latest WordPress version.
 
 
-### 1.7.1 - Jul 2, 2025
+= 1.7.1 =
 
 - Update dependencies and WordPress compatibility.
 - Decrease timestamp check to one second ago.
 
 
-### 1.7.0 - Jan 27, 2025
+= 1.7.0 =
 
 - Bump required PHP version to 7.3 or higher.
 - Bump required WordPress version to 4.9 or higher.
@@ -35,12 +35,12 @@ Changelog
 - Minor performance improvements troughout the code by explicitly specifying the global namespace on core PHP functions.
 
 
-### 1.6.2 - Oct 3, 2024
+= 1.6.2 =
 
 - Fix button text setting not updating after saving settings.
 
 
-### 1.6.1 - Oct 1, 2024
+= 1.6.1 =
 
 - Escape return value of `add_query_arg` before outputting, fixing a potential XSS issue. Thanks to vgo0 for the responsible disclosure.
 - Escape or kses return values of all gettext calls.
@@ -48,7 +48,7 @@ Changelog
 - Minor server side performance improvements by getting rid of some unneccessary string copies or sprintf calls.
 
 
-### 1.6.0 - Jan 4, 2023
+= 1.6.0 =
 
 - JS file now has `defer` attribute so it is not render blocking.
 - Stylesheet is now inserted through JS, so it is not render blocking.
@@ -56,62 +56,62 @@ Changelog
 - JS file is now 20% smaller because of the above (2.6 kB gzipped).
 
 
-### 1.5.6 - Dec 1, 2022
+= 1.5.6 =
 
 - Minor JS improvements to shrink ~500 bytes off script file.
 - Prepare admin tab navigation for upcoming [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) release.
 
 
-#### 1.5.5 - May 14, 2021
+= 1.5.5 =
 
 - Always use minified asset file, regardless of `SCRIPT_DEBUG` setting.
 - Add nonce to all URL's using `_mc4wp_action` parameter.
 
 
-#### 1.5.4 - May 7, 2021
+= 1.5.4 =
 
 - Update classnames to work with MailChimp for WordPress version 4.8.4 (and up).
 - Minor JS optimizations.
 
 
-#### 1.5.3 - Mar 30, 2021
+= 1.5.3 =
 
 - Fix typo in help text.
 - Show bar server-side to speed-up height calculation.
 
 
-#### 1.5.2 - Mar 9, 2020
+= 1.5.2 =
 
 - Add setting to disable bar (stop loading it altogether) after it is used.
 - Increase default cookie lifetime to 1 year.
 
 
-#### 1.5.1 - Jan 21, 2020
+= 1.5.1 =
 
 - Fade response element using CSS animations for better performance.
 - Various minor performance improvements.
 
 
-#### 1.5.0 - Oct 7, 2019
+= 1.5.0 =
 
 Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 4.6.
 
 
-#### 1.4.1 - Sep 11, 2019
+= 1.4.1 =
 
 **Changes**
 
 - Change name to MC4WP: Mailchimp Top Bar.
 
 
-#### 1.4.0 - Sep 4, 2019
+= 1.4.0 =
 
 **Improvements**
 
 - Add (advanced) setting to quickly disable the top bar on certain pages.
 
 
-#### 1.3.2 - Aug 8, 2018
+= 1.3.2 =
 
 **Fixes**
 
@@ -122,7 +122,7 @@ Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailc
 - Prefix internal CSS classes for improved compatibility with other themes or plugins applying global admin styles.
 
 
-#### 1.3.1 - May 29, 2018
+= 1.3.1 =
 
 **Improvements**
 
@@ -132,7 +132,7 @@ Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailc
 - Improve animation performance.
 
 
-#### 1.3 - November 1, 2017
+= 1.3 =
 
 **Improvements**
 
@@ -140,12 +140,12 @@ Compatibility with [Mailchimp for WordPress](https://wordpress.org/plugins/mailc
 - Added `for` attribute to label elements, thanks [gabriel-kaam](https://github.com/gabriel-kaam).
 - Added `mctb_replace_interests` filter hook.
 
-#### 1.2.16 - January 19, 2017
+= 1.2.16 =
 
 Various minor code improvements.
 
 
-#### 1.2.15 - September 8, 2016
+= 1.2.15 =
 
 **Improvements**
 
@@ -153,7 +153,7 @@ Various minor code improvements.
 - Add `required` attribute to email input.
 
 
-#### 1.2.14 - August 29, 2016
+= 1.2.14 =
 
 **Fixes**
 
@@ -164,14 +164,14 @@ Various minor code improvements.
 - Better bar responsiveness when window dimensions change on the fly (eg resizing a window or changing device orientation mode). (Thanks [tech4him1](https://github.com/tech4him1)!)
 
 
-#### 1.2.13 - August 2, 2016
+= 1.2.13 =
 
 **Fixes**
 
 - Error in animating body padding back to its original value.
 
 
-#### 1.2.12 - July 21, 2016
+= 1.2.12 =
 
 **Fixes**
 
@@ -193,27 +193,27 @@ Various minor code improvements.
 - Deprecated `mctb_merge_vars` filter.
 
 
-#### 1.2.11 - July 8, 2016
+= 1.2.11 =
 
 **Improvements**
 
 - Completely removed optional jQuery dependency. The plugin now uses JavaScript animations, resulting in a much smoother experience.
 
-#### 1.2.10 - April 12, 2016
+= 1.2.10 =
 
 **Fixes**
 
 - Closed bar would still overlap underlying elements (like fixed top menu's).
 
 
-#### 1.2.9 - March 16, 2016
+= 1.2.9 =
 
 **Fixes**
 
 Top Bar was invisible on some themes because of `z-index` being too low.
 
 
-#### 1.2.8 - March 15, 2016
+= 1.2.8 =
 
 **Improvements**
 
@@ -221,7 +221,7 @@ Top Bar was invisible on some themes because of `z-index` being too low.
 - Hardened CSS styles for improved theme compatability.
 
 
-#### 1.2.7 - January 26, 2016
+= 1.2.7 =
 
 **Improvements**
 
@@ -232,7 +232,7 @@ Top Bar was invisible on some themes because of `z-index` being too low.
 - Add support for new [debug log](https://www.mc4wp.com/kb/how-to-enable-log-debugging/) in Mailchimp for WordPress 3.1
 
 
-#### 1.2.6 - January 4, 2016
+= 1.2.6 =
 
  **Additions**
 
@@ -243,7 +243,7 @@ Top Bar was invisible on some themes because of `z-index` being too low.
  - Toggle icon now has a background color, for increased visibility.
  - Toggle icon now stacks above or below bar on small screens.
 
-#### 1.2.5 - December 10, 2015
+= 1.2.5 =
 
 The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) version 3.0 or higher.
 
@@ -256,18 +256,18 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - Improved admin notice when dependencies are not installed.
 
 
-#### 1.2.4 - November 22, 2015
+= 1.2.4 =
 
 - Compatibility for [the upcoming Mailchimp for WordPress 3.0 release](https://www.mc4wp.com/blog/breaking-backwards-compatibility-in-version-3-0/) tomorrow.
 - Added `mctb_subscribed` filter.
 
-#### 1.2.3 - November 13, 2015
+= 1.2.3 =
 
 **Improvements**
 
 - Minor refactoring in the way the plugin is bootstrapped.
 
-#### 1.2.2 - September 10, 2015
+= 1.2.2 =
 
 **Fixes**
 
@@ -275,7 +275,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - Honeypot field was accessible by pressing "tab" key.
 - Hardened security for cookie that tracks sign-up attempts.
 
-#### 1.2.1 - September 8, 2015
+= 1.2.1 =
 
 **Fixes**
 
@@ -286,7 +286,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - Better mobile responsiveness
 
 
-#### 1.2 - September 3, 2015
+= 1.2 =
 
 **Improvements**
 
@@ -301,20 +301,20 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - Added `mctb_before_submit_button` action allowing you to add HTML before the submit button.
 - Added `mctb_form_action` filter allowing you to set a custom form action.
 
-#### 1.1.3 - June 23, 2015
+= 1.1.3 =
 
 **Fixes**
 
 - Fixes fatal error when visiting settings page on some servers
 
-#### 1.1.2 - June 18, 2015
+= 1.1.2 =
 
 **Improvements**
 
 - Fixes height of response message
 - CSS improvements for compatibility with various popular themes
 
-#### 1.1.1 - June 12, 2015
+= 1.1.1 =
 
 **Fixes**
 
@@ -325,7 +325,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - Various improvements to bar CSS so it can be easily overridden.
 - Fix vertical alignment of toggle icon.
 
-#### 1.1 - June 10, 2015
+= 1.1 =
 
 **Improvements**
 
@@ -337,13 +337,13 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - New filter: `mctb_mailchimp_list` (set lists to subscribe to)
 - Lithuanian translation, thanks to [Aleksandr Charkov](https://github.com/dec0n)
 
-#### 1.0.8 - May 6, 2015
+= 1.0.8 =
 
 **Fixes**
 
 - Compatibility with [Mailchimp for WordPress Lite v2.3](https://wordpress.org/plugins/mailchimp-for-wp/) and [Mailchimp for WordPress Pro v2.7](https://www.mc4wp.com/).
 
-#### 1.0.7 - April 15, 2015
+= 1.0.7 =
 
 **Fixes**
 
@@ -354,7 +354,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 
 - Toggle icon is no longer shown for users without JavaScript.
 
-#### 1.0.6 - March 17, 2015
+= 1.0.6 =
 
 **Fixes**
 
@@ -366,14 +366,14 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - Allow simple inline tags in the bar text
 
 
-#### 1.0.5 - February 25, 2015
+= 1.0.5 =
 
 **Fixes**
 
 - Bar not loading in some themes after latest update
 - Colors not working because of missing leading `#` value. Color settings are now validated before saving them.
 
-#### 1.0.4 - February 23, 2015
+= 1.0.4 =
 
 **Fixes**
 
@@ -385,7 +385,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - You can now set a "redirect url" in the bar settings
 - All form response messages can now be customised for the bar form
 
-#### 1.0.3 - February 17, 2015
+= 1.0.3 =
 
 **Improvements**
 
@@ -401,7 +401,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 - WPML compatibility
 
 
-#### 1.0.2 - February 12, 2015
+= 1.0.2 =
 
 **Improvements**
 
@@ -412,7 +412,7 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 
 - Top Bar sign-ups are now shown in the log for [Mailchimp for WordPress Pro](https://www.mc4wp.com/).
 
-#### 1.0.1 - February 4, 2015
+= 1.0.1 =
 
 **Fixes**
 
@@ -430,6 +430,6 @@ The plugin now requires [Mailchimp for WordPress](https://wordpress.org/plugins/
 
 Please update the [Mailchimp for WordPress plugin](https://wordpress.org/plugins/mailchimp-for-wp/) before updating to this version.
 
-#### 1.0 - January 28, 2015
+= 1.0 =
 
 Initial release
