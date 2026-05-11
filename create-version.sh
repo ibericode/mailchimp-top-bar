@@ -45,7 +45,7 @@ sed -i "s/^Stable tag: .*$/Stable tag: $VERSION/g" "readme.txt"
 
 # Copy over changelog from CHANGELOG.md to readme.txt
 # Read the first section of CHANGELOG.md (until the second header)
-CHANGELOG=$(awk '/^= /{if(++c==2) exit} 1' CHANGELOG.md)
+CHANGELOG=$(awk '/^= [0-9]+/{ if(++c==2) exit; start=1 } start { print }' CHANGELOG.md)
 
 # Append a link to the full changelog
 CHANGELOG="$CHANGELOG

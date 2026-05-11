@@ -119,9 +119,6 @@ If you run into any issues or have questions about configuring your subscribe ba
 2. The easy-to-use settings page where you can customize your subscribe notification bar colors and behavior.
 == Changelog ==
 
-Changelog
-==========
-
 = 1.7.5 =
 
 - Allow WP Core to handle dependency on core Mailchimp for WordPress plugin.
