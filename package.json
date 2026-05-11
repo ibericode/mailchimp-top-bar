@@ -9,7 +9,7 @@
 		"@babel/core": "^7.25",
 		"@babel/preset-env": "^7.25",
 		"babel-loader": "^9.2",
-		"copy-webpack-plugin": "^12.0.2",
+		"copy-webpack-plugin": "^14.0.0",
 		"cssnano": "^7.0.6",
 		"eslint": "^8.28.0",
 		"eslint-config-standard": "^17.0.0",
