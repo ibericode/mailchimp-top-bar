@@ -40,7 +40,7 @@ npm run build
 
 # Update version numbers in code
 sed -i "s/^Version: .*$/Version: $VERSION/g" "$PLUGIN_FILE"
-sed -i "s/define('\(.*_VERSION\)', '.*');/define('\1', '$VERSION');/g" "$PLUGIN_FILE"
+sed -i "s/^\s*define(\s*['\"]\(.*_VERSION\)['\"]\s*,\s*['\"].*['\"]\s*);/define('\1', '$VERSION');/g" "$PLUGIN_FILE"
 sed -i "s/^Stable tag: .*$/Stable tag: $VERSION/g" "readme.txt"
 
 # Copy over changelog from CHANGELOG.md to readme.txt
