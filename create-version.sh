@@ -44,8 +44,19 @@ sed -i "s/define(\s*['\"]\(.*_VERSION\)['\"]\s*,\s*['\"].*['\"]\s*);/define('\1'
 sed -i "s/^Stable tag: .*$/Stable tag: $VERSION/g" "readme.txt"
 
 # Copy over changelog from CHANGELOG.md to readme.txt
-# Ref: https://git.sr.ht/~dvko/dotfiles/tree/master/item/bin/wp-update-changelog
-wp-update-changelog
+# Read the first section of CHANGELOG.md (until the second header)
+CHANGELOG=$(awk '/^= /{if(++c==2) exit} 1' CHANGELOG.md)
+
+# Append a link to the full changelog
+CHANGELOG="$CHANGELOG
+
+[View the full changelog on GitHub](https://github.com/ibericode/mailchimp-top-bar/blob/main/CHANGELOG.md)"
+
+# Replace the changelog section in readme.txt
+# This assumes the changelog is at the end of readme.txt and starts with == Changelog ==
+sed -i '/== Changelog ==/q' readme.txt
+echo "" >> readme.txt
+echo "$CHANGELOG" >> readme.txt
 
 # Move up one directory level because we need plugin directory in ZIP file
 cd ..
