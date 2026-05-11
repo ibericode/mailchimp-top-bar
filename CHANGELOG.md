@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+### 1.7.5 - May 11, 2026
+
+- Allow WP Core to handle dependency on core Mailchimp for WordPress plugin.
+- Minor defensive coding improvements.
+
+
 ### 1.7.4 - Feb 23, 2026
 
 - Bump required WordPress version to 7.4 or higher.
