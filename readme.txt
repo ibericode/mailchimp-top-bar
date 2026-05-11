@@ -41,7 +41,7 @@ You don't need to be a developer to make the Mailchimp top bar match your brand.
 
 == About the Author ==
 
-Mailchimp Top Bar is a plugin by [ibericode](https:/www.ibericode.com/), a company from The Netherlands that you may know from other plugins like [Mailchimp for WordPress](https://www.mc4wp.com/), [Boxzilla Pop-ups](https://www.boxzillaplugin.com) and [Koko Analytics](https://www.kokoanalytics.com/).
+Mailchimp Top Bar is a plugin by [ibericode](https://www.ibericode.com/), a company from The Netherlands that you may know from other plugins like [Mailchimp for WordPress](https://www.mc4wp.com/), [Boxzilla Pop-ups](https://www.boxzillaplugin.com) and [Koko Analytics](https://www.kokoanalytics.com/).
 
 == Installation ==
 
@@ -113,10 +113,12 @@ If you prefer not to show the notification bar on smaller screens, you can hide 
 = Where can I get support for this Mailchimp form? =
 
 If you run into any issues or have questions about configuring your subscribe bar, please open a topic on the [WordPress.org plugin support forums](https://wordpress.org/support/plugin/mailchimp-top-bar). 
+
 == Screenshots ==
 
 1. A sleek Mailchimp top bar in action, capturing email signups without disrupting the user experience.
 2. The easy-to-use settings page where you can customize your subscribe notification bar colors and behavior.
+
 == Changelog ==
 
 = 1.7.5 =
