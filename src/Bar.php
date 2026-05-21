@@ -333,11 +333,12 @@ class Bar
         }
 
         // check if email is given and valid
-        if (
-            empty($_POST["email"]) ||
-            !is_string($_POST["email"]) ||
-            !is_email($_POST["email"])
-        ) {
+        $email_address = $_POST["email"] ?? "";
+        $is_valid_email = function_exists("mc4wp_is_email")
+            ? mc4wp_is_email($email_address)
+            : is_string($email_address) && is_email($email_address);
+
+        if (!$is_valid_email) {
             $this->error_type = "invalid_email";
             return false;
         }
