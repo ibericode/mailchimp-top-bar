@@ -50,11 +50,11 @@ add_action(
         require __DIR__ . "/src/functions.php";
 
         if (is_admin()) {
-            require __DIR__ . "/src/Admin.php";
+            require __DIR__ . "/src/class-admin.php";
             $admin = new MailChimp\TopBar\Admin();
             $admin->add_hooks();
         } else {
-            require __DIR__ . "/src/Bar.php";
+            require __DIR__ . "/src/class-bar.php";
             $bar = new MailChimp\TopBar\Bar();
             add_action("wp", [$bar, "init"]);
         }

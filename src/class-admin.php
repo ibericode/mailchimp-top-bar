@@ -66,9 +66,9 @@ class Admin
     public function add_menu_item(array $items)
     {
         $item = [
-            "title" => esc_html__("Mailchimp Top Bar", "mailchimp-top-bar"),
-            "text" => esc_html__("Top Bar", "mailchimp-top-bar"),
-            "slug" => "top-bar",
+            "title"    => esc_html__("Mailchimp Top Bar", "mailchimp-top-bar"),
+            "text"     => esc_html__("Top Bar", "mailchimp-top-bar"),
+            "slug"     => "top-bar",
             "callback" => [$this, "show_settings_page"],
         ];
 
@@ -85,10 +85,10 @@ class Admin
      */
     public function add_plugin_settings_link(array $links)
     {
-        $link_href = esc_attr(
+        $link_href     = esc_attr(
             admin_url("admin.php?page=mailchimp-for-wp-top-bar"),
         );
-        $link_title = esc_html__("Settings", "mailchimp-top-bar");
+        $link_title    = esc_html__("Settings", "mailchimp-top-bar");
         $settings_link = "<a href=\"{$link_href}\">{$link_title}</a>";
         \array_unshift($links, $settings_link);
         return $links;
@@ -144,9 +144,9 @@ class Admin
     public function show_settings_page()
     {
         $current_tab = isset($_GET["tab"]) ? sanitize_text_field(wp_unslash($_GET["tab"])) : "settings";
-        $options = mctb_get_options();
-        $mailchimp = new \MC4WP_MailChimp();
-        $lists = $mailchimp->get_lists();
+        $options     = mctb_get_options();
+        $mailchimp   = new \MC4WP_MailChimp();
+        $lists       = $mailchimp->get_lists();
 
         require MAILCHIMP_TOP_BAR_DIR . "/views/settings-page.php";
     }
@@ -175,24 +175,24 @@ class Admin
      */
     public function sanitize_settings(array $dirty)
     {
-        $unfiltered_html = current_user_can("unfiltered_html");
-        $clean = $dirty;
-        $safe_attributes = [
-            "class" => [],
-            "id" => [],
-            "title" => [],
+        $unfiltered_html   = current_user_can("unfiltered_html");
+        $clean             = $dirty;
+        $safe_attributes   = [
+            "class"    => [],
+            "id"       => [],
+            "title"    => [],
             "tabindex" => [],
         ];
         $unsafe_attributes = \array_merge($safe_attributes, ["href" => []]);
-        $allowed_html = [
+        $allowed_html      = [
             "strong" => $safe_attributes,
-            "b" => $safe_attributes,
-            "em" => $safe_attributes,
-            "i" => $safe_attributes,
-            "u" => $safe_attributes,
+            "b"      => $safe_attributes,
+            "em"     => $safe_attributes,
+            "i"      => $safe_attributes,
+            "u"      => $safe_attributes,
             // only allow href attribute on <a> elements if user has unfiltered_html capability
-            "a" => $unfiltered_html ? $unsafe_attributes : $safe_attributes,
-            "span" => $safe_attributes,
+            "a"      => $unfiltered_html ? $unsafe_attributes : $safe_attributes,
+            "span"   => $safe_attributes,
         ];
 
         foreach ($clean as $key => $value) {
@@ -200,13 +200,13 @@ class Admin
             if (\strpos($key, "color_") === 0) {
                 $value = wp_strip_all_tags($value);
                 if ("" !== $value && $value[0] !== "#") {
-                    $clean[$key] = "#" . $value;
+                    $clean[ $key ] = "#" . $value;
                 }
             }
 
             // only allow certain HTML elements inside all text settings
             if (\strpos($key, "text_") === 0) {
-                $clean[$key] = wp_kses($value, $allowed_html);
+                $clean[ $key ] = wp_kses($value, $allowed_html);
             }
         }
 
@@ -220,7 +220,7 @@ class Admin
         }
 
         // button & email placeholders can have no HTML at all
-        $clean["text_button"] = wp_strip_all_tags($dirty["text_button"]);
+        $clean["text_button"]            = wp_strip_all_tags($dirty["text_button"]);
         $clean["text_email_placeholder"] = wp_strip_all_tags(
             $dirty["text_email_placeholder"],
         );

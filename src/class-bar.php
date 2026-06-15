@@ -47,9 +47,6 @@ class Bar
      */
     private $submitted = false;
 
-    /**
-     *
-     */
     public function init()
     {
         if (!$this->should_show_bar()) {
@@ -77,7 +74,7 @@ class Bar
         if (!empty($options["disable_on_pages"])) {
             $disable_on_pages = \explode(",", $options["disable_on_pages"]);
             $disable_on_pages = \array_map("trim", $disable_on_pages);
-            $show_bar = !is_page($disable_on_pages);
+            $show_bar         = !is_page($disable_on_pages);
         }
 
         if (
@@ -112,7 +109,7 @@ class Bar
             return;
         }
 
-        $options = mctb_get_options();
+        $options       = mctb_get_options();
         $this->success = $this->process();
 
         if (
@@ -120,8 +117,8 @@ class Bar
             $_SERVER["HTTP_X_REQUESTED_WITH"] === "XMLHttpRequest"
         ) {
             $data = [
-                "message" => $this->get_response_message(),
-                "success" => $this->success,
+                "message"      => $this->get_response_message(),
+                "success"      => $this->success,
                 "redirect_url" => $this->success ? $options["redirect"] : "",
             ];
 
@@ -141,13 +138,13 @@ class Bar
 
     private function process(): bool
     {
-        $options = mctb_get_options();
+        $options         = mctb_get_options();
         $this->submitted = true;
-        $log = $this->get_log();
+        $log             = $this->get_log();
 
         /** @var MC4WP_MailChimp_Subscriber $subscriber_data */
         $subscriber = null;
-        $result = false;
+        $result     = false;
 
         if (!$this->validate()) {
             if ($log) {
@@ -184,7 +181,7 @@ class Bar
         }
 
         $email_address = sanitize_text_field(wp_unslash($_POST["email"] ?? ''));
-        $data = [
+        $data          = [
             "EMAIL" => $email_address,
         ];
 
@@ -196,7 +193,7 @@ class Bar
         $data = apply_filters("mctb_data", $data);
 
         /** @ignore */
-        $data = apply_filters("mctb_merge_vars", $data);
+        $data       = apply_filters("mctb_merge_vars", $data);
         $email_type = apply_filters("mctb_email_type", "html");
 
         $replace_interests = true;
@@ -207,17 +204,17 @@ class Bar
          * @param bool $replace_interests
          */
         $replace_interests = apply_filters("mctb_replace_interests", $replace_interests);
-        $mailchimp = new MC4WP_MailChimp();
+        $mailchimp         = new MC4WP_MailChimp();
 
         $mapper = new MC4WP_List_Data_Mapper($data, [$mailchimp_list_id]);
-        $map = $mapper->map();
+        $map    = $mapper->map();
 
         foreach ($map as $list_id => $subscriber) {
             $subscriber->email_type = $email_type;
-            $subscriber->status = $options["double_optin"]
+            $subscriber->status     = $options["double_optin"]
                 ? "pending"
                 : "subscribed";
-            $subscriber->ip_signup = mc4wp_get_request_ip_address();
+            $subscriber->ip_signup  = mc4wp_get_request_ip_address();
 
             /** @ignore (documented elsewhere) */
             $subscriber = apply_filters("mc4wp_subscriber_data", $subscriber);
@@ -298,6 +295,7 @@ class Bar
 
     /**
      * Validate the form submission
+     *
      * @return boolean
      */
     private function validate()
@@ -333,7 +331,7 @@ class Bar
         }
 
         // check if email is given and valid
-        $email_address = $_POST["email"] ?? "";
+        $email_address  = $_POST["email"] ?? "";
         $is_valid_email = function_exists("mc4wp_is_email")
             ? mc4wp_is_email($email_address)
             : is_string($email_address) && is_email($email_address);
@@ -358,14 +356,14 @@ class Bar
 
         $data = [
             "cookieLength" => $options["cookie_length"],
-            "icons" => [
+            "icons"        => [
                 "hide" => $bottom ? "&#x25BC;" : "&#x25B2;",
                 "show" => $bottom ? "&#x25B2;" : "&#x25BC;",
             ],
-            "position" => $options["position"],
-            "state" => [
+            "position"     => $options["position"],
+            "state"        => [
                 "submitted" => $this->submitted,
-                "success" => $this->success,
+                "success"   => $this->success,
             ],
         ];
 
@@ -409,10 +407,10 @@ class Bar
      */
     public function output_css()
     {
-        $options = mctb_get_options();
-        $bar_color = sanitize_hex_color($options["color_bar"]);
-        $button_color = sanitize_hex_color($options["color_button"]);
-        $text_color = sanitize_hex_color($options["color_text"]);
+        $options           = mctb_get_options();
+        $bar_color         = sanitize_hex_color($options["color_bar"]);
+        $button_color      = sanitize_hex_color($options["color_button"]);
+        $text_color        = sanitize_hex_color($options["color_text"]);
         $button_text_color = sanitize_hex_color($options["color_button_text"]);
 
         echo "<style>";
@@ -443,33 +441,35 @@ class Bar
      */
     public function output_html()
     {
-        $hide = isset($_COOKIE["mctb_bar_hidden"]);
+        $hide        = isset($_COOKIE["mctb_bar_hidden"]);
         $form_action = apply_filters("mctb_form_action", null);
-        $options = mctb_get_options();
+        $options     = mctb_get_options();
         ?>
-         <!-- Mailchimp Top Bar v<?php echo esc_html(MAILCHIMP_TOP_BAR_VERSION); ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
-         <div id="mailchimp-top-bar" class="<?php echo esc_attr($this->get_css_class()); ?>">
-             <div class="mctb-bar" style="<?php echo esc_attr($hide ? "display: none;" : ""); ?>">
-            <form method="post" <?php if (is_string($form_action)) {
-                echo "action=\"", esc_attr($form_action), "\"";
-                                } ?>>
+        <!-- Mailchimp Top Bar v<?php echo esc_html(MAILCHIMP_TOP_BAR_VERSION); ?> - https://wordpress.org/plugins/mailchimp-top-bar/ -->
+        <div id="mailchimp-top-bar" class="<?php echo esc_attr($this->get_css_class()); ?>">
+            <div class="mctb-bar" style="<?php echo esc_attr($hide ? "display: none;" : ""); ?>">
+                <?php if (is_string($form_action)) : ?>
+                <form method="post" action="<?php echo esc_attr($form_action); ?>"> 
+                <?php else : ?>
+                <form method="post">
+                <?php endif; ?>
                     <?php do_action("mctb_before_label"); ?>
-                  <label class="mctb-label" for="mailchimp-top-bar__email"><?php echo wp_kses_post($options["text_bar"]); ?></label>
+                    <label class="mctb-label" for="mailchimp-top-bar__email"><?php echo wp_kses_post($options["text_bar"]); ?></label>
                     <?php do_action("mctb_before_email_field"); ?>
                     <input type="email" name="email"
-                      placeholder="<?php echo esc_attr($options["text_email_placeholder"]); ?>"
-                           class="mctb-email" required id="mailchimp-top-bar__email">
+                        placeholder="<?php echo esc_attr($options["text_email_placeholder"]); ?>"
+                            class="mctb-email" required id="mailchimp-top-bar__email">
                     <input type="text" name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off"
-                           tabindex="-1" class="mctb-email-confirm">
+                            tabindex="-1" class="mctb-email-confirm">
                     <?php do_action("mctb_before_submit_button"); ?>
-                  <input type="submit" value="<?php echo esc_attr($options["text_button"]); ?>"
-                           class="mctb-button">
+                    <input type="submit" value="<?php echo esc_attr($options["text_button"]); ?>"
+                            class="mctb-button">
                     <?php do_action("mctb_after_submit_button"); ?>
                     <input type="hidden" name="_mctb" value="1">
                     <input type="hidden" name="_mctb_no_js" value="1">
-                  <input type="hidden" name="_mctb_timestamp" value="<?php echo esc_attr((string) time()); ?>">
+                    <input type="hidden" name="_mctb_timestamp" value="<?php echo esc_attr((string) time()); ?>">
                 </form>
-              <?php echo wp_kses_post($this->get_response_message_html()); ?>
+                <?php echo wp_kses_post($this->get_response_message_html()); ?>
             </div>
         </div>
         <!-- / Mailchimp Top Bar -->
