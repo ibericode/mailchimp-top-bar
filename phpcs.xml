@@ -1,15 +1,32 @@
 <?xml version="1.0"?>
 <ruleset name="rules">
     <description>rules</description>
-    <arg name="colors"/>
+    <arg name="colors" />
     <file>src/</file>
     <file>mailchimp-top-bar.php</file>
     <exclude-pattern>*\.(html|css|js)</exclude-pattern>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found" />
     <rule ref="PSR12">
         <exclude name="Squiz.Classes.ValidClassName.NotCamelCaps" />
         <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps" />
         <exclude name="PSR1.Files.SideEffects.FoundWithSymbols" />
         <exclude name="Generic.Files.LineLength.TooLong" />
     </rule>
+    <rule ref="WordPress.CodeAnalysis" />
+    <rule ref="WordPress.DateTime" />
+    <rule ref="WordPress.DB" />
+    <rule ref="WordPress.PHP">
+        <exclude name="WordPress.PHP.YodaConditions" />
+        <exclude name="WordPress.PHP.POSIXFunctions" />
+    </rule>
+    <rule ref="WordPress.WP">
+        <exclude name="WordPress.WP.GlobalVariablesOverride.Prohibited" />
+    </rule>
+    <rule ref="WordPress.Security">
+        <exclude name="WordPress.Security.NonceVerification.Missing"/>
+        <exclude name="WordPress.Security.ValidatedSanitizedInput.MissingUnslash" />
+        <exclude name="WordPress.Security.ValidatedSanitizedInput.InputNotSanitized" />
+    </rule>
+    <rule ref="Generic.PHP.DeprecatedFunctions" />
+    <rule ref="Generic.PHP.ForbiddenFunctions" />
 </ruleset>

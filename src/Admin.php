@@ -143,7 +143,7 @@ class Admin
      */
     public function show_settings_page()
     {
-        $current_tab = isset($_GET["tab"]) ? sanitize_text_field($_GET["tab"]) : "settings";
+        $current_tab = isset($_GET["tab"]) ? sanitize_text_field(wp_unslash($_GET["tab"])) : "settings";
         $options = mctb_get_options();
         $mailchimp = new \MC4WP_MailChimp();
         $lists = $mailchimp->get_lists();
@@ -236,12 +236,13 @@ class Admin
      */
     public function footer_text($text)
     {
-        if (
-            isset($_GET["page"]) &&
-            strpos($_GET["page"], "mailchimp-for-wp-top-bar") === 0
-        ) {
-            $text =
-                'If you enjoy using <strong>Mailchimp Top Bar</strong>, please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!';
+        if (! isset($_GET['page'])) {
+            return $text;
+        }
+
+        $page = sanitize_text_field(wp_unslash($_GET['page']));
+        if (str_starts_with($page, 'mailchimp-for-wp-top-bar')) {
+            return 'If you enjoy using <strong>Mailchimp Top Bar</strong>, please leave us a <a href="https://wordpress.org/support/view/plugin-reviews/mailchimp-top-bar?rate=5#postform" target="_blank">★★★★★</a> rating. A <strong style="text-decoration: underline;">huge</strong> thank you in advance!';
         }
 
         return $text;

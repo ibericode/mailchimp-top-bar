@@ -183,7 +183,7 @@ class Bar
             return false;
         }
 
-        $email_address = sanitize_text_field($_POST["email"]);
+        $email_address = sanitize_text_field(wp_unslash($_POST["email"] ?? ''));
         $data = [
             "EMAIL" => $email_address,
         ];

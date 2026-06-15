@@ -20,19 +20,21 @@
     },
     "scripts": {
         "check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l",
-        "check-codestyle": "vendor/bin/phpcs -n",
-        "static-analysis": "vendor/bin/phpstan analyse",
+        "check-codestyle": "phpcs -ns",
+        "static-analysis": "phpstan analyse",
         "wp-plugin-checks": "wp plugin check mailchimp-top-bar --ignore-warnings --ignore-codes=hidden_files,application_detected"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.11",
         "phpstan/phpstan": "^2.1",
         "szepeviktor/phpstan-wordpress": "^2.0",
-        "phpstan/extension-installer": "^1.4"
+        "phpstan/extension-installer": "^1.4",
+        "wp-coding-standards/wpcs": "^3.0"
     },
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
