@@ -105,12 +105,14 @@ class Bar
      */
     public function listen(): void
     {
-        if (!isset($_POST["_mctb"]) || $_POST["_mctb"] != 1) {
+        // phpcs:ignore WordPress.Security.NonceVerification -- Subscribe form is for logged-out visitors. Explicitly not using a nonce.
+        $form_data = $_POST;
+        if (!isset($form_data["_mctb"]) || $form_data["_mctb"] !== '1') {
             return;
         }
 
         $options       = mctb_get_options();
-        $this->success = $this->process();
+        $this->success = $this->process($form_data);
 
         if (
             !empty($_SERVER["HTTP_X_REQUESTED_WITH"]) &&
@@ -136,7 +138,7 @@ class Bar
         }
     }
 
-    private function process(): bool
+    private function process(array $form_data): bool
     {
         $options         = mctb_get_options();
         $this->submitted = true;
@@ -146,7 +148,7 @@ class Bar
         $subscriber = null;
         $result     = false;
 
-        if (!$this->validate()) {
+        if (!$this->validate($form_data)) {
             if ($log) {
                 $log->info(
                     sprintf(
@@ -164,10 +166,7 @@ class Bar
          *
          * @param string $list_id
          */
-        $mailchimp_list_id = apply_filters(
-            "mctb_mailchimp_list",
-            $options["list"],
-        );
+        $mailchimp_list_id = apply_filters("mctb_mailchimp_list", $options["list"]);
 
         // check if a Mailchimp list was given
         if (empty($mailchimp_list_id)) {
@@ -180,7 +179,8 @@ class Bar
             return false;
         }
 
-        $email_address = sanitize_text_field(wp_unslash($_POST["email"] ?? ''));
+        // phpcs:ignore WordPress.Security.NonceVerification
+        $email_address = sanitize_text_field(wp_unslash($form_data["email"] ?? ''));
         $data          = [
             "EMAIL" => $email_address,
         ];
@@ -295,43 +295,42 @@ class Bar
 
     /**
      * Validate the form submission
+     * @param array $form_data
      *
      * @return boolean
      */
-    private function validate()
+    private function validate(array $form_data)
     {
         // make sure `email_confirm` field is given but not filled (honeypot)
-        if (!isset($_POST["email_confirm"]) || "" !== $_POST["email_confirm"]) {
+        if (!isset($form_data["email_confirm"]) || "" !== $form_data["email_confirm"]) {
             $this->error_type = "spam";
             return false;
         }
 
         // make sure `_mctb_timestamp` is at least 1 seconds ago
         if (
-            empty($_POST["_mctb_timestamp"]) ||
-            time() < intval($_POST["_mctb_timestamp"]) + 1
+            empty($form_data["_mctb_timestamp"]) ||
+            time() < intval($form_data["_mctb_timestamp"]) + 1
         ) {
             $this->error_type = "spam";
             return false;
         }
 
         // don't work for users without JavaScript (since bar is hidden anyway, must be a bot)
-        if (isset($_POST["_mctb_no_js"])) {
+        if (isset($form_data["_mctb_no_js"])) {
             $this->error_type = "spam";
             return false;
         }
 
-        // simple user agent check
-        $user_agent = isset($_SERVER["HTTP_USER_AGENT"])
-            ? $_SERVER["HTTP_USER_AGENT"]
-            : "";
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        $user_agent = wp_unslash((string) ($_SERVER["HTTP_USER_AGENT"] ?? ''));
         if (strlen($user_agent) < 2) {
             $this->error_type = "spam";
             return false;
         }
 
         // check if email is given and valid
-        $email_address  = $_POST["email"] ?? "";
+        $email_address  = $form_data["email"] ?? "";
         $is_valid_email = function_exists("mc4wp_is_email")
             ? mc4wp_is_email($email_address)
             : is_string($email_address) && is_email($email_address);
