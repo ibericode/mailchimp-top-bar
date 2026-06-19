@@ -19,7 +19,7 @@
         "php": ">=7.4"
     },
     "scripts": {
-        "check-syntax": "find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l",
+        "check-syntax": "find . -path ./vendor -prune -o -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php --define error_reporting=-1 -l -n | (! grep -v \"No syntax errors detected\" )",
         "check-codestyle": "phpcs -ns",
         "static-analysis": "phpstan analyse",
         "wp-plugin-checks": "wp plugin check mailchimp-top-bar --ignore-warnings --ignore-codes=hidden_files,application_detected"
