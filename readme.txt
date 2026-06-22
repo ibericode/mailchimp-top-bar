@@ -125,4 +125,28 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 - Improved email address validation.
 - Address warnings reported by WordPress Coding Standards.
 
+
+= 1.7.5 =
+
+- Allow WP Core to handle dependency on core Mailchimp for WordPress plugin.
+- Minor defensive coding improvements.
+
+
+= 1.7.4 =
+
+- Bump required WordPress version to 7.4 or higher.
+- Modernize code base by using latest PHP features and removing legacy compatibility code.
+
+
+= 1.7.3 =
+
+- Minor performance or memory usage related improvements.
+- Compatibility check with latest WordPress version.
+
+
+= 1.7.1 =
+
+- Update dependencies and WordPress compatibility.
+- Decrease timestamp check to one second ago.
+
 [View the full changelog on GitHub](https://github.com/ibericode/mailchimp-top-bar/blob/main/CHANGELOG.md)

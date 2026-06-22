@@ -43,8 +43,8 @@ sed -i "s/define(\s*['\"]\(.*_VERSION\)['\"]\s*,\s*['\"].*['\"]\s*);/define('\1'
 sed -i "s/^Stable tag: .*$/Stable tag: $VERSION/g" "readme.txt"
 
 # Copy over changelog from CHANGELOG.md to readme.txt
-# Read the first section of CHANGELOG.md (until the second header)
-CHANGELOG=$(awk '/^= [0-9]+/{ if(++c==2) exit; start=1 } start { print }' CHANGELOG.md)
+# Read the five latest sections of CHANGELOG.md (until the sixth header)
+CHANGELOG=$(awk '/^= [0-9]+/{ if(++c==6) exit; start=1 } start { print }' CHANGELOG.md)
 
 # Append a link to the full changelog
 CHANGELOG="$CHANGELOG
