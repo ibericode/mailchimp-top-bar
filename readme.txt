@@ -4,7 +4,7 @@ Donate link: https://www.mc4wp.com/
 Tags: mailchimp, notification bar, email signup, subscribe bar, top bar
 Requires at least: 4.9
 Tested up to: 7.0
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.4
@@ -122,9 +122,9 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 
 == Changelog ==
 
-= 1.7.5 =
+= 1.7.6 = 
 
-- Enhancement: Let WordPress manage the dependency on MC4WP: Mailchimp for WordPress.
-- Maintenance: Add defensive coding improvements.
+- Improved email address validation.
+- Address warnings reported by WordPress Coding Standards.
 
 [View the full changelog on GitHub](https://github.com/ibericode/mailchimp-top-bar/blob/main/CHANGELOG.md)
