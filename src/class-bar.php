@@ -310,7 +310,7 @@ class Bar
         // make sure `_mctb_timestamp` is at least 1 seconds ago
         if (
             empty($form_data["_mctb_timestamp"]) ||
-            time() < intval($form_data["_mctb_timestamp"]) + 1
+            time() < ((int) $form_data["_mctb_timestamp"]) + 1
         ) {
             $this->error_type = "spam";
             return false;

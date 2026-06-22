@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+= 1.7.6 = 
+
+- Improved email address validation.
+- Address warnings reported by WordPress Coding Standards.
+
+
 = 1.7.5 =
 
 - Allow WP Core to handle dependency on core Mailchimp for WordPress plugin.

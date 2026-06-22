@@ -29,20 +29,35 @@
     <rule ref="Generic.PHP.DeprecatedFunctions" />
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>
-            <property name="forbiddenFunctions" type="array">
-                <element key="var_dump" value="null"/>
-                <element key="create_function" value="null"/>
-                <element key="each" value="null"/>
-				<element key="ray" value="null"/>
-				<element key="dd" value="null"/>
-				<element key="die" value="null"/>
-				<element key="sizeof" value="count"/>
-				<element key="delete" value="unset"/>
-				<element key="eval" value="null"/>
-				<element key="print" value="echo"/>
-                <element key="read_exif_data" value="exif_read_data"/>
-                <element key="__autoload" value="null"/>
-            </property>
+        <property name="forbiddenFunctions" type="array">
+            <element key="create_function" value="null" />
+            <element key="eval" value="null" />
+            <element key="sizeof" value="count" />
+            <element key="delete" value="unset" />
+            <element key="print" value="echo" />
+            <element key="mt_rand" value="random_int"/>
+            <element key="rand" value="random_int"/>
+
+            <!-- Debugging functions -->
+            <element key="var_dump" value="null" />
+            <element key="each" value="null" />
+            <element key="ray" value="null" />
+            <element key="dd" value="null" />
+            <element key="die" value="null" />
+            
+            <!-- Type checking and converting function -->
+            <element key="boolval" value="(bool)"/>
+            <element key="doubleval" value="(float)"/>
+            <element key="doubleval" value="floatval"/>
+            <element key="floatval" value="(float)"/>
+            <element key="intval" value="(int)"/>
+            <element key="is_double" value="is_float"/>
+            <element key="is_integer" value="is_int"/>
+            <element key="is_long" value="is_int"/>
+            <element key="is_null" value="null"/>
+            <element key="is_real" value="is_float"/>
+            <element key="strval" value="(string)"/>
+        </property>
         </properties>
     </rule>
 
