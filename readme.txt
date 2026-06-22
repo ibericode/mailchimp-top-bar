@@ -25,8 +25,6 @@ Mailchimp Top Bar is an add-on for [MC4WP: Mailchimp for WordPress](https://word
 * **Let visitors dismiss it:** Visitors can hide the bar when they are not interested.
 * **Keep pages fast:** The front-end JavaScript is under 2 kB when compressed.
 
-== About the Author ==
-
 == About the Plugin Author ==
 
 [Danny van Kooten](https://www.dannyvankooten.com/) has been building WordPress plugins since 2010, starting with WordPress 3.0.
