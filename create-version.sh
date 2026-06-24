@@ -77,6 +77,7 @@ zip -r "$PACKAGE_FILE" "$PLUGIN_SLUG" \
 	-x "$PLUGIN_SLUG/phpstan.neon.dist" \
 	-x "$PLUGIN_SLUG/*.sh" \
 	-x "$PLUGIN_SLUG/assets/src/*"	\
+	-x "$PLUGIN_SLUG/assets/wordpress.org/*" \
 	-x "$PLUGIN_SLUG/sample-code-snippets/*"
 
 cd "$PLUGIN_SLUG"

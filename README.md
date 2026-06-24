@@ -3,6 +3,8 @@ MC4WP: Mailchimp Top Bar
 
 Adds a beautiful and customizable Mailchimp opt-in bar to the top of your WordPress site. 
 
+![Mailchimp email signup bar displayed at the top of a WordPress site](assets/wordpress.org/screenshot-1.png)
+
 Requirements
 ------------
 

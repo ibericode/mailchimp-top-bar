@@ -115,8 +115,12 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 
 == Screenshots ==
 
-1. A Mailchimp top bar capturing email signups without blocking the page content.
-2. The settings page for customizing the Mailchimp notification bar colors, text, and behavior.
+1. A Mailchimp email signup bar displayed at the top of a WordPress site.
+2. A Mailchimp subscribe bar displayed at the bottom of a WordPress site.
+3. The collapsed email signup bar, which visitors can reopen using the arrow button.
+4. The bar settings for choosing a Mailchimp audience and customizing the signup text, email placeholder, and button label.
+5. The appearance settings for changing the notification bar position, size, colors, and sticky behavior.
+6. The message settings for customizing signup responses and redirecting subscribers after a successful signup.
 
 == Changelog ==
 
