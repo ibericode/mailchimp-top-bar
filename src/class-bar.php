@@ -88,7 +88,7 @@ class Bar
         /**
          * @deprecated 1.1
          */
-        $show_bar = apply_filters_deprecated("mctp_show_bar", $show_bar, '1.1', 'mctb_show_bar');
+        $show_bar = apply_filters_deprecated("mctp_show_bar", [$show_bar], '1.1', 'mctb_show_bar');
 
         /**
          * @filter `mctb_show_bar`
