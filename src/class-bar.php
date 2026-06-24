@@ -87,9 +87,8 @@ class Bar
 
         /**
          * @deprecated 1.1
-         * @use `mctb_show_bar`
          */
-        $show_bar = apply_filters("mctp_show_bar", $show_bar);
+        $show_bar = apply_filters_deprecated("mctp_show_bar", $show_bar, '1.1', 'mctb_show_bar');
 
         /**
          * @filter `mctb_show_bar`
@@ -144,7 +143,7 @@ class Bar
         $this->submitted = true;
         $log             = $this->get_log();
 
-        /** @var MC4WP_MailChimp_Subscriber $subscriber_data */
+        /** @var ?MC4WP_MailChimp_Subscriber $subscriber */
         $subscriber = null;
         $result     = false;
 
@@ -216,7 +215,7 @@ class Bar
                 : "subscribed";
             $subscriber->ip_signup  = mc4wp_get_request_ip_address();
 
-            /** @ignore (documented elsewhere) */
+            /** @ignore */
             $subscriber = apply_filters("mc4wp_subscriber_data", $subscriber);
 
             /**
