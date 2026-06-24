@@ -15,9 +15,6 @@
             "homepage": "https://dannyvankooten.com"
         }
     ],
-    "require": {
-        "php": ">=7.4"
-    },
     "scripts": {
         "check-syntax": "find . -path ./vendor -prune -o -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php --define error_reporting=-1 -l -n | (! grep -v \"No syntax errors detected\" )",
         "check-codestyle": "phpcs -ns",

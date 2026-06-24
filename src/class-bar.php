@@ -124,7 +124,6 @@ class Bar
             ];
 
             wp_send_json($data);
-            exit();
         }
 
         if ($this->success) {
@@ -132,7 +131,7 @@ class Bar
             $redirect_url = $options["redirect"];
             if (!empty($redirect_url)) {
                 wp_redirect($redirect_url);
-                exit();
+                exit;
             }
         }
     }
@@ -265,7 +264,7 @@ class Bar
         }
 
         // An API error occured... Oh noes!
-        if ($mailchimp->get_error_code() === 214) {
+        if ((int) $mailchimp->get_error_code() === 214) {
             $this->error_type = "already_subscribed";
 
             if ($log) {
