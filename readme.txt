@@ -4,7 +4,7 @@ Donate link: https://www.mc4wp.com/
 Tags: mailchimp, notification bar, email signup, subscribe bar, top bar
 Requires at least: 4.9
 Tested up to: 7.0
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.4
@@ -124,6 +124,12 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 
 == Changelog ==
 
+= 1.7.7 = 
+
+- Add autocomplete attribute to email field.
+- Hide notice that bar is disabled through PHP as well, to prevent confusion in case of JS failures.
+
+
 = 1.7.6 = 
 
 - Improved email address validation.
@@ -146,11 +152,5 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 
 - Minor performance or memory usage related improvements.
 - Compatibility check with latest WordPress version.
-
-
-= 1.7.1 =
-
-- Update dependencies and WordPress compatibility.
-- Decrease timestamp check to one second ago.
 
 [View the full changelog on GitHub](https://github.com/ibericode/mailchimp-top-bar/blob/main/CHANGELOG.md)
