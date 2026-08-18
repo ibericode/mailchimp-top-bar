@@ -455,7 +455,7 @@ class Bar
                     <?php do_action("mctb_before_email_field"); ?>
                     <input type="email" name="email"
                         placeholder="<?php echo esc_attr($options["text_email_placeholder"]); ?>"
-                            class="mctb-email" required id="mailchimp-top-bar__email">
+                            class="mctb-email" required id="mailchimp-top-bar__email" autocomplete="email">
                     <input type="text" name="email_confirm" placeholder="Confirm your email" value="" autocomplete="off"
                             tabindex="-1" class="mctb-email-confirm">
                     <?php do_action("mctb_before_submit_button"); ?>
