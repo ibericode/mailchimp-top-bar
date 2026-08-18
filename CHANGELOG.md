@@ -1,6 +1,12 @@
 Changelog
 ==========
 
+= 1.7.7 = 
+
+- Add autocomplete attribute to email field.
+- Hide notice that bar is disabled through PHP as well, to prevent confusion in case of JS failures.
+
+
 = 1.7.6 = 
 
 - Improved email address validation.
