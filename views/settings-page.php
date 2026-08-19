@@ -90,7 +90,7 @@ $tabs = [
         ]; ?>
         <div id="message-bar-is-disabled" class="notice notice-warning" data-showif="<?php echo esc_attr(
             json_encode($config),
-        ); ?>" style="<?php echo $options['enabled'] ? '' : 'display: none;'; ?>">
+        ); ?>" style="<?php echo $options['enabled'] ? 'display: none;' : ''; ?>">
             <p>
                 <?php esc_html_e(
                     "You have disabled the bar. It will not show up on your site until you enable it again.",
