@@ -2,7 +2,7 @@
 Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://www.mc4wp.com/
 Tags: mailchimp, notification bar, email signup, subscribe bar, top bar
-Requires at least: 4.9
+Requires at least: 5.3
 Tested up to: 7.0
 Stable tag: 1.7.7
 License: GPL-3.0-or-later
