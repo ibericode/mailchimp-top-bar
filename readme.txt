@@ -124,6 +124,13 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 
 == Changelog ==
 
+= 1.7.8 =
+
+- Fix the "bar is disabled" notice showing on the settings page while the bar was enabled (and vice versa) before JavaScript loaded.
+- Bump required WordPress version to 5.3 or higher.
+- Compatibility check with WordPress 7.1.
+
+
 = 1.7.7 = 
 
 - Add autocomplete attribute to email field.
