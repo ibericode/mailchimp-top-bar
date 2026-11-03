@@ -4,7 +4,7 @@ Donate link: https://www.mc4wp.com/
 Tags: mailchimp, notification bar, email signup, subscribe bar, top bar
 Requires at least: 5.3
 Tested up to: 7.1
-Stable tag: 1.7.7
+Stable tag: 1.7.8
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.4
@@ -153,11 +153,5 @@ Open a topic in the [WordPress.org support forum](https://wordpress.org/support/
 
 - Bump required WordPress version to 7.4 or higher.
 - Modernize code base by using latest PHP features and removing legacy compatibility code.
-
-
-= 1.7.3 =
-
-- Minor performance or memory usage related improvements.
-- Compatibility check with latest WordPress version.
 
 [View the full changelog on GitHub](https://github.com/ibericode/mailchimp-top-bar/blob/main/CHANGELOG.md)
